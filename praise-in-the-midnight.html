@@ -169,37 +169,46 @@
   }
   ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
   .watch{
-    margin-top:34px;
+    margin-top:38px;
     text-align:center;
+    border:1px solid var(--gold);
+    background:linear-gradient(180deg,rgba(255,250,232,.75),rgba(247,238,213,.75));
+    padding:26px 22px 22px;
   }
   .watch .label{
     font-family:'Cinzel',serif;
-    font-size:.68rem;letter-spacing:.36em;text-transform:uppercase;
-    color:var(--gold);display:block;margin-bottom:12px;
+    font-size:.72rem;letter-spacing:.36em;text-transform:uppercase;
+    color:var(--gold);display:block;margin-bottom:16px;
   }
   .watch a{
     display:inline-block;
     font-family:'Cinzel',serif;
-    font-variant:small-caps;
-    letter-spacing:.1em;
-    font-size:.98rem;
-    color:var(--wine);
+    font-weight:600;
+    letter-spacing:.08em;
+    font-size:1.02rem;
+    color:#fdf6e6;
+    background:var(--wine);
+    border:1px solid #5d2b20;
     text-decoration:none;
-    border:1px solid var(--gold-pale);
-    background:linear-gradient(180deg,rgba(255,250,232,.92),rgba(247,238,213,.92));
-    padding:11px 22px;
-    margin:5px 6px;
-    transition:border-color .18s ease, box-shadow .18s ease;
+    padding:14px 26px;
+    margin:6px 7px;
+    box-shadow:0 4px 14px rgba(90,45,30,.28);
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
   }
   .watch a:hover,.watch a:focus-visible{
-    border-color:var(--gold);
-    box-shadow:0 8px 20px rgba(90,70,30,.15);
+    background:#8f4837;
+    transform:translateY(-2px);
+    box-shadow:0 8px 22px rgba(90,45,30,.36);
     outline:none;
   }
-  .watch a .yt{color:var(--gold);margin-right:9px;font-variant:normal;}
+  .watch a .yt{color:var(--gold-bright);margin-right:10px;font-variant:normal;}
   .watch .note{
     font-family:'Cormorant Garamond',serif;font-style:italic;
-    font-size:1.02rem;color:var(--ink-soft);margin-top:12px;
+    font-size:1.02rem;color:var(--ink-soft);margin-top:14px;
+  }
+  @media(max-width:620px){
+    .watch a{display:block;margin:9px 0;padding:15px 18px;}
+    .watch{padding:22px 16px 18px;}
   }
   .sdg{
     font-family:'Pinyon Script',cursive;
