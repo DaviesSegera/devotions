@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>When Enough Is Not Enough &mdash; Today's Devotion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f3ead4;
+    --parchment-deep:#eadfc2;
+    --ink:#3b2d18;
+    --ink-soft:#5a4629;
+    --gold:#a67c1e;
+    --gold-bright:#c9a227;
+    --gold-pale:#e3cf95;
+    --wine:#7a3b2e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    color:var(--ink);
+    font-family:'Lora',serif;
+    line-height:1.85;
+    padding:34px 14px 60px;
+    position:relative;
+  }
+  /* aged-paper grain */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
+    z-index:2;
+  }
+  .page{
+    max-width:760px;
+    margin:0 auto;
+    background:rgba(255,252,240,.55);
+    border:1.5px solid var(--gold);
+    outline:1px solid var(--gold-pale);
+    outline-offset:6px;
+    padding:64px 52px 56px;
+    position:relative;
+    box-shadow:0 18px 50px rgba(90,70,30,.18);
+  }
+  @media(max-width:620px){.page{padding:52px 24px 44px;}}
+  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
+  .corner.tl{top:10px;left:10px;}
+  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
+  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
+  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+  .eyebrow{
+    font-family:'Cinzel',serif;
+    font-size:.82rem;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:clamp(2.1rem,5.4vw,3rem);
+    text-align:center;
+    color:var(--ink);
+    letter-spacing:.01em;
+    margin-bottom:26px;
+  }
+  /* Ellen G. White — companion ink */
+  .egw{color:var(--wine);}
+  .egw-ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.08em;
+    font-size:.88em;
+    color:var(--wine);
+  }
+  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .divider{
+    display:flex;align-items:center;justify-content:center;
+    gap:14px;margin:30px 0;color:var(--gold);
+  }
+  .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+  .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
+  .divider svg{flex-shrink:0;}
+  .verse-card{
+    border:1px solid var(--gold-pale);
+    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
+    padding:30px 34px 26px;
+    text-align:center;
+    margin:0 auto 8px;
+    position:relative;
+  }
+  .verse-card .label{
+    font-family:'Cinzel',serif;
+    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .verse-card .scripture{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.42rem;
+    line-height:1.65;
+    color:var(--ink-soft);
+  }
+  .verse-card .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.14em;
+    font-size:.95rem;
+    color:var(--gold);
+    margin-top:14px;
+  }
+  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
+  .body-text p:first-of-type::first-letter{
+    font-family:'Playfair Display',serif;
+    font-size:3.9em;
+    float:left;
+    line-height:.82;
+    padding:6px 12px 0 0;
+    color:var(--gold);
+  }
+  .body-text strong{color:#7c5a12;font-weight:600;}
+  .scrip{font-style:italic;color:var(--ink-soft);}
+  .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.1em;
+    font-size:.92em;
+    color:var(--gold);
+    white-space:nowrap;
+  }
+  h2.takeaways{
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.35rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    text-align:center;
+    color:var(--ink);
+    margin-bottom:26px;
+  }
+  ol.takeaway-list{list-style:none;counter-reset:tk;}
+  ol.takeaway-list li{
+    counter-increment:tk;
+    position:relative;
+    padding-left:62px;
+    margin-bottom:20px;
+    font-size:1.03rem;
+  }
+  ol.takeaway-list li::before{
+    content:counter(tk);
+    position:absolute;left:0;top:2px;
+    width:42px;height:42px;
+    border-radius:50%;
+    border:1.5px solid var(--gold);
+    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
+    color:#7c5a12;
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.05rem;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+  }
+  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  .sources{
+    margin-top:34px;
+    font-size:.9rem;
+    line-height:1.7;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+  .sources .label{
+    font-family:'Cinzel',serif;
+    font-size:.68rem;letter-spacing:.36em;text-transform:uppercase;
+    color:var(--gold);display:block;margin-bottom:4px;
+  }
+  .sdg{
+    font-family:'Pinyon Script',cursive;
+    font-size:2.5rem;
+    color:var(--gold);
+    text-align:center;
+    margin-top:40px;
+  }
+</style>
+</head>
+<body>
+<style>
+  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
+  .allnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
+    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
+    padding-bottom:2px;
+  }
+  .allnav a:hover{border-bottom-color:#a67c1e;}
+</style>
+<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+
+<article class="page">
+  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+
+    <div class="eyebrow">Today's Devotion</div>
+  <h1>When Enough Is Not Enough</h1>
+
+  <section class="verse-card">
+    <div class="label">Key Verse</div>
+    <div class="scripture">“So Ahab went home angry and sullen because of Naboth’s answer. The king went to bed with his face to the wall and refused to eat!”</div>
+    <div class="ref">1 Kings 21:4 (NLT)</div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <div class="body-text">
+    <p>Ahab was not a poor man staring through the fence at another man’s prosperity. He was a king. Yet one vineyard he could not have was enough to make him miserable. Naboth’s vineyard lay <span class="scrip">“beside the palace of King Ahab,”</span> <span class="ref">1 Kings 21:1 (NLT)</span> and the king’s offer was fair: <span class="scrip">“I will give you a better vineyard in exchange, or if you prefer, I will pay you for it.”</span> <span class="ref">1 Kings 21:2 (NLT)</span> The story turns on what happened when a fair request was refused. <span class="scrip">“So Ahab went home angry and sullen because of Naboth’s answer. The king went to bed with his face to the wall and refused to eat!”</span> <span class="ref">1 Kings 21:4 (NLT)</span> Nothing had been taken from him; he simply could not have the one thing his heart had fixed on, and that made everything else feel like nothing. First Kings 21 shows Ahab becoming sullen when Naboth refused him, and Ellen G. White identifies the deeper problem—covetousness and selfishness so controlling that he could not tolerate a refusal: <span class="egw">“Naturally of a covetous disposition, Ahab … had followed the dictates of his evil heart until he was fully controlled by the spirit of selfishness. He could brook no refusal of his wishes; the things he desired he felt should by right be his”</span> <span class="egw-ref">Prophets and Kings, p. 204 · PK 204.2</span>. <strong>Ahab had a kingdom, but one vineyard he could not have became enough to make what he already possessed feel insufficient.</strong></p>
+
+    <p>Naboth’s answer was short and it was not about money: <span class="scrip">“The Lord forbid that I should give you the inheritance that was passed down by my ancestors.”</span> <span class="ref">1 Kings 21:3 (NLT)</span> In Israel the land was held as a trust from God—<span class="scrip">“The land must never be sold on a permanent basis, for the land belongs to me”</span> <span class="ref">Leviticus 25:23 (NLT)</span>—and each tribe was to keep the portion first allotted to it (Numbers 36:7). Naboth invoked the Lord and his fathers in the same breath. Scripture records his refusal, and Ellen White draws attention to the value behind it: <span class="egw">“Naboth valued his vineyard highly because it had belonged to his fathers, and he refused to part with it”</span> <span class="egw-ref">Prophets and Kings, p. 205 · PK 205.1</span>. Ahab measured the vineyard by usefulness and price; Naboth measured it by faithfulness and stewardship. Scripture records no hostility in him—only the courage to tell a king “no” when a profitable exchange would have cost him his conviction. This is not a rule that believers may never sell inherited property; it is a picture of a man for whom obedience to God outweighed personal advantage. <strong>Some opportunities are profitable but still not faithful.</strong></p>
+
+    <p>Ahab’s dissatisfaction did not stay inside him. Jezebel reframed his grievance as a question of power—<span class="scrip">“Are you the king of Israel or not? … I’ll get you Naboth’s vineyard!”</span> <span class="ref">1 Kings 21:7 (NLT)</span>—and <span class="scrip">“wrote letters in Ahab’s name, sealed them with his seal.”</span> <span class="ref">1 Kings 21:8 (NLT)</span> The letters ordered a fast, a place of honour for Naboth, <span class="scrip">“two scoundrels”</span> to accuse him of <span class="scrip">“cursing God and the king,”</span> <span class="ref">1 Kings 21:10 (NLT)</span> and then his death. Every form was observed; an innocent man died. And <span class="scrip">“the elders and other town leaders followed the instructions.”</span> <span class="ref">1 Kings 21:11 (NLT)</span> A process can look official and still be unjust, and a corrupt command does not become righteous because it carries a royal seal. Ahab did not write the letters or arrange the witnesses, but when Jezebel told him Naboth was dead, <span class="scrip">“Ahab immediately went down to the vineyard of Naboth to claim it.”</span> <span class="ref">1 Kings 21:16 (NLT)</span> Ellen White records the same step: Ahab “cared not by what means his wife might accomplish the desired object” and, <span class="egw">“heedless of the consequences, blindly followed her counsel and went down to take possession of the coveted property”</span> <span class="egw-ref">Prophets and Kings, pp. 205–206 · PK 205.4, 206.1</span>. Influence matters—Scripture says Ahab acted <span class="scrip">“under the influence of his wife Jezebel”</span> <span class="ref">1 Kings 21:25 (NLT)</span>—but every person remains accountable before God for the evil they embrace, enable or benefit from. This is not a story of a bad wife corrupting an innocent husband. <strong>We become participants in evil not only through what we organise, but through what we knowingly accept, benefit from or refuse to resist.</strong></p>
+
+    <p>Ahab could treat the matter as closed. God did not. <span class="scrip">“Wasn’t it enough that you killed Naboth? Must you rob him, too?”</span> <span class="ref">1 Kings 21:19 (NLT)</span> Naboth’s voice had been silenced, but his case had not disappeared before God; as Ellen White puts it, <span class="egw">“The king was not allowed to enjoy unrebuked that which he had gained by fraud and bloodshed”</span> <span class="egw-ref">Prophets and Kings, p. 206 · PK 206.2</span>. Ahab greeted the prophet with <span class="scrip">“So, my enemy, you have found me!”</span> <span class="ref">1 Kings 21:20 (NLT)</span>—which is how truth feels when it confronts a cherished sin. Yet the chapter does not end with judgment. Ahab <span class="scrip">“tore his clothing, dressed in burlap, and fasted,”</span> <span class="ref">1 Kings 21:27 (NLT)</span> and God said, <span class="scrip">“Do you see how Ahab has humbled himself before me? Because he has done this, I will not do what I promised during his lifetime.”</span> <span class="ref">1 Kings 21:29 (NLT)</span> The God who saw Naboth’s injustice also saw Ahab’s humiliation. Wanting a better home, a fair opportunity or a wider ministry is not covetousness. The danger is a desire that refuses to be surrendered—that grows from “I want it” into “I deserve it,” until a “no” becomes unbearable. What has become so important to me that I struggle to accept God’s boundaries, another person’s rights, or the possibility that I may have to live without it? Jesus said, <span class="scrip">“Beware! Guard against every kind of greed. Life is not measured by how much you own.”</span> <span class="ref">Luke 12:15 (NLT)</span> Christ does not merely tell us to want less; He gives us a greater treasure, so that our desires no longer have to rule us. <strong>The heart that can say “Christ is enough” is no longer controlled by the vineyard it cannot possess.</strong></p>
+
+  </div>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <h2 class="takeaways">Key Takeaways</h2>
+  <ol class="takeaway-list">
+    <li><strong>Enough became not enough.</strong> A king with a kingdom <span class="scrip">“went to bed with his face to the wall and refused to eat!”</span> <span class="ref">1 Kings 21:4 (NLT)</span> Ellen White names the condition: <span class="egw">“He could brook no refusal of his wishes; the things he desired he felt should by right be his”</span> <span class="egw-ref">Prophets and Kings, p. 204 · PK 204.2</span>.</li>
+    <li><strong>Naboth chose faithfulness over advantage.</strong> <span class="scrip">“The Lord forbid that I should give you the inheritance that was passed down by my ancestors.”</span> <span class="ref">1 Kings 21:3 (NLT)</span> Some opportunities are profitable but still not faithful.</li>
+    <li><strong>Unsurrendered desire used power, and an innocent man paid.</strong> Letters in Ahab’s name, a royal seal, two false witnesses, compliant elders—and <span class="scrip">“Ahab immediately went down to the vineyard of Naboth to claim it.”</span> <span class="ref">1 Kings 21:16 (NLT)</span> We are accountable for what we knowingly accept and benefit from.</li>
+    <li><strong>God saw the victim, and He saw the sinner bow.</strong> <span class="scrip">“Wasn’t it enough that you killed Naboth? Must you rob him, too?”</span> <span class="ref">1 Kings 21:19 (NLT)</span> Then, <span class="scrip">“Do you see how Ahab has humbled himself before me?”</span> <span class="ref">1 Kings 21:29 (NLT)</span> Bring the desire to Christ before the desire begins ruling you.</li>
+  </ol>
+
+  <p class="sources"><span class="label">Sources and Further Reading</span>Scripture: 1 Kings 21:1–29 (context 1 Kings 16:29–33; 20:43; 22:29–40; 2 Kings 9:21–37); Leviticus 25:23; Numbers 36:7; Luke 12:15 (NLT). Ellen G. White: <em>Prophets and Kings</em>, chapter 16, “The Fall of the House of Ahab,” pp. 204–207 (PK 204.2, 205.1, 205.4, 206.1, 206.2); the same account appears in condensed form in <em>Royalty and Ruin</em>, “The Fall of the House of Ahab,” pp. 73–74.</p>
+
+  <div class="sdg">Soli Deo Gloria</div>
+</article>
+</body>
+</html>

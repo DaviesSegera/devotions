@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>When God Sends a Peacemaker &mdash; Today's Devotion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f3ead4;
+    --parchment-deep:#eadfc2;
+    --ink:#3b2d18;
+    --ink-soft:#5a4629;
+    --gold:#a67c1e;
+    --gold-bright:#c9a227;
+    --gold-pale:#e3cf95;
+    --wine:#7a3b2e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    color:var(--ink);
+    font-family:'Lora',serif;
+    line-height:1.85;
+    padding:34px 14px 60px;
+    position:relative;
+  }
+  /* aged-paper grain */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
+    z-index:2;
+  }
+  .page{
+    max-width:760px;
+    margin:0 auto;
+    background:rgba(255,252,240,.55);
+    border:1.5px solid var(--gold);
+    outline:1px solid var(--gold-pale);
+    outline-offset:6px;
+    padding:64px 52px 56px;
+    position:relative;
+    box-shadow:0 18px 50px rgba(90,70,30,.18);
+  }
+  @media(max-width:620px){.page{padding:52px 24px 44px;}}
+  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
+  .corner.tl{top:10px;left:10px;}
+  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
+  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
+  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+  .eyebrow{
+    font-family:'Cinzel',serif;
+    font-size:.82rem;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:clamp(2.1rem,5.4vw,3rem);
+    text-align:center;
+    color:var(--ink);
+    letter-spacing:.01em;
+    margin-bottom:26px;
+  }
+  /* Ellen G. White — companion ink */
+  .egw{color:var(--wine);}
+  .egw-ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.08em;
+    font-size:.88em;
+    color:var(--wine);
+  }
+  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .divider{
+    display:flex;align-items:center;justify-content:center;
+    gap:14px;margin:30px 0;color:var(--gold);
+  }
+  .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+  .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
+  .divider svg{flex-shrink:0;}
+  .verse-card{
+    border:1px solid var(--gold-pale);
+    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
+    padding:30px 34px 26px;
+    text-align:center;
+    margin:0 auto 8px;
+    position:relative;
+  }
+  .verse-card .label{
+    font-family:'Cinzel',serif;
+    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .verse-card .scripture{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.42rem;
+    line-height:1.65;
+    color:var(--ink-soft);
+  }
+  .verse-card .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.14em;
+    font-size:.95rem;
+    color:var(--gold);
+    margin-top:14px;
+  }
+  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
+  .body-text p:first-of-type::first-letter{
+    font-family:'Playfair Display',serif;
+    font-size:3.9em;
+    float:left;
+    line-height:.82;
+    padding:6px 12px 0 0;
+    color:var(--gold);
+  }
+  .body-text strong{color:#7c5a12;font-weight:600;}
+  .scrip{font-style:italic;color:var(--ink-soft);}
+  .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.1em;
+    font-size:.92em;
+    color:var(--gold);
+    white-space:nowrap;
+  }
+  h2.takeaways{
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.35rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    text-align:center;
+    color:var(--ink);
+    margin-bottom:26px;
+  }
+  ol.takeaway-list{list-style:none;counter-reset:tk;}
+  ol.takeaway-list li{
+    counter-increment:tk;
+    position:relative;
+    padding-left:62px;
+    margin-bottom:20px;
+    font-size:1.03rem;
+  }
+  ol.takeaway-list li::before{
+    content:counter(tk);
+    position:absolute;left:0;top:2px;
+    width:42px;height:42px;
+    border-radius:50%;
+    border:1.5px solid var(--gold);
+    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
+    color:#7c5a12;
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.05rem;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+  }
+  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  .sources{
+    margin-top:34px;
+    font-size:.9rem;
+    line-height:1.7;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+  .sources .label{
+    font-family:'Cinzel',serif;
+    font-size:.68rem;letter-spacing:.36em;text-transform:uppercase;
+    color:var(--gold);display:block;margin-bottom:4px;
+  }
+  .sdg{
+    font-family:'Pinyon Script',cursive;
+    font-size:2.5rem;
+    color:var(--gold);
+    text-align:center;
+    margin-top:40px;
+  }
+</style>
+</head>
+<body>
+<style>
+  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
+  .allnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
+    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
+    padding-bottom:2px;
+  }
+  .allnav a:hover{border-bottom-color:#a67c1e;}
+</style>
+<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+
+<article class="page">
+  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+
+                                <div class="eyebrow">Today's Devotion</div>
+  <h1>When God Sends a Peacemaker</h1>
+
+
+  <section class="verse-card">
+    <div class="label">Key Verse</div>
+    <div class="scripture">“Praise the Lord, the God of Israel, who has sent you to meet me today!”</div>
+    <div class="ref">1 Samuel 25:32 (NLT, excerpt)</div>
+    <div class="scripture" style="margin-top:18px;">“Thank God for your good sense! Bless you for keeping me from murder and from carrying out vengeance with my own hands.”</div>
+    <div class="ref">1 Samuel 25:33 (NLT)</div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <div class="body-text">
+    <p>Sometimes God’s answer to our anger comes through someone asking us to stop. In 1 Samuel 25, David—anointed but not yet king, a fugitive in Judah—sent ten young men to a wealthy landowner named Nabal at sheep-shearing time. His men had protected Nabal’s shepherds; the request was courteous: <span class="scrip">“Please share any provisions you might have on hand with us and with your friend David.”</span> <span class="ref">1 Samuel 25:8 (NLT)</span> Nabal’s answer was contempt: <span class="scrip">“Who is this fellow David?” Nabal sneered to the young men. “Who does this son of Jesse think he is?”</span> <span class="ref">1 Samuel 25:10 (NLT, excerpt)</span> When the report reached David, his reply was short: <span class="scrip">“Get your swords!”</span> <span class="ref">1 Samuel 25:13 (NLT, excerpt)</span> Four hundred men set out with him, and he swore that not one male of Nabal’s household would be alive by morning (1 Samuel 25:21–22). The insult was real; the response was a plan to kill many people who had wronged no one. Ellen G. White describes the moment plainly: <span class="egw" data-wa="block">“This impulsive movement was more in harmony with the character of Saul than with that of David, but the son of Jesse had yet to learn of patience in the school of affliction.”</span> <span class="egw-ref">Patriarchs and Prophets, p. 665 · PP 665.2</span> <strong>An injury does not remove our responsibility for what we do next.</strong></p>
+
+    <p>Meanwhile a servant went to Abigail, Nabal’s wife, told her what had happened, and said, <span class="scrip">“You need to know this and figure out what to do, for there is going to be trouble for our master and his whole family.”</span> <span class="ref">1 Samuel 25:17 (NLT, excerpt)</span> <span class="scrip">“Abigail wasted no time.”</span> <span class="ref">1 Samuel 25:18 (NLT, excerpt)</span> She loaded donkeys with provisions, sent her servants ahead, and rode out to meet an armed and angry man. She bowed low before David and spoke—and it was not flattery. She took the matter onto herself, offered the gift, and said the hard thing: the Lord had kept David <span class="scrip">“from murdering and taking vengeance into your own hands,”</span> <span class="ref">1 Samuel 25:26 (NLT, excerpt)</span> the Lord would give him a lasting dynasty, and when God made him leader of Israel he must not have to carry <span class="scrip">“the staggering burden of needless bloodshed and vengeance”</span> <span class="ref">1 Samuel 25:31 (NLT, excerpt)</span> on his conscience. Respectful in manner, it was a correction in substance. Ellen G. White writes of her appeal: <span class="egw" data-wa="block">“These words could have come only from the lips of one who had partaken of the wisdom from above. The piety of Abigail, like the fragrance of a flower, breathed out all unconsciously in face and word and action. The Spirit of the Son of God was abiding in her soul. Her speech, seasoned with grace, and full of kindness and peace, shed a heavenly influence.”</span> <span class="egw-ref">Patriarchs and Prophets, p. 667 · PP 667.1</span> A wise word can become an instrument of God’s restraining grace. <strong>Wise concern becomes practical help, and peacemaking can require the courage to say that a course of action is wrong.</strong></p>
+
+    <p>Then the story turns on what David did with her words. <span class="scrip">“Praise the Lord, the God of Israel, who has sent you to meet me today! Thank God for your good sense! Bless you for keeping me from murder and from carrying out vengeance with my own hands.”</span> <span class="ref">1 Samuel 25:32–33 (NLT, excerpt)</span> He credited God first, thanked the person who corrected him, named plainly what he had been about to do, accepted her gift, and changed his decision: <span class="scrip">“Return home in peace. I have heard what you said. We will not kill your husband.”</span> <span class="ref">1 Samuel 25:35 (NLT, excerpt)</span> This was the David who had spared Saul (1 Samuel 24; 26); restraint once does not make anyone immune to anger the next time, and position, power and a real grievance put no one beyond correction. Ellen G. White writes: <span class="egw" data-wa="block">“With a humble heart he received the rebuke.... He gave thanks and blessings because she advised him righteously. There are many who, when they are reproved, think it praiseworthy if they receive the rebuke without becoming impatient; but how few take reproof with gratitude of heart and bless those who seek to save them from pursuing an evil course.”</span> <span class="egw-ref">Patriarchs and Prophets, p. 667 · PP 667.3</span> James says it in a sentence: <span class="scrip">“Human anger does not produce the righteousness God desires.”</span> <span class="ref">James 1:20 (NLT)</span> Abigail told Nabal the next morning, when he was sober; he collapsed, and about ten days later <span class="scrip">“the Lord struck him, and he died.”</span> <span class="ref">1 Samuel 25:38 (NLT, excerpt)</span> David later married her. But the story’s turning point is verse 35, not verse 38: harm was prevented because a courageous word was humbly received. <strong>A teachable heart can change direction before anger becomes harm.</strong></p>
+
+    <p>We may need Abigail’s courage or David’s humility—often both in the same week. Peacemaking is not keeping things quiet; a quiet room is not necessarily a just or safe room. It looks like refusing to repeat an inflammatory rumour, offering a calm and honest correction, or, where someone is in real danger, getting appropriate help rather than approaching the danger alone. And being corrected is not merely listening politely; it is stopping a wrong course once the truth is plain—testing counsel by Scripture and the facts, and adding apology and repair where harm has been done. Neither task belongs to women as managers of men’s anger or to children as mediators of adult conflict; Ellen G. White’s wish reaches the whole church: <span class="egw" data-wa="block">“Would that there were many more like this woman of Israel, who would soothe the irritated feelings, prevent rash impulses, and quell great evils by words of calm and well-directed wisdom.”</span> <span class="egw-ref">Patriarchs and Prophets, p. 667 · PP 667.1</span> Neither task makes us saviours or guarantees another’s response; our hope rests elsewhere. <span class="scrip">“For Christ himself has brought peace to us,”</span> <span class="ref">Ephesians 2:14 (NLT, excerpt)</span> Paul writes—peace made in His own body on the cross, reconciling us to God. And Peter tells us that Jesus <span class="scrip">“did not retaliate when he was insulted, nor threaten revenge when he suffered. He left his case in the hands of God, who always judges fairly. He personally carried our sins in his body on the cross so that we can be dead to sin and live for what is right.”</span> <span class="ref">1 Peter 2:23–24 (NLT, excerpt)</span> David was kept from sin by a word he received; we are saved by the One who carried our sins. Am I willing both to speak wisely and to receive wise correction? <strong>Receive Christ’s grace, speak truth with care, listen with humility, and surrender revenge to God.</strong></p>
+
+  </div>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <h2 class="takeaways">Key Takeaways</h2>
+  <ol class="takeaway-list">
+    <li><strong>An injury does not remove our responsibility for what we do next.</strong> <span class="scrip">“Get your swords!”</span> <span class="ref">1 Samuel 25:13 (NLT, excerpt)</span> Ellen White tells us that David’s <span class="egw">“impulsive movement was more in harmony with the character of Saul than with that of David”</span> <span class="egw-ref">Patriarchs and Prophets, p. 665 · PP 665.2</span>—Nabal’s insult was real, but the plan to answer it with bloodshed was David’s own.</li>
+    <li><strong>Wise concern becomes practical help, and peacemaking can require the courage to say that a course of action is wrong.</strong> <span class="scrip">“Abigail wasted no time.”</span> <span class="ref">1 Samuel 25:18 (NLT, excerpt)</span> Ellen White writes that her speech, <span class="egw">“seasoned with grace, and full of kindness and peace, shed a heavenly influence”</span> <span class="egw-ref">Patriarchs and Prophets, p. 667 · PP 667.1</span>—respectful in manner, a correction in substance.</li>
+    <li><strong>A teachable heart can change direction before anger becomes harm.</strong> <span class="scrip">“Praise the Lord, the God of Israel, who has sent you to meet me today!”</span> <span class="ref">1 Samuel 25:32 (NLT, excerpt)</span> Ellen White says that <span class="egw">“with a humble heart he received the rebuke”</span> <span class="egw-ref">Patriarchs and Prophets, p. 667 · PP 667.3</span>—David credited God, thanked his counsellor, and changed his decision.</li>
+    <li><strong>Receive Christ’s grace, speak truth with care, listen with humility, and surrender revenge to God.</strong> <span class="scrip">“For Christ himself has brought peace to us.”</span> <span class="ref">Ephesians 2:14 (NLT, excerpt)</span> Ellen White’s wish is for <span class="egw">“many more like this woman of Israel”</span> <span class="egw-ref">Patriarchs and Prophets, p. 667 · PP 667.1</span>; and Jesus, who <span class="scrip">“did not retaliate when he was insulted,”</span> <span class="ref">1 Peter 2:23 (NLT, excerpt)</span> <span class="scrip">“personally carried our sins in his body on the cross.”</span> <span class="ref">1 Peter 2:24 (NLT, excerpt)</span></li>
+  </ol>
+
+  <p class="sources"><span class="label">Sources and Further Reading</span>Scripture: 1 Samuel 25:2–42, with the central scene in 25:14–35 and the key text in 25:32–33; 1 Samuel 24 and 26 as context; James 1:20; Ephesians 2:13–18; 1 Peter 2:21–24 (NLT). Ellen G. White: <em>Patriarchs and Prophets</em>, chapter 65, “The Magnanimity of David,” pp. 664–668 (PP 665.2, 667.1, 667.3) — her extended account of Nabal’s insult, David’s impulsive response, Abigail’s appeal and David’s grateful reception of correction. The same material is reproduced, abridged, in <em>Conflict and Courage</em>, “Gentle Rebuke” (June 12, p. 169), a compilation whose later paragraphs are credited to <em>Patriarchs and Prophets</em>, pp. 666–667.</p>
+
+  <div class="sdg">Soli Deo Gloria</div>
+</article>
+</body>
+</html>

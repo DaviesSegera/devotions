@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>When God Raises a Deliverer &mdash; Today's Devotion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f3ead4;
+    --parchment-deep:#eadfc2;
+    --ink:#3b2d18;
+    --ink-soft:#5a4629;
+    --gold:#a67c1e;
+    --gold-bright:#c9a227;
+    --gold-pale:#e3cf95;
+    --wine:#7a3b2e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    color:var(--ink);
+    font-family:'Lora',serif;
+    line-height:1.85;
+    padding:34px 14px 60px;
+    position:relative;
+  }
+  /* aged-paper grain */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
+    z-index:2;
+  }
+  .page{
+    max-width:760px;
+    margin:0 auto;
+    background:rgba(255,252,240,.55);
+    border:1.5px solid var(--gold);
+    outline:1px solid var(--gold-pale);
+    outline-offset:6px;
+    padding:64px 52px 56px;
+    position:relative;
+    box-shadow:0 18px 50px rgba(90,70,30,.18);
+  }
+  @media(max-width:620px){.page{padding:52px 24px 44px;}}
+  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
+  .corner.tl{top:10px;left:10px;}
+  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
+  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
+  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+  .eyebrow{
+    font-family:'Cinzel',serif;
+    font-size:.82rem;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:clamp(2.1rem,5.4vw,3rem);
+    text-align:center;
+    color:var(--ink);
+    letter-spacing:.01em;
+    margin-bottom:26px;
+  }
+  /* Ellen G. White — companion ink */
+  .egw{color:var(--wine);}
+  .egw-ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.08em;
+    font-size:.88em;
+    color:var(--wine);
+  }
+  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .divider{
+    display:flex;align-items:center;justify-content:center;
+    gap:14px;margin:30px 0;color:var(--gold);
+  }
+  .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+  .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
+  .divider svg{flex-shrink:0;}
+  .verse-card{
+    border:1px solid var(--gold-pale);
+    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
+    padding:30px 34px 26px;
+    text-align:center;
+    margin:0 auto 8px;
+    position:relative;
+  }
+  .verse-card .label{
+    font-family:'Cinzel',serif;
+    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .verse-card .scripture{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.42rem;
+    line-height:1.65;
+    color:var(--ink-soft);
+  }
+  .verse-card .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.14em;
+    font-size:.95rem;
+    color:var(--gold);
+    margin-top:14px;
+  }
+  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
+  .body-text p:first-of-type::first-letter{
+    font-family:'Playfair Display',serif;
+    font-size:3.9em;
+    float:left;
+    line-height:.82;
+    padding:6px 12px 0 0;
+    color:var(--gold);
+  }
+  .body-text strong{color:#7c5a12;font-weight:600;}
+  .scrip{font-style:italic;color:var(--ink-soft);}
+  .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.1em;
+    font-size:.92em;
+    color:var(--gold);
+    white-space:nowrap;
+  }
+  h2.takeaways{
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.35rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    text-align:center;
+    color:var(--ink);
+    margin-bottom:26px;
+  }
+  ol.takeaway-list{list-style:none;counter-reset:tk;}
+  ol.takeaway-list li{
+    counter-increment:tk;
+    position:relative;
+    padding-left:62px;
+    margin-bottom:20px;
+    font-size:1.03rem;
+  }
+  ol.takeaway-list li::before{
+    content:counter(tk);
+    position:absolute;left:0;top:2px;
+    width:42px;height:42px;
+    border-radius:50%;
+    border:1.5px solid var(--gold);
+    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
+    color:#7c5a12;
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.05rem;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+  }
+  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  .sources{
+    margin-top:34px;
+    font-size:.9rem;
+    line-height:1.7;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+  .sources .label{
+    font-family:'Cinzel',serif;
+    font-size:.68rem;letter-spacing:.36em;text-transform:uppercase;
+    color:var(--gold);display:block;margin-bottom:4px;
+  }
+  .sdg{
+    font-family:'Pinyon Script',cursive;
+    font-size:2.5rem;
+    color:var(--gold);
+    text-align:center;
+    margin-top:40px;
+  }
+</style>
+</head>
+<body>
+<style>
+  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
+  .allnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
+    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
+    padding-bottom:2px;
+  }
+  .allnav a:hover{border-bottom-color:#a67c1e;}
+</style>
+<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+
+<article class="page">
+  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+
+                                <div class="eyebrow">Today's Devotion</div>
+  <h1>When God Raises a Deliverer</h1>
+
+
+  <section class="verse-card">
+    <div class="label">Key Verse</div>
+    <div class="scripture">“The Lord again raised up a rescuer to save them.”</div>
+    <div class="ref">Judges 3:15 (NLT, excerpt)</div>
+    <div class="scripture" style="margin-top:18px;">“The Lord has given you victory over Moab your enemy.”</div>
+    <div class="ref">Judges 3:28 (NLT, excerpt)</div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <div class="body-text">
+    <p>The most important turning point in Ehud’s story is not the moment in the palace. It is the moment the people cry to God and He raises a rescuer. But the story begins earlier, with a failure. <span class="scrip">“Once again the Israelites did evil in the Lord’s sight, and the Lord gave King Eglon of Moab control over Israel because of their evil.”</span> <span class="ref">Judges 3:12 (NLT)</span> The word “again” matters. Judges 2 had already described a generation that <span class="scrip">“did not acknowledge the Lord or remember the mighty things he had done for Israel,”</span> <span class="ref">Judges 2:10 (NLT, excerpt)</span> and the pattern that followed: <span class="scrip">“when the judge died, the people returned to their corrupt ways.”</span> <span class="ref">Judges 2:19 (NLT, excerpt)</span> Eglon of Moab gathered his allies, took Jericho, <span class="scrip">“and the Israelites served Eglon of Moab for eighteen years.”</span> <span class="ref">Judges 3:14 (NLT)</span> The narrator is clear that this domination was not bad luck; it was the fruit of turning from God. Ellen G. White describes the same movement in the history of this period: <span class="egw" data-wa="block">“By their sins the Israelites were separated from God; His strength was removed from them, and they could no longer prevail against their enemies. Thus they were brought into subjection to the very nations that through God they might have subdued.”</span> <span class="egw-ref">Patriarchs and Prophets, p. 544 · PP 544.4</span> That is the narrator’s explanation of this episode, not a licence to explain every hardship a person suffers as punishment for a particular sin. But it does ask each of us whether we have become comfortable with something that is drawing our heart away from God. <strong>What we turn to instead of God cannot give us the freedom we seek.</strong></p>
+
+    <p>Eighteen years is a long time. Then comes the turning point, and it is not in the palace. <span class="scrip">“But when the people of Israel cried out to the Lord for help, the Lord again raised up a rescuer to save them. His name was Ehud son of Gera, a left-handed man of the tribe of Benjamin.”</span> <span class="ref">Judges 3:15 (NLT, excerpt)</span> Notice the order: the people cry; God raises. Scripture does not record the words of their prayer or measure the sincerity of every heart; it records that they cried to the Lord and that He answered. Why would He, when this was not their first failure? Judges 2 tells us what moved Him: <span class="scrip">“For the Lord took pity on his people, who were burdened by oppression and suffering.”</span> <span class="ref">Judges 2:18 (NLT, excerpt)</span> The rescuer came not because Israel had earned another chance but because God is merciful. Ellen G. White, surveying this whole period, writes: <span class="egw" data-wa="block">“Yet He did not utterly forsake His people. There was ever a remnant who were true to Jehovah; and from time to time the Lord raised up faithful and valiant men to put down idolatry and to deliver the Israelites from their enemies.”</span> <span class="egw-ref">Patriarchs and Prophets, p. 545 · PP 545.1</span> A repeated failure is a reason to return to God, not a reason to hide from Him. <strong>Israel’s failure did not make their prayer pointless: they cried to the Lord, and He raised a rescuer.</strong></p>
+
+    <p>The text tells us little about Ehud—his father’s name, his tribe, and that he was left-handed—and it makes no claim that he was despised or weak. What it tells us is that God raised him. What followed can be told in a sentence: Ehud was sent to Eglon with Israel’s tribute and the men who carried it, returned to the king, killed him, escaped, and then called Israel to follow him. That was deliverance in an ancient conflict; it is not an instruction for how Christians treat people who oppose us. But notice what Ehud said when he sounded the call to arms in the hill country of Ephraim: <span class="scrip">“‘Follow me,’ he said, ‘for the Lord has given you victory over Moab your enemy.’ So they followed him.”</span> <span class="ref">Judges 3:28 (NLT, excerpt)</span> The man who had acted so boldly did not claim the victory; he named its source. The Israelites followed him, Moab’s forces were defeated, <span class="scrip">“and there was peace in the land for eighty years.”</span> <span class="ref">Judges 3:30 (NLT, excerpt)</span> Ellen G. White names him among the deliverers of that era: <span class="egw">“Othniel, Shamgar, and Ehud, Deborah and Barak, were raised up as deliverers of their people”</span> <span class="egw-ref">Patriarchs and Prophets, p. 545 · PP 545.2</span>. The weight of her sentence, like the Bible’s, falls on the raising. <strong>God raised the rescuer, Ehud gave the Lord the credit, and the whole people shared in the deliverance.</strong></p>
+
+    <p>Eighty years of peace was a gift. But the next chapter opens with a sobering line: <span class="scrip">“After Ehud’s death, the Israelites again did evil in the Lord’s sight.”</span> <span class="ref">Judges 4:1 (NLT)</span> Relief from an oppressor is not the same as a lasting return to God. That is the searching question this story leaves with us: Am I seeking only relief from my trouble, or am I returning to God Himself? It is possible to want the pressure to stop without wanting God—to pray hard in the crisis and drift once it passes. The invitation today is not to a national deliverance but to an honest return: <span class="scrip">“If we confess our sins to him, he is faithful and just to forgive us our sins and to cleanse us from all wickedness.”</span> <span class="ref">1 John 1:9 (NLT, excerpt)</span> Do not wait until you feel worthy to return. Ellen G. White writes of the Saviour who receives us: <span class="egw" data-wa="block">“Jesus loves to have us come to Him just as we are, sinful, helpless, dependent. We may come with all our weakness, our folly, our sinfulness, and fall at His feet in penitence. It is His glory to encircle us in the arms of His love and to bind up our wounds, to cleanse us from all impurity.”</span> <span class="egw-ref">Steps to Christ, p. 52 · SC 52.2</span> And the deepest deliverance we need is not from a Moab. The angel told Joseph to name the child Jesus, <span class="scrip">“for he will save his people from their sins.”</span> <span class="ref">Matthew 1:21 (NLT, excerpt)</span> Ehud’s deliverance gave Israel eighty years of peace; Jesus saves from sin and brings us to God. <strong>God’s mercy calls us back to Him, not merely back to comfort—return to God, trust His mercy, offer Him your faithful service, and keep your hope in Jesus, who saves from sin.</strong></p>
+
+  </div>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <h2 class="takeaways">Key Takeaways</h2>
+  <ol class="takeaway-list">
+    <li><strong>What we turn to instead of God cannot give us the freedom we seek.</strong> <span class="scrip">“Once again the Israelites did evil in the Lord’s sight.”</span> <span class="ref">Judges 3:12 (NLT, excerpt)</span> Ellen White tells us that <span class="egw">“by their sins the Israelites were separated from God; His strength was removed from them”</span> <span class="egw-ref">Patriarchs and Prophets, p. 544 · PP 544.4</span>—the story begins with a spiritual problem before it describes a political deliverance.</li>
+    <li><strong>Israel’s failure did not make their prayer pointless: they cried to the Lord, and He raised a rescuer.</strong> <span class="scrip">“The Lord took pity on his people, who were burdened by oppression and suffering.”</span> <span class="ref">Judges 2:18 (NLT, excerpt)</span> Ellen White writes that <span class="egw">“He did not utterly forsake His people”</span> <span class="egw-ref">Patriarchs and Prophets, p. 545 · PP 545.1</span>—the rescuer came because God is merciful, not because Israel had earned another chance.</li>
+    <li><strong>God raised the rescuer, Ehud gave the Lord the credit, and the whole people shared in the deliverance.</strong> <span class="scrip">“The Lord has given you victory over Moab your enemy.”</span> <span class="ref">Judges 3:28 (NLT, excerpt)</span> Ellen White names <span class="egw">“Othniel, Shamgar, and Ehud, Deborah and Barak”</span> <span class="egw-ref">Patriarchs and Prophets, p. 545 · PP 545.2</span> among those God raised up as deliverers; the weight falls on the raising, not on the instrument.</li>
+    <li><strong>God’s mercy calls us back to Him, not merely back to comfort—return to God, trust His mercy, offer Him your faithful service, and keep your hope in Jesus, who saves from sin.</strong> <span class="scrip">“After Ehud’s death, the Israelites again did evil in the Lord’s sight.”</span> <span class="ref">Judges 4:1 (NLT)</span> Ellen White says that <span class="egw">“Jesus loves to have us come to Him just as we are, sinful, helpless, dependent”</span> <span class="egw-ref">Steps to Christ, p. 52 · SC 52.2</span>; and the angel said of Jesus, <span class="scrip">“he will save his people from their sins.”</span> <span class="ref">Matthew 1:21 (NLT, excerpt)</span></li>
+  </ol>
+
+  <p class="sources"><span class="label">Sources and Further Reading</span>Scripture: Judges 3:12–30, within Judges 2:10–23 and Judges 3:1–30; Judges 2:10, 18, 19; Judges 4:1; 1 John 1:9; Matthew 1:21 (NLT). Ellen G. White: <em>Patriarchs and Prophets</em>, chapter 53, “The Earlier Judges,” pp. 543–545 (PP 544.4, 545.1, 545.2) — the spiritual setting of the judges and the direct mention of Ehud among the deliverers; the chapter does not retell the encounter with Eglon, and its later material concerns Midian and Gideon. <em>Steps to Christ</em>, chapter 6, “Faith and Acceptance,” p. 52 (SC 52.2), thematic gospel counsel on coming to Christ as we are. The same <em>Steps to Christ</em> material is reproduced in <em>Homeward Bound</em>, “Just as We Are” (March 1, p. 78, drawn from <em>Steps to Christ</em>, pp. 52–53).</p>
+
+  <div class="sdg">Soli Deo Gloria</div>
+</article>
+</body>
+</html>

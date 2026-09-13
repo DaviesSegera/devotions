@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Praise in the Midnight &mdash; Today's Devotion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f3ead4;
+    --parchment-deep:#eadfc2;
+    --ink:#3b2d18;
+    --ink-soft:#5a4629;
+    --gold:#a67c1e;
+    --gold-bright:#c9a227;
+    --gold-pale:#e3cf95;
+    --wine:#7a3b2e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    color:var(--ink);
+    font-family:'Lora',serif;
+    line-height:1.85;
+    padding:34px 14px 60px;
+    position:relative;
+  }
+  /* aged-paper grain */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
+    z-index:2;
+  }
+  .page{
+    max-width:760px;
+    margin:0 auto;
+    background:rgba(255,252,240,.55);
+    border:1.5px solid var(--gold);
+    outline:1px solid var(--gold-pale);
+    outline-offset:6px;
+    padding:64px 52px 56px;
+    position:relative;
+    box-shadow:0 18px 50px rgba(90,70,30,.18);
+  }
+  @media(max-width:620px){.page{padding:52px 24px 44px;}}
+  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
+  .corner.tl{top:10px;left:10px;}
+  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
+  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
+  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+  .eyebrow{
+    font-family:'Cinzel',serif;
+    font-size:.82rem;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:clamp(2.1rem,5.4vw,3rem);
+    text-align:center;
+    color:var(--ink);
+    letter-spacing:.01em;
+    margin-bottom:26px;
+  }
+  /* Ellen G. White — companion ink */
+  .egw{color:var(--wine);}
+  .egw-ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.08em;
+    font-size:.88em;
+    color:var(--wine);
+  }
+  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .divider{
+    display:flex;align-items:center;justify-content:center;
+    gap:14px;margin:30px 0;color:var(--gold);
+  }
+  .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+  .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
+  .divider svg{flex-shrink:0;}
+  .verse-card{
+    border:1px solid var(--gold-pale);
+    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
+    padding:30px 34px 26px;
+    text-align:center;
+    margin:0 auto 8px;
+    position:relative;
+  }
+  .verse-card .label{
+    font-family:'Cinzel',serif;
+    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .verse-card .scripture{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.42rem;
+    line-height:1.65;
+    color:var(--ink-soft);
+  }
+  .verse-card .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.14em;
+    font-size:.95rem;
+    color:var(--gold);
+    margin-top:14px;
+  }
+  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
+  .body-text p:first-of-type::first-letter{
+    font-family:'Playfair Display',serif;
+    font-size:3.9em;
+    float:left;
+    line-height:.82;
+    padding:6px 12px 0 0;
+    color:var(--gold);
+  }
+  .body-text strong{color:#7c5a12;font-weight:600;}
+  .scrip{font-style:italic;color:var(--ink-soft);}
+  .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.1em;
+    font-size:.92em;
+    color:var(--gold);
+    white-space:nowrap;
+  }
+  h2.takeaways{
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.35rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    text-align:center;
+    color:var(--ink);
+    margin-bottom:26px;
+  }
+  ol.takeaway-list{list-style:none;counter-reset:tk;}
+  ol.takeaway-list li{
+    counter-increment:tk;
+    position:relative;
+    padding-left:62px;
+    margin-bottom:20px;
+    font-size:1.03rem;
+  }
+  ol.takeaway-list li::before{
+    content:counter(tk);
+    position:absolute;left:0;top:2px;
+    width:42px;height:42px;
+    border-radius:50%;
+    border:1.5px solid var(--gold);
+    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
+    color:#7c5a12;
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.05rem;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+  }
+  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  .sdg{
+    font-family:'Pinyon Script',cursive;
+    font-size:2.5rem;
+    color:var(--gold);
+    text-align:center;
+    margin-top:40px;
+  }
+</style>
+</head>
+<body>
+<style>
+  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
+  .allnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
+    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
+    padding-bottom:2px;
+  }
+  .allnav a:hover{border-bottom-color:#a67c1e;}
+</style>
+<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+
+<article class="page">
+  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+
+    <div class="eyebrow">Today's Devotion</div>
+  <h1>Praise in the Midnight</h1>
+
+  <section class="verse-card">
+    <div class="label">Key Verse</div>
+    <div class="scripture">“Around midnight Paul and Silas were praying and singing hymns to God, and the other prisoners were listening.”</div>
+    <div class="ref">Acts 16:25 (NLT)</div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <div class="body-text">
+    <p>Paul and Silas did not wander into Philippi. Scripture is careful to show that God had been steering the journey, sometimes by closing roads. <span class="scrip">“Next Paul and Silas traveled through the area of Phrygia and Galatia, because the Holy Spirit had prevented them from preaching the word in the province of Asia at that time.”</span> <span class="ref">Acts 16:6 (NLT)</span> They tried another direction, <span class="scrip">“but again the Spirit of Jesus did not allow them to go there.”</span> <span class="ref">Acts 16:7 (NLT)</span> Then, at Troas, the direction came: <span class="scrip">“That night Paul had a vision: A man from Macedonia in northern Greece was standing there, pleading with him, ‘Come over to Macedonia and help us!’”</span> <span class="ref">Acts 16:9 (NLT)</span> Luke, who joins the narrative here, records the conclusion they drew: <span class="scrip">“So we decided to leave for Macedonia at once, having concluded that God was calling us to preach the Good News there.”</span> <span class="ref">Acts 16:10 (NLT)</span> They landed and <span class="scrip">“reached Philippi, a major city of that district of Macedonia and a Roman colony.”</span> <span class="ref">Acts 16:12 (NLT)</span> The first fruit was gentle. By a riverbank on the Sabbath they met a group of women, and <span class="scrip">“one of them was Lydia from Thyatira, a merchant of expensive purple cloth, who worshiped God. As she listened to us, the Lord opened her heart, and she accepted what Paul was saying.”</span> <span class="ref">Acts 16:14 (NLT)</span> <span class="scrip">“She and her household were baptized,”</span> and she urged the missionaries to stay in her home. <span class="ref">Acts 16:15 (NLT)</span> Hold that beginning in mind, because the same men who had <span class="scrip">“concluded that God was calling us”</span> <span class="ref">Acts 16:10 (NLT)</span> were, within days, bleeding in a dungeon. Divine guidance had not delivered them into comfort. That does not mean hardship proves a person has missed God’s will, and it does not mean hardship proves a person is in it; Scripture draws neither conclusion. What it shows is that Paul and Silas could keep going because their confidence rested on God’s call, not on the pleasantness of the road. <strong>God’s leading does not promise an easy road; it promises that He is the One who led you onto it.</strong></p>
+
+    <p>The trouble began with a person, not a plot device. <span class="scrip">“One day as we were going down to the place of prayer, we met a slave girl who had a spirit that enabled her to tell the future. She earned a lot of money for her masters by telling fortunes.”</span> <span class="ref">Acts 16:16 (NLT)</span> Notice how Scripture introduces her: enslaved, spiritually bound, and profitable to other people. Her bondage was somebody’s business. <span class="scrip">“She followed Paul and the rest of us, shouting, ‘These men are servants of the Most High God, and they have come to tell you how to be saved.’”</span> <span class="ref">Acts 16:17 (NLT)</span> The words sounded like a commendation, and that was the problem. Ellen White explains why such testimony was harmful even though it sounded favourable: <span class="egw">“The words of recommendation uttered by this woman were an injury to the cause of truth, distracting the minds of the people from the teachings of the apostles and bringing disrepute upon the gospel, and by them many were led to believe that the men who spoke with the Spirit and power of God were actuated by the same spirit as this emissary of Satan”</span> <span class="egw-ref">The Acts of the Apostles, chapter 21, “In the Regions Beyond,” p. 212 · AA 212.3</span>. <span class="scrip">“This went on day after day until Paul got so exasperated that he turned and said to the demon within her, ‘I command you in the name of Jesus Christ to come out of her.’ And instantly it left her.”</span> <span class="ref">Acts 16:18 (NLT)</span> Paul did not shout at the girl; he addressed the spirit, and he did it in the name of Jesus Christ, not his own. Ellen White completes her story: <span class="egw">“restored to her right mind, the woman chose to become a follower of Christ”</span> <span class="egw-ref">The Acts of the Apostles, chapter 21, p. 213 · AA 213.1</span>. Acts then states plainly is the reaction of the men who had lived off her: <span class="scrip">“Her masters’ hopes of wealth were now shattered, so they grabbed Paul and Silas and dragged them before the authorities at the marketplace.”</span> <span class="ref">Acts 16:19 (NLT)</span> A human being had been freed, and the only people who objected were the ones who had been paid for her chains. This account should not be inflated into a political programme, and it gives no licence to diagnose every illness as demonic or every critic as possessed. But it does show that the gospel will sometimes collide with arrangements that profit from someone else’s bondage, and that when it does, the people who profit rarely stay quiet. <strong>The gospel set a woman free, and the men who had been paid for her bondage called it a crime.</strong></p>
+
+    <p>What followed was not justice; it was a riot dressed as a hearing. <span class="scrip">“‘The whole city is in an uproar because of these Jews!’ they shouted to the city officials. ‘They are teaching customs that are illegal for us Romans to practice.’”</span> <span class="ref">Acts 16:20–21 (NLT)</span> The real grievance, lost money, never appeared in the charge. <span class="scrip">“A mob quickly formed against Paul and Silas, and the city officials ordered them stripped and beaten with wooden rods. They were severely beaten, and then they were thrown into prison. The jailer was ordered to make sure they didn’t escape.”</span> <span class="ref">Acts 16:22–23 (NLT)</span> <span class="scrip">“So the jailer put them into the inner dungeon and clamped their feet in the stocks.”</span> <span class="ref">Acts 16:24 (NLT)</span> Only the next morning does the narrative reveal how unlawful all of this was, when Paul says, <span class="scrip">“They have publicly beaten us without a trial and put us in prison—and we are Roman citizens.”</span> <span class="ref">Acts 16:37 (NLT)</span> No trial. No defence. Citizens beaten before anyone asked who they were. Ellen White helps us see their condition: <span class="egw">“Their lacerated and bleeding backs were in contact with the rough stone floor, while their feet were elevated and bound fast in the stocks. In this unnatural position they suffered extreme torture”</span> <span class="egw-ref">Sketches from the Life of Paul, chapter 7, “Imprisonment of Paul and Silas,” p. 75 · LP 75.3</span>. None of this should be romanticised. The beating was an injustice, the dungeon was a cruelty, and the humiliation was real. Scripture never calls suffering good; it calls God good, and it shows Him working inside a night that was wrong from beginning to end. Jesus had told Ananias about Paul years earlier, <span class="scrip">“I will show him how much he must suffer for my name’s sake,”</span> <span class="ref">Acts 9:16 (NLT)</span> and Paul would later list among his sufferings, <span class="scrip">“Three times I was beaten with rods.”</span> <span class="ref">2 Corinthians 11:25 (NLT)</span> Philippi was one of those times. <strong>The injustice was real, the pain was real, and neither of them was the end of the story.</strong></p>
+
+    <p>Then comes the verse that gives this devotion its name. <span class="scrip">“Around midnight Paul and Silas were praying and singing hymns to God, and the other prisoners were listening.”</span> <span class="ref">Acts 16:25 (NLT)</span> Read what is not there. There is no complaint recorded, no curse on the magistrates, no plan of escape, no argument about whether the vision at Troas had been a mistake. Scripture does not say they felt no pain; it says what they did with it. Ellen White writes that <span class="egw">“they did not murmur. Instead, in the utter darkness and desolation of the dungeon, they encouraged each other by words of prayer and sang praises to God because they were found worthy to suffer shame for His sake”</span> <span class="egw-ref">The Acts of the Apostles, chapter 21, p. 213 · AA 213.4</span>. That last phrase echoes an earlier night in Jerusalem, when <span class="scrip">“the apostles left the high council rejoicing that God had counted them worthy to suffer disgrace for the name of Jesus.”</span> <span class="ref">Acts 5:41 (NLT)</span> Here is the heart of the matter. Paul and Silas had no recorded promise that the doors would open that night. They were not singing to make an earthquake happen. Their worship was rooted in who God is, not in what they hoped He was about to do. If we only praise God after the door opens, our praise quietly becomes dependent on the door. Theirs was not. Paul would later write, <span class="scrip">“Always be full of joy in the Lord. I say it again—rejoice!”</span> and, <span class="scrip">“Don’t worry about anything; instead, pray about everything. Tell God what you need, and thank him for all he has done.”</span> <span class="ref">Philippians 4:4–6 (NLT)</span> Those words were written to this very city years later, and while we cannot prove he was thinking of the dungeon when he wrote them, the man who wrote them had once practised them in the dark. Be careful, though, with what this does not mean. It does not mean believers must feel cheerful at every moment, and it is not a rebuke to anyone carrying depression, grief, trauma, chronic illness or exhaustion. The psalms are full of tears addressed to God, and honest lament is worship too. The point is orientation, not performance: in the dark, they turned towards God rather than away from Him. <strong>Faith does not wait for the prison doors to open before it worships; it can sing while the wounds still hurt and the doors are still shut.</strong></p>
+
+    <p>Scripture adds a phrase that is easy to skip: <span class="scrip">“and the other prisoners were listening.”</span> <span class="ref">Acts 16:25 (NLT)</span> The worship was heard before the earthquake was felt. Ellen White pictures the astonishment in that place: <span class="egw">“They had been accustomed to hear shrieks and moans, cursing and swearing, breaking the silence of the night; but never before had they heard words of prayer and praise ascending from that gloomy cell. Guards and prisoners marveled and asked themselves who these men could be, who, cold, hungry, and tortured, could yet rejoice”</span> <span class="egw-ref">The Acts of the Apostles, chapter 21, p. 214 · AA 214.1</span>. She adds that the jailer too “had heard with amazement the prayers and songs of the imprisoned apostles” and had <span class="egw">“expected to hear from them bitter groans and imprecations”</span> <span class="egw-ref">The Acts of the Apostles, chapter 21, p. 215 · AA 215.2</span>. Prisoners, guards and jailer alike heard it. The witness of that night began before anything miraculous happened. People learn what our faith is worth not only from what we say when everything is well, but from how we respond when we are mistreated, disappointed, wounded or afraid. Paul and Silas were not staging a service for an audience; they were worshipping God, and the honesty of it is exactly why it carried. Paul described this kind of life to another church: <span class="scrip">“We are pressed on every side by troubles, but we are not crushed. We are perplexed, but not driven to despair. We are hunted down, but never abandoned by God. We get knocked down, but we are not destroyed. Through suffering, our bodies continue to share in the death of Jesus so that the life of Jesus may also be seen in our bodies.”</span> <span class="ref">2 Corinthians 4:8–10 (NLT)</span> Your midnight may be private pain, but your response can still become a public testimony. That is not a demand to hide your tears for the sake of appearances; a believer who weeps and still prays is bearing witness too. <strong>Someone is listening in your midnight, and what they hear may be the first sermon about Jesus they have ever understood.</strong></p>
+
+    <p>Then God acted, and Scripture is clear that it was God who acted. <span class="scrip">“Suddenly, there was a massive earthquake, and the prison was shaken to its foundations. All the doors immediately flew open, and the chains of every prisoner fell off!”</span> <span class="ref">Acts 16:26 (NLT)</span> The earthquake was not produced by the volume of the singing; it was a sovereign intervention in a specific place on a specific night, and Scripture nowhere turns it into a formula. Ellen White attributes it to heaven directly: <span class="egw">“All heaven was interested in the men who were suffering for Christ’s sake, and angels were sent to visit the prison. At their tread the earth trembled”</span> <span class="egw-ref">The Acts of the Apostles, chapter 21, p. 215 · AA 215.1</span>. Heaven was not a spectator that night; it was present. Now watch what an open door became. <span class="scrip">“The jailer woke up to see the prison doors wide open. He assumed the prisoners had escaped, so he drew his sword to kill himself.”</span> <span class="ref">Acts 16:27 (NLT)</span> A man who had clamped their feet in the stocks hours earlier was seconds from death. <span class="scrip">“But Paul shouted to him, ‘Stop! Don’t kill yourself! We are all here!’”</span> <span class="ref">Acts 16:28 (NLT)</span> The first recorded word out of the open prison was not about escape; it was a cry to save the life of the man who had guarded them. Scripture tells us what Paul did, and Ellen White shows us the heart behind it: <span class="egw">“The severity with which the jailer had treated the apostles had not aroused their resentment. Paul and Silas had the spirit of Christ, not the spirit of revenge. Their hearts, filled with the love of the Saviour, had no room for malice against their persecutors”</span> <span class="egw-ref">The Acts of the Apostles, chapter 21, p. 216 · AA 216.1</span>. This is what Paul later urged on believers in Rome: <span class="scrip">“Dear friends, never take revenge. Leave that to the righteous anger of God,”</span> and, <span class="scrip">“Don’t let evil conquer you, but conquer evil by doing good.”</span> <span class="ref">Romans 12:19–21 (NLT)</span> Sometimes the greatest evidence of freedom is not that a door opens, but that we are free from the need to take revenge. <strong>The earthquake opened the prison, but the character of Christ in two wounded men kept a jailer alive.</strong></p>
+
+    <p>Now the dungeon became a place of salvation. <span class="scrip">“The jailer called for lights and ran to the dungeon and fell down trembling before Paul and Silas. Then he brought them out and asked, ‘Sirs, what must I do to be saved?’”</span> <span class="ref">Acts 16:29–30 (NLT)</span> That is the greatest question asked in the whole account, greater than any question about doors or chains. Ellen White suggests what was behind it: <span class="egw">“his desire to possess the tranquillity and cheerfulness shown by the apostles under suffering and abuse. He saw in their countenances the light of heaven”</span> <span class="egw-ref">The Acts of the Apostles, chapter 21, p. 216 · AA 216.3</span>. The answer is the centre of the devotion: <span class="scrip">“They replied, ‘Believe in the Lord Jesus and you will be saved, along with everyone in your household.’”</span> <span class="ref">Acts 16:31 (NLT)</span> Read the next verse before drawing conclusions about the household, because Scripture does: <span class="scrip">“And they shared the word of the Lord with him and with all who lived in his household.”</span> <span class="ref">Acts 16:32 (NLT)</span> The promise was not a formula that saved relatives who never heard; the word of the Lord was spoken to each of them, and the closing note of the scene says they <span class="scrip">“rejoiced because they all believed in God.”</span> <span class="ref">Acts 16:34 (NLT)</span> One person’s encounter with Christ can open a whole home to the gospel, and that is a hope worth holding, but salvation remains personal: heard, believed, received. Then the transformation showed itself in hands as well as words. <span class="scrip">“Even at that hour of the night, the jailer cared for them and washed their wounds. Then he and everyone in his household were immediately baptized. He brought them into his house and set a meal before them, and he and his entire household rejoiced because they all believed in God.”</span> <span class="ref">Acts 16:33–34 (NLT)</span> The man who had locked them in now washed the wounds that his city had inflicted, and the prisoners became his guests. Do not let the earthquake overshadow this. The central message of Acts 16 is not that God can open your prison; it is that Jesus saves. The greatest freedom in the story is not a Roman door swinging open but a Roman jailer and his household being brought from death to life, and that freedom is offered to every reader of this page. <strong>The most important thing that happened that night was not that a prison opened, but that a man asked how to be saved and was pointed to Jesus.</strong></p>
+
+    <p>Morning brought a different kind of test. <span class="scrip">“The next morning the city officials sent the police to tell the jailer, ‘Let those men go!’”</span> <span class="ref">Acts 16:35 (NLT)</span> The jailer passed it on gladly: <span class="scrip">“The city officials have said you and Silas are free to leave. Go in peace.”</span> <span class="ref">Acts 16:36 (NLT)</span> Paul declined. <span class="scrip">“They have publicly beaten us without a trial and put us in prison—and we are Roman citizens. So now they want us to leave secretly? Certainly not! Let them come themselves to release us!”</span> <span class="ref">Acts 16:37 (NLT)</span> Read this carefully, because it is easy to misjudge in both directions. This was not revenge. The man who had just refused to let his jailer die was not now hunting for his magistrates. He organised no protest and raised no hand. But neither did he agree that a public injustice could be tidied away in private. Ellen White explains the motive: <span class="egw">“Paul and Silas felt that to maintain the dignity of Christ’s church, they must not submit to the illegal course proposed by the Roman magistrates”</span> <span class="egw-ref">Sketches from the Life of Paul, chapter 7, p. 79 · LP 79.2</span>, and elsewhere that Paul <span class="egw">“was not willing that the manifestation of the power of God should be concealed”</span> <span class="egw-ref">Early Writings, “The Jews Decide to Kill Paul,” p. 205 · EW 205.2</span>. A young church would remain in Philippi after the apostles left, and how its founders had been treated would matter to how its members were treated. <span class="scrip">“When the police reported this, the city officials were alarmed to learn that Paul and Silas were Roman citizens. So they came to the jail and apologized to them. Then they brought them out and begged them to leave the city.”</span> <span class="ref">Acts 16:38–39 (NLT)</span> The apology is not the victory of the story, and it should never be turned into a promise that everyone who hurts you will one day come to your door. It is simply a picture of balance. Christians can forgive. Christians can refuse revenge. Christians may still use lawful, ordinary means to seek accountability and to protect others, and using them is not a failure of faith. Forgiveness does not require pretending that wrong was not done, and it must never be used to keep an abused person silent, unprotected or unreported. This is not legal advice, and not every conflict calls for public confrontation; wisdom decides when to speak and when to let a matter rest. <strong>Forgiving those who wronged him did not require Paul to help them hide what they had done.</strong></p>
+
+    <p>The account does not end at the prison gate. <span class="scrip">“When Paul and Silas left the prison, they returned to the home of Lydia. There they met with the believers and encouraged them once more. Then they left town.”</span> <span class="ref">Acts 16:40 (NLT)</span> Wounded, sleepless and lawfully expelled, their last act in Philippi was to strengthen other people. The church they left behind became one of the dearest of Paul’s life. Years later he wrote to it, <span class="scrip">“Every time I think of you, I give thanks to my God. Whenever I pray, I make my requests for all of you with joy, for you have been my partners in spreading the Good News about Christ from the time you first heard it until now.”</span> <span class="ref">Philippians 1:3–5 (NLT)</span> He also reminded them that suffering had been part of their story from the beginning: <span class="scrip">“For you have been given not only the privilege of trusting in Christ but also the privilege of suffering for him. We are in this struggle together. You have seen my struggle in the past, and you know that I am still in the midst of it.”</span> <span class="ref">Philippians 1:29–30 (NLT)</span> The Philippians had seen his struggle; they had been there when it started. When Paul wrote from a later imprisonment, not the Philippian dungeon, <span class="scrip">“everything that has happened to me here has helped to spread the Good News,”</span> <span class="ref">Philippians 1:12 (NLT)</span> he was describing a principle he had first lived out in their city: a prison cannot silence the gospel, because the gospel travels in people. Ellen White summarises the fruit: <span class="egw">“Paul’s labors at Philippi resulted in the establishment of a church whose membership steadily increased. His zeal and devotion, and, above all, his willingness to suffer for Christ’s sake, exerted a deep and lasting influence upon the converts”</span> <span class="egw-ref">The Acts of the Apostles, chapter 21, p. 218 · AA 218.3</span>. So where does all of this leave you, tonight, if it is midnight in your experience and you do not yet know how the story ends? Not with a guarantee of an earthquake. Some prisons open; some believers are sustained inside them until Christ returns; Scripture honours both. What it leaves you with is Christ. He is the One who <span class="scrip">“did not retaliate when he was insulted, nor threaten revenge when he suffered. He left his case in the hands of God, who always judges fairly,”</span> <span class="ref">1 Peter 2:23 (NLT)</span> and who said, <span class="scrip">“Here on earth you will have many trials and sorrows. But take heart, because I have overcome the world.”</span> <span class="ref">John 16:33 (NLT)</span> Paul and Silas did not praise God because they were strong; they praised Him because He is God, and He was God before the earthquake came. Remember, too, the ones still in the dark: <span class="scrip">“Remember those in prison, as if you were there yourself. Remember also those being mistreated, as if you felt their pain in your own bodies.”</span> <span class="ref">Hebrews 13:3 (NLT)</span> And if God has not opened your door yet, ask the only question that finally matters: is He still worthy of your trust and your worship? <strong>Faith can sing at midnight because God is still God before the earthquake comes.</strong></p>
+
+  </div>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <h2 class="takeaways">Key Takeaways</h2>
+  <ol class="takeaway-list">
+    <li><strong>God’s leading does not promise an easy road.</strong> The same men who had <span class="scrip">“concluded that God was calling us to preach the Good News there”</span> <span class="ref">Acts 16:10 (NLT)</span> were soon <span class="scrip">“severely beaten, and then they were thrown into prison.”</span> <span class="ref">Acts 16:23 (NLT)</span> Hardship neither proves you have missed God’s will nor proves you are in it; confidence rests on His call, not on the comfort of the road.</li>
+    <li><strong>The gospel confronted exploitation and freed a person.</strong> She <span class="scrip">“earned a lot of money for her masters by telling fortunes,”</span> <span class="ref">Acts 16:16 (NLT)</span> and when Paul said, <span class="scrip">“I command you in the name of Jesus Christ to come out of her,”</span> <span class="ref">Acts 16:18 (NLT)</span> the only objection came from the men who had profited. She was a human being, not a plot device.</li>
+    <li><strong>Worship came before the earthquake.</strong> <span class="scrip">“Around midnight Paul and Silas were praying and singing hymns to God.”</span> <span class="ref">Acts 16:25 (NLT)</span> They had no recorded promise that the doors would open. Praise is not a technique for producing miracles; it is the response of people who know who God is while the doors are still shut.</li>
+    <li><strong>Someone is listening in your midnight.</strong> Scripture notes that <span class="scrip">“the other prisoners were listening.”</span> <span class="ref">Acts 16:25 (NLT)</span> Ellen White describes them marvelling at men <span class="egw">“who, cold, hungry, and tortured, could yet rejoice”</span> <span class="egw-ref">The Acts of the Apostles, chapter 21, p. 214 · AA 214.1</span>. Honest faith under pressure, tears included, is a witness.</li>
+    <li><strong>The open door was not merely an exit.</strong> When the jailer <span class="scrip">“drew his sword to kill himself,”</span> Paul shouted, <span class="scrip">“Stop! Don’t kill yourself! We are all here!”</span> <span class="ref">Acts 16:27–28 (NLT)</span> Ellen White writes that they <span class="egw">“had the spirit of Christ, not the spirit of revenge”</span> <span class="egw-ref">The Acts of the Apostles, chapter 21, p. 216 · AA 216.1</span>. Freedom from the need for revenge is freedom too.</li>
+    <li><strong>The greatest question in the prison was about salvation.</strong> <span class="scrip">“Sirs, what must I do to be saved?”</span> was answered, <span class="scrip">“Believe in the Lord Jesus and you will be saved,”</span> and then <span class="scrip">“they shared the word of the Lord with him and with all who lived in his household.”</span> <span class="ref">Acts 16:30–32 (NLT)</span> Jesus saves; the household heard and believed for themselves.</li>
+    <li><strong>Forgiveness does not require concealing injustice.</strong> Paul refused to <span class="scrip">“leave secretly”</span> after being <span class="scrip">“publicly beaten … without a trial,”</span> <span class="ref">Acts 16:37 (NLT)</span> yet Scripture says, <span class="scrip">“never take revenge.”</span> <span class="ref">Romans 12:19 (NLT)</span> Believers can forgive, refuse revenge, and still use lawful means to seek accountability and protect others.</li>
+  </ol>
+
+  <div class="sdg">Soli Deo Gloria</div>
+</article>
+</body>
+</html>

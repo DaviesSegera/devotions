@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>When Another Voice Contradicts God &mdash; Today's Devotion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f3ead4;
+    --parchment-deep:#eadfc2;
+    --ink:#3b2d18;
+    --ink-soft:#5a4629;
+    --gold:#a67c1e;
+    --gold-bright:#c9a227;
+    --gold-pale:#e3cf95;
+    --wine:#7a3b2e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    color:var(--ink);
+    font-family:'Lora',serif;
+    line-height:1.85;
+    padding:34px 14px 60px;
+    position:relative;
+  }
+  /* aged-paper grain */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
+    z-index:2;
+  }
+  .page{
+    max-width:760px;
+    margin:0 auto;
+    background:rgba(255,252,240,.55);
+    border:1.5px solid var(--gold);
+    outline:1px solid var(--gold-pale);
+    outline-offset:6px;
+    padding:64px 52px 56px;
+    position:relative;
+    box-shadow:0 18px 50px rgba(90,70,30,.18);
+  }
+  @media(max-width:620px){.page{padding:52px 24px 44px;}}
+  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
+  .corner.tl{top:10px;left:10px;}
+  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
+  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
+  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+  .eyebrow{
+    font-family:'Cinzel',serif;
+    font-size:.82rem;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:clamp(2.1rem,5.4vw,3rem);
+    text-align:center;
+    color:var(--ink);
+    letter-spacing:.01em;
+    margin-bottom:26px;
+  }
+  /* Ellen G. White — companion ink */
+  .egw{color:var(--wine);}
+  .egw-ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.08em;
+    font-size:.88em;
+    color:var(--wine);
+  }
+  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .divider{
+    display:flex;align-items:center;justify-content:center;
+    gap:14px;margin:30px 0;color:var(--gold);
+  }
+  .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+  .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
+  .divider svg{flex-shrink:0;}
+  .verse-card{
+    border:1px solid var(--gold-pale);
+    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
+    padding:30px 34px 26px;
+    text-align:center;
+    margin:0 auto 8px;
+    position:relative;
+  }
+  .verse-card .label{
+    font-family:'Cinzel',serif;
+    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .verse-card .scripture{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.42rem;
+    line-height:1.65;
+    color:var(--ink-soft);
+  }
+  .verse-card .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.14em;
+    font-size:.95rem;
+    color:var(--gold);
+    margin-top:14px;
+  }
+  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
+  .body-text p:first-of-type::first-letter{
+    font-family:'Playfair Display',serif;
+    font-size:3.9em;
+    float:left;
+    line-height:.82;
+    padding:6px 12px 0 0;
+    color:var(--gold);
+  }
+  .body-text strong{color:#7c5a12;font-weight:600;}
+  .scrip{font-style:italic;color:var(--ink-soft);}
+  .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.1em;
+    font-size:.92em;
+    color:var(--gold);
+    white-space:nowrap;
+  }
+  h2.takeaways{
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.35rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    text-align:center;
+    color:var(--ink);
+    margin-bottom:26px;
+  }
+  ol.takeaway-list{list-style:none;counter-reset:tk;}
+  ol.takeaway-list li{
+    counter-increment:tk;
+    position:relative;
+    padding-left:62px;
+    margin-bottom:20px;
+    font-size:1.03rem;
+  }
+  ol.takeaway-list li::before{
+    content:counter(tk);
+    position:absolute;left:0;top:2px;
+    width:42px;height:42px;
+    border-radius:50%;
+    border:1.5px solid var(--gold);
+    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
+    color:#7c5a12;
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.05rem;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+  }
+  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  .sources{
+    margin-top:34px;
+    font-size:.9rem;
+    line-height:1.7;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+  .sources .label{
+    font-family:'Cinzel',serif;
+    font-size:.68rem;letter-spacing:.36em;text-transform:uppercase;
+    color:var(--gold);display:block;margin-bottom:4px;
+  }
+  .sdg{
+    font-family:'Pinyon Script',cursive;
+    font-size:2.5rem;
+    color:var(--gold);
+    text-align:center;
+    margin-top:40px;
+  }
+</style>
+</head>
+<body>
+<style>
+  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
+  .allnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
+    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
+    padding-bottom:2px;
+  }
+  .allnav a:hover{border-bottom-color:#a67c1e;}
+</style>
+<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+
+<article class="page">
+  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+
+    <div class="eyebrow">Today's Devotion</div>
+  <h1>When Another Voice Contradicts God</h1>
+
+  <section class="verse-card">
+    <div class="label">Key Verse</div>
+    <div class="scripture">“But the man of God said to the king, ‘Even if you gave me half of everything you own, I would not go with you. I would not eat or drink anything in this place. For the Lord gave me this command: You must not eat or drink anything while you are there, and do not return to Judah by the same way you came.’”</div>
+    <div class="ref">1 Kings 13:8–9 (NLT)</div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <div class="body-text">
+    <p>He stood before a king and would not compromise. Hours later, another voice told him that God had changed the instructions—and he turned back. Scripture calls him only <span class="scrip">“a man of God from Judah.”</span> <span class="ref">1 Kings 13:1 (NLT)</span> As Jeroboam burned incense at his rival altar in Bethel (1 Kings 12:28–33), the stranger from Judah <span class="scrip">“shouted, ‘O altar, altar! This is what the Lord says: A child named Josiah will be born into the dynasty of David.’”</span> <span class="ref">1 Kings 13:2 (NLT)</span> The king cried, <span class="scrip">“Seize that man!”</span>—and his hand <span class="scrip">“became paralyzed in that position.”</span> <span class="ref">1 Kings 13:4 (NLT)</span> The altar split as announced; the man of God prayed, and the hand was restored (1 Kings 13:5–6). When the king offered a meal and a gift, his answer showed how clearly he knew God’s command: <span class="scrip">“Even if you gave me half of everything you own, I would not go with you. … For the Lord gave me this command: You must not eat or drink anything while you are there, and do not return to Judah by the same way you came.”</span> <span class="ref">1 Kings 13:8–9 (NLT)</span> He <span class="scrip">“left Bethel and went home another way.”</span> <span class="ref">1 Kings 13:10 (NLT)</span> First Kings 13 shows him standing firmly before Jeroboam and refusing the reward, and Ellen G. White emphasizes the holy boldness God gave His messenger: <span class="egw">“How firmly the man of God rebuked the king! And this firmness was essential; in no other way could the existing evils have been rebuked”</span> <span class="egw-ref">Prophets and Kings, p. 105 · PK 105.1</span>. <strong>He began with courageous, unmistakable obedience—he knew God’s will, said it aloud, and did it.</strong></p>
+
+    <p>Then a second voice arrived, and it did not sound like a king. An old prophet from Bethel rode after him and found him <span class="scrip">“sitting under a great tree.”</span> <span class="ref">1 Kings 13:14 (NLT)</span> Invited home, the man of God refused again and repeated God’s command (1 Kings 13:16–17). Then the old prophet said what no king could say: <span class="scrip">“I am a prophet, too, just as you are. And an angel gave me this command from the Lord: Bring him home with you so he can have something to eat and drink.”</span> And Scripture removes every ambiguity: <span class="scrip">“But the old man was lying to him.”</span> <span class="ref">1 Kings 13:18 (NLT)</span> And he went back (1 Kings 13:19). The old prophet did not persuade him by denying God, but by claiming that God had said something different. Scripture records his repeated refusal, and Ellen G. White highlights the tragedy that followed when repeated persuasion moved him from the line of duty already made clear: <span class="egw">“Well would it have been for the prophet had he adhered to his purpose to return to Judea without delay. … Again and again the lie was repeated and the invitation urged until the man of God was persuaded to return”</span> <span class="egw-ref">Prophets and Kings, p. 106 · PK 106.1</span>. Scripture never says why the old prophet lied, and we should not guess. The Bible does not tell us to distrust every voice—<span class="scrip">“Do not scoff at prophecies, but test everything that is said. Hold on to what is good”</span> <span class="ref">1 Thessalonians 5:20–21 (NLT)</span>—but no claimed message has authority to overturn what God has clearly revealed in His Word. <strong>The most dangerous contradiction may not sound rebellious; it may sound religious.</strong></p>
+
+    <p>At the table a genuine <span class="scrip">“command from the Lord came to the old prophet”:</span> <span class="ref">1 Kings 13:20 (NLT)</span> <span class="scrip">“You have defied the word of the Lord and have disobeyed the command the Lord your God gave you.”</span> <span class="ref">1 Kings 13:21 (NLT)</span> On the way home <span class="scrip">“a lion came out and killed him. His body lay there on the road, with the donkey and the lion standing beside it”</span> <span class="ref">1 Kings 13:24 (NLT)</span>—a sign, not an ordinary attack, for the lion touched neither body nor donkey (1 Kings 13:28). Ellen G. White states the reason with care: <span class="egw">“Because the true prophet allowed himself to take a course contrary to the line of duty, God permitted him to suffer the penalty of transgression”</span> <span class="egw-ref">Prophets and Kings, p. 106 · PK 106.2</span>. This is no rule that every mistake brings immediate judgment or that every tragedy is God’s punishment; Scripture does not even tell us this man’s eternal destiny. It does teach that past faithfulness is a testimony, not a guarantee. The man who stood at the altar in the morning fell on the road home. <span class="scrip">“If you think you are standing strong, be careful not to fall.”</span> <span class="ref">1 Corinthians 10:12 (NLT)</span> <strong>Yesterday’s obedience cannot substitute for today’s obedience; the assignment was not finished at the altar.</strong></p>
+
+    <p>The messenger failed, but God’s word did not. The old prophet who had lied buried him in his own grave and affirmed that the message against the altar <span class="scrip">“will certainly come true.”</span> <span class="ref">1 Kings 13:32 (NLT)</span> Three centuries later King Josiah tore down that altar and, seeing the tomb, said, <span class="scrip">“Leave it alone. Don’t disturb his bones.”</span> <span class="ref">2 Kings 23:15–18 (NLT)</span> The prophecy stood despite the prophet’s failure, and Ellen G. White likewise points to his fate as further evidence of the message he had given: <span class="egw">“The penalty that overtook the unfaithful messenger was a still further evidence of the truth of the prophecy uttered over the altar”</span> <span class="egw-ref">Prophets and Kings, p. 107 · PK 107.1</span>. Yet the chapter ends with the king: <span class="scrip">“But even after this, Jeroboam did not turn from his evil ways.”</span> <span class="ref">1 Kings 13:33 (NLT)</span> The prophet turned back where he should have continued; the king refused to turn where he should have repented. So the question comes to us: What voice am I allowing to compete with something God has already made clear in His Word? And: Am I relying on yesterday’s faithfulness, or am I still walking faithfully with God today? The man of God shows how dangerous it is to begin in obedience and later turn aside; Jesus shows perfect faithfulness—obedience carried all the way to the cross. We do not finish faithfully by trusting our previous victories; we finish by <span class="scrip">“keeping our eyes on Jesus, the champion who initiates and perfects our faith.”</span> <span class="ref">Hebrews 12:2 (NLT)</span> And if you have already turned aside, His grace does not leave you on the road—Christ forgives those who return to Him and strengthens them to keep walking. <strong>Do not depend on yesterday’s obedience. Keep your eyes on Jesus, remain anchored in His Word, test every voice, and by His grace finish faithfully.</strong></p>
+
+  </div>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <h2 class="takeaways">Key Takeaways</h2>
+  <ol class="takeaway-list">
+    <li><strong>He began with courageous, unmistakable obedience.</strong> <span class="scrip">“Even if you gave me half of everything you own, I would not go with you.”</span> <span class="ref">1 Kings 13:8 (NLT)</span> Ellen White emphasizes the boldness God gave him: <span class="egw">“How firmly the man of God rebuked the king! And this firmness was essential”</span> <span class="egw-ref">Prophets and Kings, p. 105 · PK 105.1</span>.</li>
+    <li><strong>A spiritual-sounding contradiction turned him from what God had made clear.</strong> <span class="scrip">“I am a prophet, too, just as you are. And an angel gave me this command from the Lord … But the old man was lying to him.”</span> <span class="ref">1 Kings 13:18 (NLT)</span> Test the voice; do not abandon the Word.</li>
+    <li><strong>Yesterday’s faithfulness cannot replace today’s obedience.</strong> <span class="scrip">“If you think you are standing strong, be careful not to fall.”</span> <span class="ref">1 Corinthians 10:12 (NLT)</span> Past faithfulness is a testimony, not a guarantee.</li>
+    <li><strong>The messenger failed, but God’s word stood.</strong> <span class="scrip">“Leave it alone. Don’t disturb his bones.”</span> <span class="ref">2 Kings 23:18 (NLT)</span> Keep your eyes on Jesus, remain anchored in His Word, and finish faithfully.</li>
+  </ol>
+
+  <p class="sources"><span class="label">Sources and Further Reading</span>Scripture: 1 Kings 13:1–34 (context 1 Kings 12:25–33; fulfilment 2 Kings 23:15–18); 1 Thessalonians 5:20–21; 1 Corinthians 10:12; Hebrews 12:1–2 (NLT). Ellen G. White: <em>Prophets and Kings</em>, chapter 7, “Jeroboam,” pp. 99–108 (PK 105.1, 106.1, 106.2, 107.1); the fulfilment under Josiah in chapter 33, “The Book of the Law,” pp. 401–402 (PK 402.2); the same account appears in condensed form in <em>Royalty and Ruin</em>, “How a Prophet Was Tricked Into Disobeying,” pp. 37–38, and <em>From Splendor to Shadow</em>, pp. 54–55.</p>
+
+  <div class="sdg">Soli Deo Gloria</div>
+</article>
+</body>
+</html>

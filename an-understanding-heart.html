@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>An Understanding Heart &mdash; Today's Devotion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f3ead4;
+    --parchment-deep:#eadfc2;
+    --ink:#3b2d18;
+    --ink-soft:#5a4629;
+    --gold:#a67c1e;
+    --gold-bright:#c9a227;
+    --gold-pale:#e3cf95;
+    --wine:#7a3b2e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    color:var(--ink);
+    font-family:'Lora',serif;
+    line-height:1.85;
+    padding:34px 14px 60px;
+    position:relative;
+  }
+  /* aged-paper grain */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
+    z-index:2;
+  }
+  .page{
+    max-width:760px;
+    margin:0 auto;
+    background:rgba(255,252,240,.55);
+    border:1.5px solid var(--gold);
+    outline:1px solid var(--gold-pale);
+    outline-offset:6px;
+    padding:64px 52px 56px;
+    position:relative;
+    box-shadow:0 18px 50px rgba(90,70,30,.18);
+  }
+  @media(max-width:620px){.page{padding:52px 24px 44px;}}
+  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
+  .corner.tl{top:10px;left:10px;}
+  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
+  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
+  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+  .eyebrow{
+    font-family:'Cinzel',serif;
+    font-size:.82rem;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:clamp(2.1rem,5.4vw,3rem);
+    text-align:center;
+    color:var(--ink);
+    letter-spacing:.01em;
+    margin-bottom:26px;
+  }
+  /* Ellen G. White — companion ink */
+  .egw{color:var(--wine);}
+  .egw-ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.08em;
+    font-size:.88em;
+    color:var(--wine);
+  }
+  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .divider{
+    display:flex;align-items:center;justify-content:center;
+    gap:14px;margin:30px 0;color:var(--gold);
+  }
+  .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+  .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
+  .divider svg{flex-shrink:0;}
+  .verse-card{
+    border:1px solid var(--gold-pale);
+    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
+    padding:30px 34px 26px;
+    text-align:center;
+    margin:0 auto 8px;
+    position:relative;
+  }
+  .verse-card .label{
+    font-family:'Cinzel',serif;
+    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .verse-card .scripture{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.42rem;
+    line-height:1.65;
+    color:var(--ink-soft);
+  }
+  .verse-card .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.14em;
+    font-size:.95rem;
+    color:var(--gold);
+    margin-top:14px;
+  }
+  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
+  .body-text p:first-of-type::first-letter{
+    font-family:'Playfair Display',serif;
+    font-size:3.9em;
+    float:left;
+    line-height:.82;
+    padding:6px 12px 0 0;
+    color:var(--gold);
+  }
+  .body-text strong{color:#7c5a12;font-weight:600;}
+  .scrip{font-style:italic;color:var(--ink-soft);}
+  .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.1em;
+    font-size:.92em;
+    color:var(--gold);
+    white-space:nowrap;
+  }
+  h2.takeaways{
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.35rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    text-align:center;
+    color:var(--ink);
+    margin-bottom:26px;
+  }
+  ol.takeaway-list{list-style:none;counter-reset:tk;}
+  ol.takeaway-list li{
+    counter-increment:tk;
+    position:relative;
+    padding-left:62px;
+    margin-bottom:20px;
+    font-size:1.03rem;
+  }
+  ol.takeaway-list li::before{
+    content:counter(tk);
+    position:absolute;left:0;top:2px;
+    width:42px;height:42px;
+    border-radius:50%;
+    border:1.5px solid var(--gold);
+    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
+    color:#7c5a12;
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.05rem;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+  }
+  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  .sources{
+    margin-top:34px;
+    font-size:.9rem;
+    line-height:1.7;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+  .sources .label{
+    font-family:'Cinzel',serif;
+    font-size:.68rem;letter-spacing:.36em;text-transform:uppercase;
+    color:var(--gold);display:block;margin-bottom:4px;
+  }
+  .sdg{
+    font-family:'Pinyon Script',cursive;
+    font-size:2.5rem;
+    color:var(--gold);
+    text-align:center;
+    margin-top:40px;
+  }
+</style>
+</head>
+<body>
+<style>
+  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
+  .allnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
+    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
+    padding-bottom:2px;
+  }
+  .allnav a:hover{border-bottom-color:#a67c1e;}
+</style>
+<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+
+<article class="page">
+  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+
+                                <div class="eyebrow">Today's Devotion</div>
+  <h1>An Understanding Heart</h1>
+
+
+  <section class="verse-card">
+    <div class="label">Key Verse</div>
+    <div class="scripture">“Give me an understanding heart so that I can govern your people well and know the difference between right and wrong.”</div>
+    <div class="ref">1 Kings 3:9 (NLT, excerpt)</div>
+    <div class="scripture" style="margin-top:18px;">“They saw the wisdom God had given him for rendering justice.”</div>
+    <div class="ref">1 Kings 3:28 (NLT, excerpt)</div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <div class="body-text">
+    <p>Solomon’s most famous judgment did not begin when two women walked into his court. It began earlier, at Gibeon, on a night when God came to a young king with an open invitation. <span class="scrip">“That night the Lord appeared to Solomon in a dream, and God said, ‘What do you want? Ask, and I will give it to you!’”</span> <span class="ref">1 Kings 3:5 (NLT)</span> Solomon began with God’s faithfulness to his father David, and then with his own need: <span class="scrip">“Now, O Lord my God, you have made me king instead of my father, David, but I am like a little child who doesn’t know his way around.”</span> <span class="ref">1 Kings 3:7 (NLT)</span> So he asked: <span class="scrip">“Give me an understanding heart so that I can govern your people well and know the difference between right and wrong. For who by himself is able to govern this great people of yours?”</span> <span class="ref">1 Kings 3:9 (NLT)</span> He was not pretending to be incompetent; he was a king facing a responsibility greater than his own wisdom, and his first instinct was dependence on God. Ellen G. White helps us see the heart behind the words: <span class="egw" data-wa="block">“He realized that without divine aid he was as helpless as a little child to fulfill the responsibilities resting on him. He knew that he lacked discernment, and it was a sense of his great need that led him to seek God for wisdom.”</span> <span class="egw-ref">Prophets and Kings, p. 30 · PK 30.2</span> <strong>Solomon’s wisdom began with a confession of need, not a claim of ability.</strong></p>
+
+    <p>Heaven’s response tells us what God thinks of such a prayer. <span class="scrip">“The Lord was pleased that Solomon had asked for wisdom.”</span> <span class="ref">1 Kings 3:10 (NLT)</span> God named what Solomon had not asked for—<span class="scrip">“a long life or wealth or the death of your enemies”</span> <span class="ref">1 Kings 3:11 (NLT, excerpt)</span>—and then He answered: <span class="scrip">“I will give you what you asked for! I will give you a wise and understanding heart such as no one else has had or ever will have!”</span> <span class="ref">1 Kings 3:12 (NLT)</span> The gift had a purpose: <span class="scrip">“wisdom in governing my people with justice.”</span> <span class="ref">1 Kings 3:11 (NLT, excerpt)</span> Solomon had not asked to look wise; he had asked for what he needed to serve God’s people well. Biblical wisdom is not merely knowing more. It is receiving from God the discernment needed to do what is right—and it was never Solomon’s own invention. Ellen G. White carries the same truth to us: <span class="egw" data-wa="block">“He who gave to Solomon the spirit of wise discernment is willing to impart the same blessing to His children today. … When a burden bearer desires wisdom more than he desires wealth, power, or fame, he will not be disappointed.”</span> <span class="egw-ref">Prophets and Kings, p. 31 · PK 31.1</span> <strong>God gave Solomon wisdom as a gift, for the sake of the people he was called to serve.</strong></p>
+
+    <p>Then came a case that words alone could not settle. <span class="scrip">“Some time later two prostitutes came to the king to have an argument settled.”</span> <span class="ref">1 Kings 3:16 (NLT)</span> One woman told the king her account: they shared a house, each had given birth, they had been alone, the other woman’s baby had died in the night, and—she said—the other woman had exchanged the dead child for her living son while she slept. The other woman denied it: <span class="scrip">“It certainly was your son, and the living child is mine.”</span> <span class="ref">1 Kings 3:22 (NLT, excerpt)</span> There was no witness to call. Solomon restated the two claims, called for a sword, and gave a startling command: <span class="scrip">“Cut the living child in two, and give half to one woman and half to the other!”</span> <span class="ref">1 Kings 3:25 (NLT)</span> Scripture does not narrate what the king was thinking; it records what the command revealed. <span class="scrip">“Then the woman who was the real mother of the living child, and who loved him very much, cried out, ‘Oh no, my lord! Give her the child—please do not kill him!’ But the other woman said, ‘All right, he will be neither yours nor mine; divide him between us!’”</span> <span class="ref">1 Kings 3:26 (NLT)</span> The king ruled at once: <span class="scrip">“Do not kill the child, but give him to the woman who wants him to live, for she is his mother!”</span> <span class="ref">1 Kings 3:27 (NLT)</span> The real mother’s love was revealed not by insisting on possession at any cost, but by valuing her child’s life above her own claim. Ellen G. White remembers this early judgment as the time Solomon <span class="egw">“displayed so much wisdom and sympathy in restoring a helpless babe to its unfortunate mother”</span> <span class="egw-ref">Prophets and Kings, p. 57 · PK 57.2</span>. <strong>God-given wisdom reached a just decision that protected the child’s life and recognised a mother’s love.</strong></p>
+
+    <p>Notice where the story ends. <span class="scrip">“When all Israel heard the king’s decision, the people were in awe of the king, for they saw the wisdom God had given him for rendering justice.”</span> <span class="ref">1 Kings 3:28 (NLT)</span> The people did not admire a clever man; they recognised a gift from God, used for justice. Every one of us faces something bigger than our own understanding—a family, a class, a church, a workplace, a decision with no easy facts. James writes to believers like us: <span class="scrip">“If you need wisdom, ask our generous God, and he will give it to you. He will not rebuke you for asking.”</span> <span class="ref">James 1:5 (NLT)</span> Wisdom from God is not a feeling of certainty or a clever answer; it works through prayer, the Scriptures, honest attention to the facts, godly counsel, and care for everyone a decision will touch. Ellen G. White writes of those who carry responsibility: <span class="egw" data-wa="block">“The path of men who are placed as leaders is not an easy one. But they are to see in every difficulty a call to prayer. Never are they to fail of consulting the great Source of all wisdom.”</span> <span class="egw-ref">Prophets and Kings, p. 31 · PK 31.3</span> When I face what I cannot solve by my own understanding, do I first seek an understanding heart from God? Yet the story must not end in admiration of Solomon. Jesus said, <span class="scrip">“Now someone greater than Solomon is here.”</span> <span class="ref">Matthew 12:42 (NLT, excerpt)</span> Solomon received wisdom; of Christ, Paul writes, <span class="scrip">“For our benefit God made him to be wisdom itself.”</span> <span class="ref">1 Corinthians 1:30 (NLT, excerpt)</span> We do not merely need better decisions; we need the Saviour who becomes for us the wisdom we could never produce ourselves. <strong>The wisdom Solomon displayed before people began with dependence upon God—ask Him for an understanding heart, use His gifts with truth and compassion, and keep your eyes on Christ, who is greater than Solomon.</strong></p>
+
+  </div>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <h2 class="takeaways">Key Takeaways</h2>
+  <ol class="takeaway-list">
+    <li><strong>Solomon’s wisdom began with a confession of need, not a claim of ability.</strong> <span class="scrip">“I am like a little child who doesn’t know his way around.”</span> <span class="ref">1 Kings 3:7 (NLT, excerpt)</span> Ellen White tells us that <span class="egw">“it was a sense of his great need that led him to seek God for wisdom”</span> <span class="egw-ref">Prophets and Kings, p. 30 · PK 30.2</span>—dependence on God, not self-confidence, was his first instinct.</li>
+    <li><strong>God gave Solomon wisdom as a gift, for the sake of the people he was called to serve.</strong> <span class="scrip">“I will give you a wise and understanding heart such as no one else has had or ever will have!”</span> <span class="ref">1 Kings 3:12 (NLT, excerpt)</span> Ellen White writes that God <span class="egw">“is willing to impart the same blessing to His children today”</span> <span class="egw-ref">Prophets and Kings, p. 31 · PK 31.1</span>—wisdom is received from God, and it is meant for faithful service.</li>
+    <li><strong>God-given wisdom reached a just decision that protected the child’s life and recognised a mother’s love.</strong> <span class="scrip">“Give her the child—please do not kill him!”</span> <span class="ref">1 Kings 3:26 (NLT, excerpt)</span> Ellen White recalls Solomon’s <span class="egw">“wisdom and sympathy in restoring a helpless babe to its unfortunate mother”</span> <span class="egw-ref">Prophets and Kings, p. 57 · PK 57.2</span>. Real love seeks the beloved’s good, not merely possession.</li>
+    <li><strong>The wisdom Solomon displayed before people began with dependence upon God—ask Him for an understanding heart, use His gifts with truth and compassion, and keep your eyes on Christ, who is greater than Solomon.</strong> <span class="scrip">“They saw the wisdom God had given him for rendering justice.”</span> <span class="ref">1 Kings 3:28 (NLT, excerpt)</span> Ellen White says leaders <span class="egw">“are to see in every difficulty a call to prayer”</span> <span class="egw-ref">Prophets and Kings, p. 31 · PK 31.3</span>; and Jesus says, <span class="scrip">“Now someone greater than Solomon is here.”</span> <span class="ref">Matthew 12:42 (NLT, excerpt)</span></li>
+  </ol>
+
+  <p class="sources"><span class="label">Sources and Further Reading</span>Scripture: 1 Kings 3:16–28, within 1 Kings 3:5–28; James 1:5; Matthew 12:42; 1 Corinthians 1:30 (NLT). Ellen G. White: <em>Prophets and Kings</em>, chapter 1, “Solomon,” pp. 25–34 (PK 30.2, 31.1, 31.3), and chapter 3, “Pride of Prosperity,” p. 57 (PK 57.2), the direct reference to the judgment. The same Gibeon material is gathered in <em>Conflict and Courage</em>, “As a Little Child” and “Wisdom for the Asking” (July 2–3, pp. 189–190, drawn from <em>Prophets and Kings</em>, pp. 30–31), and in <em>My Life Today</em>, “Have an Understanding Heart” (August 20, p. 236, drawn from <em>Education</em>, p. 48, and <em>Prophets and Kings</em>, pp. 32–33). For Solomon’s early choice, see <em>Education</em>, p. 48.</p>
+
+  <div class="sdg">Soli Deo Gloria</div>
+</article>
+</body>
+</html>

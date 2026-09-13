@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I Have No One &mdash; Today's Devotion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Lora:ital,wght@0,400;0,600;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f3ead4;
+    --parchment-deep:#eadfc2;
+    --ink:#3b2d18;
+    --ink-soft:#5a4629;
+    --gold:#a67c1e;
+    --gold-bright:#c9a227;
+    --gold-pale:#e3cf95;
+    --wine:#7a3b2e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    color:var(--ink);
+    font-family:'Lora',serif;
+    line-height:1.85;
+    padding:34px 14px 60px;
+    position:relative;
+  }
+  /* aged-paper grain */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
+    z-index:2;
+  }
+  .page{
+    max-width:760px;
+    margin:0 auto;
+    background:rgba(255,252,240,.55);
+    border:1.5px solid var(--gold);
+    outline:1px solid var(--gold-pale);
+    outline-offset:6px;
+    padding:64px 52px 56px;
+    position:relative;
+    box-shadow:0 18px 50px rgba(90,70,30,.18);
+  }
+  @media(max-width:620px){.page{padding:52px 24px 44px;}}
+  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
+  .corner.tl{top:10px;left:10px;}
+  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
+  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
+  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+  .eyebrow{
+    font-family:'Cinzel',serif;
+    font-size:.82rem;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:clamp(2.1rem,5.4vw,3rem);
+    text-align:center;
+    color:var(--ink);
+    letter-spacing:.01em;
+    margin-bottom:26px;
+  }
+  /* Ellen G. White — companion ink */
+  .egw{color:var(--wine);}
+  .egw-ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.08em;
+    font-size:.88em;
+    color:var(--wine);
+  }
+  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .divider{
+    display:flex;align-items:center;justify-content:center;
+    gap:14px;margin:30px 0;color:var(--gold);
+  }
+  .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+  .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
+  .divider svg{flex-shrink:0;}
+  .verse-card{
+    border:1px solid var(--gold-pale);
+    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
+    padding:30px 34px 26px;
+    text-align:center;
+    margin:0 auto 8px;
+    position:relative;
+  }
+  .verse-card .label{
+    font-family:'Cinzel',serif;
+    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .verse-card .scripture{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.42rem;
+    line-height:1.65;
+    color:var(--ink-soft);
+  }
+  .verse-card .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.14em;
+    font-size:.95rem;
+    color:var(--gold);
+    margin-top:14px;
+  }
+  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
+  .body-text p:first-of-type::first-letter{
+    font-family:'Playfair Display',serif;
+    font-size:3.9em;
+    float:left;
+    line-height:.82;
+    padding:6px 12px 0 0;
+    color:var(--gold);
+  }
+  .body-text strong{color:#7c5a12;font-weight:600;}
+  .scrip{font-style:italic;color:var(--ink-soft);}
+  .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.1em;
+    font-size:.92em;
+    color:var(--gold);
+    white-space:nowrap;
+  }
+  h2.takeaways{
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.35rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    text-align:center;
+    color:var(--ink);
+    margin-bottom:26px;
+  }
+  ol.takeaway-list{list-style:none;counter-reset:tk;}
+  ol.takeaway-list li{
+    counter-increment:tk;
+    position:relative;
+    padding-left:62px;
+    margin-bottom:20px;
+    font-size:1.03rem;
+  }
+  ol.takeaway-list li::before{
+    content:counter(tk);
+    position:absolute;left:0;top:2px;
+    width:42px;height:42px;
+    border-radius:50%;
+    border:1.5px solid var(--gold);
+    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
+    color:#7c5a12;
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.05rem;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+  }
+  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  .sdg{
+    font-family:'Pinyon Script',cursive;
+    font-size:2.5rem;
+    color:var(--gold);
+    text-align:center;
+    margin-top:40px;
+  }
+</style>
+</head>
+<body>
+<style>
+  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
+  .allnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
+    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
+    padding-bottom:2px;
+  }
+  .allnav a:hover{border-bottom-color:#a67c1e;}
+</style>
+<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+
+<article class="page">
+  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+
+  <div class="eyebrow">Today's Devotion</div>
+  <h1>I Have No One</h1>
+
+  <section class="verse-card">
+    <div class="label">Key Verse</div>
+    <div class="scripture">“When Jesus saw him and knew he had been ill for a long time, he asked him, ‘Would you like to get well?’”</div>
+    <div class="ref">John 5:6 (NLT)</div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <div class="body-text">
+    <p>Jerusalem had a place for people like him. <span class="scrip">“Inside the city, near the Sheep Gate, was the pool of Bethesda, with five covered porches. Crowds of sick people&mdash;blind, lame, or paralyzed&mdash;lay on the porches”</span> <span class="ref">John 5:2-3 (NLT)</span>. Picture it honestly: not a hospital but a waiting room with no doctor, five colonnades of the city’s most hopeless, all watching one surface of water. The name is usually taken to mean <em>house of mercy</em>, and for most of the people lying there it had become a house of waiting. The crowd believed that when the water stirred, the first one in would be healed &mdash; a belief John reports without endorsing it, and which some manuscripts spell out in a verse 4 that the NLT places in a footnote. Ellen White describes what that belief did to the crowd: <span class="egw">“At certain seasons the waters of this pool were agitated, and it was commonly believed that this was the result of supernatural power”</span>; and when it happened, <span class="egw">“they rushed forward, trampling underfoot men, women, and children, weaker than themselves. Many could not get near the pool.”</span> Then John narrows the lens to one mat. <span class="scrip">“One of the men lying there had been sick for thirty-eight years”</span> <span class="ref">John 5:5 (NLT)</span>. Thirty-eight years. Longer than many of the people stepping over him had been alive. Ellen White puts his condition into a single sentence, and it is the whole reason this devotion exists: <span class="egw">“Alone and friendless, feeling that he was shut out from God’s mercy, the sufferer had passed long years of misery.”</span> He was not only sick. He was sick in the house of mercy, convinced that mercy was for other people.</p>
+
+    <p>Now watch who moves first. <span class="scrip">“Afterward Jesus returned to Jerusalem for one of the Jewish holy days”</span> <span class="ref">John 5:1 (NLT)</span>. The city was full; the Temple courts were the place to be seen. Jesus went to the porches. Ellen White pictures it: <span class="egw">“Walking alone, in apparent meditation and prayer, He came to the pool”</span> &mdash; and among all that suffering, <span class="egw">“the Saviour saw one case of supreme wretchedness.”</span> Then the verse chosen as the key to everything: <span class="scrip">“When Jesus saw him and knew he had been ill for a long time, he asked him, ‘Would you like to get well?’”</span> <span class="ref">John 5:6 (NLT)</span>. Read the order of it. Jesus saw. Jesus knew &mdash; not just that he was ill, but how long. And only then did Jesus speak. The man did not call out; he did not know who this was (verse 13 will tell us he could not have picked Jesus out of a crowd); he could not have crawled to Him if he had wanted to. Every movement in this verse is from Jesus toward the man. And the knowing matters as much as the seeing. What the lonely fear most is not that God cannot see them but that He has not noticed how long it has been. Here it is written down: He knew.</p>
+
+    <p>Why ask a paralysed man whether he wants to be well? Because a question is a door, and Jesus was giving him a door to walk through with his own will. Ellen White: <span class="egw">“A tender, compassionate face bent over him, and the words, ‘Wilt thou be made whole?’ arrested his attention.”</span> <span class="egw">“Hope came to his heart. He felt that in some way he was to have help.”</span> But then: <span class="egw">“the glow of encouragement soon faded. He remembered how often he had tried to reach the pool.”</span> Listen to how he answered: <span class="scrip">“‘I can’t, sir,’ the sick man said, ‘for I have no one to put me into the pool when the water bubbles up. Someone else always gets there ahead of me’”</span> <span class="ref">John 5:7 (NLT)</span>. He was asked whether he wanted to be well, and he answered with the reason it could not happen. Two sentences, and they hold the two oldest griefs of the human heart: <em>I have no one</em>, and <em>someone else always gets there first</em>. Loneliness, and being overtaken. He had been on that mat so long that even a stranger’s kindness reached him as an accusation &mdash; as if the question were really, <em>why haven’t you managed it yet?</em> Thirty-eight years of disappointment will do that; it teaches you to hear every offer as a demand. And notice the one thing he did not see: he was staring at the pool and explaining its rules while the answer stood beside his mat.</p>
+
+    <p><span class="scrip">“Jesus told him, ‘Stand up, pick up your mat, and walk!’”</span> <span class="ref">John 5:8 (NLT)</span>. No one carried him to the water. The water is never mentioned again. The man had said, <em>I have no one to put me in</em>, and Jesus did not answer by providing someone; He answered by making the pool unnecessary. That is worth sitting with, because we often pray for the helper when God intends to give the healing. Ellen White notices what Jesus did not do: <span class="egw">“Jesus does not ask this sufferer to exercise faith in Him. He simply says, ‘Rise, take up thy bed, and walk.’”</span> And what the man did: <span class="egw">“Without question he sets his will to obey the command of Christ”</span> &mdash; <span class="egw">“every nerve and muscle thrills with new life, and healthful action comes to his crippled limbs.”</span> <span class="scrip">“Instantly, the man was healed! He rolled up his sleeping mat and began walking!”</span> <span class="ref">John 5:9 (NLT)</span>. In <em>Steps to Christ</em> she slows the moment down so we can see the hinge of it: <span class="egw">“The sick man might have said, ‘Lord, if Thou wilt make me whole, I will obey Thy word.’ But, no, he believed Christ’s word, believed that he was made whole, and he made the effort at once; he willed to walk, and he did walk. He acted on the word of Christ, and God gave the power. He was made whole.”</span> He had no evidence but a voice. Thirty-eight years of evidence said the opposite. He moved anyway &mdash; and the strength came in the moving. <span class="egw">“The man might have stopped to doubt, and lost his one chance of healing. But he believed Christ’s word, and in acting upon it he received strength.”</span></p>
+
+    <p>This is where Ellen White takes the story, and it is where Scripture takes it too: the deepest paralysis is not in the legs. <span class="egw">“Through the same faith we may receive spiritual healing. By sin we have been severed from the life of God. Our souls are palsied.”</span> We lie on our own porches &mdash; the habit we have stopped fighting, the bitterness we have made peace with, the prayer life that has been flat for so long that we no longer expect it to move &mdash; and we explain to God why nothing can change: no one to help, everyone else ahead. And the word that comes is the same word: stand up. <span class="egw">“You are a sinner. You cannot atone for your past sins; you cannot change your heart and make yourself holy. But God promises to do all this for you through Christ. You believe that promise. You confess your sins and give yourself to God. You will to serve Him. Just as surely as you do this, God will fulfill His word to you.”</span> Then the line that has steadied more people than can be counted: <span class="egw">“Do not wait to feel that you are made whole, but say, ‘I believe it; it is so, not because I feel it, but because God has promised.’”</span> <span class="egw">“Put your will on the side of Christ. Will to serve Him, and in acting upon His word you will receive strength.”</span> Forgiveness works like the man’s legs: it is received in the act of trusting, not in waiting for a feeling to arrive first. Let me be exact here, because it matters. This counsel is about the forgiveness of sin and the healing of the heart; it is not a formula for the body. Scripture never turns one man’s healing into a guarantee for every mat &mdash; Paul asked three times and heard, <span class="scrip">“My grace is all you need. My power works best in weakness”</span> <span class="ref">2 Corinthians 12:9 (NLT)</span>. Believing God does not mean refusing the doctor or stopping the medicine He has provided. It means you are no longer alone on the porch.</p>
+
+    <p>There is one more thing Jesus did for this man, and it is easy to miss. The healing happened on the Sabbath, the leaders objected to the mat, and when they demanded a name, <span class="scrip">“The man didn’t know, for Jesus had disappeared into the crowd”</span> <span class="ref">John 5:13 (NLT)</span>. Ellen White: <span class="egw">“he looked around for his Deliverer; but Jesus was lost in the crowd,”</span> and <span class="egw">“the man feared that he would not know Him if he should see Him again.”</span> Healed, and alone again. But then: <span class="scrip">“But afterward Jesus found him in the Temple”</span> <span class="ref">John 5:14 (NLT)</span>. Found him. The man who had no one was sought out twice by the same Person &mdash; once on the porch, once among the worshippers. That is the pattern of grace: it does not heal you and leave you to work out who did it. What Jesus said there was a mercy dressed as a warning: <span class="scrip">“Now you are well; so stop sinning, or something even worse may happen to you”</span> <span class="ref">John 5:14 (NLT)</span>. In this man’s case there was a link between his sin and his suffering &mdash; Ellen White says plainly that <span class="egw">“his disease was in a great degree the result of his own sin”</span> &mdash; and Jesus, who knew the whole thirty-eight years, addressed it. But be careful what you build on that. The same Jesus, asked whose sin had caused a man’s blindness, answered, <span class="scrip">“It was not because of his sins or his parents’ sins”</span> <span class="ref">John 9:3 (NLT)</span>. Do not read anyone’s illness, including your own, as a verdict. What Jesus is saying is that there is something worse than thirty-eight years on a mat, and that it is possible to get your legs back and still be lost. He wanted the man whole, not just walking.</p>
+
+    <p>So let me speak to whoever said the title of this devotion under their breath this morning. <em>I have no one.</em> You may be surrounded by people and still mean it. The Bible does not scold you for the feeling; it wrote your sentence down first. <span class="scrip">“I look for someone to come and help me, but no one gives me a passing thought! No one will help me; no one cares a bit what happens to me”</span> <span class="ref">Psalm 142:4 (NLT)</span> &mdash; that is David, in a cave, in the Bible. And the same book answers: <span class="scrip">“Even if my father and mother abandon me, the L<small>ORD</small> will hold me close”</span> <span class="ref">Psalm 27:10 (NLT)</span>; <span class="scrip">“The L<small>ORD</small> is close to the brokenhearted; he rescues those whose spirits are crushed”</span> <span class="ref">Psalm 34:18 (NLT)</span>; <span class="scrip">“I will never fail you. I will never abandon you”</span> <span class="ref">Hebrews 13:5 (NLT)</span>. Bethesda is what those promises look like with a face. He came to the porch on purpose, He picked out the one who had waited longest, and He came back for him afterwards. Two honest things follow. First, tell Him the truth the way the man did &mdash; the whole thirty-eight years of it &mdash; and then listen for the question underneath your explanation: <em>would you like to get well?</em> Answer the question, not the obstacle. Second, do not stay silent with people either. In Mark’s Gospel, <span class="scrip">“Four men arrived carrying a paralyzed man on a mat”</span> <span class="ref">Mark 2:3 (NLT)</span> &mdash; God’s usual way of answering <em>I have no one</em> is to send someone, and His people are meant to be the carriers. Say the words out loud to a pastor, a friend, a doctor: <em>I have no one to put me in.</em> And if the weight you are carrying today has made it hard to keep going at all, please tell someone you trust today. That is not weakness; it is the first step off the mat.</p>
+
+    <p>He is still walking the porches. Not only the Temple courts where the successful gather, but the colonnades where people have stopped expecting anything. He sees you. He knows how long. And He is not waiting for the water to move or for someone to arrive; He is asking the question, and the answer is not a reason. Ellen White: <span class="egw">“Do not wait to feel that you are made whole. Believe His word, and it will be fulfilled.”</span> What is He telling you to stand up from today? <strong>You may have no one &mdash; but you have never been unseen.</strong></p>
+  </div>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <h2 class="takeaways">Key Takeaways</h2>
+  <ol class="takeaway-list">
+    <li><strong>“I have no one” is a real grief, and Scripture writes it down before it answers it</strong> &mdash; thirty-eight years, five porches, and someone else always first. God does not scold the feeling; David said it too.</li>
+    <li><strong>Every movement in the key verse is from Jesus toward the man</strong> &mdash; <em>when Jesus saw him and knew he had been ill for a long time</em>. He did not call out, did not know who Jesus was, and could not reach Him. Jesus came.</li>
+    <li><strong>He knew how long</strong> &mdash; what the lonely fear is not that God cannot see them but that He has not noticed the years. He had.</li>
+    <li><strong>The man answered an offer with an explanation</strong> &mdash; long disappointment teaches us to hear even grace as a demand. Answer the question, not the obstacle.</li>
+    <li><strong>Jesus never used the pool</strong> &mdash; to <em>I have no one to put me in</em> He did not send a helper; He made the pool unnecessary. Do not pray only for the carrier when God intends the healing.</li>
+    <li><strong>The strength came in the moving</strong> &mdash; <em>he willed to walk, and he did walk; he acted on the word of Christ, and God gave the power</em>. Do not wait to feel that you are made whole. This is counsel for forgiveness and the heart, never a reason to refuse the doctor.</li>
+    <li><strong>He was found twice</strong> &mdash; on the porch and in the Temple. Grace does not heal you and leave you to work out who did it; and <em>stop sinning</em> was a mercy, because it is possible to walk and still be lost. No one’s illness is a verdict.</li>
+  </ol>
+
+  <div class="sdg">Soli Deo Gloria</div>
+</article>
+</body>
+</html>

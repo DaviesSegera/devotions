@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>When Hezekiah Turned His Face to the Wall &mdash; Today's Devotion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f3ead4;
+    --parchment-deep:#eadfc2;
+    --ink:#3b2d18;
+    --ink-soft:#5a4629;
+    --gold:#a67c1e;
+    --gold-bright:#c9a227;
+    --gold-pale:#e3cf95;
+    --wine:#7a3b2e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    color:var(--ink);
+    font-family:'Lora',serif;
+    line-height:1.85;
+    padding:34px 14px 60px;
+    position:relative;
+  }
+  /* aged-paper grain */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
+    z-index:2;
+  }
+  .page{
+    max-width:760px;
+    margin:0 auto;
+    background:rgba(255,252,240,.55);
+    border:1.5px solid var(--gold);
+    outline:1px solid var(--gold-pale);
+    outline-offset:6px;
+    padding:64px 52px 56px;
+    position:relative;
+    box-shadow:0 18px 50px rgba(90,70,30,.18);
+  }
+  @media(max-width:620px){.page{padding:52px 24px 44px;}}
+  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
+  .corner.tl{top:10px;left:10px;}
+  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
+  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
+  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+  .eyebrow{
+    font-family:'Cinzel',serif;
+    font-size:.82rem;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:clamp(2.1rem,5.4vw,3rem);
+    text-align:center;
+    color:var(--ink);
+    letter-spacing:.01em;
+    margin-bottom:26px;
+  }
+  /* Ellen G. White — companion ink */
+  .egw{color:var(--wine);}
+  .egw-ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.08em;
+    font-size:.88em;
+    color:var(--wine);
+  }
+  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .divider{
+    display:flex;align-items:center;justify-content:center;
+    gap:14px;margin:30px 0;color:var(--gold);
+  }
+  .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+  .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
+  .divider svg{flex-shrink:0;}
+  .verse-card{
+    border:1px solid var(--gold-pale);
+    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
+    padding:30px 34px 26px;
+    text-align:center;
+    margin:0 auto 8px;
+    position:relative;
+  }
+  .verse-card .label{
+    font-family:'Cinzel',serif;
+    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .verse-card .scripture{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.42rem;
+    line-height:1.65;
+    color:var(--ink-soft);
+  }
+  .verse-card .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.14em;
+    font-size:.95rem;
+    color:var(--gold);
+    margin-top:14px;
+  }
+  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
+  .body-text p:first-of-type::first-letter{
+    font-family:'Playfair Display',serif;
+    font-size:3.9em;
+    float:left;
+    line-height:.82;
+    padding:6px 12px 0 0;
+    color:var(--gold);
+  }
+  .body-text strong{color:#7c5a12;font-weight:600;}
+  .scrip{font-style:italic;color:var(--ink-soft);}
+  .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.1em;
+    font-size:.92em;
+    color:var(--gold);
+    white-space:nowrap;
+  }
+  h2.takeaways{
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.35rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    text-align:center;
+    color:var(--ink);
+    margin-bottom:26px;
+  }
+  ol.takeaway-list{list-style:none;counter-reset:tk;}
+  ol.takeaway-list li{
+    counter-increment:tk;
+    position:relative;
+    padding-left:62px;
+    margin-bottom:20px;
+    font-size:1.03rem;
+  }
+  ol.takeaway-list li::before{
+    content:counter(tk);
+    position:absolute;left:0;top:2px;
+    width:42px;height:42px;
+    border-radius:50%;
+    border:1.5px solid var(--gold);
+    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
+    color:#7c5a12;
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.05rem;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+  }
+  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  .sources{
+    margin-top:34px;
+    font-size:.9rem;
+    line-height:1.7;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+  .sources .label{
+    font-family:'Cinzel',serif;
+    font-size:.68rem;letter-spacing:.36em;text-transform:uppercase;
+    color:var(--gold);display:block;margin-bottom:4px;
+  }
+  .sdg{
+    font-family:'Pinyon Script',cursive;
+    font-size:2.5rem;
+    color:var(--gold);
+    text-align:center;
+    margin-top:40px;
+  }
+</style>
+</head>
+<body>
+<style>
+  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
+  .allnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
+    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
+    padding-bottom:2px;
+  }
+  .allnav a:hover{border-bottom-color:#a67c1e;}
+</style>
+<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+
+<article class="page">
+  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+
+        <div class="eyebrow">Today's Devotion</div>
+  <h1>When Hezekiah Turned His Face to the Wall</h1>
+
+  <section class="verse-card">
+    <div class="label">Key Verse</div>
+    <div class="scripture">“When Hezekiah heard this, he turned his face to the wall and prayed to the Lord.”</div>
+    <div class="ref">2 Kings 20:2 (NLT)</div>
+    <div class="scripture" style="margin-top:18px;">“I have heard your prayer and seen your tears.”</div>
+    <div class="ref">2 Kings 20:5 (NLT, excerpt)</div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <div class="body-text">
+    <p>What do you do when the news before you is more than you know how to carry? 2 Kings 20 opens in a sickroom. <span class="scrip">“About that time Hezekiah became deathly ill, and the prophet Isaiah son of Amoz went to visit him. He gave the king this message: ‘This is what the Lord says: Set your affairs in order, for you are going to die. You will not recover from this illness.’”</span> <span class="ref">2 Kings 20:1 (NLT)</span> Hezekiah, king of Judah, was a faithful king, and that did not spare him this day. Isaiah was not offering an opinion; he carried the word of the Lord. Ellen G. White describes the king’s position: <span class="egw" data-wa="block">“In the midst of his prosperous reign King Hezekiah was suddenly stricken with a fatal malady. ‘Sick unto death,’ his case was beyond the power of man to help. And the last vestige of hope seemed removed when the prophet Isaiah appeared before him.”</span> <span class="egw-ref">Prophets and Kings, p. 340 · PK 340.1</span> <strong>A crown could not remove Hezekiah’s vulnerability.</strong></p>
+
+    <p>Here is the verse behind our title. <span class="scrip">“When Hezekiah heard this, he turned his face to the wall and prayed to the Lord, ‘Remember, O Lord, how I have always been faithful to you and have served you single-mindedly, always doing what pleases you.’ Then he broke down and wept bitterly.”</span> <span class="ref">2 Kings 20:2–3 (NLT)</span> Scripture records the turn to the wall; it does not explain it. What it makes plain is where the prayer went. The power was not in the wall; Hezekiah’s prayer was directed to the Lord. After describing the king’s desperate condition, Ellen G. White directs our attention to the possibility that remained open to him: <span class="egw" data-wa="block">“The outlook seemed utterly dark; yet the king could still pray to the One who had hitherto been his ‘refuge and strength, a very present help in trouble.’ Psalm 46:1.”</span> <span class="egw-ref">Prophets and Kings, p. 340 · PK 340.2</span> He did not ask for fifteen years, and he did not bargain; he appealed to a life lived with God. Ellen G. White affirms that record: <span class="egw">“The dying ruler had served his God faithfully, and had strengthened the confidence of the people in Jehovah as their Supreme Ruler.”</span> <span class="egw-ref">Prophets and Kings, p. 340 · PK 340.3</span> This was not religious performance purchasing years of life; it was a servant appealing to a real relationship. And then the king wept. He was not ashamed to be weak before God, and neither tears nor calm is the measure of a genuine prayer—honesty is. <strong>We do not need to pretend to be strong before bringing our weakness to God.</strong></p>
+
+    <p>Now watch heaven answer. <span class="scrip">“But before Isaiah had left the middle courtyard, this message came to him from the Lord.”</span> <span class="ref">2 Kings 20:4 (NLT)</span> The God of David said: <span class="scrip">“I have heard your prayer and seen your tears. I will heal you, and three days from now you will get out of bed and go to the Temple of the Lord. I will add fifteen years to your life, and I will rescue you and this city from the king of Assyria. I will defend this city for my own honor and for the sake of my servant David.”</span> <span class="ref">2 Kings 20:5–6 (NLT)</span> The reply was personal, and larger than one man: it spoke of Jerusalem and of David. Ellen G. White sums it up: <span class="egw">“He whose ‘compassions fail not,’ heard the prayer of His servant. Lamentations 3:22.”</span> <span class="egw-ref">Prophets and Kings, p. 341 · PK 341.3</span> Then came the means: <span class="scrip">“Then Isaiah said, ‘Make an ointment from figs.’ So Hezekiah’s servants spread the ointment over the boil, and Hezekiah recovered!”</span> <span class="ref">2 Kings 20:7 (NLT)</span> Prayer and practical care were not rivals. Ellen G. White tells us: <span class="egw">“It is not a denial of faith to use such remedies as God has provided to alleviate pain and to aid nature in her work of restoration.”</span> <span class="egw-ref">The Ministry of Healing, p. 231 · MH 231.3</span> A sign followed—at Hezekiah’s request the shadow on the sundial of Ahaz moved ten steps backward (2 Kings 20:8–11)—but the sign confirmed the promise; it was not the source of the healing. This was God’s particular promise to Hezekiah. It does not mean that everyone who prays will recover, or that every answer will come before the prophet reaches the courtyard. Ellen G. White is careful here: <span class="egw">“if persons are not raised to health, they should not on this account be judged as wanting in faith.”</span> <span class="egw-ref">The Ministry of Healing, p. 230 · MH 230.3</span> What the story gives every believer is this: God hears, God sees, and He is not indifferent to a servant in distress. <strong>God’s response to Hezekiah was personal: his suffering had not escaped God’s attention.</strong></p>
+
+    <p>Why may we come as Hezekiah came? Not because of a wall, or tears, or a record of service, but because of Jesus. <span class="scrip">“This High Priest of ours understands our weaknesses, for he faced all of the same testings we do, yet he did not sin. So let us come boldly to the throne of our gracious God. There we will receive his mercy, and we will find grace to help us when we need it most.”</span> <span class="ref">Hebrews 4:15–16 (NLT)</span> Hezekiah received more years of earthly life. In Christ our hope reaches beyond the number of our years: <span class="scrip">“I am the resurrection and the life. Anyone who believes in me will live, even after dying.”</span> <span class="ref">John 11:25 (NLT)</span> And when God answers, the story is not over. Hezekiah rose from his bed to sing—<span class="scrip">“Only the living can praise you as I do today. Each generation tells of your faithfulness to the next”</span> <span class="ref">Isaiah 38:19 (NLT)</span>—and Ellen G. White tells us he <span class="egw">“vowed to spend his remaining days in willing service to the King of kings.”</span> <span class="egw-ref">Prophets and Kings, p. 342 · PK 342.5</span> Later, when envoys from Babylon came to ask about his recovery, he showed them his treasures instead of telling them of his God, <span class="scrip">“and he became proud”</span>; then he <span class="scrip">“humbled himself and repented of his pride.”</span> <span class="ref">2 Chronicles 32:25–26 (NLT)</span> Mercy asks a searching question: will I draw attention to the Giver or only to what I have gained? So name one fear honestly before God, ask a trusted person to pray with you, take one responsible step of care, and rest in the God who heard a dying king and saw his tears. <strong>Bring God your fears and tears; entrust Him with the outcome—and let the mercy you receive shape the life you live.</strong></p>
+
+  </div>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <h2 class="takeaways">Key Takeaways</h2>
+  <ol class="takeaway-list">
+    <li><strong>A crown could not remove Hezekiah’s vulnerability.</strong> <span class="scrip">“Set your affairs in order, for you are going to die. You will not recover from this illness.”</span> <span class="ref">2 Kings 20:1 (NLT)</span> Ellen White tells us <span class="egw">“his case was beyond the power of man to help”</span> <span class="egw-ref">Prophets and Kings, p. 340 · PK 340.1</span>—and faithful service does not make anyone immune to a crisis.</li>
+    <li><strong>We do not need to pretend to be strong before bringing our weakness to God.</strong> <span class="scrip">“he turned his face to the wall and prayed to the Lord … Then he broke down and wept bitterly.”</span> <span class="ref">2 Kings 20:2–3 (NLT)</span> Ellen White says the outlook seemed utterly dark, <span class="egw">“yet the king could still pray”</span> <span class="egw-ref">Prophets and Kings, p. 340 · PK 340.2</span>. The power was not in the wall; the prayer was directed to the Lord.</li>
+    <li><strong>God’s response to Hezekiah was personal: his suffering had not escaped God’s attention.</strong> <span class="scrip">“I have heard your prayer and seen your tears.”</span> <span class="ref">2 Kings 20:5 (NLT)</span> Ellen White writes, <span class="egw">“He whose ‘compassions fail not,’ heard the prayer of His servant”</span> <span class="egw-ref">Prophets and Kings, p. 341 · PK 341.3</span>. It was a particular promise to Hezekiah, not a guarantee for every case; those who are not healed <span class="egw">“should not on this account be judged as wanting in faith”</span> <span class="egw-ref">The Ministry of Healing, p. 230 · MH 230.3</span>.</li>
+    <li><strong>Bring God your fears and tears; entrust Him with the outcome.</strong> <span class="scrip">“So let us come boldly to the throne of our gracious God. There we will receive his mercy, and we will find grace to help us when we need it most.”</span> <span class="ref">Hebrews 4:16 (NLT)</span> Then let the mercy you receive shape the life you live, drawing attention to the Giver rather than to what you have gained (2 Chronicles 32:25–26).</li>
+  </ol>
+
+  <p class="sources"><span class="label">Sources and Further Reading</span>Scripture: 2 Kings 20:1–11 (parallel Isaiah 38:1–8, 21–22; aftermath 2 Kings 20:12–19, Isaiah 39:1–8, 2 Chronicles 32:24–26, 31); Isaiah 38:19; Hebrews 4:14–16; John 11:25–26 (NLT). Ellen G. White: <em>Prophets and Kings</em>, chapter 29, “The Ambassadors From Babylon,” pp. 340–348 (PK 340.1, 340.2, 340.3, 341.3, 342.5); <em>The Ministry of Healing</em>, chapter 16, “Prayer for the Sick,” pp. 225–233 (MH 230.3, 231.3). The opening of PK chapter 29 also appears as “The Healing of Hezekiah,” <em>The Review and Herald</em>, May 6, 1915.</p>
+
+  <div class="sdg">Soli Deo Gloria</div>
+</article>
+</body>
+</html>

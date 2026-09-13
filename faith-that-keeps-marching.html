@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faith That Keeps Marching &mdash; Today's Devotion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f3ead4;
+    --parchment-deep:#eadfc2;
+    --ink:#3b2d18;
+    --ink-soft:#5a4629;
+    --gold:#a67c1e;
+    --gold-bright:#c9a227;
+    --gold-pale:#e3cf95;
+    --wine:#7a3b2e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    color:var(--ink);
+    font-family:'Lora',serif;
+    line-height:1.85;
+    padding:34px 14px 60px;
+    position:relative;
+  }
+  /* aged-paper grain */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
+    z-index:2;
+  }
+  .page{
+    max-width:760px;
+    margin:0 auto;
+    background:rgba(255,252,240,.55);
+    border:1.5px solid var(--gold);
+    outline:1px solid var(--gold-pale);
+    outline-offset:6px;
+    padding:64px 52px 56px;
+    position:relative;
+    box-shadow:0 18px 50px rgba(90,70,30,.18);
+  }
+  @media(max-width:620px){.page{padding:52px 24px 44px;}}
+  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
+  .corner.tl{top:10px;left:10px;}
+  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
+  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
+  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+  .eyebrow{
+    font-family:'Cinzel',serif;
+    font-size:.82rem;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:clamp(2.1rem,5.4vw,3rem);
+    text-align:center;
+    color:var(--ink);
+    letter-spacing:.01em;
+    margin-bottom:26px;
+  }
+  /* Ellen G. White — companion ink */
+  .egw{color:var(--wine);}
+  .egw-ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.08em;
+    font-size:.88em;
+    color:var(--wine);
+  }
+  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .divider{
+    display:flex;align-items:center;justify-content:center;
+    gap:14px;margin:30px 0;color:var(--gold);
+  }
+  .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+  .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
+  .divider svg{flex-shrink:0;}
+  .verse-card{
+    border:1px solid var(--gold-pale);
+    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
+    padding:30px 34px 26px;
+    text-align:center;
+    margin:0 auto 8px;
+    position:relative;
+  }
+  .verse-card .label{
+    font-family:'Cinzel',serif;
+    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .verse-card .scripture{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.42rem;
+    line-height:1.65;
+    color:var(--ink-soft);
+  }
+  .verse-card .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.14em;
+    font-size:.95rem;
+    color:var(--gold);
+    margin-top:14px;
+  }
+  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
+  .body-text p:first-of-type::first-letter{
+    font-family:'Playfair Display',serif;
+    font-size:3.9em;
+    float:left;
+    line-height:.82;
+    padding:6px 12px 0 0;
+    color:var(--gold);
+  }
+  .body-text strong{color:#7c5a12;font-weight:600;}
+  .scrip{font-style:italic;color:var(--ink-soft);}
+  .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.1em;
+    font-size:.92em;
+    color:var(--gold);
+    white-space:nowrap;
+  }
+  h2.takeaways{
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.35rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    text-align:center;
+    color:var(--ink);
+    margin-bottom:26px;
+  }
+  ol.takeaway-list{list-style:none;counter-reset:tk;}
+  ol.takeaway-list li{
+    counter-increment:tk;
+    position:relative;
+    padding-left:62px;
+    margin-bottom:20px;
+    font-size:1.03rem;
+  }
+  ol.takeaway-list li::before{
+    content:counter(tk);
+    position:absolute;left:0;top:2px;
+    width:42px;height:42px;
+    border-radius:50%;
+    border:1.5px solid var(--gold);
+    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
+    color:#7c5a12;
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.05rem;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+  }
+  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  .sdg{
+    font-family:'Pinyon Script',cursive;
+    font-size:2.5rem;
+    color:var(--gold);
+    text-align:center;
+    margin-top:40px;
+  }
+</style>
+</head>
+<body>
+<style>
+  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
+  .allnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
+    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
+    padding-bottom:2px;
+  }
+  .allnav a:hover{border-bottom-color:#a67c1e;}
+</style>
+<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+
+<article class="page">
+  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+
+    <div class="eyebrow">Today's Devotion</div>
+  <h1>Faith That Keeps Marching</h1>
+
+  <section class="verse-card">
+    <div class="label">Key Verse</div>
+    <div class="scripture">“It was by faith that the people of Israel marched around Jericho for seven days, and the walls came crashing down.”</div>
+    <div class="ref">Hebrews 11:30 (NLT)</div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <div class="body-text">
+    <p>Israel stood inside the Promised Land with the Jordan behind them and Jericho directly ahead. God had brought them across the river, but crossing into promise did not mean they would never face anything formidable again. Jericho was not an imaginary problem to be dismissed with religious enthusiasm. Scripture states, <span class="scrip">“Now the gates of Jericho were tightly shut because the people were afraid of the Israelites. No one was allowed to go out or in.”</span> <span class="ref">Joshua 6:1 (NLT)</span> The city was closed, defended and beyond anything Israel could remove merely by wishing it away. Yet no conventional assault was appointed as the means of bringing its walls down. The tension of the account lies between what Israel could see and what God had said. The walls were visible; the outcome God promised was not. The people would have to walk through several days in which obedience had been completed but the decisive result had not appeared. Scripture does not record their private conversations or tell us what each person felt, so we should not invent complaints, doubts or dramatic reactions. It does show that, day after day, they followed the instructions they had received. That is the searching question behind this devotion: What does faithfulness look like when God has spoken clearly, yet nothing in front of us appears to be changing? It does not look like pretending the wall is small. It does not mean manufacturing certainty about an outcome God has never promised. It means taking the next faithful step because God is trustworthy, even when obedience has not yet produced visible evidence. <strong>Faith keeps marching—not because repetition has power, but because the God who gave the command is faithful.</strong></p>
+
+    <p>Before Joshua received the plan for Jericho, he had to surrender his own position before the divine Commander. When Joshua saw the armed figure near the city, he asked, <span class="scrip">“Are you friend or foe?”</span> <span class="ref">Joshua 5:13 (NLT)</span> The answer disrupted the categories in Joshua’s question: <span class="scrip">“Neither one … I am the commander of the Lord’s army.”</span> Joshua responded, <span class="scrip">“I am at your command … What do you want your servant to do?”</span> <span class="ref">Joshua 5:14 (NLT)</span> Then came the command, <span class="scrip">“Take off your sandals, for the place where you are standing is holy.”</span> Scripture adds, <span class="scrip">“And Joshua did as he was told.”</span> <span class="ref">Joshua 5:15 (NLT)</span> Joshua’s first victory at Jericho was therefore not over a city but over the impulse to remain in control. He did not ask the Commander to approve a strategy Joshua had already designed. He placed himself at the Commander’s disposal. The biblical passage identifies this figure as the Commander of the Lord’s army, and Ellen White tells us who He was: <span class="egw">“It was Christ, the Exalted One, who stood before the leader of Israel”</span> <span class="egw-ref">Patriarchs and Prophets, chapter 45, “The Fall of Jericho,” p. 487 · PP 487.3</span>. Her insight directs attention away from Joshua as the ultimate hero and towards Christ as the true Leader of God’s people. It must never be twisted into the claim that God automatically endorses our nation, political party, institution, personal dispute or preferred cause. The Commander did not appear to become a weapon for Joshua’s agenda; Joshua bowed and submitted himself to heaven’s agenda. We also begin in the wrong place when we ask only, “Is God on my side?” The deeper question is whether we have surrendered to His authority, truth and character. <strong>Victory begins when we stop asking Christ to follow our plans and place ourselves under His command.</strong></p>
+
+    <p>Only after that surrender did the Lord declare the outcome: <span class="scrip">“I have given you Jericho, its king, and all its strong warriors.”</span> <span class="ref">Joshua 6:2 (NLT)</span> The promise was spoken while Jericho’s gates remained closed and its walls remained standing. God described the gift before Israel could see the result. Faith, therefore, did not begin with falling stones; it began by receiving the word of the One who could not be defeated by the obstacle. Yet this must be applied carefully. Israel possessed a specific word from God about a particular city within a particular moment of biblical history. Believers today are not free to label every ambition a divine promise or to declare that every illness, debt, strained relationship, closed door or painful circumstance must disappear because Jericho fell. We trust what God has actually revealed—not what desire, pressure or imagination would like Him to have said. Scripture assures us of God’s presence, wisdom, forgiveness, sustaining grace, resurrection hope and final triumph over sin. It does not guarantee that every present difficulty will change in our preferred manner or timetable. Some prayers are answered through removal; others through endurance, wise treatment, a difficult act of truthfulness, the help of a community or grace sufficient for a burden that remains. The strength of faith is not measured by how confidently we predict an outcome. It is measured by whether we entrust the outcome to God while obeying what He has made clear. Israel’s obedience did not purchase Jericho, place God in its debt or force Him to act. They marched because He had spoken; they did not march to make His promise true. <strong>Obedience did not purchase the miracle; obedience revealed trust in the One who had promised the victory.</strong></p>
+
+    <p>The instructions themselves made Israel’s dependence unmistakable. God said, <span class="scrip">“You and your fighting men should march around the town once a day for six days.”</span> <span class="ref">Joshua 6:3 (NLT)</span> He then specified, <span class="scrip">“On the seventh day you are to march around the town seven times, with the priests blowing the horns.”</span> <span class="ref">Joshua 6:4 (NLT)</span> The procession moved in deliberate order. Armed men went first, followed by seven priests with ram’s-horn trumpets; the Ark of the Lord’s Covenant came behind them, and other armed men followed the Ark, functioning as the rear guard. The priests sounded the horns continually, so the people’s commanded silence was not an absence of sound. The Ark was not a magical object, and the trumpets were not sonic weapons. The Ark represented the presence, authority and covenant faithfulness of the God who led His people. Marching, repetition, horns, silence, the number seven and the final shout held no independent power to demolish stone. This was a unique divine command, not a spiritual technique to copy around buildings, neighbourhoods, medical diagnoses, debts or people. At the same time, Israel was not passive. The fighting men assembled. The priests carried their appointed responsibilities. The people moved together. They rose, marched, returned and repeated the task in the order they had been given. Their actions mattered as obedient cooperation, but their actions were not the physical force that brought down the walls. God’s method allowed no soldier, engineer, priest or tribe to claim the victory as a monument to human brilliance. Yet it also taught that dependence is not inactivity. We pray because God commands prayer. We confess sin, seek reconciliation where it is safe, work honestly, consult wise counsel, serve faithfully and practise disciplined habits because these are fitting responses to God. We do not perform them as levers that compel Him to produce our chosen result. <strong>Faithful action is neither human self-sufficiency nor passive waiting; it is doing the part God assigns while depending on Him for what only He can do.</strong></p>
+
+    <p>The discipline of the march was as important as its movement. Joshua commanded, <span class="scrip">“Do not shout; do not even talk … Not a single word from any of you until I tell you to shout. Then shout!”</span> <span class="ref">Joshua 6:10 (NLT)</span> After the first circuit the people returned to camp, and Scripture later explains, <span class="scrip">“On the second day they again marched around the town once and returned to the camp. They followed this pattern for six days.”</span> <span class="ref">Joshua 6:14 (NLT)</span> The sequence must not be confused: Israel marched once each day for the first six days, not seven times every day, and no collapse is reported before God’s appointed moment on the seventh day. Each completed circuit ended with the city still standing. Ellen White observes that the prolonged plan <span class="egw">“afforded opportunity for the development of faith among the Israelites”</span> and trained them in <span class="egw">“relying wholly upon their divine Leader”</span> <span class="egw-ref">Patriarchs and Prophets, chapter 45, “The Fall of Jericho,” p. 493 · PP 493.1</span>. Their continuing obedience required order, unity, restraint and patience. Faith sometimes speaks courageously, but sometimes it refuses to let panic, complaint, gossip or self-importance take control of the community. A home, church or ministry can lose its shared purpose when every fearful assumption is repeated as fact or when people compete to make their own voice dominant. Disciplined speech creates room to listen, pray and obey together. But Israel’s commanded silence must never be misused by human leaders to suppress legitimate questions, conceal wrongdoing, prevent biblical accountability or stop someone from reporting abuse and seeking help. There are moments when faithfulness requires speaking clearly, exposing danger, contacting proper authorities or leaving an unsafe situation. The silence around Jericho was a specific command from God, not a universal policy of secrecy or blind submission. Its transferable lesson is self-control under God’s direction. Whether obedience requires speech or silence, it must remain accountable to Scripture, truth, conscience and proper safeguards. <strong>Faith does not confuse the absence of visible progress with the absence of God’s work, and it does not abandon obedience merely because the wall still looks unchanged.</strong></p>
+
+    <p>On the seventh day, Israel rose early and followed the instruction again. Scripture says, <span class="scrip">“But this time they went around the town seven times.”</span> <span class="ref">Joshua 6:15 (NLT)</span> At the appointed trumpet signal, Joshua commanded, <span class="scrip">“Shout! For the Lord has given you the town!”</span> <span class="ref">Joshua 6:16 (NLT)</span> Then, and not before, <span class="scrip">“Suddenly, the walls of Jericho collapsed, and the Israelites charged straight into the town and captured it.”</span> <span class="ref">Joshua 6:20 (NLT)</span> The text does not explain a natural mechanism for the collapse, and we should not invent one. The New Testament gives the inspired interpretation: <span class="scrip">“It was by faith that the people of Israel marched around Jericho for seven days, and the walls came crashing down.”</span> <span class="ref">Hebrews 11:30 (NLT)</span> That summary does not replace the detailed sequence: once per day for six days and seven times on the seventh day. Israel marched, the priests blew horns and the people shouted; God caused the collapse. Faith was expressed through obedience, but the march did not earn the miracle, the trumpets did not manufacture divine power, and the shout did not force God’s hand. Ellen White puts the same truth in one sentence: <span class="egw">“No human hand must cast down the walls of the city, lest man should take to himself the glory of victory”</span> <span class="egw-ref">Conflict and Courage, April 22, “Only God Could Do It,” p. 118 · CC 118.2</span>. God arranged the victory so the glory could not honestly settle on Israel. This does not mean that every believer who continues long enough will eventually receive a dramatic “seventh-day breakthrough.” Faithful people may pray for healing and remain ill, work towards reconciliation and still be rejected, pursue justice and endure delay, or serve faithfully without seeing the fruit they hoped to see. An unchanged circumstance is not proof of deficient faith. Jericho teaches us to obey without attempting to control God’s method, timing or outcome. <strong>The decisive power belonged entirely to God; Israel’s perseverance simply kept them in the place of obedient trust.</strong></p>
+
+    <p>The fall of Jericho is also a solemn account of judgment, and it must not be reduced to a cheerful metaphor about overcoming personal obstacles. Scripture does not portray Israel as morally superior by nature, nor does it give Christians permission to transfer an ancient conquest command into hostility towards people today. Within that grave setting, Rahab’s rescue shines as an act of mercy and covenant faithfulness. Before Israel crossed the Jordan, Rahab had told the spies, <span class="scrip">“I know the Lord has given you this land …”</span> She confessed, <span class="scrip">“For the Lord your God is the supreme God of the heavens above and the earth below.”</span> <span class="ref">Joshua 2:9–11 (NLT)</span> Her confession did not remain an inward opinion. She protected the messengers, sought mercy for her household and accepted the terms of rescue. The spies promised, <span class="scrip">“If you don’t betray us, we will keep our promise and be kind to you when the Lord gives us the land.”</span> Rahab answered, <span class="scrip">“I accept your terms …”</span> <span class="ref">Joshua 2:14–21 (NLT)</span> When the city fell, Joshua did not allow the urgency of victory to erase that promise. He declared, <span class="scrip">“Only Rahab the prostitute and the others in her house will be spared, for she protected our spies.”</span> <span class="ref">Joshua 6:17 (NLT)</span> The New Testament interprets her rescue through faith: <span class="scrip">“It was by faith that Rahab the prostitute was not destroyed with the people in her city who refused to obey God. For she had given a friendly welcome to the spies.”</span> <span class="ref">Hebrews 11:31 (NLT)</span> James likewise says that Rahab <span class="scrip">“was shown to be right with God by her actions when she hid those messengers and sent them safely away by a different road.”</span> <span class="ref">James 2:25 (NLT)</span> Her actions did not buy grace; they showed that her confession was living faith. We need no speculative archaeology, invented feelings or forced symbolism to make the point. <strong>In the midst of judgment, God remembered Rahab, honoured the promise made to her and showed that faith takes refuge in His mercy and acts upon His word.</strong></p>
+
+    <p>Visible victory did not release Israel from the rest of God’s instructions. Before the collapse Joshua warned, <span class="scrip">“Do not take any of the things set apart for destruction …”</span> He explained that the silver, gold, bronze and iron were <span class="scrip">“sacred to the Lord and must be brought into his treasury.”</span> <span class="ref">Joshua 6:18–19 (NLT)</span> After the walls fell, he turned immediately to the two men who had entered Jericho earlier: <span class="scrip">“Keep your promise. Go to the prostitute’s house and bring her out, along with all her family.”</span> <span class="ref">Joshua 6:22 (NLT)</span> The former spies brought out Rahab, her parents, brothers and the relatives who were with her. The narrative concludes, <span class="scrip">“So Joshua spared Rahab the prostitute and her relatives who were with her in the house …”</span> <span class="ref">Joshua 6:25 (NLT)</span> Israel therefore needed faithfulness before the march, during the circuits and after the collapse. Success created new temptations: to take what God had forbidden, to forget the vulnerable, to treat victory as personal possession or to assume that yesterday’s dependence could be replaced by today’s confidence. We face similar spiritual danger after an answered prayer, completed project, public recognition, ministry success or restored relationship. Gratitude can quietly become self-congratulation. Stewardship can become entitlement. The careful listening that marked the crisis can disappear once the pressure lifts. God’s gifts never authorise carelessness with His commands, exploitation of people or self-exaltation. If He grants a visible result, the faithful response is worship, integrity, promise-keeping, generosity and continuing dependence. If He sustains us without changing the circumstance, the same consecration still matters. <strong>Faithfulness is not a temporary posture adopted until the wall moves; it is a life kept under God’s authority before, during and after every outcome.</strong></p>
+
+    <p>For Christians, the enduring application is not a campaign against human beings. Paul says, <span class="scrip">“Be strong in the Lord and in his mighty power.”</span> He immediately guards the meaning of that strength: <span class="scrip">“For we are not fighting against flesh-and-blood enemies …”</span> <span class="ref">Ephesians 6:10–12 (NLT)</span> Difficult relatives, church members, neighbours, political opponents, unbelievers and wounded people are not Jericho walls to be conquered. The Christian conflict concerns sin, temptation, deception, unbelief and the powers of darkness, and our resources are truth, righteousness, faith, salvation, God’s word and prayer. Scripture tells believers, <span class="scrip">“Pray in the Spirit at all times and on every occasion.”</span> <span class="ref">Ephesians 6:18 (NLT)</span> This is why the devotion finally returns to the posture Joshua learned before he marched: sandals off, agenda surrendered, listening for the Commander’s word. Faith that keeps marching is not restless activity without discernment. Sometimes Christ calls us to advance; sometimes to wait, rest, speak, remain silent, seek counsel, accept medical care, report wrongdoing, change direction or receive sustaining grace. The common thread is not motion but surrendered obedience to what He has truly made clear. Jesus never promised that every present wall would collapse on our schedule. He said, <span class="scrip">“Here on earth you will have many trials and sorrows. But take heart, because I have overcome the world.”</span> <span class="ref">John 16:33 (NLT)</span> At the cross, apparent defeat became the place of redemption; in the resurrection, Christ’s victory gave believers a hope no unchanged circumstance can cancel. So name the wall honestly. Test impressions by Scripture. Seek wise and accountable counsel. Do the next clear thing without treating it as a bargain with God. If the result comes, give Him the glory. If the waiting continues, receive His presence and grace without accepting shame. <strong>Faith does not keep marching because repetition is powerful; faith keeps obeying because Christ is faithful, and it leaves the method, timing and outcome in His hands.</strong></p>
+  </div>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <h2 class="takeaways">Key Takeaways</h2>
+  <ol class="takeaway-list">
+    <li><strong>God’s word comes before visible evidence.</strong> The Lord said, <span class="scrip">“I have given you Jericho, its king, and all its strong warriors.”</span> <span class="ref">Joshua 6:2 (NLT)</span> Israel trusted a specific promise God had actually given. Faith today rests on what God has revealed in Scripture, not on attaching His name to every private desire.</li>
+    <li><strong>Surrender comes before strategy.</strong> Joshua answered the Commander, <span class="scrip">“I am at your command … What do you want your servant to do?”</span> <span class="ref">Joshua 5:14 (NLT)</span> Faith does not ask Christ merely to bless a finished plan. It places the plan, the person and the outcome under His authority.</li>
+    <li><strong>Jericho’s method was a command, not a formula.</strong> Israel was told to march <span class="scrip">“once a day for six days”</span> and on the seventh day <span class="scrip">“seven times …”</span> <span class="ref">Joshua 6:3–4 (NLT)</span> Marching, horns, silence, shouting and the number seven possessed no magical force and must not be copied as a technique for controlling God.</li>
+    <li><strong>Faith remains steady while the wall still stands.</strong> Scripture says, <span class="scrip">“They followed this pattern for six days.”</span> Then, on the seventh day, <span class="scrip">“this time they went around the town seven times.”</span> <span class="ref">Joshua 6:14–15 (NLT)</span> No visible change does not prove that faithful prayer, service or growth is worthless—or that suffering reveals failed faith.</li>
+    <li><strong>Obedience participated; God supplied the power.</strong> At the appointed moment, <span class="scrip">“Suddenly, the walls of Jericho collapsed …”</span> <span class="ref">Joshua 6:20 (NLT)</span> Israel’s actions mattered as trust, but they neither earned nor mechanically caused the miracle. The glory belongs to God alone.</li>
+    <li><strong>Living faith receives mercy and acts upon God’s word.</strong> Scripture says, <span class="scrip">“It was by faith that Rahab the prostitute was not destroyed … For she had given a friendly welcome to the spies.”</span> <span class="ref">Hebrews 11:31 (NLT)</span> God kept the promise made to her household in the midst of solemn judgment.</li>
+    <li><strong>Christ calls us to spiritual faithfulness, not hostility towards people.</strong> We are told, <span class="scrip">“Be strong in the Lord and in his mighty power.”</span> We also remember, <span class="scrip">“we are not fighting against flesh-and-blood enemies …”</span> <span class="ref">Ephesians 6:10–12 (NLT)</span> Surrender, truth, prayer, wise counsel and persevering obedience—not domination—mark faith under Christ’s command.</li>
+  </ol>
+
+  <div class="sdg">Soli Deo Gloria</div>
+</article>
+</body>
+</html>

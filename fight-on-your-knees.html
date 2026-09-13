@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fight on Your Knees &mdash; Today's Devotion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Lora:ital,wght@0,400;0,600;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f3ead4;
+    --parchment-deep:#eadfc2;
+    --ink:#3b2d18;
+    --ink-soft:#5a4629;
+    --gold:#a67c1e;
+    --gold-bright:#c9a227;
+    --gold-pale:#e3cf95;
+    --wine:#7a3b2e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    color:var(--ink);
+    font-family:'Lora',serif;
+    line-height:1.85;
+    padding:34px 14px 60px;
+    position:relative;
+  }
+  /* aged-paper grain */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
+    z-index:2;
+  }
+  .page{
+    max-width:760px;
+    margin:0 auto;
+    background:rgba(255,252,240,.55);
+    border:1.5px solid var(--gold);
+    outline:1px solid var(--gold-pale);
+    outline-offset:6px;
+    padding:64px 52px 56px;
+    position:relative;
+    box-shadow:0 18px 50px rgba(90,70,30,.18);
+  }
+  @media(max-width:620px){.page{padding:52px 24px 44px;}}
+  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
+  .corner.tl{top:10px;left:10px;}
+  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
+  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
+  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+  .eyebrow{
+    font-family:'Cinzel',serif;
+    font-size:.82rem;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:clamp(2.1rem,5.4vw,3rem);
+    text-align:center;
+    color:var(--ink);
+    letter-spacing:.01em;
+    margin-bottom:26px;
+  }
+  /* Ellen G. White — companion ink */
+  .egw{color:var(--wine);}
+  .egw-ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.08em;
+    font-size:.88em;
+    color:var(--wine);
+  }
+  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .divider{
+    display:flex;align-items:center;justify-content:center;
+    gap:14px;margin:30px 0;color:var(--gold);
+  }
+  .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+  .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
+  .divider svg{flex-shrink:0;}
+  .verse-card{
+    border:1px solid var(--gold-pale);
+    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
+    padding:30px 34px 26px;
+    text-align:center;
+    margin:0 auto 8px;
+    position:relative;
+  }
+  .verse-card .label{
+    font-family:'Cinzel',serif;
+    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .verse-card .scripture{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.42rem;
+    line-height:1.65;
+    color:var(--ink-soft);
+  }
+  .verse-card .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.14em;
+    font-size:.95rem;
+    color:var(--gold);
+    margin-top:14px;
+  }
+  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
+  .body-text p:first-of-type::first-letter{
+    font-family:'Playfair Display',serif;
+    font-size:3.9em;
+    float:left;
+    line-height:.82;
+    padding:6px 12px 0 0;
+    color:var(--gold);
+  }
+  .body-text strong{color:#7c5a12;font-weight:600;}
+  .scrip{font-style:italic;color:var(--ink-soft);}
+  .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.1em;
+    font-size:.92em;
+    color:var(--gold);
+    white-space:nowrap;
+  }
+  h2.takeaways{
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.35rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    text-align:center;
+    color:var(--ink);
+    margin-bottom:26px;
+  }
+  ol.takeaway-list{list-style:none;counter-reset:tk;}
+  ol.takeaway-list li{
+    counter-increment:tk;
+    position:relative;
+    padding-left:62px;
+    margin-bottom:20px;
+    font-size:1.03rem;
+  }
+  ol.takeaway-list li::before{
+    content:counter(tk);
+    position:absolute;left:0;top:2px;
+    width:42px;height:42px;
+    border-radius:50%;
+    border:1.5px solid var(--gold);
+    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
+    color:#7c5a12;
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.05rem;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+  }
+  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  .sdg{
+    font-family:'Pinyon Script',cursive;
+    font-size:2.5rem;
+    color:var(--gold);
+    text-align:center;
+    margin-top:40px;
+  }
+</style>
+</head>
+<body>
+<style>
+  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
+  .allnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
+    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
+    padding-bottom:2px;
+  }
+  .allnav a:hover{border-bottom-color:#a67c1e;}
+</style>
+<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+
+<article class="page">
+  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+
+  <div class="eyebrow">Today's Devotion</div>
+  <h1>Fight on Your Knees</h1>
+
+  <section class="verse-card">
+    <div class="label">Key Verse</div>
+    <div class="scripture">“Hannah was in deep anguish, crying bitterly as she prayed to the L<small>ORD</small>.”</div>
+    <div class="ref">1 Samuel 1:10 (NLT)</div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <div class="body-text">
+    <p>Every family has a table, and this one had a wound at it. <span class="scrip">“Elkanah had two wives, Hannah and Peninnah. Peninnah had children, but Hannah did not”</span> <span class="ref">1 Samuel 1:2 (NLT)</span>. The Bible records the arrangement without approving it; Ellen White says plainly of Elkanah’s second marriage that <span class="egw">“this step, prompted by a lack of faith in God, did not bring happiness.”</span> Each year, at the sacrificial meal in Shiloh, the ache was laid bare: <span class="scrip">“And though he loved Hannah, he would give her only one choice portion because the L<small>ORD</small> had given her no children”</span> <span class="ref">1 Samuel 1:5 (NLT)</span>. Then the sentences that give this devotion its reason: <span class="scrip">“So Peninnah would taunt Hannah and make fun of her because the L<small>ORD</small> had kept her from having children. Year after year it was the same&mdash;Peninnah would taunt Hannah as they went to the Tabernacle. Each time, Hannah would be reduced to tears and would not even eat”</span> <span class="ref">1 Samuel 1:6-7 (NLT)</span>. Notice where the taunt was aimed. It was not only that Hannah had no child; it was that, in her world, an empty cradle was read as a verdict from heaven, and Peninnah pressed exactly there. Ellen White describes her as one who <span class="egw">“claimed the precedence as one highly favored of God, and taunted Hannah with her childless state as evidence of the Lord’s displeasure.”</span> That is the cruellest kind of provocation: the kind that uses God against you. Scripture tells us almost nothing else about Peninnah, and she is not the point of the story. The point is what the provocation did to Hannah, and what Hannah did with it. And it came <em>year after year</em>, on the way to worship, at the one meal that was meant to be joy &mdash; until it had taken her tears and her appetite for the feast of God.</p>
+
+    <p>Watch first what could not help her. <span class="scrip">“‘Why are you crying, Hannah?’ Elkanah would ask. ‘Why aren’t you eating? Why be downhearted just because you have no children? You have me&mdash;isn’t that better than having ten sons?’”</span> <span class="ref">1 Samuel 1:8 (NLT)</span>. This is a loving husband, and Ellen White notes that at the feast he had already given Hannah <span class="egw">“a double portion, signifying that his affection for her was the same as if she had had a son.”</span> But listen to his questions: four of them, and not one that Hannah could answer. Love that offers itself in place of the grief is still love; it simply cannot reach the room the grief is in. <span class="egw">“Her husband vainly sought to comfort her.”</span> Some sorrows cannot be argued away, even by the people who love us most. Now watch what Hannah did not do. There is no recorded word from her to Peninnah in the whole chapter. She did not answer taunt with taunt. She did not demand that Elkanah choose. She did not stop going to Shiloh. She did not grow the quiet, reasonable bitterness that would have felt entirely justified. Ellen White: <span class="egw">“Hannah uttered no reproach. The burden which she could share with no earthly friend she cast upon God.”</span> That sentence is the whole devotion.</p>
+
+    <p><span class="scrip">“Once after a sacrificial meal at Shiloh, Hannah got up and went to pray”</span> <span class="ref">1 Samuel 1:9 (NLT)</span>. She got up from the table where the taunting happened and walked to the place where God was. Then the key verse: <span class="scrip">“Hannah was in deep anguish, crying bitterly as she prayed to the L<small>ORD</small>”</span> <span class="ref">1 Samuel 1:10 (NLT)</span>. Look at what sits together in that one sentence. Deep anguish. Bitter tears. And <em>prayed to the L<small>ORD</small></em>. The fight and the kneeling are in the same breath. Hannah did not tidy herself up before she came; she did not pretend the pain was smaller than it was; she brought the whole war. Faith is not the absence of tears. Faith is the direction they run. Ellen White: <span class="egw">“in the anguish of her spirit she ‘prayed, . . . and wept sore.’ Yet she communed with God in silence, uttering no sound.”</span> Then hear how she addressed Him: <span class="scrip">“O L<small>ORD</small> of Heaven’s Armies, if you will look upon my sorrow and answer my prayer and give me a son, then I will give him back to you”</span> <span class="ref">1 Samuel 1:11 (NLT)</span>. She called on the God of armies, because she was bringing Him a battle. She asked first to be <em>seen</em> &mdash; <em>look upon my sorrow</em> &mdash; before she asked for anything else. And then she did something that only a person fighting on her knees can do: she offered back, in advance, the very thing she was fighting for. <span class="egw">“And she made a solemn vow that if her request were granted, she would dedicate her child to God, even from its birth.”</span> A person fighting Peninnah wants a son in order to win. A person fighting on her knees wants a son in order to give.</p>
+
+    <p>The provocation followed her to the door of the Tabernacle. <span class="scrip">“As she was praying to the L<small>ORD</small>, Eli watched her. Seeing her lips moving but hearing no sound, he thought she had been drinking. ‘Must you come here drunk?’ he demanded. ‘Throw away your wine!’”</span> <span class="ref">1 Samuel 1:12-14 (NLT)</span>. Even the priest misread her. Ellen White explains that in those days <span class="egw">“irreverent feasting and even drunkenness were not uncommon, even at the religious festivals,”</span> and Eli, <span class="egw">“thinking to administer a deserved rebuke,”</span> spoke sternly. A second provocation, at the altar itself &mdash; and a second answer. <span class="scrip">“‘Oh no, sir!’ she replied. ‘I haven’t been drinking wine or anything stronger. But I am very discouraged, and I was pouring out my heart to the L<small>ORD</small>. Don’t think I am a wicked woman! For I have been praying out of great anguish and sorrow’”</span> <span class="ref">1 Samuel 1:15-16 (NLT)</span>. Ellen White: <span class="egw">“Pained and startled, Hannah answered gently.”</span> Learn two things from this. Fighting on your knees does not mean having no voice: Hannah corrected a false accusation, plainly and truthfully, and refused a label that was not hers. But she corrected it without contempt. And her explanation of what she had been doing is the best plain definition of prayer in the Bible: <em>pouring out my heart to the L<small>ORD</small></em>. The psalmist uses the same words: <span class="scrip">“Pour out your heart to him, for God is our refuge”</span> <span class="ref">Psalm 62:8 (NLT)</span>. <span class="scrip">“‘In that case,’ Eli said, ‘go in peace! May the God of Israel grant the request you have asked of him’”</span> <span class="ref">1 Samuel 1:17 (NLT)</span>. <span class="egw">“The high priest was deeply moved, for he was a man of God; and in place of rebuke he uttered a blessing.”</span> The gentleness of her answer turned an accusation into a benediction.</p>
+
+    <p>Now the verse most of us miss. <span class="scrip">“‘Oh, thank you, sir!’ she exclaimed. Then she went back and began to eat again, and she was no longer sad”</span> <span class="ref">1 Samuel 1:18 (NLT)</span>. Stop and count what had changed. Peninnah still had her children. Hannah’s arms were still empty. There had been no angel, no promise, nothing but a tired priest’s blessing. And she was no longer sad. She went back to the very table where she had been reduced to tears, and she ate. The peace came <em>before</em> the answer, because the battle had changed hands. This is what Paul meant: <span class="scrip">“Don’t worry about anything; instead, pray about everything. Tell God what you need, and thank him for all he has done. Then you will experience God’s peace, which exceeds anything we can understand”</span> <span class="ref">Philippians 4:6-7 (NLT)</span>. Peace that exceeds understanding is peace that arrives when nothing visible has moved. When you fight a person, you cannot rest until they lose. When you fight on your knees, you can get up and eat while the outcome is still in God’s hands &mdash; precisely because it is in God’s hands. That is the first victory, and it is available to everyone who prays, whatever answer follows.</p>
+
+    <p>The answer did follow. <span class="scrip">“When Elkanah slept with Hannah, the L<small>ORD</small> remembered her plea, and in due time she gave birth to a son. She named him Samuel, for she said, ‘I asked the L<small>ORD</small> for him’”</span> <span class="ref">1 Samuel 1:19-20 (NLT)</span>. Then she kept her vow. <span class="scrip">“‘Sir, do you remember me?’ Hannah asked. ‘I am the very woman who stood here several years ago praying to the L<small>ORD</small>. I asked the L<small>ORD</small> to give me this boy, and he has granted my request. Now I am giving him to the L<small>ORD</small>, and he will belong to the L<small>ORD</small> his whole life’”</span> <span class="ref">1 Samuel 1:26-28 (NLT)</span>. Ellen White: <span class="egw">“He was her only son, the special gift of Heaven; but she had received him as a treasure consecrated to God, and she would not withhold from the Giver His own.”</span> And: <span class="egw">“Eli was deeply impressed by the faith and devotion of this woman of Israel.”</span> Here is the mark of a battle fought on your knees rather than against a person: the thing you fought for, you can give back, because you never thought the victory was yours. Hannah did not parade Samuel past Peninnah. She walked him to the house of God. And the fight went on, quietly, for the rest of her life. <span class="egw">“Every day he was the subject of her prayers,”</span> Ellen White writes, and every year she made him a little robe, and <span class="egw">“every fiber of the little garment had been woven with a prayer that he might be pure, noble, and true.”</span> In <em>Daughters of God</em> she closes Hannah’s story with a line worth keeping: <span class="egw">“What a reward was Hannah’s! And what an encouragement to faithfulness is her example!”</span> The Bible adds its own footnote: <span class="scrip">“And the L<small>ORD</small> blessed Hannah, and she conceived and gave birth to three sons and two daughters”</span> <span class="ref">1 Samuel 2:21 (NLT)</span>.</p>
+
+    <p>So what, in the end, was Hannah’s answer to Peninnah? Years of provocation, and now at last she speaks &mdash; and it is not to Peninnah. <span class="scrip">“My heart rejoices in the L<small>ORD</small>! The L<small>ORD</small> has made me strong. Now I have an answer for my enemies; I rejoice because you rescued me”</span> <span class="ref">1 Samuel 2:1 (NLT)</span>. Her answer to her enemies was a song to God. She does speak to the proud &mdash; <span class="scrip">“Stop acting so proud and haughty! Don’t speak with such arrogance! For the L<small>ORD</small> is a God who knows what you have done”</span> <span class="ref">1 Samuel 2:3 (NLT)</span> &mdash; but notice that even here she is not settling a score; she is stating who God is, and leaving the judging to Him. Ellen White: <span class="egw">“Referring first to the boasting of an insolent and contentious woman, the song points to the destruction of the enemies of God and the final triumph of His redeemed people.”</span> And then the song lifts far above Shiloh. <span class="scrip">“No one will succeed by strength alone”</span> <span class="ref">1 Samuel 2:9 (NLT)</span> &mdash; that is the title of this devotion in six words. It ends with a king Israel did not yet have: <span class="scrip">“He gives power to his king; he increases the strength of his anointed one”</span> <span class="ref">1 Samuel 2:10 (NLT)</span>. <span class="egw">“Hannah’s words were prophetic, both of David, who should reign as king of Israel, and of the Messiah, the Lord’s Anointed.”</span> A thousand years later another young woman, carrying a promised Son, would open her own song with Hannah’s cadence: <span class="scrip">“Oh, how my soul praises the Lord. How my spirit rejoices in God my Savior!”</span> <span class="ref">Luke 1:46-47 (NLT)</span>. And that Son would fight the greatest battle in history the way Hannah fought hers. <span class="scrip">“He walked away, about a stone’s throw, and knelt down and prayed, ‘Father, if you are willing, please take this cup of suffering away from me. Yet I want your will to be done, not mine’”</span> <span class="ref">Luke 22:41-42 (NLT)</span>. <span class="scrip">“He did not retaliate when he was insulted, nor threaten revenge when he suffered. He left his case in the hands of God, who always judges fairly”</span> <span class="ref">1 Peter 2:23 (NLT)</span>. Hannah left her case in the same hands. That is why her story is not merely a lesson in restraint; it is a small, early picture of the Saviour.</p>
+
+    <p>So, who is your Peninnah? Be careful how you answer, because <span class="scrip">“we are not fighting against flesh-and-blood enemies”</span> <span class="ref">Ephesians 6:12 (NLT)</span>; the person is never the real battle. But you know the provocation: the remark that comes <em>year after year</em> at the family table; the colleague who is rewarded for what you are blamed for; the prayer that has been on your lips through more festivals than you can count. You have the same options Hannah had. You can answer back, and lose the peace. You can go quiet and bitter, and lose the joy. Or you can get up from the table and take the whole thing &mdash; the anger, the tears, the ache underneath &mdash; to the L<small>ORD</small> of Heaven’s Armies, and pour it out. Hannah, as it happens, stood to pray; verse 26 says so. The knees in this title are not a posture but a direction; wherever you are, the question is where the fight goes. Two honest words before you go. First, Hannah’s story is a true story, not a formula. God <em>remembered her plea</em> with a son; He does not promise that every empty place will be filled in the shape we ask, and if you carry that particular grief, hear this clearly: the text never says God was displeased with Hannah. The “evidence” Peninnah pointed to was no evidence at all &mdash; Ellen White calls Hannah <span class="egw">“a woman of fervent piety”</span> whose character was marked with <span class="egw">“a lofty faith.”</span> What is promised to everyone who prays is verse 18: the peace that comes before the answer. Second, fighting on your knees is not silence about harm. If what you are facing is not provocation but abuse, danger, or wrongdoing, taking it to God includes taking it to the people He has placed to protect you &mdash; a pastor, a trusted friend, the proper authorities. Hannah herself spoke up when she was wronged. Prayer is never a reason to stay where you are being hurt.</p>
+
+    <p>Peninnah had children, a sharp tongue, and the whole table’s attention. Hannah had a God who <em>looks upon sorrow</em> and <em>remembers pleas</em>. She never won an argument with Peninnah, because she never had one. She won at the door of the Tabernacle, with her lips moving and no sound coming out, and she walked back to the table no longer sad. The Lord who saw her still sees; the hands she left her case in are the same hands. What have you been fighting standing up that you were meant to fight on your knees? <strong>Some battles are not won by standing up to people. They are won by kneeling before God.</strong></p>
+  </div>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <h2 class="takeaways">Key Takeaways</h2>
+  <ol class="takeaway-list">
+    <li><strong>Provocation is real, and Scripture names it</strong> &mdash; year after year, at the table, on the way to worship, aimed at her standing with God. The Bible does not minimise it; it records the tears and the lost appetite.</li>
+    <li><strong>Loving people could not reach it</strong> &mdash; Elkanah’s four questions were kind and useless. Some griefs cannot be argued away by the people who love us most; they can only be carried to God.</li>
+    <li><strong>Hannah uttered no reproach</strong> &mdash; there is no recorded word from her to Peninnah in the whole chapter. She did not answer taunt with taunt, she did not turn bitter, and she did not stop going to Shiloh.</li>
+    <li><strong>The fight and the kneeling are in one sentence</strong> &mdash; <em>deep anguish, crying bitterly as she prayed to the L<small>ORD</small></em>. Faith is not the absence of tears; it is the direction they run. She stood to pray (1:26); the knees are a direction, not a posture.</li>
+    <li><strong>Fighting on your knees is not having no voice</strong> &mdash; she corrected Eli’s false accusation plainly and gently, and a rebuke became a blessing. And it is never silence about harm &mdash; abuse, danger, or wrongdoing must also be taken to the people God has placed to protect you.</li>
+    <li><strong>Peace came before the answer</strong> &mdash; <em>she was no longer sad</em> while nothing visible had changed, because the battle had changed hands. That peace is promised to everyone who prays, whatever the answer.</li>
+    <li><strong>Her answer to her enemies was a song</strong> &mdash; and she gave back the son she had fought for. The song reached past Peninnah to David and to the Messiah, who fought His own battle on His knees and <em>left his case in the hands of God</em>.</li>
+  </ol>
+
+  <div class="sdg">Soli Deo Gloria</div>
+</article>
+</body>
+</html>

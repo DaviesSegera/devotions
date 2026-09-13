@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Devotions &mdash; A New Beginning</title>
+<meta name="description" content="Devotions from the Word of God, with insight from the writings of Ellen G. White. Prepared by Dr. Davies Rene Segera.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f3ead4;
+    --parchment-deep:#eadfc2;
+    --ink:#3b2d18;
+    --ink-soft:#5a4629;
+    --gold:#a67c1e;
+    --gold-bright:#c9a227;
+    --gold-pale:#e3cf95;
+    --wine:#7a3b2e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    color:var(--ink);
+    font-family:'Lora',serif;
+    line-height:1.85;
+    padding:34px 14px 60px;
+    position:relative;
+    min-height:100vh;
+  }
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
+    z-index:2;
+  }
+  .page{
+    max-width:1040px;
+    margin:0 auto;
+    background:rgba(255,252,240,.55);
+    border:1.5px solid var(--gold);
+    outline:1px solid var(--gold-pale);
+    outline-offset:6px;
+    padding:64px 52px 56px;
+    position:relative;
+    box-shadow:0 18px 50px rgba(90,70,30,.18);
+  }
+  @media(max-width:620px){.page{padding:52px 20px 44px;} body{padding:22px 10px 44px;}}
+  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
+  .corner.tl{top:10px;left:10px;}
+  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
+  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
+  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+  .eyebrow{
+    font-family:'Cinzel',serif;
+    font-size:.82rem;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:clamp(2.1rem,5.4vw,3rem);
+    text-align:center;
+    color:var(--ink);
+    letter-spacing:.01em;
+    margin-bottom:18px;
+  }
+  .standfirst{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.32rem;
+    line-height:1.7;
+    color:var(--ink-soft);
+    text-align:center;
+    max-width:620px;
+    margin:0 auto;
+  }
+  .divider{display:flex;align-items:center;justify-content:center;gap:14px;color:var(--gold);margin:34px 0;}
+  .divider .line{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--gold));}
+  .divider .line.right{background:linear-gradient(to left,transparent,var(--gold));}
+  .divider svg{flex-shrink:0;}
+
+  .search{max-width:460px;margin:0 auto 8px;}
+  .search input{
+    width:100%;
+    font-family:'Lora',serif;
+    font-size:1rem;
+    color:var(--ink);
+    background:rgba(255,250,232,.9);
+    border:1px solid var(--gold-pale);
+    padding:12px 16px;
+    outline:none;
+  }
+  .search input:focus{border-color:var(--gold);}
+  .search input::placeholder{color:#9b8a6a;font-style:italic;}
+  .count{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.14em;
+    font-size:.82rem;color:var(--gold);text-align:center;margin-top:10px;
+  }
+
+  .group{margin-top:44px;}
+  .group h2{
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.2rem;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    text-align:center;
+    color:var(--ink);
+  }
+  .group .note{
+    font-family:'Cormorant Garamond',serif;font-style:italic;
+    text-align:center;color:var(--ink-soft);font-size:1.06rem;margin-bottom:26px;
+  }
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px;}
+  .card{
+    display:block;
+    text-decoration:none;
+    color:inherit;
+    border:1px solid var(--gold-pale);
+    background:linear-gradient(180deg,rgba(255,250,232,.92),rgba(247,238,213,.92));
+    padding:22px 24px 20px;
+    transition:border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+  }
+  .card:hover,.card:focus-visible{
+    border-color:var(--gold);
+    box-shadow:0 10px 26px rgba(90,70,30,.16);
+    transform:translateY(-2px);
+    outline:none;
+  }
+  .card .passage{
+    display:block;
+    font-family:'Cinzel',serif;font-variant:small-caps;
+    letter-spacing:.16em;font-size:.78rem;color:var(--gold);
+    margin-bottom:8px;
+  }
+  .card h3{
+    font-family:'Playfair Display',serif;
+    font-weight:700;font-size:1.24rem;line-height:1.35;
+    color:var(--ink);margin-bottom:6px;
+  }
+  .card .subject{
+    font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.08rem;line-height:1.5;color:var(--ink-soft);margin-bottom:14px;
+  }
+  .card .verse{
+    font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.02rem;line-height:1.55;color:var(--ink-soft);
+    border-top:1px solid var(--gold-pale);padding-top:12px;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .card .ref{
+    font-family:'Cinzel',serif;font-variant:small-caps;
+    letter-spacing:.12em;font-size:.8rem;color:var(--gold);margin-top:8px;
+  }
+  .empty{
+    display:none;text-align:center;font-family:'Cormorant Garamond',serif;
+    font-style:italic;font-size:1.16rem;color:var(--ink-soft);padding:30px 0;
+  }
+  .colophon{
+    margin-top:44px;text-align:center;font-size:.95rem;color:var(--ink-soft);
+  }
+  .sdg{
+    font-family:'Pinyon Script',cursive;
+    font-size:2.5rem;
+    color:var(--gold);
+    text-align:center;
+    margin-top:26px;
+  }
+</style>
+</head>
+<body>
+<main class="page">
+  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+
+  <div class="eyebrow">A New Beginning</div>
+  <h1>Daily Devotions</h1>
+  <p class="standfirst">Thirty-one devotions from the Word of God, each read alongside the writings of Ellen G.&nbsp;White. Scripture is quoted from the New Living Translation.</p>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <div class="search">
+    <label class="sr-only" for="q" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Search the devotions</label>
+    <input id="q" type="search" autocomplete="off" placeholder="Search by title, person or passage&hellip;">
+    <p class="count" id="count">Thirty-one devotions</p>
+  </div>
+
+    <section class="group">
+      <h2>The Old Testament</h2>
+      <p class="note">From the plain of Shinar to the valley of dry bones.</p>
+      <div class="grid">
+      <a class="card" href="building-without-god.html" data-find="building without god the tower on the plain of shinar genesis 11 genesis 11:4 (nlt) “come, let’s build a great city for ourselves with a tower that reaches into the sky.”">
+        <span class="passage">Genesis 11</span>
+        <h3>Building Without God</h3>
+        <p class="subject">The tower on the plain of Shinar</p>
+        <p class="verse">“Come, let’s build a great city for ourselves with a tower that reaches into the sky.”</p>
+        <p class="ref">Genesis 11:4 (NLT)</p>
+      </a>
+      <a class="card" href="do-not-trade-the-eternal-for-the-temporary.html" data-find="do not trade the eternal for the temporary esau sells his birthright genesis 25 genesis 25:34 (nlt) “then jacob gave esau some bread and lentil stew. esau ate the meal, then got up and left. he showed contempt for his rights as the firstborn.”">
+        <span class="passage">Genesis 25</span>
+        <h3>Do Not Trade the Eternal for the Temporary</h3>
+        <p class="subject">Esau sells his birthright</p>
+        <p class="verse">“Then Jacob gave Esau some bread and lentil stew. Esau ate the meal, then got up and left. He showed contempt for his rights as the firstborn.”</p>
+        <p class="ref">Genesis 25:34 (NLT)</p>
+      </a>
+      <a class="card" href="gods-promise-does-not-need-our-deception.html" data-find="god’s promise does not need our deception jacob and rebekah deceive isaac genesis 27 genesis 27:35 (nlt) “but isaac said, ‘your brother was here, and he tricked me. he has taken away your blessing.’”">
+        <span class="passage">Genesis 27</span>
+        <h3>God’s Promise Does Not Need Our Deception</h3>
+        <p class="subject">Jacob and Rebekah deceive Isaac</p>
+        <p class="verse">“But Isaac said, ‘Your brother was here, and he tricked me. He has taken away your blessing.’”</p>
+        <p class="ref">Genesis 27:35 (NLT)</p>
+      </a>
+      <a class="card" href="when-envy-takes-root.html" data-find="when envy takes root joseph&#x27;s brothers and the robe genesis 37 genesis 37:4 (nlt) “but his brothers hated joseph because their father loved him more than the rest of them. they couldn’t say a kind word to him.”">
+        <span class="passage">Genesis 37</span>
+        <h3>When Envy Takes Root</h3>
+        <p class="subject">Joseph&#x27;s brothers and the robe</p>
+        <p class="verse">“But his brothers hated Joseph because their father loved him more than the rest of them. They couldn’t say a kind word to him.”</p>
+        <p class="ref">Genesis 37:4 (NLT)</p>
+      </a>
+      <a class="card" href="whose-report-will-you-believe.html" data-find="whose report will you believe? the twelve spies and the same land numbers 13–14 numbers 14:8–9 (nlt) “and if the lord is pleased with us, he will bring us safely into that land and give it to us. it is a rich land flowing with milk and honey. do not rebel against the lord, and don’t be afraid of the people of the land. they are only helpless prey to us! they have no protection, but the lord is with us! don’t be afraid of them!”">
+        <span class="passage">Numbers 13–14</span>
+        <h3>Whose Report Will You Believe?</h3>
+        <p class="subject">The twelve spies and the same land</p>
+        <p class="verse">“And if the Lord is pleased with us, he will bring us safely into that land and give it to us. It is a rich land flowing with milk and honey. Do not rebel against the Lord, and don’t be afraid of the people of the land. They are only helpless prey to us! They have no protection, but the Lord is with us! Don’t be afraid of them!”</p>
+        <p class="ref">Numbers 14:8–9 (NLT)</p>
+      </a>
+      <a class="card" href="when-discontent-becomes-rebellion.html" data-find="when discontent becomes rebellion korah, dathan and abiram numbers 16 numbers 16:9–10 (nlt) “does it seem insignificant to you that the god of israel has chosen you from among all the community of israel to be near him so you can serve in the lord’s tabernacle and stand before the people to minister to them? korah, he has already given this special ministry to you and your fellow levites. are you now demanding the priesthood as well?”">
+        <span class="passage">Numbers 16</span>
+        <h3>When Discontent Becomes Rebellion</h3>
+        <p class="subject">Korah, Dathan and Abiram</p>
+        <p class="verse">“Does it seem insignificant to you that the God of Israel has chosen you from among all the community of Israel to be near him so you can serve in the Lord’s Tabernacle and stand before the people to minister to them? Korah, he has already given this special ministry to you and your fellow Levites. Are you now demanding the priesthood as well?”</p>
+        <p class="ref">Numbers 16:9–10 (NLT)</p>
+      </a>
+      <a class="card" href="faith-that-keeps-marching.html" data-find="faith that keeps marching six silent days around jericho joshua 6 hebrews 11:30 (nlt) “it was by faith that the people of israel marched around jericho for seven days, and the walls came crashing down.”">
+        <span class="passage">Joshua 6</span>
+        <h3>Faith That Keeps Marching</h3>
+        <p class="subject">Six silent days around Jericho</p>
+        <p class="verse">“It was by faith that the people of Israel marched around Jericho for seven days, and the walls came crashing down.”</p>
+        <p class="ref">Hebrews 11:30 (NLT)</p>
+      </a>
+      <a class="card" href="when-god-raises-a-deliverer.html" data-find="when god raises a deliverer ehud, and a people who cried out judges 3 judges 3:15 (nlt, excerpt) “the lord again raised up a rescuer to save them.”">
+        <span class="passage">Judges 3</span>
+        <h3>When God Raises a Deliverer</h3>
+        <p class="subject">Ehud, and a people who cried out</p>
+        <p class="verse">“The Lord again raised up a rescuer to save them.”</p>
+        <p class="ref">Judges 3:15 (NLT, excerpt)</p>
+      </a>
+      <a class="card" href="when-empty-becomes-full.html" data-find="when empty becomes full naomi returns, and ruth goes with her ruth 1–4 ruth 1:21 (nlt) “i went away full, but the lord has brought me home empty. why call me naomi when the lord has caused me to suffer and the almighty has sent such tragedy upon me?”">
+        <span class="passage">Ruth 1–4</span>
+        <h3>When Empty Becomes Full</h3>
+        <p class="subject">Naomi returns, and Ruth goes with her</p>
+        <p class="verse">“I went away full, but the LORD has brought me home empty. Why call me Naomi when the LORD has caused me to suffer and the Almighty has sent such tragedy upon me?”</p>
+        <p class="ref">Ruth 1:21 (NLT)</p>
+      </a>
+      <a class="card" href="fight-on-your-knees.html" data-find="fight on your knees hannah, taunted year after year 1 samuel 1 1 samuel 1:10 (nlt) “hannah was in deep anguish, crying bitterly as she prayed to the lord.”">
+        <span class="passage">1 Samuel 1</span>
+        <h3>Fight on Your Knees</h3>
+        <p class="subject">Hannah, taunted year after year</p>
+        <p class="verse">“Hannah was in deep anguish, crying bitterly as she prayed to the LORD.”</p>
+        <p class="ref">1 Samuel 1:10 (NLT)</p>
+      </a>
+      <a class="card" href="anointed-but-not-yet-appointed.html" data-find="anointed, but not yet appointed david, the oil and the long wait 1 samuel 16 1 samuel 16:13 (nlt) “so as david stood there among his brothers, samuel took the flask of olive oil he had brought and anointed david with the oil. and the spirit of the lord came powerfully upon david from that day on.”">
+        <span class="passage">1 Samuel 16</span>
+        <h3>Anointed, But Not Yet Appointed</h3>
+        <p class="subject">David, the oil and the long wait</p>
+        <p class="verse">“So as David stood there among his brothers, Samuel took the flask of olive oil he had brought and anointed David with the oil. And the Spirit of the LORD came powerfully upon David from that day on.”</p>
+        <p class="ref">1 Samuel 16:13 (NLT)</p>
+      </a>
+      <a class="card" href="when-god-sends-a-peacemaker.html" data-find="when god sends a peacemaker abigail rides out to meet david 1 samuel 25 1 samuel 25:32 (nlt, excerpt) “praise the lord, the god of israel, who has sent you to meet me today!”">
+        <span class="passage">1 Samuel 25</span>
+        <h3>When God Sends a Peacemaker</h3>
+        <p class="subject">Abigail rides out to meet David</p>
+        <p class="verse">“Praise the Lord, the God of Israel, who has sent you to meet me today!”</p>
+        <p class="ref">1 Samuel 25:32 (NLT, excerpt)</p>
+      </a>
+      <a class="card" href="an-understanding-heart.html" data-find="an understanding heart solomon asks, and two mothers come 1 kings 3 1 kings 3:9 (nlt, excerpt) “give me an understanding heart so that i can govern your people well and know the difference between right and wrong.”">
+        <span class="passage">1 Kings 3</span>
+        <h3>An Understanding Heart</h3>
+        <p class="subject">Solomon asks, and two mothers come</p>
+        <p class="verse">“Give me an understanding heart so that I can govern your people well and know the difference between right and wrong.”</p>
+        <p class="ref">1 Kings 3:9 (NLT, excerpt)</p>
+      </a>
+      <a class="card" href="when-another-voice-contradicts-god.html" data-find="when another voice contradicts god the man of god from judah 1 kings 13 1 kings 13:8–9 (nlt) “but the man of god said to the king, ‘even if you gave me half of everything you own, i would not go with you. i would not eat or drink anything in this place. for the lord gave me this command: you must not eat or drink anything while you are there, and do not return to judah by the same way you came.’”">
+        <span class="passage">1 Kings 13</span>
+        <h3>When Another Voice Contradicts God</h3>
+        <p class="subject">The man of God from Judah</p>
+        <p class="verse">“But the man of God said to the king, ‘Even if you gave me half of everything you own, I would not go with you. I would not eat or drink anything in this place. For the Lord gave me this command: You must not eat or drink anything while you are there, and do not return to Judah by the same way you came.’”</p>
+        <p class="ref">1 Kings 13:8–9 (NLT)</p>
+      </a>
+      <a class="card" href="when-enough-is-not-enough.html" data-find="when enough is not enough ahab, naboth and one vineyard 1 kings 21 1 kings 21:4 (nlt) “so ahab went home angry and sullen because of naboth’s answer. the king went to bed with his face to the wall and refused to eat!”">
+        <span class="passage">1 Kings 21</span>
+        <h3>When Enough Is Not Enough</h3>
+        <p class="subject">Ahab, Naboth and one vineyard</p>
+        <p class="verse">“So Ahab went home angry and sullen because of Naboth’s answer. The king went to bed with his face to the wall and refused to eat!”</p>
+        <p class="ref">1 Kings 21:4 (NLT)</p>
+      </a>
+      <a class="card" href="god-sees-your-generosity.html" data-find="god sees your generosity the shunammite builds a room 2 kings 4 2 kings 4:13 (nlt) “we appreciate the kind concern you have shown us. what can we do for you?”">
+        <span class="passage">2 Kings 4</span>
+        <h3>God Sees Your Generosity</h3>
+        <p class="subject">The Shunammite builds a room</p>
+        <p class="verse">“We appreciate the kind concern you have shown us. What can we do for you?”</p>
+        <p class="ref">2 Kings 4:13 (NLT)</p>
+      </a>
+      <a class="card" href="when-pride-bows-to-the-word-of-god.html" data-find="when pride bows to the word of god naaman at the jordan 2 kings 5 2 kings 5:13–14 (nlt) “sir, if the prophet had told you to do something very difficult … so naaman went down … and dipped himself seven times …”">
+        <span class="passage">2 Kings 5</span>
+        <h3>When Pride Bows to the Word of God</h3>
+        <p class="subject">Naaman at the Jordan</p>
+        <p class="verse">“Sir, if the prophet had told you to do something very difficult … So Naaman went down … and dipped himself seven times …”</p>
+        <p class="ref">2 Kings 5:13–14 (NLT)</p>
+      </a>
+      <a class="card" href="theres-more-with-you-than-against-you.html" data-find="there’s more with you than against you elisha&#x27;s servant at dothan 2 kings 6 2 kings 6:16 (nlt) “don’t be afraid!” elisha told him. “for there are more on our side than on theirs!”">
+        <span class="passage">2 Kings 6</span>
+        <h3>There’s More With You Than Against You</h3>
+        <p class="subject">Elisha&#x27;s servant at Dothan</p>
+        <p class="verse">“Don’t be afraid!” Elisha told him. “For there are more on our side than on theirs!”</p>
+        <p class="ref">2 Kings 6:16 (NLT)</p>
+      </a>
+      <a class="card" href="when-hezekiah-turned-his-face-to-the-wall.html" data-find="when hezekiah turned his face to the wall a king told he would die 2 kings 20 2 kings 20:2 (nlt) “when hezekiah heard this, he turned his face to the wall and prayed to the lord.”">
+        <span class="passage">2 Kings 20</span>
+        <h3>When Hezekiah Turned His Face to the Wall</h3>
+        <p class="subject">A king told he would die</p>
+        <p class="verse">“When Hezekiah heard this, he turned his face to the wall and prayed to the Lord.”</p>
+        <p class="ref">2 Kings 20:2 (NLT)</p>
+      </a>
+      <a class="card" href="can-these-bones-live.html" data-find="can these bones live? the valley of dry bones ezekiel 37 ezekiel 37:3 (nlt) “son of man, can these bones become living people again?” “o sovereign lord,” i replied, “you alone know the answer to that.”">
+        <span class="passage">Ezekiel 37</span>
+        <h3>Can These Bones Live?</h3>
+        <p class="subject">The valley of dry bones</p>
+        <p class="verse">“Son of man, can these bones become living people again?” “O Sovereign Lord,” I replied, “you alone know the answer to that.”</p>
+        <p class="ref">Ezekiel 37:3 (NLT)</p>
+      </a>
+      <a class="card" href="faith-that-will-not-bow.html" data-find="faith that will not bow three men and the blazing furnace daniel 3 daniel 3:17–18 (nlt) “if we are thrown into the blazing furnace, the god whom we serve is able to save us. he will rescue us from your power, your majesty. but even if he doesn’t, we want to make it clear to you, your majesty, that we will never serve your gods or worship the gold statue you have set up.”">
+        <span class="passage">Daniel 3</span>
+        <h3>Faith That Will Not Bow</h3>
+        <p class="subject">Three men and the blazing furnace</p>
+        <p class="verse">“If we are thrown into the blazing furnace, the God whom we serve is able to save us. He will rescue us from your power, Your Majesty. But even if he doesn’t, we want to make it clear to you, Your Majesty, that we will never serve your gods or worship the gold statue you have set up.”</p>
+        <p class="ref">Daniel 3:17–18 (NLT)</p>
+      </a>
+      <a class="card" href="daniel-prayed-anyway.html" data-find="daniel prayed anyway a decree against prayer daniel 6 daniel 6:10 (nlt) “but when daniel learned that the law had been signed, he went home and knelt down as usual in his upstairs room, with its windows open toward jerusalem. he prayed three times a day, just as he had always done, giving thanks to his god.”">
+        <span class="passage">Daniel 6</span>
+        <h3>Daniel Prayed Anyway</h3>
+        <p class="subject">A decree against prayer</p>
+        <p class="verse">“But when Daniel learned that the law had been signed, he went home and knelt down as usual in his upstairs room, with its windows open toward Jerusalem. He prayed three times a day, just as he had always done, giving thanks to his God.”</p>
+        <p class="ref">Daniel 6:10 (NLT)</p>
+      </a>
+      </div>
+    </section>
+
+    <section class="group">
+      <h2>The New Testament</h2>
+      <p class="note">From a roof opened in Capernaum to a search of the Scriptures in Berea.</p>
+      <div class="grid">
+      <a class="card" href="when-jesus-saw-their-faith.html" data-find="when jesus saw their faith four friends open a roof mark 2 mark 2:5 (nlt) “seeing their faith, jesus said to the paralyzed man, ‘my child, your sins are forgiven.’”">
+        <span class="passage">Mark 2</span>
+        <h3>When Jesus Saw Their Faith</h3>
+        <p class="subject">Four friends open a roof</p>
+        <p class="verse">“Seeing their faith, Jesus said to the paralyzed man, ‘My child, your sins are forgiven.’”</p>
+        <p class="ref">Mark 2:5 (NLT)</p>
+      </a>
+      <a class="card" href="when-peter-denied-jesus.html" data-find="when peter denied jesus the promise, the fire and the look luke 22 luke 22:32 (nlt, excerpt) “but i have pleaded in prayer for you, simon, that your faith should not fail.”">
+        <span class="passage">Luke 22</span>
+        <h3>When Peter Denied Jesus</h3>
+        <p class="subject">The promise, the fire and the look</p>
+        <p class="verse">“But I have pleaded in prayer for you, Simon, that your faith should not fail.”</p>
+        <p class="ref">Luke 22:32 (NLT, excerpt)</p>
+      </a>
+      <a class="card" href="remember-me.html" data-find="remember me the dying man who saw a king luke 23 luke 23:42 (nlt) “jesus, remember me when you come into your kingdom.”">
+        <span class="passage">Luke 23</span>
+        <h3>Remember Me</h3>
+        <p class="subject">The dying man who saw a King</p>
+        <p class="verse">“Jesus, remember me when you come into your Kingdom.”</p>
+        <p class="ref">Luke 23:42 (NLT)</p>
+      </a>
+      <a class="card" href="when-jesus-walks-with-us-unrecognized.html" data-find="when jesus walks with us unrecognized the road to emmaus luke 24 luke 24:15–16 (nlt) “as they talked and discussed these things, jesus himself suddenly came and began walking with them. but god kept them from recognizing him.”">
+        <span class="passage">Luke 24</span>
+        <h3>When Jesus Walks With Us Unrecognized</h3>
+        <p class="subject">The road to Emmaus</p>
+        <p class="verse">“As they talked and discussed these things, Jesus himself suddenly came and began walking with them. But God kept them from recognizing him.”</p>
+        <p class="ref">Luke 24:15–16 (NLT)</p>
+      </a>
+      <a class="card" href="i-have-no-one.html" data-find="i have no one thirty-eight years at bethesda john 5 john 5:6 (nlt) “when jesus saw him and knew he had been ill for a long time, he asked him, ‘would you like to get well?’”">
+        <span class="passage">John 5</span>
+        <h3>I Have No One</h3>
+        <p class="subject">Thirty-eight years at Bethesda</p>
+        <p class="verse">“When Jesus saw him and knew he had been ill for a long time, he asked him, ‘Would you like to get well?’”</p>
+        <p class="ref">John 5:6 (NLT)</p>
+      </a>
+      <a class="card" href="when-thomas-doubted.html" data-find="when thomas doubted proof on his own terms john 20 john 20:29 (nlt, excerpt) “blessed are those who believe without seeing me.”">
+        <span class="passage">John 20</span>
+        <h3>When Thomas Doubted</h3>
+        <p class="subject">Proof on his own terms</p>
+        <p class="verse">“Blessed are those who believe without seeing me.”</p>
+        <p class="ref">John 20:29 (NLT, excerpt)</p>
+      </a>
+      <a class="card" href="a-life-that-left-evidence.html" data-find="a life that left evidence dorcas, and the coats she had made acts 9 acts 9:36 (nlt) “there was a believer in joppa named tabitha (which in greek is dorcas). she was always doing kind things for others and helping the poor.”">
+        <span class="passage">Acts 9</span>
+        <h3>A Life That Left Evidence</h3>
+        <p class="subject">Dorcas, and the coats she had made</p>
+        <p class="verse">“There was a believer in Joppa named Tabitha (which in Greek is Dorcas). She was always doing kind things for others and helping the poor.”</p>
+        <p class="ref">Acts 9:36 (NLT)</p>
+      </a>
+      <a class="card" href="praise-in-the-midnight.html" data-find="praise in the midnight paul and silas sing in the stocks acts 16 acts 16:25 (nlt) “around midnight paul and silas were praying and singing hymns to god, and the other prisoners were listening.”">
+        <span class="passage">Acts 16</span>
+        <h3>Praise in the Midnight</h3>
+        <p class="subject">Paul and Silas sing in the stocks</p>
+        <p class="verse">“Around midnight Paul and Silas were praying and singing hymns to God, and the other prisoners were listening.”</p>
+        <p class="ref">Acts 16:25 (NLT)</p>
+      </a>
+      <a class="card" href="search-the-scriptures.html" data-find="search the scriptures the bereans search day after day acts 17 acts 17:11 (nlt) “and the people of berea were more open-minded than those in thessalonica, and they listened eagerly to paul’s message. they searched the scriptures day after day to see if paul and silas were teaching the truth.”">
+        <span class="passage">Acts 17</span>
+        <h3>Search the Scriptures</h3>
+        <p class="subject">The Bereans search day after day</p>
+        <p class="verse">“And the people of Berea were more open-minded than those in Thessalonica, and they listened eagerly to Paul’s message. They searched the Scriptures day after day to see if Paul and Silas were teaching the truth.”</p>
+        <p class="ref">Acts 17:11 (NLT)</p>
+      </a>
+      </div>
+    </section>
+
+  <p class="empty" id="empty">No devotion matches that. Try a name, a book of the Bible, or a word from the title.</p>
+
+  <div class="colophon">
+    Prepared by Dr.&nbsp;Davies Rene Segera.<br>
+    Free to read, and free to share with anyone.
+  </div>
+  <div class="sdg">Soli Deo Gloria</div>
+</main>
+
+<script>
+(function () {
+  var q = document.getElementById('q');
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var groups = Array.prototype.slice.call(document.querySelectorAll('.group'));
+  var empty = document.getElementById('empty');
+  var count = document.getElementById('count');
+  var words = ['Zero','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten',
+    'Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen','Twenty',
+    'Twenty-one','Twenty-two','Twenty-three','Twenty-four','Twenty-five','Twenty-six','Twenty-seven',
+    'Twenty-eight','Twenty-nine','Thirty','Thirty-one'];
+
+  function label(n) {
+    var w = words[n] || String(n);
+    return w + (n === 1 ? ' devotion' : ' devotions');
+  }
+
+  function run() {
+    var term = q.value.trim().toLowerCase();
+    var shown = 0;
+    cards.forEach(function (c) {
+      var hit = !term || c.getAttribute('data-find').indexOf(term) !== -1;
+      c.hidden = !hit;
+      if (hit) shown++;
+    });
+    groups.forEach(function (g) {
+      g.hidden = !g.querySelector('.card:not([hidden])');
+    });
+    empty.style.display = shown ? 'none' : 'block';
+    count.textContent = label(shown);
+  }
+
+  q.addEventListener('input', run);
+  run();
+})();
+</script>
+</body>
+</html>

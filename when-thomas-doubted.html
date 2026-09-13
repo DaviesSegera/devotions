@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>When Thomas Doubted &mdash; Today's Devotion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f3ead4;
+    --parchment-deep:#eadfc2;
+    --ink:#3b2d18;
+    --ink-soft:#5a4629;
+    --gold:#a67c1e;
+    --gold-bright:#c9a227;
+    --gold-pale:#e3cf95;
+    --wine:#7a3b2e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    color:var(--ink);
+    font-family:'Lora',serif;
+    line-height:1.85;
+    padding:34px 14px 60px;
+    position:relative;
+  }
+  /* aged-paper grain */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
+    z-index:2;
+  }
+  .page{
+    max-width:760px;
+    margin:0 auto;
+    background:rgba(255,252,240,.55);
+    border:1.5px solid var(--gold);
+    outline:1px solid var(--gold-pale);
+    outline-offset:6px;
+    padding:64px 52px 56px;
+    position:relative;
+    box-shadow:0 18px 50px rgba(90,70,30,.18);
+  }
+  @media(max-width:620px){.page{padding:52px 24px 44px;}}
+  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
+  .corner.tl{top:10px;left:10px;}
+  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
+  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
+  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+  .eyebrow{
+    font-family:'Cinzel',serif;
+    font-size:.82rem;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:clamp(2.1rem,5.4vw,3rem);
+    text-align:center;
+    color:var(--ink);
+    letter-spacing:.01em;
+    margin-bottom:26px;
+  }
+  /* Ellen G. White — companion ink */
+  .egw{color:var(--wine);}
+  .egw-ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.08em;
+    font-size:.88em;
+    color:var(--wine);
+  }
+  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .divider{
+    display:flex;align-items:center;justify-content:center;
+    gap:14px;margin:30px 0;color:var(--gold);
+  }
+  .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+  .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
+  .divider svg{flex-shrink:0;}
+  .verse-card{
+    border:1px solid var(--gold-pale);
+    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
+    padding:30px 34px 26px;
+    text-align:center;
+    margin:0 auto 8px;
+    position:relative;
+  }
+  .verse-card .label{
+    font-family:'Cinzel',serif;
+    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .verse-card .scripture{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.42rem;
+    line-height:1.65;
+    color:var(--ink-soft);
+  }
+  .verse-card .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.14em;
+    font-size:.95rem;
+    color:var(--gold);
+    margin-top:14px;
+  }
+  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
+  .body-text p:first-of-type::first-letter{
+    font-family:'Playfair Display',serif;
+    font-size:3.9em;
+    float:left;
+    line-height:.82;
+    padding:6px 12px 0 0;
+    color:var(--gold);
+  }
+  .body-text strong{color:#7c5a12;font-weight:600;}
+  .scrip{font-style:italic;color:var(--ink-soft);}
+  .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.1em;
+    font-size:.92em;
+    color:var(--gold);
+    white-space:nowrap;
+  }
+  h2.takeaways{
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.35rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    text-align:center;
+    color:var(--ink);
+    margin-bottom:26px;
+  }
+  ol.takeaway-list{list-style:none;counter-reset:tk;}
+  ol.takeaway-list li{
+    counter-increment:tk;
+    position:relative;
+    padding-left:62px;
+    margin-bottom:20px;
+    font-size:1.03rem;
+  }
+  ol.takeaway-list li::before{
+    content:counter(tk);
+    position:absolute;left:0;top:2px;
+    width:42px;height:42px;
+    border-radius:50%;
+    border:1.5px solid var(--gold);
+    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
+    color:#7c5a12;
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.05rem;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+  }
+  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  .sources{
+    margin-top:34px;
+    font-size:.9rem;
+    line-height:1.7;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+  .sources .label{
+    font-family:'Cinzel',serif;
+    font-size:.68rem;letter-spacing:.36em;text-transform:uppercase;
+    color:var(--gold);display:block;margin-bottom:4px;
+  }
+  .sdg{
+    font-family:'Pinyon Script',cursive;
+    font-size:2.5rem;
+    color:var(--gold);
+    text-align:center;
+    margin-top:40px;
+  }
+</style>
+</head>
+<body>
+<style>
+  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
+  .allnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
+    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
+    padding-bottom:2px;
+  }
+  .allnav a:hover{border-bottom-color:#a67c1e;}
+</style>
+<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+
+<article class="page">
+  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+
+                                <div class="eyebrow">Today's Devotion</div>
+  <h1>When Thomas Doubted</h1>
+
+  <section class="verse-card">
+    <div class="label">Key Verse</div>
+    <div class="scripture">“Blessed are those who believe without seeing me.”</div>
+    <div class="ref">John 20:29 (NLT, excerpt)</div>
+    <div class="scripture" style="margin-top:18px;">“My Lord and my God!”</div>
+    <div class="ref">John 20:28 (NLT)</div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <div class="body-text">
+    <p>Thomas heard that Jesus was alive, but he wanted proof on his own terms. On the evening of the resurrection the disciples were meeting behind locked doors. <span class="scrip">“Suddenly, Jesus was standing there among them! ‘Peace be with you,’ he said. As he spoke, he showed them the wounds in his hands and his side.”</span> <span class="ref">John 20:19–20 (NLT)</span> But John records: <span class="scrip">“One of the twelve disciples, Thomas (nicknamed the Twin), was not with the others when Jesus came.”</span> <span class="ref">John 20:24 (NLT)</span> John tells us that he was absent; he does not tell us why. When his friends said, <span class="scrip">“We have seen the Lord!”</span> Thomas replied, <span class="scrip">“I won’t believe it unless I see the nail wounds in his hands, put my fingers into them, and place my hand into the wound in his side.”</span> <span class="ref">John 20:25 (NLT)</span> This was the disciple who had once said, <span class="scrip">“Let’s go, too—and die with Jesus.”</span> <span class="ref">John 11:16 (NLT)</span> Asking for understanding is one thing; announcing the conditions on which you will believe is another. Ellen G. White helps us see what was happening in him: <span class="egw" data-wa="block">“He would not see through the eyes of his brethren, or exercise faith which was dependent upon their testimony. He ardently loved his Lord, but he had allowed jealousy and unbelief to take possession of his mind and heart.”</span> <span class="egw-ref">The Desire of Ages, p. 807 · DA 807.1</span> <strong>Thomas loved Jesus, but he had made his own test the measure of whether Christ could be trusted.</strong></p>
+
+    <p>Now notice what Jesus did not do. He did not leave Thomas identified only by his unbelief. <span class="scrip">“Eight days later the disciples were together again, and this time Thomas was with them. The doors were locked; but suddenly, as before, Jesus was standing among them. ‘Peace be with you,’ he said.”</span> <span class="ref">John 20:26 (NLT)</span> The first word the doubting disciple heard from the risen Christ was peace. Then Jesus turned to him personally: <span class="scrip">“Put your finger here, and look at my hands. Put your hand into the wound in my side. Don’t be faithless any longer. Believe!”</span> <span class="ref">John 20:27 (NLT)</span> Jesus answered the very conditions Thomas had set—and He did not stop there. He called him to believe. Ellen G. White writes: <span class="egw">“These words showed that He was acquainted with the thoughts and words of Thomas. The doubting disciple knew that none of his companions had seen Jesus for a week. They could not have told the Master of his unbelief.”</span> <span class="egw-ref">The Desire of Ages, p. 807 · DA 807.3</span> Christ knew Thomas’s words before Thomas had said one word to Him. Patient care and truthful correction stood together in a single sentence: an open invitation, and a clear call beyond unbelief. <strong>Jesus met Thomas with peace and personal attention—and still called him to believe.</strong></p>
+
+    <p>Between the invitation and the confession John records only this: <span class="scrip">“‘My Lord and my God!’ Thomas exclaimed.”</span> <span class="ref">John 20:28 (NLT)</span> Thomas did not say it about Jesus; he said it to Him. This is not a man who simply felt better. It is a disciple acknowledging who the risen Jesus is and giving himself to Him personally—my Lord, my God. Ellen G. White describes the moment: <span class="egw" data-wa="block">“He recognized the One before him as his Lord. He had no desire for further proof. His heart leaped for joy, and he cast himself at the feet of Jesus crying, ‘My Lord and my God.’”</span> <span class="egw-ref">The Desire of Ages, p. 807 · DA 807.3</span> The wounds Thomas had demanded to see were the marks of the cross. The Saviour he had doubted was the Saviour who had died for him and risen. <strong>Thomas did not merely feel better; he acknowledged the crucified and risen Jesus as his Lord and his God.</strong></p>
+
+    <p>Then Jesus looked past that room. <span class="scrip">“You believe because you have seen me. Blessed are those who believe without seeing me.”</span> <span class="ref">John 20:29 (NLT)</span> And John explains at once why he wrote: <span class="scrip">“these are written so that you may continue to believe that Jesus is the Messiah, the Son of God, and that by believing in him you will have life by the power of his name.”</span> <span class="ref">John 20:31 (NLT)</span> We have not seen the risen Jesus as Thomas did, but we have not been left without His witness. Peter, who had seen Him, wrote to believers who never had: <span class="scrip">“You love him even though you have never seen him. Though you do not see him now, you trust him.”</span> <span class="ref">1 Peter 1:8 (NLT)</span> Faith without sight is not faith without testimony; it is trust in the Jesus whom Scripture presents. Ellen G. White says: <span class="egw">“Should the world now follow the example of Thomas, no one would believe unto salvation; for all who receive Christ must do so through the testimony of others.”</span> <span class="egw-ref">The Desire of Ages, p. 807 · DA 807.4</span> And she draws the lesson for the church: <span class="egw" data-wa="block">“Jesus did not overwhelm Thomas with reproach, nor did He enter into controversy with him. He revealed Himself to the doubting one.”</span> <span class="egw-ref">The Desire of Ages, p. 808 · DA 808.1</span> Jude says the same in one line: <span class="scrip">“And you must show mercy to those whose faith is wavering.”</span> <span class="ref">Jude 22 (NLT)</span> So am I willing to trust the risen Christ beyond the conditions I have set for Him? Honest questions are not the problem; a private test that God has never promised to pass is. Bring your questions to Jesus. Read John 20 again and notice what is actually reported. And when someone near you is struggling to believe, remember how Christ dealt with Thomas—with peace, personal attention, and a call to faith, not ridicule. He is the same crucified and risen Lord today. <strong>Jesus met Thomas in his doubt, but called him beyond it—receive the witness of His Word, trust the risen Saviour, and treat struggling faith the way He did.</strong></p>
+
+  </div>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <h2 class="takeaways">Key Takeaways</h2>
+  <ol class="takeaway-list">
+    <li><strong>Thomas loved Jesus, but he had made his own test the measure of whether Christ could be trusted.</strong> <span class="scrip">“I won’t believe it unless I see the nail wounds in his hands, put my fingers into them, and place my hand into the wound in his side.”</span> <span class="ref">John 20:25 (NLT)</span> Ellen White tells us he <span class="egw">“had allowed jealousy and unbelief to take possession of his mind and heart”</span> <span class="egw-ref">The Desire of Ages, p. 807 · DA 807.1</span>—asking for understanding is one thing; dictating the conditions of faith is another.</li>
+    <li><strong>Jesus met Thomas with peace and personal attention—and still called him to believe.</strong> <span class="scrip">“Put your finger here, and look at my hands. Put your hand into the wound in my side. Don’t be faithless any longer. Believe!”</span> <span class="ref">John 20:27 (NLT)</span> Ellen White writes that these words <span class="egw">“showed that He was acquainted with the thoughts and words of Thomas”</span> <span class="egw-ref">The Desire of Ages, p. 807 · DA 807.3</span>—patient care and truthful correction in one sentence.</li>
+    <li><strong>Thomas did not merely feel better; he acknowledged the crucified and risen Jesus as his Lord and his God.</strong> <span class="scrip">“‘My Lord and my God!’ Thomas exclaimed.”</span> <span class="ref">John 20:28 (NLT)</span> Ellen White says, <span class="egw">“He had no desire for further proof”</span> <span class="egw-ref">The Desire of Ages, p. 807 · DA 807.3</span>. The wounds he demanded to see were the marks of the cross.</li>
+    <li><strong>Jesus met Thomas in his doubt, but called him beyond it—receive the witness of His Word, trust the risen Saviour, and treat struggling faith the way He did.</strong> <span class="scrip">“Blessed are those who believe without seeing me.”</span> <span class="ref">John 20:29 (NLT, excerpt)</span> Ellen White writes, <span class="egw">“Jesus did not overwhelm Thomas with reproach, nor did He enter into controversy with him”</span> <span class="egw-ref">The Desire of Ages, p. 808 · DA 808.1</span>; and Jude says, <span class="scrip">“show mercy to those whose faith is wavering”</span> <span class="ref">Jude 22 (NLT, excerpt)</span>—faith without sight is not faith without testimony.</li>
+  </ol>
+
+  <p class="sources"><span class="label">Sources and Further Reading</span>Scripture: John 20:24–29, with John 20:19–23 and 20:30–31; John 11:16; 1 Peter 1:8; Jude 22 (NLT). Ellen G. White: <em>The Desire of Ages</em>, chapter 84, “Peace Be Unto You,” pp. 802–808 (DA 807.1, 807.3, 807.4, 808.1). The same Thomas passages are gathered in <em>Conflict and Courage</em>, “Thomas the Doubter” (November 18, p. 328, drawn from <em>The Desire of Ages</em>, pp. 806–808, and <em>Early Writings</em>, p. 188). For counsel on doubt and evidence, see <em>Steps to Christ</em>, chapter 12, “What to Do with Doubt,” pp. 105–113.</p>
+
+  <div class="sdg">Soli Deo Gloria</div>
+</article>
+</body>
+</html>

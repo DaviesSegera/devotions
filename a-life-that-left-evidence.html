@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Life That Left Evidence &mdash; Today's Devotion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f3ead4;
+    --parchment-deep:#eadfc2;
+    --ink:#3b2d18;
+    --ink-soft:#5a4629;
+    --gold:#a67c1e;
+    --gold-bright:#c9a227;
+    --gold-pale:#e3cf95;
+    --wine:#7a3b2e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    color:var(--ink);
+    font-family:'Lora',serif;
+    line-height:1.85;
+    padding:34px 14px 60px;
+    position:relative;
+  }
+  /* aged-paper grain */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
+    z-index:2;
+  }
+  .page{
+    max-width:760px;
+    margin:0 auto;
+    background:rgba(255,252,240,.55);
+    border:1.5px solid var(--gold);
+    outline:1px solid var(--gold-pale);
+    outline-offset:6px;
+    padding:64px 52px 56px;
+    position:relative;
+    box-shadow:0 18px 50px rgba(90,70,30,.18);
+  }
+  @media(max-width:620px){.page{padding:52px 24px 44px;}}
+  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
+  .corner.tl{top:10px;left:10px;}
+  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
+  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
+  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+  .eyebrow{
+    font-family:'Cinzel',serif;
+    font-size:.82rem;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:clamp(2.1rem,5.4vw,3rem);
+    text-align:center;
+    color:var(--ink);
+    letter-spacing:.01em;
+    margin-bottom:26px;
+  }
+  .divider{
+    display:flex;align-items:center;justify-content:center;
+    gap:14px;margin:30px 0;color:var(--gold);
+  }
+  .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+  .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
+  .divider svg{flex-shrink:0;}
+  .verse-card{
+    border:1px solid var(--gold-pale);
+    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
+    padding:30px 34px 26px;
+    text-align:center;
+    margin:0 auto 8px;
+    position:relative;
+  }
+  .verse-card .label{
+    font-family:'Cinzel',serif;
+    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .verse-card .scripture{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.42rem;
+    line-height:1.65;
+    color:var(--ink-soft);
+  }
+  .verse-card .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.14em;
+    font-size:.95rem;
+    color:var(--gold);
+    margin-top:14px;
+  }
+  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
+  .body-text p:first-of-type::first-letter{
+    font-family:'Playfair Display',serif;
+    font-size:3.9em;
+    float:left;
+    line-height:.82;
+    padding:6px 12px 0 0;
+    color:var(--gold);
+  }
+  .body-text strong{color:#7c5a12;font-weight:600;}
+  .scrip{font-style:italic;color:var(--ink-soft);}
+  .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.1em;
+    font-size:.92em;
+    color:var(--gold);
+    white-space:nowrap;
+  }
+  /* Ellen G. White — companion ink */
+  .egw{color:var(--wine);}
+  .egw-ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.08em;
+    font-size:.88em;
+    color:var(--wine);
+  }
+  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  h2.takeaways{
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.35rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    text-align:center;
+    color:var(--ink);
+    margin-bottom:26px;
+  }
+  ol.takeaway-list{list-style:none;counter-reset:tk;}
+  ol.takeaway-list li{
+    counter-increment:tk;
+    position:relative;
+    padding-left:62px;
+    margin-bottom:20px;
+    font-size:1.03rem;
+  }
+  ol.takeaway-list li::before{
+    content:counter(tk);
+    position:absolute;left:0;top:2px;
+    width:42px;height:42px;
+    border-radius:50%;
+    border:1.5px solid var(--gold);
+    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
+    color:#7c5a12;
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.05rem;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+  }
+  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  .sources{
+    margin-top:34px;
+    font-size:.9rem;
+    line-height:1.7;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+  .sources .label{
+    font-family:'Cinzel',serif;
+    font-size:.68rem;letter-spacing:.36em;text-transform:uppercase;
+    color:var(--gold);display:block;margin-bottom:4px;
+  }
+  .sdg{
+    font-family:'Pinyon Script',cursive;
+    font-size:2.5rem;
+    color:var(--gold);
+    text-align:center;
+    margin-top:40px;
+  }
+</style>
+</head>
+<body>
+<style>
+  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
+  .allnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
+    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
+    padding-bottom:2px;
+  }
+  .allnav a:hover{border-bottom-color:#a67c1e;}
+</style>
+<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+
+<article class="page">
+  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+
+    <div class="eyebrow">Today's Devotion</div>
+  <h1>A Life That Left Evidence</h1>
+
+  <section class="verse-card">
+    <div class="label">Key Verse</div>
+    <div class="scripture">“There was a believer in Joppa named Tabitha (which in Greek is Dorcas). She was always doing kind things for others and helping the poor.”</div>
+    <div class="ref">Acts 9:36 (NLT)</div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <div class="body-text">
+    <p>Before Acts tells us how Dorcas died, it tells us how she lived. <span class="scrip">“There was a believer in Joppa named Tabitha (which in Greek is Dorcas). She was always doing kind things for others and helping the poor.”</span> <span class="ref">Acts 9:36 (NLT)</span> Luke introduces her by her discipleship and by what it produced. While Peter was ministering at nearby Lydda, a believer in the port town of Joppa was quietly doing good, and her faith was not only something she held; it was something the poor of Joppa could feel. Ellen G. White draws attention to the same Christlike pattern: <span class="egw">“She was a worthy disciple of Jesus, and her life was filled with acts of kindness. She knew who needed comfortable clothing and who needed sympathy, and she freely ministered to the poor and the sorrowful. Her skillful fingers were more active than her tongue”</span> <span class="egw-ref">The Acts of the Apostles, p. 131 &middot; AA 131.2</span>. Notice the two needs she noticed—clothing and sympathy. Dorcas served bodies and hearts. <strong>Dorcas was a disciple before she was a miracle story.</strong></p>
+
+    <p>Then she became ill and died. The believers laid her in an upstairs room and sent two men to beg Peter, <span class="scrip">“Please come as soon as possible!”</span> <span class="ref">Acts 9:38 (NLT)</span> What Peter found when he arrived is the heart of this devotion. <span class="scrip">“The room was filled with widows who were weeping and showing him the coats and other clothes Dorcas had made for them.”</span> <span class="ref">Acts 9:39 (NLT)</span> The widows did not describe her faith; they showed him what her love had done. They were holding visible evidence of a life that had served Christ by serving people—love that others could wear, receive and remember. Ellen White helps us see why the grief in that room ran so deep: <span class="egw">“In view of the life of service that Dorcas had lived, it is little wonder that they mourned”</span> <span class="egw-ref">The Acts of the Apostles, p. 131 &middot; AA 131.3</span>. The church felt her absence because it had already felt the blessing of her presence. <strong>Dorcas’s faith left evidence in other people’s lives.</strong></p>
+
+    <p>Peter did not act as though the power belonged to him. <span class="scrip">“But Peter asked them all to leave the room; then he knelt and prayed. Turning to the body he said, ‘Get up, Tabitha.’ And she opened her eyes! When she saw Peter, she sat up!”</span> <span class="ref">Acts 9:40 (NLT)</span> He knelt before he spoke. Ellen White describes the moment in the same order: <span class="egw">“he kneeled down and prayed fervently to God to restore Dorcas to life and health”</span> <span class="egw-ref">The Acts of the Apostles, p. 132 &middot; AA 132.1</span>. Peter served, but God supplied the power. Then Peter <span class="scrip">“presented her to them alive”</span> <span class="ref">Acts 9:41 (NLT)</span>—returned to the very widows and believers she had served—and <span class="scrip">“The news spread through the whole town, and many believed in the Lord.”</span> <span class="ref">Acts 9:42 (NLT)</span> Standing alongside Luke’s account, Ellen White points to the purpose of what God did: <span class="egw">“Dorcas had been of great service to the church, and God saw fit to bring her back from the land of the enemy, that her skill and energy might still be a blessing to others, and also that by this manifestation of His power the cause of Christ might be strengthened”</span> <span class="egw-ref">The Acts of the Apostles, p. 132 &middot; AA 132.1</span>. The miracle did not make Dorcas famous; it made the Lord known. Scripture does not promise that every faithful servant will be restored in this life, and Dorcas’s usefulness did not put God in her debt; her restoration was His gift, and the story ends not with a woman rising but with many believing in the Lord. <strong>Peter served, God supplied the power, and the glory went to the Lord.</strong></p>
+
+    <p>Dorcas did not need a platform to have a ministry. She used what God had placed in her hands to meet real needs. Jesus said, <span class="scrip">“Your love for one another will prove to the world that you are my disciples.”</span> <span class="ref">John 13:35 (NLT)</span> We are not saved by such works—Paul is clear that salvation <span class="scrip">“is not a reward for the good things we have done”</span> <span class="ref">Ephesians 2:9 (NLT)</span>—but the grace that saves us produces a faith that serves: <span class="scrip">“For we are God’s masterpiece. He has created us anew in Christ Jesus, so we can do the good things he planned for us long ago.”</span> <span class="ref">Ephesians 2:10 (NLT)</span> Not everyone can sew. Some can cook, visit, listen, teach, repair, drive someone to hospital, or turn a professional skill toward a person who cannot pay. The question is not whether we can do what Dorcas did but whether Christ’s love is becoming visible through what He has already placed in our hands. This is not a call to exhaustion or a scoreboard: Dorcas served because she followed Jesus, not to prove her worth, and the sick, the grieving and the overburdened are not being measured here—some of the most Christlike service in any church comes from people whose capacity is small. Ask the question pastorally, then: If I were absent from my church or community tomorrow, what evidence of Christ’s love through my life would people be able to point to? What need near me have I noticed but not yet acted upon? <strong>Use what God has placed in your hands to make Christ’s love visible.</strong></p>
+
+  </div>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <h2 class="takeaways">Key Takeaways</h2>
+  <ol class="takeaway-list">
+    <li><strong>A disciple known by her life of service.</strong> Dorcas <span class="scrip">“was always doing kind things for others and helping the poor.”</span> <span class="ref">Acts 9:36 (NLT)</span> Ellen White calls her <span class="egw">“a worthy disciple of Jesus”</span> whose <span class="egw">“life was filled with acts of kindness”</span> <span class="egw-ref">The Acts of the Apostles, p. 131 &middot; AA 131.2</span>.</li>
+    <li><strong>Her faith left visible evidence in the lives of others.</strong> The widows were <span class="scrip">“showing him the coats and other clothes Dorcas had made for them.”</span> <span class="ref">Acts 9:39 (NLT)</span> They did not need to explain her faith; they could show what her love had done.</li>
+    <li><strong>God restored a life that had been a blessing to His church.</strong> Peter <span class="scrip">“knelt and prayed”</span> <span class="ref">Acts 9:40 (NLT)</span> and <span class="scrip">“many believed in the Lord.”</span> <span class="ref">Acts 9:42 (NLT)</span> God restored her <span class="egw">“that her skill and energy might still be a blessing to others”</span> <span class="egw-ref">The Acts of the Apostles, p. 132 &middot; AA 132.1</span>. Peter served; God supplied the power.</li>
+    <li><strong>Christ calls us to use what He has placed in our hands.</strong> <span class="scrip">“Your love for one another will prove to the world that you are my disciples.”</span> <span class="ref">John 13:35 (NLT)</span> Saved by grace and created anew in Christ for good works, let Christ’s love become visible through the way you serve.</li>
+  </ol>
+
+  <p class="sources"><span class="label">Sources and Further Reading</span>Scripture: Acts 9:36–43 (context Acts 9:31–35); John 13:34–35; Ephesians 2:8–10 (NLT). Ellen G. White: <em>The Acts of the Apostles</em>, chapter 14, “A Seeker for Truth,” pp. 131–132 (AA 131.2–132.1); the same reflection on Dorcas appears earlier in <em>Testimonies for the Church</em>, vol. 5, p. 304.</p>
+
+  <div class="sdg">Soli Deo Gloria</div>
+</article>
+</body>
+</html>

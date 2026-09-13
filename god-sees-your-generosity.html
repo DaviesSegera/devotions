@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>God Sees Your Generosity &mdash; Today's Devotion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Lora:ital,wght@0,400;0,600;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f3ead4;
+    --parchment-deep:#eadfc2;
+    --ink:#3b2d18;
+    --ink-soft:#5a4629;
+    --gold:#a67c1e;
+    --gold-bright:#c9a227;
+    --gold-pale:#e3cf95;
+    --wine:#7a3b2e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    color:var(--ink);
+    font-family:'Lora',serif;
+    line-height:1.85;
+    padding:34px 14px 60px;
+    position:relative;
+  }
+  /* aged-paper grain */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
+    z-index:2;
+  }
+  .page{
+    max-width:760px;
+    margin:0 auto;
+    background:rgba(255,252,240,.55);
+    border:1.5px solid var(--gold);
+    outline:1px solid var(--gold-pale);
+    outline-offset:6px;
+    padding:64px 52px 56px;
+    position:relative;
+    box-shadow:0 18px 50px rgba(90,70,30,.18);
+  }
+  @media(max-width:620px){.page{padding:52px 24px 44px;}}
+  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
+  .corner.tl{top:10px;left:10px;}
+  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
+  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
+  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+  .eyebrow{
+    font-family:'Cinzel',serif;
+    font-size:.82rem;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:clamp(2.1rem,5.4vw,3rem);
+    text-align:center;
+    color:var(--ink);
+    letter-spacing:.01em;
+    margin-bottom:26px;
+  }
+  /* Ellen G. White — companion ink */
+  .egw{color:var(--wine);}
+  .egw-ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.08em;
+    font-size:.88em;
+    color:var(--wine);
+  }
+  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .divider{
+    display:flex;align-items:center;justify-content:center;
+    gap:14px;margin:30px 0;color:var(--gold);
+  }
+  .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+  .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
+  .divider svg{flex-shrink:0;}
+  .verse-card{
+    border:1px solid var(--gold-pale);
+    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
+    padding:30px 34px 26px;
+    text-align:center;
+    margin:0 auto 8px;
+    position:relative;
+  }
+  .verse-card .label{
+    font-family:'Cinzel',serif;
+    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .verse-card .scripture{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.42rem;
+    line-height:1.65;
+    color:var(--ink-soft);
+  }
+  .verse-card .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.14em;
+    font-size:.95rem;
+    color:var(--gold);
+    margin-top:14px;
+  }
+  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
+  .body-text p:first-of-type::first-letter{
+    font-family:'Playfair Display',serif;
+    font-size:3.9em;
+    float:left;
+    line-height:.82;
+    padding:6px 12px 0 0;
+    color:var(--gold);
+  }
+  .body-text strong{color:#7c5a12;font-weight:600;}
+  .scrip{font-style:italic;color:var(--ink-soft);}
+  .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.1em;
+    font-size:.92em;
+    color:var(--gold);
+    white-space:nowrap;
+  }
+  h2.takeaways{
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.35rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    text-align:center;
+    color:var(--ink);
+    margin-bottom:26px;
+  }
+  ol.takeaway-list{list-style:none;counter-reset:tk;}
+  ol.takeaway-list li{
+    counter-increment:tk;
+    position:relative;
+    padding-left:62px;
+    margin-bottom:20px;
+    font-size:1.03rem;
+  }
+  ol.takeaway-list li::before{
+    content:counter(tk);
+    position:absolute;left:0;top:2px;
+    width:42px;height:42px;
+    border-radius:50%;
+    border:1.5px solid var(--gold);
+    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
+    color:#7c5a12;
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.05rem;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+  }
+  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  .sdg{
+    font-family:'Pinyon Script',cursive;
+    font-size:2.5rem;
+    color:var(--gold);
+    text-align:center;
+    margin-top:40px;
+  }
+</style>
+</head>
+<body>
+<style>
+  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
+  .allnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
+    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
+    padding-bottom:2px;
+  }
+  .allnav a:hover{border-bottom-color:#a67c1e;}
+</style>
+<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+
+<article class="page">
+  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+
+  <div class="eyebrow">Today's Devotion</div>
+  <h1>God Sees Your Generosity</h1>
+
+  <section class="verse-card">
+    <div class="label">Key Verse</div>
+    <div class="scripture">“We appreciate the kind concern you have shown us. What can we do for you?”</div>
+    <div class="ref">2 Kings 4:13 (NLT)</div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <div class="body-text">
+    <p>It started with a meal. <span class="scrip">“One day Elisha went to the town of Shunem. A wealthy woman lived there, and she urged him to come to her home for a meal”</span> <span class="ref">2 Kings 4:8 (NLT)</span>. Shunem was a small farming town in the north of Israel. Elisha was a travelling prophet, walking from place to place, doing God’s work with no home of his own. This woman had money. She did not have to notice him. But she did. And look at the little word the Bible uses: she <em>urged</em> him. She did not offer politely and hope he would say no. She insisted. That is where the whole story begins &mdash; not with a miracle, but with somebody deciding that a tired stranger should eat.</p>
+
+    <p>Then she went further. <span class="scrip">“She said to her husband, ’I am sure this man who stops in from time to time is a holy man of God’”</span> <span class="ref">2 Kings 4:9 (NLT)</span>. So she made a plan: <span class="scrip">“Let’s build a small room for him on the roof and furnish it with a bed, a table, a chair, and a lamp. Then he will have a place to stay whenever he comes by”</span> <span class="ref">2 Kings 4:10 (NLT)</span>. Read that list slowly. A bed. A table. A chair. A lamp. Nothing expensive. Nothing showy. Just four ordinary things that turn a bare room into a place where a person can rest, eat, sit and read at night. She thought about what he actually needed. That is what real kindness looks like. It pays attention.</p>
+
+    <p>And notice something else. She built it for a man who could never pay her back. He had no house, no salary and no way to return the favour. She was not investing. She was giving. Then came the quiet years &mdash; the part of this story nobody would ever put in a film. <span class="scrip">“One day Elisha returned to Shunem, and he went up to this upper room to rest”</span> <span class="ref">2 Kings 4:11 (NLT)</span>. That is all. He came, he rested, he left. Again and again. No thank-you speech. No crowd. No sign that heaven had noticed anything at all. If you are being faithful in something small and nobody has mentioned it, you are standing exactly where she stood.</p>
+
+    <p>Then one day it changed. Elisha sent his servant to call her: <span class="scrip">“Tell her, ’We appreciate the kind concern you have shown us. What can we do for you?’”</span> <span class="ref">2 Kings 4:13 (NLT)</span>. He even offered to use his influence for her, with the king or the army commander. And here is the most surprising line in the whole story. She said no. <span class="scrip">“No,” she replied, “my family takes good care of me”</span> <span class="ref">2 Kings 4:13 (NLT)</span>. She was not fishing for anything. She had not built that room as a down payment on a future favour. She turned the offer down flat, and went back to her work. That refusal is what makes her generosity real. The moment kindness becomes an investment, it stops being kindness.</p>
+
+    <p>So Elisha asked his servant a second question, quietly: <span class="scrip">“What can we do for her?”</span> <span class="ref">2 Kings 4:14 (NLT)</span>. And Gehazi answered with the one thing she had never mentioned: <span class="scrip">“She doesn’t have a son, and her husband is an old man”</span> <span class="ref">2 Kings 4:14 (NLT)</span>. There it is. She had a home, land, money and a good marriage. She also had an empty place in her life, and she never once brought it up. Not when she cooked for him. Not when she built the room. Not even when she was directly asked what she wanted. But it was seen anyway. Ellen White puts it beautifully: <span class="egw">“Nor was God unmindful of the woman’s kindness. Her home had been childless; and now the Lord rewarded her hospitality by the gift of a son.”</span> God notices the thing you never say out loud.</p>
+
+    <p>Then came the promise, and her reaction is painfully honest. <span class="scrip">“Next year at this time you will be holding a son in your arms!”</span> <span class="ref">2 Kings 4:16 (NLT)</span>. She did not celebrate. She flinched. <span class="scrip">“No, my lord!” she cried. “O man of God, don’t deceive me and get my hopes up like that.”</span> <span class="ref">2 Kings 4:16 (NLT)</span>. Do you hear the years in that sentence? She had wanted this so long that hoping had become dangerous. She would rather not hope again than be disappointed again. If you know that feeling, you are in good company &mdash; and it did not disqualify her. God kept His word anyway: <span class="scrip">“But sure enough, the woman soon became pregnant. And at that time the following year she had a son, just as Elisha had said”</span> <span class="ref">2 Kings 4:17 (NLT)</span>.</p>
+
+    <p>Now, hold this carefully, because it can be twisted. This is not a deal. God is not a machine that pays out a child, a house or a job if you give enough. Be careful of anyone who teaches you that. Look at the rest of her story. That same boy later collapsed in the field and died. She had to go and find the prophet all over again. Even the gift did not buy her an easy life. So no, generosity is not a formula. But it is <strong>seen</strong>. That is the promise, and it is a different and better promise: <span class="scrip">“For God is not unjust. He will not forget how hard you have worked for him and how you have shown your love to him by caring for other believers, as you still do”</span> <span class="ref">Hebrews 6:10 (NLT)</span>. <strong>He will not forget.</strong> So keep cooking the meals. Keep making the room. Keep giving to people who cannot pay you back, and keep doing it when nobody says thank you. You may be years into the quiet part, like she was. But Heaven is not absent-minded. God sees your generosity &mdash; and He has not forgotten the thing you have never asked Him for.</p>
+  </div>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <h2 class="takeaways">Key Takeaways</h2>
+  <ol class="takeaway-list">
+    <li><strong>It began with a meal, not a miracle</strong> &mdash; she <em>urged</em> a tired stranger to eat, and the whole story grew out of that one decision.</li>
+    <li><strong>A bed, a table, a chair, a lamp</strong> &mdash; nothing expensive; she simply paid attention to what he actually needed.</li>
+    <li><strong>She gave to someone who could not repay her</strong> &mdash; no house, no salary, no way to return the favour; that is giving, not investing.</li>
+    <li><strong>The quiet years are part of the story</strong> &mdash; he came, rested and left, again and again, with no sign heaven had noticed anything.</li>
+    <li><strong>She turned the reward down</strong> &mdash; <em>my family takes good care of me</em>; the moment kindness becomes an investment, it stops being kindness.</li>
+    <li><strong>God noticed what she never said</strong> &mdash; she never once mentioned being childless, not even when asked directly what she wanted.</li>
+    <li><strong>Not a formula, but never forgotten</strong> &mdash; her son later died and had to be raised; generosity buys no easy life, yet <em>God is not unjust &mdash; He will not forget</em>.</li>
+  </ol>
+
+  <div class="sdg">Soli Deo Gloria</div>
+</article>
+</body>
+</html>

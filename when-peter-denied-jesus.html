@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>When Peter Denied Jesus &mdash; Today's Devotion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f3ead4;
+    --parchment-deep:#eadfc2;
+    --ink:#3b2d18;
+    --ink-soft:#5a4629;
+    --gold:#a67c1e;
+    --gold-bright:#c9a227;
+    --gold-pale:#e3cf95;
+    --wine:#7a3b2e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    color:var(--ink);
+    font-family:'Lora',serif;
+    line-height:1.85;
+    padding:34px 14px 60px;
+    position:relative;
+  }
+  /* aged-paper grain */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
+    z-index:2;
+  }
+  .page{
+    max-width:760px;
+    margin:0 auto;
+    background:rgba(255,252,240,.55);
+    border:1.5px solid var(--gold);
+    outline:1px solid var(--gold-pale);
+    outline-offset:6px;
+    padding:64px 52px 56px;
+    position:relative;
+    box-shadow:0 18px 50px rgba(90,70,30,.18);
+  }
+  @media(max-width:620px){.page{padding:52px 24px 44px;}}
+  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
+  .corner.tl{top:10px;left:10px;}
+  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
+  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
+  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+  .eyebrow{
+    font-family:'Cinzel',serif;
+    font-size:.82rem;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:clamp(2.1rem,5.4vw,3rem);
+    text-align:center;
+    color:var(--ink);
+    letter-spacing:.01em;
+    margin-bottom:26px;
+  }
+  /* Ellen G. White — companion ink */
+  .egw{color:var(--wine);}
+  .egw-ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.08em;
+    font-size:.88em;
+    color:var(--wine);
+  }
+  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .divider{
+    display:flex;align-items:center;justify-content:center;
+    gap:14px;margin:30px 0;color:var(--gold);
+  }
+  .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+  .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
+  .divider svg{flex-shrink:0;}
+  .verse-card{
+    border:1px solid var(--gold-pale);
+    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
+    padding:30px 34px 26px;
+    text-align:center;
+    margin:0 auto 8px;
+    position:relative;
+  }
+  .verse-card .label{
+    font-family:'Cinzel',serif;
+    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .verse-card .scripture{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.42rem;
+    line-height:1.65;
+    color:var(--ink-soft);
+  }
+  .verse-card .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.14em;
+    font-size:.95rem;
+    color:var(--gold);
+    margin-top:14px;
+  }
+  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
+  .body-text p:first-of-type::first-letter{
+    font-family:'Playfair Display',serif;
+    font-size:3.9em;
+    float:left;
+    line-height:.82;
+    padding:6px 12px 0 0;
+    color:var(--gold);
+  }
+  .body-text strong{color:#7c5a12;font-weight:600;}
+  .scrip{font-style:italic;color:var(--ink-soft);}
+  .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.1em;
+    font-size:.92em;
+    color:var(--gold);
+    white-space:nowrap;
+  }
+  h2.takeaways{
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.35rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    text-align:center;
+    color:var(--ink);
+    margin-bottom:26px;
+  }
+  ol.takeaway-list{list-style:none;counter-reset:tk;}
+  ol.takeaway-list li{
+    counter-increment:tk;
+    position:relative;
+    padding-left:62px;
+    margin-bottom:20px;
+    font-size:1.03rem;
+  }
+  ol.takeaway-list li::before{
+    content:counter(tk);
+    position:absolute;left:0;top:2px;
+    width:42px;height:42px;
+    border-radius:50%;
+    border:1.5px solid var(--gold);
+    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
+    color:#7c5a12;
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.05rem;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+  }
+  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  .sources{
+    margin-top:34px;
+    font-size:.9rem;
+    line-height:1.7;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+  .sources .label{
+    font-family:'Cinzel',serif;
+    font-size:.68rem;letter-spacing:.36em;text-transform:uppercase;
+    color:var(--gold);display:block;margin-bottom:4px;
+  }
+  .sdg{
+    font-family:'Pinyon Script',cursive;
+    font-size:2.5rem;
+    color:var(--gold);
+    text-align:center;
+    margin-top:40px;
+  }
+</style>
+</head>
+<body>
+<style>
+  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
+  .allnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
+    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
+    padding-bottom:2px;
+  }
+  .allnav a:hover{border-bottom-color:#a67c1e;}
+</style>
+<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+
+<article class="page">
+  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+
+                <div class="eyebrow">Today's Devotion</div>
+  <h1>When Peter Denied Jesus</h1>
+
+  <section class="verse-card">
+    <div class="label">Key Verse</div>
+    <div class="scripture">“But I have pleaded in prayer for you, Simon, that your faith should not fail.”</div>
+    <div class="ref">Luke 22:32 (NLT, excerpt)</div>
+    <div class="scripture" style="margin-top:18px;">“At that moment the Lord turned and looked at Peter.”</div>
+    <div class="ref">Luke 22:61 (NLT, excerpt)</div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <div class="body-text">
+    <p>Peter was certain he would never deny Jesus. Before the night was over, he had done it three times. On the evening Jesus was betrayed, Peter meant every word he said: <span class="scrip">“Lord, I am ready to go to prison with you, and even to die with you.”</span> <span class="ref">Luke 22:33 (NLT)</span> Peter loved Jesus. His problem was not that he cared too little; it was that he did not know his own weakness. Ellen G. White puts it plainly: <span class="egw" data-wa="block">“Peter did not know his own danger. Self-confidence misled him. He thought himself able to withstand temptation; but in a few short hours the test came, and with cursing and swearing he denied his Lord.”</span> <span class="egw-ref">Christ’s Object Lessons, p. 152 · COL 152.2</span> Sincerity is not the same as strength, and a sincere disciple can trust himself more than he realizes. <strong>Peter trusted his love for Jesus; he needed to learn to trust Jesus more than himself.</strong></p>
+
+    <p>Now notice what Jesus said before any of it happened. <span class="scrip">“Simon, Simon, Satan has asked to sift each of you like wheat. But I have pleaded in prayer for you, Simon, that your faith should not fail. So when you have repented and turned to me again, strengthen your brothers.”</span> <span class="ref">Luke 22:31–32 (NLT)</span> Jesus did not flatter Peter, and He did not minimize the danger: <span class="scrip">“Before the rooster crows tomorrow morning, you will deny three times that you even know me.”</span> <span class="ref">Luke 22:34 (NLT)</span> But in the same breath He spoke of a future on the other side of the failure—a repentant Peter, turned back to Christ, strengthening his brothers. The warning and the prayer belong together. In Gethsemane Jesus warned him once more, by name: <span class="scrip">“Keep watch and pray, so that you will not give in to temptation. For the spirit is willing, but the body is weak!”</span> <span class="ref">Matthew 26:41 (NLT)</span> Peter slept. Ellen G. White helps us see what that cost him: <span class="egw">“Had those hours in the garden been spent in watching and prayer, Peter would not have been left to depend upon his own feeble strength. He would not have denied his Lord.”</span> <span class="egw-ref">The Desire of Ages, p. 713 · DA 713.4</span> Christ’s prayer was never permission to be careless; it was the reason Peter had every hope of standing. <strong>Before Peter fell, Jesus was already praying for his faith and looking beyond the failure to restoration.</strong></p>
+
+    <p>Then the pressure came. Jesus was arrested and led to the high priest’s home. <span class="scrip">“And Peter followed at a distance.”</span> <span class="ref">Luke 22:54 (NLT)</span> A fire was lit in the courtyard, and Peter joined the company around it. There is nothing wrong with warming yourself at a fire; the trouble was what Peter was trying to hide. Ellen G. White tells us: <span class="egw">“In assuming an air of indifference he had placed himself on the enemy’s ground, and he became an easy prey to temptation.”</span> <span class="egw-ref">The Desire of Ages, p. 712 · DA 712.1</span> A servant girl said, <span class="scrip">“This man was one of Jesus’ followers!”</span> and Peter answered, <span class="scrip">“I don’t even know him!”</span> Someone else said, <span class="scrip">“You must be one of them!”</span> <span class="scrip">“No, man, I’m not!”</span> About an hour later a third insisted that he must be one of them, and Peter said, <span class="scrip">“Man, I don’t know what you are talking about.” And immediately, while he was still speaking, the rooster crowed.</span> <span class="ref">Luke 22:56–60 (NLT)</span> Then comes one of the most tender moments in the Gospels: <span class="scrip">“At that moment the Lord turned and looked at Peter. Suddenly, the Lord’s words flashed through Peter’s mind … And Peter left the courtyard, weeping bitterly.”</span> <span class="ref">Luke 22:61–62 (NLT)</span> Luke tells us that Jesus turned and looked at Peter. Ellen G. White lingers over what Peter discerned in that moment: <span class="egw" data-wa="block">“In that gentle countenance he read deep pity and sorrow, but there was no anger there.”</span> <span class="egw-ref">The Desire of Ages, p. 712 · DA 712.4</span> And she adds, <span class="egw">“That look of Christ’s broke his heart. Peter had come to the turning point, and bitterly did he repent his sin … The look of Christ assured him of pardon.”</span> <span class="egw-ref">Christ’s Object Lessons, p. 152 · COL 152.3</span> His tears were not a payment for pardon—grace is never purchased. They were the grief of a man who had been loved, and knew it. <strong>Christ’s look brought conviction together with compassion—not to trap Peter in shame, but to bring him back.</strong></p>
+
+    <p>And Peter’s story did not end in the courtyard. Ellen G. White says: <span class="egw">“Though Peter had grievously sinned, he was not forsaken.”</span> <span class="egw-ref">Christ’s Object Lessons, p. 155 · COL 155.4</span> On the resurrection morning the angel at the empty tomb said, <span class="scrip">“Now go and tell his disciples, including Peter, that Jesus is going ahead of you to Galilee.”</span> <span class="ref">Mark 16:7 (NLT)</span> Including Peter. The risen Christ <span class="scrip">“was seen by Peter”</span> <span class="ref">1 Corinthians 15:5 (NLT)</span>, and later, by the Sea of Galilee, He asked him three times, <span class="scrip">“Simon son of John, do you love me?”</span> and gave him his work back: <span class="scrip">“Then feed my sheep.”</span> <span class="ref">John 21:17 (NLT)</span> Then He said once more, <span class="scrip">“Follow me.”</span> <span class="ref">John 21:19 (NLT)</span> Ellen G. White tells us: <span class="egw">“Although Peter had denied his Lord, the love which Jesus bore him never faltered.”</span> <span class="egw-ref">The Desire of Ages, p. 815 · DA 815.1</span> Peter’s return to apostolic work was the risen Lord’s own act; today, Christ’s grace restores a repentant person to Himself and to meaningful discipleship, while particular roles may rightly involve accountability, time, and the protection of others. That is not the opposite of grace; it is grace being honest. So where am I trusting my own strength instead of depending on Christ? And if the rooster has already crowed in your life, hear this: the Jesus who prayed for Peter before he fell, who turned and looked at him in the moment of his collapse, and who sought him out after the resurrection is the same crucified and risen Saviour today, and His promise stands: <span class="scrip">“if we confess our sins to him, he is faithful and just to forgive us our sins and to cleanse us from all wickedness.”</span> <span class="ref">1 John 1:9 (NLT)</span> <strong>Peter failed Jesus, but Jesus did not abandon Peter—come back to Him, depend on His strength, and follow Him in humble, faithful service.</strong></p>
+
+  </div>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <h2 class="takeaways">Key Takeaways</h2>
+  <ol class="takeaway-list">
+    <li><strong>Peter trusted his love for Jesus; he needed to learn to trust Jesus more than himself.</strong> <span class="scrip">“Lord, I am ready to go to prison with you, and even to die with you.”</span> <span class="ref">Luke 22:33 (NLT)</span> Ellen White tells us <span class="egw">“Self-confidence misled him”</span> <span class="egw-ref">Christ’s Object Lessons, p. 152 · COL 152.2</span>—sincerity is not the same as strength.</li>
+    <li><strong>Before Peter fell, Jesus was already praying for his faith and looking beyond the failure to restoration.</strong> <span class="scrip">“But I have pleaded in prayer for you, Simon, that your faith should not fail. So when you have repented and turned to me again, strengthen your brothers.”</span> <span class="ref">Luke 22:32 (NLT)</span> The warning and the prayer belong together; Ellen White says that had Peter watched and prayed, he <span class="egw">“would not have been left to depend upon his own feeble strength”</span> <span class="egw-ref">The Desire of Ages, p. 713 · DA 713.4</span>.</li>
+    <li><strong>Christ’s look brought conviction together with compassion—not to trap Peter in shame, but to bring him back.</strong> <span class="scrip">“At that moment the Lord turned and looked at Peter … And Peter left the courtyard, weeping bitterly.”</span> <span class="ref">Luke 22:61–62 (NLT)</span> Ellen White writes that in that look Peter read <span class="egw">“deep pity and sorrow, but there was no anger there”</span> <span class="egw-ref">The Desire of Ages, p. 712 · DA 712.4</span>. Tears do not purchase pardon; repentance turns back to Christ.</li>
+    <li><strong>Peter failed Jesus, but Jesus did not abandon Peter—come back to Him, depend on His strength, and follow Him in humble, faithful service.</strong> <span class="scrip">“Now go and tell his disciples, including Peter.”</span> <span class="ref">Mark 16:7 (NLT)</span> Ellen White says, <span class="egw">“the love which Jesus bore him never faltered”</span> <span class="egw-ref">The Desire of Ages, p. 815 · DA 815.1</span>. The risen Christ asked him, <span class="scrip">“Simon son of John, do you love me?”</span> and said, <span class="scrip">“Then feed my sheep”</span> <span class="ref">John 21:17 (NLT)</span>—grace restores, and restored people serve with humility and tenderness.</li>
+  </ol>
+
+  <p class="sources"><span class="label">Sources and Further Reading</span>Scripture: Luke 22:31–34, 54–62 (parallels Matthew 26:31–35, 69–75; Mark 14:27–31, 66–72; John 13:36–38; 18:15–18, 25–27); Matthew 26:40–41; Mark 16:6–7; 1 Corinthians 15:3–5; John 21:15–19; 1 John 1:9 (NLT). Ellen G. White: <em>The Desire of Ages</em>, chapter 75, “Before Annas and the Court of Caiaphas,” pp. 698–715 (DA 712.1, 712.4, 713.4) and chapter 85, “By the Sea Once More,” pp. 809–817 (DA 815.1); <em>Christ’s Object Lessons</em>, chapter 13, “Two Worshipers,” pp. 150–163 (COL 152.2, 152.3, 155.4). Related readings appear in <em>Conflict and Courage</em>, “On Enemy Ground” (November 11, p. 321, gathering COL 152–155 and DA 712) and “Converted at Last” (November 12, p. 322, drawn from <em>The SDA Bible Commentary</em>, vol. 5, p. 1152).</p>
+
+  <div class="sdg">Soli Deo Gloria</div>
+</article>
+</body>
+</html>

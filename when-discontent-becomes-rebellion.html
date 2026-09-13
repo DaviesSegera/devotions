@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>When Discontent Becomes Rebellion &mdash; Today's Devotion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f3ead4;
+    --parchment-deep:#eadfc2;
+    --ink:#3b2d18;
+    --ink-soft:#5a4629;
+    --gold:#a67c1e;
+    --gold-bright:#c9a227;
+    --gold-pale:#e3cf95;
+    --wine:#7a3b2e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    color:var(--ink);
+    font-family:'Lora',serif;
+    line-height:1.85;
+    padding:34px 14px 60px;
+    position:relative;
+  }
+  /* aged-paper grain */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
+    z-index:2;
+  }
+  .page{
+    max-width:760px;
+    margin:0 auto;
+    background:rgba(255,252,240,.55);
+    border:1.5px solid var(--gold);
+    outline:1px solid var(--gold-pale);
+    outline-offset:6px;
+    padding:64px 52px 56px;
+    position:relative;
+    box-shadow:0 18px 50px rgba(90,70,30,.18);
+  }
+  @media(max-width:620px){.page{padding:52px 24px 44px;}}
+  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
+  .corner.tl{top:10px;left:10px;}
+  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
+  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
+  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+  .eyebrow{
+    font-family:'Cinzel',serif;
+    font-size:.82rem;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:clamp(2.1rem,5.4vw,3rem);
+    text-align:center;
+    color:var(--ink);
+    letter-spacing:.01em;
+    margin-bottom:26px;
+  }
+  /* Ellen G. White — companion ink */
+  .egw{color:var(--wine);}
+  .egw-ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.08em;
+    font-size:.88em;
+    color:var(--wine);
+  }
+  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .divider{
+    display:flex;align-items:center;justify-content:center;
+    gap:14px;margin:30px 0;color:var(--gold);
+  }
+  .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+  .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
+  .divider svg{flex-shrink:0;}
+  .verse-card{
+    border:1px solid var(--gold-pale);
+    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
+    padding:30px 34px 26px;
+    text-align:center;
+    margin:0 auto 8px;
+    position:relative;
+  }
+  .verse-card .label{
+    font-family:'Cinzel',serif;
+    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .verse-card .scripture{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.42rem;
+    line-height:1.65;
+    color:var(--ink-soft);
+  }
+  .verse-card .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.14em;
+    font-size:.95rem;
+    color:var(--gold);
+    margin-top:14px;
+  }
+  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
+  .body-text p:first-of-type::first-letter{
+    font-family:'Playfair Display',serif;
+    font-size:3.9em;
+    float:left;
+    line-height:.82;
+    padding:6px 12px 0 0;
+    color:var(--gold);
+  }
+  .body-text strong{color:#7c5a12;font-weight:600;}
+  .scrip{font-style:italic;color:var(--ink-soft);}
+  .ref{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.1em;
+    font-size:.92em;
+    color:var(--gold);
+    white-space:nowrap;
+  }
+  h2.takeaways{
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.35rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    text-align:center;
+    color:var(--ink);
+    margin-bottom:26px;
+  }
+  ol.takeaway-list{list-style:none;counter-reset:tk;}
+  ol.takeaway-list li{
+    counter-increment:tk;
+    position:relative;
+    padding-left:62px;
+    margin-bottom:20px;
+    font-size:1.03rem;
+  }
+  ol.takeaway-list li::before{
+    content:counter(tk);
+    position:absolute;left:0;top:2px;
+    width:42px;height:42px;
+    border-radius:50%;
+    border:1.5px solid var(--gold);
+    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
+    color:#7c5a12;
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:1.05rem;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+  }
+  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  .sources{
+    margin-top:34px;
+    font-size:.9rem;
+    line-height:1.7;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+  .sources .label{
+    font-family:'Cinzel',serif;
+    font-size:.68rem;letter-spacing:.36em;text-transform:uppercase;
+    color:var(--gold);display:block;margin-bottom:4px;
+  }
+  .sdg{
+    font-family:'Pinyon Script',cursive;
+    font-size:2.5rem;
+    color:var(--gold);
+    text-align:center;
+    margin-top:40px;
+  }
+</style>
+</head>
+<body>
+<style>
+  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
+  .allnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
+    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
+    padding-bottom:2px;
+  }
+  .allnav a:hover{border-bottom-color:#a67c1e;}
+</style>
+<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+
+<article class="page">
+  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"/>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  </svg>
+
+    <div class="eyebrow">Today's Devotion</div>
+  <h1>When Discontent Becomes Rebellion</h1>
+
+  <section class="verse-card">
+    <div class="label">Key Verse</div>
+    <div class="scripture">“Does it seem insignificant to you that the God of Israel has chosen you from among all the community of Israel to be near him so you can serve in the Lord’s Tabernacle and stand before the people to minister to them? Korah, he has already given this special ministry to you and your fellow Levites. Are you now demanding the priesthood as well?”</div>
+    <div class="ref">Numbers 16:9–10 (NLT)</div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <div class="body-text">
+    <p>Korah’s rebellion did not begin when he stood against Moses. By the time the confrontation became public, something had already been growing in the heart. Numbers 16 opens with Korah, a Levite, joined by Dathan and Abiram of the tribe of Reuben and by 250 leaders, <span class="scrip">“all prominent members of the assembly,”</span> <span class="ref">Numbers 16:2 (NLT)</span> confronting Moses and Aaron: <span class="scrip">“You have gone too far! The whole community of Israel has been set apart by the Lord, and he is with all of us.”</span> <span class="ref">Numbers 16:3 (NLT)</span> It sounded like zeal for holiness. Moses’ reply shows what was underneath. Korah already had a place in God’s service, chosen <span class="scrip">“to be near him so you can serve in the Lord’s Tabernacle.”</span> <span class="ref">Numbers 16:9 (NLT)</span> Then the question that names the heart of the matter: <span class="scrip">“Are you now demanding the priesthood as well?”</span> <span class="ref">Numbers 16:10 (NLT)</span> Numbers 16 shows Korah’s opposition becoming public, but the crisis did not begin in public. Ellen G. White draws attention to the dissatisfaction and ambition that had already been developing in his heart: <span class="egw">“Though appointed to the service of the tabernacle, he had become dissatisfied with his position and aspired to the dignity of the priesthood. … for some time Korah had been secretly opposing the authority of Moses and Aaron, though he had not ventured upon any open act of rebellion”</span> <span class="egw-ref">Patriarchs and Prophets, p. 395 · PP 395.2</span>. Discontent made Korah look past the privilege God had already given him and fix his attention on the position he did not have. <strong>Korah’s rebellion became public long after dissatisfaction had taken root privately.</strong></p>
+
+    <p>A cherished grievance does not stay private for long. Korah gathered Dathan and Abiram, then 250 respected leaders, until <span class="scrip">“Korah had stirred up the entire community against Moses and Aaron.”</span> <span class="ref">Numbers 16:19 (NLT)</span> In harmony with the biblical account, Ellen White traces the path from whispered discontent to organised resistance: <span class="egw">“Professing great interest in the prosperity of the people, they first whispered their discontent to one another and then to leading men of Israel. Their insinuations were so readily received that they ventured still further, and at last they really believed themselves to be actuated by zeal for God”</span> <span class="egw-ref">Patriarchs and Prophets, p. 396 · PP 396.4</span>. They deceived themselves until resentment felt like righteousness. Grievance also rewrote their memory: Dathan and Abiram refused to come to Moses and called Egypt—the land of their slavery—<span class="scrip">“a land flowing with milk and honey,”</span> <span class="ref">Numbers 16:13 (NLT)</span> accusing Moses of bringing them out to die. When resentment becomes our interpreter, even deliverance can begin to look like oppression. A crowd can be sincere, influential, and still be wrong. <strong>A grievance does not remain private once we begin recruiting others to carry it with us.</strong></p>
+
+    <p>Moses answered the crowd by going down, not up. <span class="scrip">“When Moses heard what they were saying, he fell face down on the ground.”</span> <span class="ref">Numbers 16:4 (NLT)</span> He referred the matter to God—<span class="scrip">“Tomorrow morning the Lord will show us who belongs to him and who is holy”</span> <span class="ref">Numbers 16:5 (NLT)</span>—and when the Lord threatened the whole community, Moses and Aaron fell on their faces again and pleaded for the people (Numbers 16:22). Korah gathered a crowd; Moses fell before God. Then God answered. The ground opened beneath Dathan and Abiram and their households, fire consumed the 250 who were offering incense, and Korah perished in that judgment (Numbers 16:31–35; 26:10). Scripture does not dwell on the horror; the point is that rebellion is not spiritually harmless. Yet the most sobering verse comes the next day: <span class="scrip">“But the very next morning the whole community of Israel began muttering again against Moses and Aaron, saying, ‘You have killed the Lord’s people!’”</span> <span class="ref">Numbers 16:41 (NLT)</span> They had seen the earth open, and the heart that produced the murmuring was unchanged. Ellen White names the condition: <span class="egw">“while they fled from the judgments, through fear of destruction, their rebellion was not cured. They returned to their tents that night terrified, but not repentant”</span> <span class="egw-ref">Patriarchs and Prophets, p. 401 · PP 401.3</span>. A plague began, and Aaron ran with the censer and <span class="scrip">“stood between the dead and the living, and the plague stopped.”</span> <span class="ref">Numbers 16:48 (NLT)</span> Even in a chapter of rebellion and judgment, mercy was still moving toward sinners. <strong>Evidence can settle a controversy without surrendering the heart.</strong></p>
+
+    <p>Then God gave a quieter sign. Twelve staffs were laid before the Ark, and the next morning Aaron’s staff <span class="scrip">“had sprouted, budded, blossomed, and produced ripe almonds!”</span> <span class="ref">Numbers 17:8 (NLT)</span> God’s stated purpose was peace: <span class="scrip">“Then I will finally put an end to the people’s murmuring and complaining against you.”</span> <span class="ref">Numbers 17:5 (NLT)</span> After the noise of rebellion, God answered with a rod that quietly came to life. What does this ask of us? Not that every question or disagreement is rebellion. Numbers 16 describes jealousy, ambition, misrepresentation, refusal to listen and the recruitment of others, all joined together. Respectful questions, reporting wrongdoing and seeking accountability are not Korah’s sin; leaders stand under God’s authority as much as members, and Moses himself referred the dispute to God rather than to his own office. The warning is about disappointment that is fed instead of surrendered. So the first prayer is “Lord, search me,” never “Lord, show me who the rebels are.” Korah grasped for a position God had not given him; Jesus <span class="scrip">“did not think of equality with God as something to cling to. Instead, he gave up his divine privileges.”</span> <span class="ref">Philippians 2:6–7 (NLT)</span> Korah’s story shows where self-exaltation leads; Jesus shows us another way—humility, surrender, service and obedience to the Father. Is there any disappointment, jealousy, resentment or wounded ambition in my heart that I have begun to justify instead of surrendering to God? Am I seeking wise counsel, or quietly gathering people around my grievance? <strong>Only Christ can change the heart that evidence alone cannot soften.</strong></p>
+  </div>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <span class="line right"></span>
+  </div>
+
+  <h2 class="takeaways">Key Takeaways</h2>
+  <ol class="takeaway-list">
+    <li><strong>Rebellion began before it became visible.</strong> Korah already served in the Tabernacle, yet Moses asked, <span class="scrip">“Are you now demanding the priesthood as well?”</span> <span class="ref">Numbers 16:10 (NLT)</span> Ellen White records that he <span class="egw">“had become dissatisfied with his position and aspired to the dignity of the priesthood”</span> <span class="egw-ref">Patriarchs and Prophets, p. 395 · PP 395.2</span>.</li>
+    <li><strong>A cherished grievance gathers a crowd.</strong> <span class="scrip">“Korah had stirred up the entire community against Moses and Aaron.”</span> <span class="ref">Numbers 16:19 (NLT)</span> Seeking counsel heals; recruiting allies builds a faction.</li>
+    <li><strong>Evidence settled the question but did not surrender the heart.</strong> <span class="scrip">“The very next morning the whole community of Israel began muttering again.”</span> <span class="ref">Numbers 16:41 (NLT)</span> They were <span class="egw">“terrified, but not repentant”</span> <span class="egw-ref">Patriarchs and Prophets, p. 401 · PP 401.3</span>.</li>
+    <li><strong>Christ is the cure for the self-exalting heart.</strong> Aaron’s staff <span class="scrip">“sprouted, budded, blossomed, and produced ripe almonds”</span> <span class="ref">Numbers 17:8 (NLT)</span> to end the murmuring; Jesus, who <span class="scrip">“gave up his divine privileges,”</span> <span class="ref">Philippians 2:7 (NLT)</span> changes the heart that evidence cannot soften.</li>
+  </ol>
+
+  <p class="sources"><span class="label">Sources and Further Reading</span>Scripture: Numbers 16:1–50; 17:1–13 (context Numbers 13–15; 26:9–11); Psalm 106:16–18; Philippians 2:3–8 (NLT). Ellen G. White: <em>Patriarchs and Prophets</em>, chapter 35, “The Rebellion of Korah,” pp. 395–405 (PP 395.2, 396.4, 401.3); the same history with church application appears in <em>Testimonies for the Church</em>, vol. 3, “The Great Rebellion,” pp. 343–354.</p>
+
+  <div class="sdg">Soli Deo Gloria</div>
+</article>
+</body>
+</html>
