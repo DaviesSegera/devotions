@@ -3,143 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>When Jesus Walks With Us Unrecognized &mdash; Today's Devotion</title>
+<title>When Jesus Walks With Us Unrecognized — Today's Devotion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
 <style>
   :root{
-    --parchment:#f3ead4;
-    --parchment-deep:#eadfc2;
-    --ink:#3b2d18;
-    --ink-soft:#5a4629;
-    --gold:#a67c1e;
-    --gold-bright:#c9a227;
-    --gold-pale:#e3cf95;
-    --wine:#7a3b2e;
+    --bg1:#f8f2e1; --bg2:#f3ead4; --bg3:#e8dcbd;
+    --page-bg:rgba(255,252,241,.62);
+    --page-border:#a67c1e; --page-outline:#e3cf95;
+    --ink:#33281a; --ink-soft:#5a4629;
+    --gold:#a67c1e; --gold-bright:#c9a227; --gold-pale:#e3cf95;
+    --wine:#7a3b2e; --wine-solid:#7a3b2e; --wine-edge:#5d2b20;
+    --card1:rgba(255,250,232,.92); --card2:rgba(247,238,213,.92);
+    --emph:#7c5a12;
+    --num1:#f5e7bd; --num2:#e3cf95; --numfg:#7c5a12;
+    --shadow:rgba(90,70,30,.16);
+    --grain:.30;
+    --rule:rgba(166,124,30,.28);
+  }
+  :root[data-theme="night"]{
+    --bg1:#1a160f; --bg2:#15120c; --bg3:#100e09;
+    --page-bg:rgba(44,37,26,.42);
+    --page-border:#7d6524; --page-outline:#463a19;
+    --ink:#e9dfc8; --ink-soft:#c4b491;
+    --gold:#c2a03a; --gold-bright:#e0bf58; --gold-pale:#6a5828;
+    --wine:#e2a891; --wine-solid:#8a4537; --wine-edge:#6b3428;
+    --card1:rgba(56,47,32,.6); --card2:rgba(46,39,27,.6);
+    --emph:#e2c775;
+    --num1:#4c4024; --num2:#3a311b; --numfg:#e8ce7f;
+    --shadow:rgba(0,0,0,.55);
+    --grain:.16;
+    --rule:rgba(194,160,58,.26);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{
-    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    background:radial-gradient(ellipse at 50% 0%, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%);
+    background-attachment:fixed;
     color:var(--ink);
     font-family:'Lora',serif;
-    line-height:1.85;
-    padding:34px 14px 60px;
+    line-height:1.78;
+    padding:30px 14px 28px;
     position:relative;
+    -webkit-font-smoothing:antialiased;
+    transition:background-color .25s ease, color .25s ease;
   }
-  /* aged-paper grain */
+  /* aged-paper grain, lighter than before */
   body::before{
     content:"";
     position:fixed;inset:0;
     pointer-events:none;
-    opacity:.5;
+    opacity:var(--grain);
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
     z-index:2;
   }
-  .page{
-    max-width:760px;
-    margin:0 auto;
-    background:rgba(255,252,240,.55);
-    border:1.5px solid var(--gold);
-    outline:1px solid var(--gold-pale);
-    outline-offset:6px;
-    padding:64px 52px 56px;
-    position:relative;
-    box-shadow:0 18px 50px rgba(90,70,30,.18);
+
+  /* reading progress */
+  .progress{
+    position:fixed;top:0;left:0;height:3px;width:0;
+    background:linear-gradient(90deg,var(--gold-pale),var(--gold-bright));
+    z-index:12;transition:width .08s linear;
   }
-  @media(max-width:620px){.page{padding:52px 24px 44px;}}
-  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
-  .corner.tl{top:10px;left:10px;}
-  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
-  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
-  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+
+  .page{
+    max-width:720px;
+    margin:0 auto;
+    background:var(--page-bg);
+    border:1.5px solid var(--page-border);
+    outline:1px solid var(--page-outline);
+    outline-offset:6px;
+    padding:62px 56px 54px;
+    position:relative;
+    box-shadow:0 18px 50px var(--shadow);
+  }
+  @media(max-width:620px){.page{padding:48px 22px 40px;} body{padding:22px 11px 24px;}}
+
+  /* corners, quieter: smaller and lighter than before */
+  .corner{position:absolute;width:44px;height:44px;color:var(--gold);opacity:.55;}
+  .corner.tl{top:9px;left:9px;}
+  .corner.tr{top:9px;right:9px;transform:scaleX(-1);}
+  .corner.bl{bottom:9px;left:9px;transform:scaleY(-1);}
+  .corner.br{bottom:9px;right:9px;transform:scale(-1,-1);}
+
   .eyebrow{
     font-family:'Cinzel',serif;
-    font-size:.82rem;
-    letter-spacing:.42em;
+    font-size:.74rem;
+    letter-spacing:.34em;
     text-transform:uppercase;
     color:var(--gold);
     text-align:center;
-    margin-bottom:18px;
+    margin-bottom:16px;
   }
   h1{
     font-family:'Playfair Display',serif;
     font-weight:700;
-    font-size:clamp(2.1rem,5.4vw,3rem);
+    font-size:clamp(2rem,5vw,2.8rem);
+    line-height:1.18;
     text-align:center;
     color:var(--ink);
-    letter-spacing:.01em;
-    margin-bottom:26px;
+    letter-spacing:.005em;
+    margin-bottom:14px;
   }
+  .meta{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.16em;
+    font-size:.78rem;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:28px;
+  }
+  .meta span{opacity:.55;margin:0 7px;}
+
   /* Ellen G. White — companion ink */
   .egw{color:var(--wine);}
   .egw-ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.08em;
-    font-size:.88em;
+    letter-spacing:.07em;
+    font-size:.85em;
     color:var(--wine);
   }
-  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .egw-ref::before{content:"\2712";margin-right:.3em;font-size:.9em;}
+  /* long quotations stand as blocks */
+  blockquote.egw-block{
+    margin:26px 0 28px;
+    padding:2px 0 2px 22px;
+    border-left:2px solid var(--wine);
+    color:var(--wine);
+    font-size:1.01rem;
+    line-height:1.72;
+  }
+  blockquote.egw-block .egw-ref{
+    display:block;margin-top:9px;font-size:.78rem;
+    letter-spacing:.04em;line-height:1.55;opacity:.92;
+    text-wrap:pretty;          /* keeps a lone word off the last line */
+  }
+  @media(max-width:620px){blockquote.egw-block{padding-left:16px;}}
+
   .divider{
     display:flex;align-items:center;justify-content:center;
-    gap:14px;margin:30px 0;color:var(--gold);
+    gap:14px;margin:28px 0;color:var(--gold);
   }
   .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
   .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
   .divider svg{flex-shrink:0;}
+
   .verse-card{
     border:1px solid var(--gold-pale);
-    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
-    padding:30px 34px 26px;
+    background:linear-gradient(180deg,var(--card1),var(--card2));
+    padding:28px 32px 24px;
     text-align:center;
     margin:0 auto 8px;
     position:relative;
   }
   .verse-card .label{
     font-family:'Cinzel',serif;
-    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
-    color:var(--gold);margin-bottom:14px;
+    font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:13px;
   }
   .verse-card .scripture{
     font-family:'Cormorant Garamond',serif;
     font-style:italic;
-    font-size:1.42rem;
-    line-height:1.65;
+    font-size:1.38rem;
+    line-height:1.62;
     color:var(--ink-soft);
   }
   .verse-card .ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.14em;
-    font-size:.95rem;
+    letter-spacing:.13em;
+    font-size:.92rem;
     color:var(--gold);
-    margin-top:14px;
+    margin-top:13px;
   }
-  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
-  .body-text p:first-of-type::first-letter{
+
+  /* body — ragged right, book measure */
+  .body-text{margin-top:4px;}
+  .body-text p{
+    margin-bottom:1.15em;
+    font-size:1.075rem;
+    text-align:left;
+    hyphens:none;
+  }
+  .body-text .mv{margin-bottom:6px;}
+  .body-text > .mv:first-child > p:first-child::first-letter{
     font-family:'Playfair Display',serif;
-    font-size:3.9em;
+    font-size:3.7em;
     float:left;
     line-height:.82;
-    padding:6px 12px 0 0;
+    padding:5px 11px 0 0;
     color:var(--gold);
   }
-  .body-text strong{color:#7c5a12;font-weight:600;}
+  .body-text strong{color:var(--emph);font-weight:600;}
   .scrip{font-style:italic;color:var(--ink-soft);}
   .ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.1em;
-    font-size:.92em;
+    letter-spacing:.09em;
+    font-size:.9em;
     color:var(--gold);
     white-space:nowrap;
   }
+
+  /* the closing sentence of each movement, promoted */
+  .body-text p.thesis{
+    text-align:center;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.32rem;
+    line-height:1.55;
+    color:var(--ink);
+    margin:26px auto 34px;
+    max-width:34em;
+    padding-top:22px;
+    position:relative;
+  }
+  .body-text p.thesis::before{
+    content:"";
+    position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:58px;height:1px;background:var(--gold);opacity:.8;
+  }
+  .body-text p.thesis strong{font-weight:inherit;color:inherit;}
+  @media(max-width:620px){.body-text p.thesis{font-size:1.2rem;}}
+
   h2.takeaways{
     font-family:'Cinzel',serif;
     font-weight:600;
-    font-size:1.35rem;
-    letter-spacing:.18em;
+    font-size:1.22rem;
+    letter-spacing:.16em;
     text-transform:uppercase;
     text-align:center;
     color:var(--ink);
@@ -149,42 +242,45 @@
   ol.takeaway-list li{
     counter-increment:tk;
     position:relative;
-    padding-left:62px;
+    padding-left:54px;
     margin-bottom:20px;
-    font-size:1.03rem;
+    font-size:1.02rem;
   }
   ol.takeaway-list li::before{
     content:counter(tk);
-    position:absolute;left:0;top:2px;
-    width:42px;height:42px;
+    position:absolute;left:0;top:3px;
+    width:36px;height:36px;
     border-radius:50%;
     border:1.5px solid var(--gold);
-    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
-    color:#7c5a12;
+    background:radial-gradient(circle at 35% 30%,var(--num1),var(--num2));
+    color:var(--numfg);
     font-family:'Cinzel',serif;
     font-weight:600;
-    font-size:1.05rem;
+    font-size:.98rem;
     display:flex;align-items:center;justify-content:center;
-    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+    box-shadow:0 2px 6px var(--shadow), inset 0 1px 2px rgba(255,255,255,.35);
   }
-  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  ol.takeaway-list li strong{color:var(--emph);font-weight:600;}
+
   .sources{
     margin-top:34px;
-    font-size:.9rem;
+    font-size:.88rem;
     line-height:1.7;
     color:var(--ink-soft);
     text-align:center;
   }
   .sources .label{
     font-family:'Cinzel',serif;
-    font-size:.68rem;letter-spacing:.36em;text-transform:uppercase;
+    font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;
     color:var(--gold);display:block;margin-bottom:4px;
   }
+
+  /* Watch It — unchanged treatment, tokenised for night reading */
   .watch{
     margin-top:38px;
     text-align:center;
     border:1px solid var(--gold);
-    background:linear-gradient(180deg,rgba(255,250,232,.75),rgba(247,238,213,.75));
+    background:linear-gradient(180deg,var(--card1),var(--card2));
     padding:26px 22px 22px;
   }
   .watch .label{
@@ -199,8 +295,8 @@
     letter-spacing:.08em;
     font-size:1.02rem;
     color:#fdf6e6;
-    background:var(--wine);
-    border:1px solid #5d2b20;
+    background:var(--wine-solid);
+    border:1px solid var(--wine-edge);
     text-decoration:none;
     padding:14px 26px;
     margin:6px 7px;
@@ -222,55 +318,78 @@
     .watch a{display:block;margin:9px 0;padding:15px 18px;}
     .watch{padding:22px 16px 18px;}
   }
+
   .sdg{
     font-family:'Pinyon Script',cursive;
-    font-size:2.5rem;
+    font-size:2.4rem;
     color:var(--gold);
     text-align:center;
     margin-top:40px;
   }
+
+  /* navigation */
+  .allnav,.footnav{max-width:720px;margin:0 auto 16px;text-align:center;}
+  .footnav{margin:26px auto 8px;display:flex;justify-content:center;gap:26px;}
+  .allnav a,.footnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.16em;
+    font-size:.8rem;color:var(--gold);text-decoration:none;
+    border-bottom:1px solid var(--rule);padding-bottom:2px;
+  }
+  .allnav a:hover,.footnav a:hover{border-bottom-color:var(--gold);}
+
+  /* night-reading toggle */
+  .lamp{
+    position:fixed;right:16px;bottom:16px;z-index:11;
+    width:44px;height:44px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--card1);
+    border:1px solid var(--gold);
+    color:var(--gold);
+    cursor:pointer;
+    box-shadow:0 4px 14px var(--shadow);
+    opacity:.72;
+    transition:opacity .18s ease, transform .18s ease;
+  }
+  .lamp:hover,.lamp:focus-visible{opacity:1;transform:translateY(-2px);outline:none;}
+  .lamp svg{width:20px;height:20px;}
+  @media print{.lamp,.progress,.allnav,.footnav{display:none;}}
 </style>
 </head>
 <body>
-<style>
-  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
-  .allnav a{
-    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
-    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
-    padding-bottom:2px;
-  }
-  .allnav a:hover{border-bottom-color:#a67c1e;}
-</style>
-<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+<div class="progress" id="prog"></div>
+<a id="top"></a>
+<nav class="allnav"><a href="./">← All devotions</a></nav>
 
 <article class="page">
-  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner tl" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner tr" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner bl" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner br" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
 
     <div class="eyebrow">Today's Devotion</div>
   <h1>When Jesus Walks With Us Unrecognized</h1>
+
+  <div class="meta">Luke 24 <span>·</span> 8 min read</div>
 
   <section class="verse-card">
     <div class="label">Key Verse</div>
@@ -282,24 +401,24 @@
 
   <div class="divider" aria-hidden="true">
     <span class="line"></span>
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <svg width="26" height="26" viewbox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"></path></svg>
     <span class="line right"></span>
   </div>
 
   <div class="body-text">
-    <p>Have you ever assumed God was absent simply because you could not see what He was doing? Luke 24 answers that question on a road. <span class="scrip">“That same day two of Jesus’ followers were walking to the village of Emmaus, seven miles from Jerusalem. As they walked along they were talking about everything that had happened.”</span> <span class="ref">Luke 24:13–14 (NLT)</span> It was resurrection day, though they did not yet know it. The women had found the tomb empty and heard the angels say, <span class="scrip">“He isn’t here! He is risen from the dead!”</span> <span class="ref">Luke 24:6 (NLT)</span>—but to the men <span class="scrip">“the story sounded like nonsense.”</span> <span class="ref">Luke 24:11 (NLT)</span> Then Luke writes the sentence the whole story turns on: <span class="scrip">“As they talked and discussed these things, Jesus himself suddenly came and began walking with them. But God kept them from recognizing him.”</span> <span class="ref">Luke 24:15–16 (NLT)</span> They were talking about Jesus while Jesus was walking beside them. Ellen G. White helps us see them on that road—joined by a stranger, yet <span class="egw" data-wa="block">“they were so absorbed in their gloom and disappointment that they did not observe him closely. … Jesus longed to comfort them. He had seen their grief; … Jesus knew that their hearts were bound up with Him in love, and He longed to wipe away their tears, and fill them with joy and gladness. But He must first give them lessons they would never forget.”</span> <span class="egw-ref">The Desire of Ages, p. 795 · DA 795.2</span> Their perception had not changed, but their situation already had. <strong>His presence is not measured by our ability to recognize Him.</strong></p>
+    <section class="mv"><p>Have you ever assumed God was absent simply because you could not see what He was doing? Luke 24 answers that question on a road. <span class="scrip">“That same day two of Jesus’ followers were walking to the village of Emmaus, seven miles from Jerusalem. As they walked along they were talking about everything that had happened.”</span> <span class="ref">Luke 24:13–14 (NLT)</span> It was resurrection day, though they did not yet know it. The women had found the tomb empty and heard the angels say, <span class="scrip">“He isn’t here! He is risen from the dead!”</span> <span class="ref">Luke 24:6 (NLT)</span>—but to the men <span class="scrip">“the story sounded like nonsense.”</span> <span class="ref">Luke 24:11 (NLT)</span></p><p> Then Luke writes the sentence the whole story turns on: <span class="scrip">“As they talked and discussed these things, Jesus himself suddenly came and began walking with them. But God kept them from recognizing him.”</span> <span class="ref">Luke 24:15–16 (NLT)</span> They were talking about Jesus while Jesus was walking beside them. Ellen G. White helps us see them on that road—joined by a stranger, yet </p><blockquote class="egw-block"><span class="egw" data-wa="block">“they were so absorbed in their gloom and disappointment that they did not observe him closely. … Jesus longed to comfort them. He had seen their grief; … Jesus knew that their hearts were bound up with Him in love, and He longed to wipe away their tears, and fill them with joy and gladness. But He must first give them lessons they would never forget.”</span> <span class="egw-ref">The Desire of Ages, p. 795 · DA 795.2</span></blockquote><p> Their perception had not changed, but their situation already had. </p><p class="thesis"><strong>His presence is not measured by our ability to recognize Him.</strong></p></section>
 
-    <p>He asked, <span class="scrip">“What are you discussing so intently as you walk along?” They stopped short, sadness written across their faces.</span> <span class="ref">Luke 24:17 (NLT)</span> Cleopas—the only one of the two Luke names—told the Stranger about Jesus of Nazareth, <span class="scrip">“a prophet who did powerful miracles,”</span> handed over by the leaders and crucified. Then came the sentence that carries their whole disappointment: <span class="scrip">“We had hoped he was the Messiah who had come to rescue Israel.”</span> <span class="ref">Luke 24:19–21 (NLT)</span> They were not faithless; they loved Jesus and grieved His death. They even knew about the empty tomb and the women’s report of angels (Luke 24:22–24). But knowing the facts had not yet become resurrection faith, and the cross still looked to them like the end of the story. Jesus answered them with truth: <span class="scrip">“You foolish people! You find it so hard to believe all that the prophets wrote in the Scriptures. Wasn’t it clearly predicted that the Messiah would have to suffer all these things before entering his glory?”</span> <span class="ref">Luke 24:25–26 (NLT)</span> Ellen G. White tells us the disciples wondered who this Stranger could be, <span class="egw">“that He should penetrate to their very souls, and speak with such earnestness, tenderness, and sympathy, and with such hopefulness”</span> <span class="egw-ref">The Desire of Ages, p. 796 · DA 796.3</span>, and she explains what had gone wrong: <span class="egw">“Their expectation of a Messiah who was to take His throne and kingly power in accordance with the desires of men had been misleading”</span> <span class="egw-ref">The Desire of Ages, p. 799 · DA 799.3</span>. <strong>Sometimes “we had hoped” reveals not that God has failed, but that our understanding of His work is incomplete.</strong></p>
+    <section class="mv"><p>He asked, <span class="scrip">“What are you discussing so intently as you walk along?” They stopped short, sadness written across their faces.</span> <span class="ref">Luke 24:17 (NLT)</span> Cleopas—the only one of the two Luke names—told the Stranger about Jesus of Nazareth, <span class="scrip">“a prophet who did powerful miracles,”</span> handed over by the leaders and crucified. Then came the sentence that carries their whole disappointment: <span class="scrip">“We had hoped he was the Messiah who had come to rescue Israel.”</span> <span class="ref">Luke 24:19–21 (NLT)</span> They were not faithless; they loved Jesus and grieved His death. </p><p>They even knew about the empty tomb and the women’s report of angels (Luke 24:22–24). But knowing the facts had not yet become resurrection faith, and the cross still looked to them like the end of the story. Jesus answered them with truth: <span class="scrip">“You foolish people! You find it so hard to believe all that the prophets wrote in the Scriptures. Wasn’t it clearly predicted that the Messiah would have to suffer all these things before entering his glory?”</span> <span class="ref">Luke 24:25–26 (NLT)</span> Ellen G. White tells us the disciples wondered who this Stranger could be, <span class="egw">“that He should penetrate to their very souls, and speak with such earnestness, tenderness, and sympathy, and with such hopefulness”</span> <span class="egw-ref">The Desire of Ages, p. 796 · DA 796.3</span>, and she explains what had gone wrong: <span class="egw">“Their expectation of a Messiah who was to take His throne and kingly power in accordance with the desires of men had been misleading”</span> <span class="egw-ref">The Desire of Ages, p. 799 · DA 799.3</span>. </p><p class="thesis"><strong>Sometimes “we had hoped” reveals not that God has failed, but that our understanding of His work is incomplete.</strong></p></section>
 
-    <p>Notice what Jesus did before He let them see Him. <span class="scrip">“Then Jesus took them through the writings of Moses and all the prophets, explaining from all the Scriptures the things concerning himself.”</span> <span class="ref">Luke 24:27 (NLT)</span> Luke does not list the passages, but he tells us the subject: the Messiah’s suffering and glory. Ellen G. White shows why the order matters: <span class="egw" data-wa="block">“Had He first made Himself known to them, their hearts would have been satisfied. In the fullness of their joy they would have hungered for nothing more. But it was necessary for them to understand the witness borne to Him by the types and prophecies of the Old Testament. Upon these their faith must be established. Christ performed no miracle to convince them, but it was His first work to explain the Scriptures. They had looked upon His death as the destruction of all their hopes. Now He showed from the prophets that this was the very strongest evidence for their faith.”</span> <span class="egw-ref">The Desire of Ages, p. 796 · DA 796.4</span> The road had not changed, but the meaning of the road changed when Christ opened the Scriptures. That same night He would tell the gathered disciples, <span class="scrip">“Yes, it was written long ago that the Messiah would suffer and die and rise from the dead on the third day.”</span> <span class="ref">Luke 24:46 (NLT)</span> The cross was not the collapse of God’s plan; it was God’s plan. Is Scripture allowed to correct the meaning we have given to our disappointments, or does our first reading of events get the final word? <strong>Their hearts began to change before their eyes were opened.</strong></p>
+    <section class="mv"><p>Notice what Jesus did before He let them see Him. <span class="scrip">“Then Jesus took them through the writings of Moses and all the prophets, explaining from all the Scriptures the things concerning himself.”</span> <span class="ref">Luke 24:27 (NLT)</span> Luke does not list the passages, but he tells us the subject: the Messiah’s suffering and glory. Ellen G. White shows why the order matters: </p><blockquote class="egw-block"><span class="egw" data-wa="block">“Had He first made Himself known to them, their hearts would have been satisfied. In the fullness of their joy they would have hungered for nothing more. But it was necessary for them to understand the witness borne to Him by the types and prophecies of the Old Testament. Upon these their faith must be established. Christ performed no miracle to convince them, but it was His first work to explain the Scriptures. They had looked upon His death as the destruction of all their hopes. Now He showed from the prophets that this was the very strongest evidence for their faith.”</span> <span class="egw-ref">The Desire of Ages, p. 796 · DA 796.4</span></blockquote><p> The road had not changed, but the meaning of the road changed when Christ opened the Scriptures. That same night He would tell the gathered disciples, <span class="scrip">“Yes, it was written long ago that the Messiah would suffer and die and rise from the dead on the third day.”</span> <span class="ref">Luke 24:46 (NLT)</span> The cross was not the collapse of God’s plan; it was God’s plan. Is Scripture allowed to correct the meaning we have given to our disappointments, or does our first reading of events get the final word? </p><p class="thesis"><strong>Their hearts began to change before their eyes were opened.</strong></p></section>
 
-    <p>At Emmaus, Jesus <span class="scrip">“acted as if he were going on, but they begged him, ‘Stay the night with us, since it is getting late.’ So he went home with them.”</span> <span class="ref">Luke 24:28–29 (NLT)</span> Ellen G. White draws the lesson: <span class="egw" data-wa="block">“Christ never forces His company upon anyone. He interests Himself in those who need Him. Gladly will He enter the humblest home, and cheer the lowliest heart.”</span> <span class="egw-ref">The Desire of Ages, p. 800 · DA 800.3</span> At the table <span class="scrip">“he took the bread and blessed it. Then he broke it and gave it to them. Suddenly, their eyes were opened, and they recognized him. And at that moment he disappeared!”</span> <span class="ref">Luke 24:30–31 (NLT)</span> Ellen G. White completes the picture: <span class="egw" data-wa="block">“They look again, and lo, they see in His hands the print of nails. Both exclaim at once, It is the Lord Jesus! He has risen from the dead!”</span> <span class="egw-ref">The Desire of Ages, p. 800 · DA 800.4</span> Only now did they understand what had been happening all along: <span class="scrip">“Didn’t our hearts burn within us as he talked with us on the road and explained the Scriptures to us?”</span> <span class="ref">Luke 24:32 (NLT)</span> The burning was not mere excitement; it was Christ speaking and Scripture opening. And <span class="scrip">“within the hour they were on their way back to Jerusalem”</span> <span class="ref">Luke 24:33 (NLT)</span> to tell the others (Luke 24:35). So the question comes to us: have I mistaken my inability to see what Christ is doing for evidence that He is absent? Grief is not unbelief, and confusion is not abandonment. Ellen G. White applies the Emmaus road to believers today: <span class="egw">“How few realize that Jesus, unseen, is walking by their side!”</span> <span class="egw-ref">Testimonies to Ministers and Gospel Workers, p. 88 · TM 88.1</span> That assurance rests on Christ’s own promise: <span class="scrip">“And be sure of this: I am with you always, even to the end of the age.”</span> <span class="ref">Matthew 28:20 (NLT)</span> The One who walked beside them was not a comforting stranger; He was the crucified and risen Saviour whose death and resurrection fulfilled God’s saving purpose. The story does not promise that every hard road will be quickly explained. It gives something deeper: Christ is risen, His Word is true, and His presence does not depend on our perception. <strong>Bring Christ the road you do not understand. Let His Word reshape your hope, trust the risen Saviour, and carry His resurrection truth to someone who needs it.</strong></p>
+    <section class="mv"><p>At Emmaus, Jesus <span class="scrip">“acted as if he were going on, but they begged him, ‘Stay the night with us, since it is getting late.’ So he went home with them.”</span> <span class="ref">Luke 24:28–29 (NLT)</span> Ellen G. White draws the lesson: <span class="egw" data-wa="block">“Christ never forces His company upon anyone. He interests Himself in those who need Him. Gladly will He enter the humblest home, and cheer the lowliest heart.”</span> <span class="egw-ref">The Desire of Ages, p. 800 · DA 800.3</span> At the table <span class="scrip">“he took the bread and blessed it. Then he broke it and gave it to them. Suddenly, their eyes were opened, and they recognized him. And at that moment he disappeared!”</span> <span class="ref">Luke 24:30–31 (NLT)</span></p><p> Ellen G. White completes the picture: <span class="egw" data-wa="block">“They look again, and lo, they see in His hands the print of nails. Both exclaim at once, It is the Lord Jesus! He has risen from the dead!”</span> <span class="egw-ref">The Desire of Ages, p. 800 · DA 800.4</span> Only now did they understand what had been happening all along: <span class="scrip">“Didn’t our hearts burn within us as he talked with us on the road and explained the Scriptures to us?”</span> <span class="ref">Luke 24:32 (NLT)</span> The burning was not mere excitement; it was Christ speaking and Scripture opening. </p><p>And <span class="scrip">“within the hour they were on their way back to Jerusalem”</span> <span class="ref">Luke 24:33 (NLT)</span> to tell the others (Luke 24:35). So the question comes to us: have I mistaken my inability to see what Christ is doing for evidence that He is absent? Grief is not unbelief, and confusion is not abandonment. Ellen G. White applies the Emmaus road to believers today: <span class="egw">“How few realize that Jesus, unseen, is walking by their side!”</span> <span class="egw-ref">Testimonies to Ministers and Gospel Workers, p. 88 · TM 88.1</span></p><p> That assurance rests on Christ’s own promise: <span class="scrip">“And be sure of this: I am with you always, even to the end of the age.”</span> <span class="ref">Matthew 28:20 (NLT)</span> The One who walked beside them was not a comforting stranger; He was the crucified and risen Saviour whose death and resurrection fulfilled God’s saving purpose. The story does not promise that every hard road will be quickly explained. It gives something deeper: Christ is risen, His Word is true, and His presence does not depend on our perception. </p><p class="thesis"><strong>Bring Christ the road you do not understand. Let His Word reshape your hope, trust the risen Saviour, and carry His resurrection truth to someone who needs it.</strong></p></section>
 
   </div>
 
   <div class="divider" aria-hidden="true">
     <span class="line"></span>
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <svg width="26" height="26" viewbox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"></path></svg>
     <span class="line right"></span>
   </div>
 
@@ -314,9 +433,34 @@
   <p class="sources"><span class="label">Sources and Further Reading</span>Scripture: Luke 24:13–35, especially 24:13–24, 24:25–27 and 24:28–35 (context Luke 24:1–12; 24:36–49; Mark 16:12–13); Matthew 28:20 (NLT). Ellen G. White: <em>The Desire of Ages</em>, chapter 83, “The Walk to Emmaus,” pp. 795–801 (DA 795.2, 796.3, 796.4, 799.3, 800.3, 800.4); <em>Testimonies to Ministers and Gospel Workers</em>, pp. 87–88 (TM 87.3–88.1), whose wording also appears in <em>Counsels to Parents, Teachers, and Students</em>, pp. 341–342, and <em>Manuscript Releases</em>, vol. 14, pp. 125–126, all drawn from Letter 57, 1895.</p>
 
   
-  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/QtNHg97gtjA" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">&#9654;</span>Watch the Short</a><p class="note">On YouTube as &ldquo;When You Can’t See Jesus—But He’s Still There&rdquo; &mdash; from the channel <em>I Can Still Believe</em>.</p></div>
+  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/QtNHg97gtjA" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">▶</span>Watch the Short</a><p class="note">On YouTube as “When You Can’t See Jesus—But He’s Still There” — from the channel <em>I Can Still Believe</em>.</p></div>
 
   <div class="sdg">Soli Deo Gloria</div>
 </article>
+<nav class="footnav"><a href="./">&#8592;&nbsp;All devotions</a><a href="#top">Back to top&nbsp;&#8593;</a></nav>
+<button class="lamp" id="lamp" type="button" aria-label="Night reading">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path class="moon" d="M20 13.4A8.2 8.2 0 1 1 10.6 4a6.4 6.4 0 0 0 9.4 9.4Z"/>
+  </svg>
+</button>
+<script>
+(function(){
+  var root=document.documentElement, lamp=document.getElementById('lamp');
+  try{ if(localStorage.getItem('devo-theme')==='night') root.setAttribute('data-theme','night'); }catch(e){}
+  if(lamp){ lamp.addEventListener('click',function(){
+    var on = root.getAttribute('data-theme')==='night';
+    if(on){ root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme','night'); }
+    try{ localStorage.setItem('devo-theme', on?'day':'night'); }catch(e){}
+  }); }
+  var bar=document.getElementById('prog');
+  function tick(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.width=(h>0?Math.min(100,(window.scrollY/h)*100):0)+'%';
+  }
+  if(bar){ window.addEventListener('scroll',tick,{passive:true});
+           window.addEventListener('resize',tick); tick(); }
+})();
+</script>
 </body>
 </html>

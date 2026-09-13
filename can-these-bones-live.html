@@ -3,143 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Can These Bones Live? &mdash; Today's Devotion</title>
+<title>Can These Bones Live? — Today's Devotion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
 <style>
   :root{
-    --parchment:#f3ead4;
-    --parchment-deep:#eadfc2;
-    --ink:#3b2d18;
-    --ink-soft:#5a4629;
-    --gold:#a67c1e;
-    --gold-bright:#c9a227;
-    --gold-pale:#e3cf95;
-    --wine:#7a3b2e;
+    --bg1:#f8f2e1; --bg2:#f3ead4; --bg3:#e8dcbd;
+    --page-bg:rgba(255,252,241,.62);
+    --page-border:#a67c1e; --page-outline:#e3cf95;
+    --ink:#33281a; --ink-soft:#5a4629;
+    --gold:#a67c1e; --gold-bright:#c9a227; --gold-pale:#e3cf95;
+    --wine:#7a3b2e; --wine-solid:#7a3b2e; --wine-edge:#5d2b20;
+    --card1:rgba(255,250,232,.92); --card2:rgba(247,238,213,.92);
+    --emph:#7c5a12;
+    --num1:#f5e7bd; --num2:#e3cf95; --numfg:#7c5a12;
+    --shadow:rgba(90,70,30,.16);
+    --grain:.30;
+    --rule:rgba(166,124,30,.28);
+  }
+  :root[data-theme="night"]{
+    --bg1:#1a160f; --bg2:#15120c; --bg3:#100e09;
+    --page-bg:rgba(44,37,26,.42);
+    --page-border:#7d6524; --page-outline:#463a19;
+    --ink:#e9dfc8; --ink-soft:#c4b491;
+    --gold:#c2a03a; --gold-bright:#e0bf58; --gold-pale:#6a5828;
+    --wine:#e2a891; --wine-solid:#8a4537; --wine-edge:#6b3428;
+    --card1:rgba(56,47,32,.6); --card2:rgba(46,39,27,.6);
+    --emph:#e2c775;
+    --num1:#4c4024; --num2:#3a311b; --numfg:#e8ce7f;
+    --shadow:rgba(0,0,0,.55);
+    --grain:.16;
+    --rule:rgba(194,160,58,.26);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{
-    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    background:radial-gradient(ellipse at 50% 0%, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%);
+    background-attachment:fixed;
     color:var(--ink);
     font-family:'Lora',serif;
-    line-height:1.85;
-    padding:34px 14px 60px;
+    line-height:1.78;
+    padding:30px 14px 28px;
     position:relative;
+    -webkit-font-smoothing:antialiased;
+    transition:background-color .25s ease, color .25s ease;
   }
-  /* aged-paper grain */
+  /* aged-paper grain, lighter than before */
   body::before{
     content:"";
     position:fixed;inset:0;
     pointer-events:none;
-    opacity:.5;
+    opacity:var(--grain);
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
     z-index:2;
   }
-  .page{
-    max-width:760px;
-    margin:0 auto;
-    background:rgba(255,252,240,.55);
-    border:1.5px solid var(--gold);
-    outline:1px solid var(--gold-pale);
-    outline-offset:6px;
-    padding:64px 52px 56px;
-    position:relative;
-    box-shadow:0 18px 50px rgba(90,70,30,.18);
+
+  /* reading progress */
+  .progress{
+    position:fixed;top:0;left:0;height:3px;width:0;
+    background:linear-gradient(90deg,var(--gold-pale),var(--gold-bright));
+    z-index:12;transition:width .08s linear;
   }
-  @media(max-width:620px){.page{padding:52px 24px 44px;}}
-  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
-  .corner.tl{top:10px;left:10px;}
-  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
-  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
-  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+
+  .page{
+    max-width:720px;
+    margin:0 auto;
+    background:var(--page-bg);
+    border:1.5px solid var(--page-border);
+    outline:1px solid var(--page-outline);
+    outline-offset:6px;
+    padding:62px 56px 54px;
+    position:relative;
+    box-shadow:0 18px 50px var(--shadow);
+  }
+  @media(max-width:620px){.page{padding:48px 22px 40px;} body{padding:22px 11px 24px;}}
+
+  /* corners, quieter: smaller and lighter than before */
+  .corner{position:absolute;width:44px;height:44px;color:var(--gold);opacity:.55;}
+  .corner.tl{top:9px;left:9px;}
+  .corner.tr{top:9px;right:9px;transform:scaleX(-1);}
+  .corner.bl{bottom:9px;left:9px;transform:scaleY(-1);}
+  .corner.br{bottom:9px;right:9px;transform:scale(-1,-1);}
+
   .eyebrow{
     font-family:'Cinzel',serif;
-    font-size:.82rem;
-    letter-spacing:.42em;
+    font-size:.74rem;
+    letter-spacing:.34em;
     text-transform:uppercase;
     color:var(--gold);
     text-align:center;
-    margin-bottom:18px;
+    margin-bottom:16px;
   }
   h1{
     font-family:'Playfair Display',serif;
     font-weight:700;
-    font-size:clamp(2.1rem,5.4vw,3rem);
+    font-size:clamp(2rem,5vw,2.8rem);
+    line-height:1.18;
     text-align:center;
     color:var(--ink);
-    letter-spacing:.01em;
-    margin-bottom:26px;
+    letter-spacing:.005em;
+    margin-bottom:14px;
   }
+  .meta{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.16em;
+    font-size:.78rem;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:28px;
+  }
+  .meta span{opacity:.55;margin:0 7px;}
+
   /* Ellen G. White — companion ink */
   .egw{color:var(--wine);}
   .egw-ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.08em;
-    font-size:.88em;
+    letter-spacing:.07em;
+    font-size:.85em;
     color:var(--wine);
   }
-  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .egw-ref::before{content:"\2712";margin-right:.3em;font-size:.9em;}
+  /* long quotations stand as blocks */
+  blockquote.egw-block{
+    margin:26px 0 28px;
+    padding:2px 0 2px 22px;
+    border-left:2px solid var(--wine);
+    color:var(--wine);
+    font-size:1.01rem;
+    line-height:1.72;
+  }
+  blockquote.egw-block .egw-ref{
+    display:block;margin-top:9px;font-size:.78rem;
+    letter-spacing:.04em;line-height:1.55;opacity:.92;
+    text-wrap:pretty;          /* keeps a lone word off the last line */
+  }
+  @media(max-width:620px){blockquote.egw-block{padding-left:16px;}}
+
   .divider{
     display:flex;align-items:center;justify-content:center;
-    gap:14px;margin:30px 0;color:var(--gold);
+    gap:14px;margin:28px 0;color:var(--gold);
   }
   .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
   .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
   .divider svg{flex-shrink:0;}
+
   .verse-card{
     border:1px solid var(--gold-pale);
-    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
-    padding:30px 34px 26px;
+    background:linear-gradient(180deg,var(--card1),var(--card2));
+    padding:28px 32px 24px;
     text-align:center;
     margin:0 auto 8px;
     position:relative;
   }
   .verse-card .label{
     font-family:'Cinzel',serif;
-    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
-    color:var(--gold);margin-bottom:14px;
+    font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:13px;
   }
   .verse-card .scripture{
     font-family:'Cormorant Garamond',serif;
     font-style:italic;
-    font-size:1.42rem;
-    line-height:1.65;
+    font-size:1.38rem;
+    line-height:1.62;
     color:var(--ink-soft);
   }
   .verse-card .ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.14em;
-    font-size:.95rem;
+    letter-spacing:.13em;
+    font-size:.92rem;
     color:var(--gold);
-    margin-top:14px;
+    margin-top:13px;
   }
-  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
-  .body-text p:first-of-type::first-letter{
+
+  /* body — ragged right, book measure */
+  .body-text{margin-top:4px;}
+  .body-text p{
+    margin-bottom:1.15em;
+    font-size:1.075rem;
+    text-align:left;
+    hyphens:none;
+  }
+  .body-text .mv{margin-bottom:6px;}
+  .body-text > .mv:first-child > p:first-child::first-letter{
     font-family:'Playfair Display',serif;
-    font-size:3.9em;
+    font-size:3.7em;
     float:left;
     line-height:.82;
-    padding:6px 12px 0 0;
+    padding:5px 11px 0 0;
     color:var(--gold);
   }
-  .body-text strong{color:#7c5a12;font-weight:600;}
+  .body-text strong{color:var(--emph);font-weight:600;}
   .scrip{font-style:italic;color:var(--ink-soft);}
   .ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.1em;
-    font-size:.92em;
+    letter-spacing:.09em;
+    font-size:.9em;
     color:var(--gold);
     white-space:nowrap;
   }
+
+  /* the closing sentence of each movement, promoted */
+  .body-text p.thesis{
+    text-align:center;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.32rem;
+    line-height:1.55;
+    color:var(--ink);
+    margin:26px auto 34px;
+    max-width:34em;
+    padding-top:22px;
+    position:relative;
+  }
+  .body-text p.thesis::before{
+    content:"";
+    position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:58px;height:1px;background:var(--gold);opacity:.8;
+  }
+  .body-text p.thesis strong{font-weight:inherit;color:inherit;}
+  @media(max-width:620px){.body-text p.thesis{font-size:1.2rem;}}
+
   h2.takeaways{
     font-family:'Cinzel',serif;
     font-weight:600;
-    font-size:1.35rem;
-    letter-spacing:.18em;
+    font-size:1.22rem;
+    letter-spacing:.16em;
     text-transform:uppercase;
     text-align:center;
     color:var(--ink);
@@ -149,30 +242,45 @@
   ol.takeaway-list li{
     counter-increment:tk;
     position:relative;
-    padding-left:62px;
+    padding-left:54px;
     margin-bottom:20px;
-    font-size:1.03rem;
+    font-size:1.02rem;
   }
   ol.takeaway-list li::before{
     content:counter(tk);
-    position:absolute;left:0;top:2px;
-    width:42px;height:42px;
+    position:absolute;left:0;top:3px;
+    width:36px;height:36px;
     border-radius:50%;
     border:1.5px solid var(--gold);
-    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
-    color:#7c5a12;
+    background:radial-gradient(circle at 35% 30%,var(--num1),var(--num2));
+    color:var(--numfg);
     font-family:'Cinzel',serif;
     font-weight:600;
-    font-size:1.05rem;
+    font-size:.98rem;
     display:flex;align-items:center;justify-content:center;
-    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+    box-shadow:0 2px 6px var(--shadow), inset 0 1px 2px rgba(255,255,255,.35);
   }
-  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  ol.takeaway-list li strong{color:var(--emph);font-weight:600;}
+
+  .sources{
+    margin-top:34px;
+    font-size:.88rem;
+    line-height:1.7;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+  .sources .label{
+    font-family:'Cinzel',serif;
+    font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);display:block;margin-bottom:4px;
+  }
+
+  /* Watch It — unchanged treatment, tokenised for night reading */
   .watch{
     margin-top:38px;
     text-align:center;
     border:1px solid var(--gold);
-    background:linear-gradient(180deg,rgba(255,250,232,.75),rgba(247,238,213,.75));
+    background:linear-gradient(180deg,var(--card1),var(--card2));
     padding:26px 22px 22px;
   }
   .watch .label{
@@ -187,8 +295,8 @@
     letter-spacing:.08em;
     font-size:1.02rem;
     color:#fdf6e6;
-    background:var(--wine);
-    border:1px solid #5d2b20;
+    background:var(--wine-solid);
+    border:1px solid var(--wine-edge);
     text-decoration:none;
     padding:14px 26px;
     margin:6px 7px;
@@ -210,55 +318,78 @@
     .watch a{display:block;margin:9px 0;padding:15px 18px;}
     .watch{padding:22px 16px 18px;}
   }
+
   .sdg{
     font-family:'Pinyon Script',cursive;
-    font-size:2.5rem;
+    font-size:2.4rem;
     color:var(--gold);
     text-align:center;
     margin-top:40px;
   }
+
+  /* navigation */
+  .allnav,.footnav{max-width:720px;margin:0 auto 16px;text-align:center;}
+  .footnav{margin:26px auto 8px;display:flex;justify-content:center;gap:26px;}
+  .allnav a,.footnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.16em;
+    font-size:.8rem;color:var(--gold);text-decoration:none;
+    border-bottom:1px solid var(--rule);padding-bottom:2px;
+  }
+  .allnav a:hover,.footnav a:hover{border-bottom-color:var(--gold);}
+
+  /* night-reading toggle */
+  .lamp{
+    position:fixed;right:16px;bottom:16px;z-index:11;
+    width:44px;height:44px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--card1);
+    border:1px solid var(--gold);
+    color:var(--gold);
+    cursor:pointer;
+    box-shadow:0 4px 14px var(--shadow);
+    opacity:.72;
+    transition:opacity .18s ease, transform .18s ease;
+  }
+  .lamp:hover,.lamp:focus-visible{opacity:1;transform:translateY(-2px);outline:none;}
+  .lamp svg{width:20px;height:20px;}
+  @media print{.lamp,.progress,.allnav,.footnav{display:none;}}
 </style>
 </head>
 <body>
-<style>
-  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
-  .allnav a{
-    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
-    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
-    padding-bottom:2px;
-  }
-  .allnav a:hover{border-bottom-color:#a67c1e;}
-</style>
-<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+<div class="progress" id="prog"></div>
+<a id="top"></a>
+<nav class="allnav"><a href="./">← All devotions</a></nav>
 
 <article class="page">
-  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner tl" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner tr" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner bl" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner br" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
 
     <div class="eyebrow">Today's Devotion</div>
   <h1>Can These Bones Live?</h1>
+
+  <div class="meta">Ezekiel 37 <span>·</span> 24 min read</div>
 
   <section class="verse-card">
     <div class="label">Key Verse</div>
@@ -268,34 +399,34 @@
 
   <div class="divider" aria-hidden="true">
     <span class="line"></span>
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <svg width="26" height="26" viewbox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"></path></svg>
     <span class="line right"></span>
   </div>
 
   <div class="body-text">
-    <p>The bones moved. They connected. Bodies formed. Yet Ezekiel 37 pauses over one unsettling fact: there was still no breath in them. Before we reach that moment, we must walk where Ezekiel walked. He was a priest living among the exiles of Judah in Babylon; his book opens <span class="scrip">“while I was with the Judean exiles beside the Kebar River in Babylon,”</span> <span class="ref">Ezekiel 1:1 (NLT)</span> and by the time of this vision a survivor had already arrived with the worst news of all: <span class="scrip">“The city has fallen!”</span> <span class="ref">Ezekiel 33:21 (NLT)</span> Jerusalem was gone, the temple was gone, and the people were far from home. Into that setting the vision comes. <span class="scrip">“The Lord took hold of me, and I was carried away by the Spirit of the Lord to a valley filled with bones. He led me all around among the bones that covered the valley floor. They were scattered everywhere across the ground and were completely dried out.”</span> <span class="ref">Ezekiel 37:1–2 (NLT)</span> Notice first what kind of scene this is. Ezekiel was carried by the Spirit, and God Himself will explain the picture a few verses later; this is a prophetic vision, not a battlefield the prophet stumbled upon during a journey. Scripture gives the valley no location, the bones no names, and the dead no history, and we will add none. Notice next how God handled His prophet. He did not show him the valley from a safe distance and move on. Ezekiel was placed in the middle of it and led all around among the bones, until he had seen that they were numerous, scattered and completely dried out—long dead, with nothing left to work with. Ellen White describes the scene as Ezekiel would have seen it: “At one time the prophet Ezekiel was in vision set down in the midst of a large valley. Before him lay a dismal scene. Throughout its whole extent the valley was covered with the bones of the dead,” and she adds, <span class="egw">“The prophet could see no hope of life being imparted to them”</span> <span class="egw-ref">The SDA Bible Commentary, vol. 4, Ellen G. White Comments on Ezekiel 37, p. 1165 · 4BC 1165.2; from Manuscript 85, 1903</span>. There is something important here for everyone who ministers to hurting people. Faith is not denial. Before God spoke a single word of life, He made sure His prophet had looked honestly at the full extent of death. A pastor, a parent or a friend who wants to help someone in a valley must first be willing to walk through it with them, to listen before speaking, and to refuse the easy slogan that skips over grief. God is not frightened by the places that appear most lifeless, and divine hope does not require us to pretend that the valley is already alive. <strong>God’s hope is strong enough to look directly at the whole valley.</strong></p>
+    <section class="mv"><p>The bones moved. They connected. Bodies formed. Yet Ezekiel 37 pauses over one unsettling fact: there was still no breath in them. Before we reach that moment, we must walk where Ezekiel walked. He was a priest living among the exiles of Judah in Babylon; his book opens <span class="scrip">“while I was with the Judean exiles beside the Kebar River in Babylon,”</span> <span class="ref">Ezekiel 1:1 (NLT)</span> and by the time of this vision a survivor had already arrived with the worst news of all: <span class="scrip">“The city has fallen!”</span> <span class="ref">Ezekiel 33:21 (NLT)</span></p><p> Jerusalem was gone, the temple was gone, and the people were far from home. Into that setting the vision comes. <span class="scrip">“The Lord took hold of me, and I was carried away by the Spirit of the Lord to a valley filled with bones. He led me all around among the bones that covered the valley floor. They were scattered everywhere across the ground and were completely dried out.”</span> <span class="ref">Ezekiel 37:1–2 (NLT)</span> Notice first what kind of scene this is. Ezekiel was carried by the Spirit, and God Himself will explain the picture a few verses later; this is a prophetic vision, not a battlefield the prophet stumbled upon during a journey. </p><p>Scripture gives the valley no location, the bones no names, and the dead no history, and we will add none. Notice next how God handled His prophet. He did not show him the valley from a safe distance and move on. Ezekiel was placed in the middle of it and led all around among the bones, until he had seen that they were numerous, scattered and completely dried out—long dead, with nothing left to work with. Ellen White describes the scene as Ezekiel would have seen it: “At one time the prophet Ezekiel was in vision set down in the midst of a large valley. Before him lay a dismal scene. Throughout its whole extent the valley was covered with the bones of the dead,” and she adds, <span class="egw">“The prophet could see no hope of life being imparted to them”</span> <span class="egw-ref">The SDA Bible Commentary, vol. 4, Ellen G. White Comments on Ezekiel 37, p. 1165 · 4BC 1165.2; from Manuscript 85, 1903</span>. </p><p>There is something important here for everyone who ministers to hurting people. Faith is not denial. Before God spoke a single word of life, He made sure His prophet had looked honestly at the full extent of death. A pastor, a parent or a friend who wants to help someone in a valley must first be willing to walk through it with them, to listen before speaking, and to refuse the easy slogan that skips over grief. God is not frightened by the places that appear most lifeless, and divine hope does not require us to pretend that the valley is already alive. </p><p class="thesis"><strong>God’s hope is strong enough to look directly at the whole valley.</strong></p></section>
 
-    <p>Then comes the question this devotion is named for. <span class="scrip">“Then he asked me, ‘Son of man, can these bones become living people again?’ ‘O Sovereign Lord,’ I replied, ‘you alone know the answer to that.’”</span> <span class="ref">Ezekiel 37:3 (NLT)</span> God addresses Ezekiel as “Son of man,” the title He uses for him throughout the book, a quiet reminder that the prophet is a human being standing before the Sovereign Lord. And God does not ask what the valley looks like; Ezekiel can see that. He asks whether the bones can live. The human answer is obvious, and Ezekiel does not give it. Neither does he give the opposite answer. He does not say “no,” which would have been unbelief, and he does not say “yes,” which would have been presumption, as though he already knew what God intended to do. He refuses to answer from human calculation at all and places the impossible where it belongs—in the hands of the Sovereign Lord. That is not evasion, cynicism or a failure of faith. It is humility before mystery, and it is exactly the posture Ellen White commends when she applies the question to us: <span class="egw">“Were the question put to us, ‘Son of man, can these bones live?’ our answer would be only the confession of ignorance, ‘O Lord, Thou knowest.’ To all appearance there is nothing to lead us to hope for their restoration”</span> <span class="egw-ref">The SDA Bible Commentary, vol. 4, “A Vision of Our Work,” p. 1165 · 4BC 1165.3; originally The Review and Herald, January 17, 1893, “The Church Must Be Quickened,” par. 6</span>. Her wording follows the older translation from which our title is drawn; the NLT phrases the same question, “can these bones become living people again?” Either way, the answer is the same: only God knows. This matters, because most of us are quick to pronounce final verdicts. We look at a person, a marriage, a congregation, a prodigal child, or our own heart, and we decide the case is closed. Ezekiel teaches us the limit of human prognosis. He did not deny the reality of death; God had not asked him to. He was asked whether death was beyond God’s power, and he would not say that it was. At the same time, to say that only God knows is never a reason to do nothing. The very next verse is a command, and Ezekiel obeys it. Dependence and obedience belong together. Have I mistaken human impossibility for divine finality? Can I look honestly at what is broken without deciding that God has nothing more to say? <strong>Ezekiel did not know what the bones could become, but he knew who held the answer.</strong></p>
+    <section class="mv"><p>Then comes the question this devotion is named for. <span class="scrip">“Then he asked me, ‘Son of man, can these bones become living people again?’ ‘O Sovereign Lord,’ I replied, ‘you alone know the answer to that.’”</span> <span class="ref">Ezekiel 37:3 (NLT)</span> God addresses Ezekiel as “Son of man,” the title He uses for him throughout the book, a quiet reminder that the prophet is a human being standing before the Sovereign Lord. And God does not ask what the valley looks like; Ezekiel can see that. He asks whether the bones can live. </p><p>The human answer is obvious, and Ezekiel does not give it. Neither does he give the opposite answer. He does not say “no,” which would have been unbelief, and he does not say “yes,” which would have been presumption, as though he already knew what God intended to do. He refuses to answer from human calculation at all and places the impossible where it belongs—in the hands of the Sovereign Lord. That is not evasion, cynicism or a failure of faith. It is humility before mystery, and it is exactly the posture Ellen White commends when she applies the question to us: </p><blockquote class="egw-block"><span class="egw">“Were the question put to us, ‘Son of man, can these bones live?’ our answer would be only the confession of ignorance, ‘O Lord, Thou knowest.’ To all appearance there is nothing to lead us to hope for their restoration”</span>.  <span class="egw-ref">The SDA Bible Commentary, vol. 4, “A Vision of Our Work,” p. 1165 · 4BC 1165.3; originally The Review and Herald, January 17, 1893, “The Church Must Be Quickened,” par. 6</span></blockquote><p>Her wording follows the older translation from which our title is drawn; the NLT phrases the same question, “can these bones become living people again?” Either way, the answer is the same: only God knows. This matters, because most of us are quick to pronounce final verdicts. We look at a person, a marriage, a congregation, a prodigal child, or our own heart, and we decide the case is closed. Ezekiel teaches us the limit of human prognosis. He did not deny the reality of death; God had not asked him to. </p><p>He was asked whether death was beyond God’s power, and he would not say that it was. At the same time, to say that only God knows is never a reason to do nothing. The very next verse is a command, and Ezekiel obeys it. Dependence and obedience belong together. Have I mistaken human impossibility for divine finality? Can I look honestly at what is broken without deciding that God has nothing more to say? </p><p class="thesis"><strong>Ezekiel did not know what the bones could become, but he knew who held the answer.</strong></p></section>
 
-    <p>What God asks next sounds absurd. <span class="scrip">“Then he said to me, ‘Speak a prophetic message to these bones and say, “Dry bones, listen to the word of the Lord! This is what the Sovereign Lord says: Look! I am going to put breath into you and make you live again! I will put flesh and muscles on you and cover you with skin. I will put breath into you, and you will come to life. Then you will know that I am the Lord.”’”</span> <span class="ref">Ezekiel 37:4–6 (NLT)</span> Bones cannot listen. That is the point. God’s word is addressed to an audience that cannot respond by its own strength, and it is addressed to them anyway, because the power to respond will come with the word itself. Read the message again and notice who is doing everything: “I am going to put breath into you,” “I will put flesh and muscles on you,” “I will put breath into you.” It is not a motivational suggestion; it is a promise, spoken in the first person by the God who keeps His promises. And it ends with the purpose that will sound again and again in this chapter: “Then you will know that I am the Lord.” Restoration is not the final goal. Knowing the Lord is. This is how God’s word works. <span class="scrip">“It is the same with my word. I send it out, and it always produces fruit. It will accomplish all I want it to, and it will prosper everywhere I send it.”</span> <span class="ref">Isaiah 55:11 (NLT)</span> Notice, too, that Ezekiel did not invent the message. He did not select an outcome he would have liked and announce it; God gave him the words and commanded him to speak them, and the text is careful to say so: <span class="scrip">“So I spoke this message, just as he told me.”</span> <span class="ref">Ezekiel 37:7 (NLT)</span> This vision gives no one permission to “prophesy” a private wish into existence. It calls the church to proclaim God’s revealed word faithfully, even where nothing seems to be listening. Ellen White draws that call directly from this scene: <span class="egw">“Yet nevertheless the word of the prophecy must be spoken even to those who are like the dry bones in the valley. We are in no wise to be deterred from fulfilling our commission by the listlessness, the dullness, the lack of spiritual perception, in those upon whom the Word of God is brought to bear”</span> <span class="egw-ref">The SDA Bible Commentary, vol. 4, p. 1165 · 4BC 1165.3</span>. Faithful proclamation comes before visible results, and sometimes long before them. The parent who keeps praying and speaking truth to an unresponsive teenager, the member who keeps visiting a neighbour who never comes to church, the teacher who keeps opening the Bible in a class that seems bored—each is doing what Ezekiel did. <strong>The power was not in Ezekiel inventing words; it was in Ezekiel faithfully declaring God’s word.</strong></p>
+    <section class="mv"><p>What God asks next sounds absurd. <span class="scrip">“Then he said to me, ‘Speak a prophetic message to these bones and say, “Dry bones, listen to the word of the Lord! This is what the Sovereign Lord says: Look! I am going to put breath into you and make you live again! I will put flesh and muscles on you and cover you with skin. I will put breath into you, and you will come to life. Then you will know that I am the Lord.”’”</span> <span class="ref">Ezekiel 37:4–6 (NLT)</span></p><p> Bones cannot listen. That is the point. God’s word is addressed to an audience that cannot respond by its own strength, and it is addressed to them anyway, because the power to respond will come with the word itself. Read the message again and notice who is doing everything: “I am going to put breath into you,” “I will put flesh and muscles on you,” “I will put breath into you.” It is not a motivational suggestion; it is a promise, spoken in the first person by the God who keeps His promises. </p><p>And it ends with the purpose that will sound again and again in this chapter: “Then you will know that I am the Lord.” Restoration is not the final goal. Knowing the Lord is. This is how God’s word works. <span class="scrip">“It is the same with my word. I send it out, and it always produces fruit. It will accomplish all I want it to, and it will prosper everywhere I send it.”</span> <span class="ref">Isaiah 55:11 (NLT)</span> Notice, too, that Ezekiel did not invent the message. He did not select an outcome he would have liked and announce it; God gave him the words and commanded him to speak them, and the text is careful to say so: <span class="scrip">“So I spoke this message, just as he told me.”</span> <span class="ref">Ezekiel 37:7 (NLT)</span></p><p> This vision gives no one permission to “prophesy” a private wish into existence. It calls the church to proclaim God’s revealed word faithfully, even where nothing seems to be listening. Ellen White draws that call directly from this scene: </p><blockquote class="egw-block"><span class="egw">“Yet nevertheless the word of the prophecy must be spoken even to those who are like the dry bones in the valley. We are in no wise to be deterred from fulfilling our commission by the listlessness, the dullness, the lack of spiritual perception, in those upon whom the Word of God is brought to bear”</span>.  <span class="egw-ref">The SDA Bible Commentary, vol. 4, p. 1165 · 4BC 1165.3</span></blockquote><p>Faithful proclamation comes before visible results, and sometimes long before them. The parent who keeps praying and speaking truth to an unresponsive teenager, the member who keeps visiting a neighbour who never comes to church, the teacher who keeps opening the Bible in a class that seems bored—each is doing what Ezekiel did. </p><p class="thesis"><strong>The power was not in Ezekiel inventing words; it was in Ezekiel faithfully declaring God’s word.</strong></p></section>
 
-    <p>Now the valley begins to change. <span class="scrip">“Suddenly as I spoke, there was a rattling noise all across the valley. The bones of each body came together and attached themselves as complete skeletons. Then as I watched, muscles and flesh formed over the bones. Then skin formed to cover their bodies, but they still had no breath in them.”</span> <span class="ref">Ezekiel 37:7–8 (NLT)</span> Everything in that description is real progress. There is sound. There is movement. There is order—each bone finds its own body. There are muscles, flesh and skin, exactly as God promised. If Ezekiel had stopped watching at this point, he would have seen a valley full of complete human forms. And then the text says the one thing that changes everything: “but they still had no breath in them.” This is the most searching moment in the vision, and Ellen White refuses to let us pass over it: <span class="egw">“But the parable does not leave the dry bones merely knit together into the forms of men; for it is not enough that there is symmetry of limb and feature. The breath of life must vivify the bodies, that they may stand upright, and spring into activity”</span> <span class="egw-ref">The SDA Bible Commentary, vol. 4, p. 1165 · 4BC 1165.6</span>. Restored form was not yet restored life. Let us be careful about what this does and does not mean. It does not mean that structure is evil or that movement is suspicious. The bodies needed proper form; God Himself supplied it, and the noise and movement in the valley were part of His work, not evidence against it. The vision does not condemn organisation, planning, doctrine, buildings, schedules or programmes. It simply shows that none of them can breathe. A church can have a full calendar, a sound constitution, a trained choir, a functioning board and a respected name, and still be waiting for what only God can give. A believer can have every religious habit in place and still feel that something is missing. The danger is not that we build; it is that we stop too early, satisfied because the bones have come together. Movement is not the same as life, structure is not the same as Spirit, and activity is not the same as revival. <strong>The valley had movement before it had life.</strong></p>
+    <section class="mv"><p>Now the valley begins to change. <span class="scrip">“Suddenly as I spoke, there was a rattling noise all across the valley. The bones of each body came together and attached themselves as complete skeletons. Then as I watched, muscles and flesh formed over the bones. Then skin formed to cover their bodies, but they still had no breath in them.”</span> <span class="ref">Ezekiel 37:7–8 (NLT)</span> Everything in that description is real progress. There is sound. There is movement. There is order—each bone finds its own body. There are muscles, flesh and skin, exactly as God promised. </p><p>If Ezekiel had stopped watching at this point, he would have seen a valley full of complete human forms. And then the text says the one thing that changes everything: “but they still had no breath in them.” This is the most searching moment in the vision, and Ellen White refuses to let us pass over it: </p><blockquote class="egw-block"><span class="egw">“But the parable does not leave the dry bones merely knit together into the forms of men; for it is not enough that there is symmetry of limb and feature. The breath of life must vivify the bodies, that they may stand upright, and spring into activity”</span>.  <span class="egw-ref">The SDA Bible Commentary, vol. 4, p. 1165 · 4BC 1165.6</span></blockquote><p>Restored form was not yet restored life. Let us be careful about what this does and does not mean. It does not mean that structure is evil or that movement is suspicious. The bodies needed proper form; God Himself supplied it, and the noise and movement in the valley were part of His work, not evidence against it. The vision does not condemn organisation, planning, doctrine, buildings, schedules or programmes. It simply shows that none of them can breathe. A church can have a full calendar, a sound constitution, a trained choir, a functioning board and a respected name, and still be waiting for what only God can give. </p><p>A believer can have every religious habit in place and still feel that something is missing. The danger is not that we build; it is that we stop too early, satisfied because the bones have come together. Movement is not the same as life, structure is not the same as Spirit, and activity is not the same as revival. </p><p class="thesis"><strong>The valley had movement before it had life.</strong></p></section>
 
-    <p>So God spoke again. <span class="scrip">“Then he said to me, ‘Speak a prophetic message to the winds, son of man. Speak a prophetic message and say, “This is what the Sovereign Lord says: Come, O breath, from the four winds! Breathe into these dead bodies so they may live again.”’ So I spoke the message as he commanded me, and breath came into their bodies. They all came to life and stood up on their feet—a great army.”</span> <span class="ref">Ezekiel 37:9–10 (NLT)</span> One Hebrew word runs through this whole passage, and English cannot hold it in a single term. It can mean breath, wind or spirit, which is why the NLT speaks of “the winds,” of “breath,” and, in verse 14, of God’s “Spirit.” The wordplay is not a puzzle to be solved; it is the message. The same God who <span class="scrip">“breathed the breath of life into the man’s nostrils, and the man became a living person”</span> <span class="ref">Genesis 2:7 (NLT)</span> is the One of whom the psalmist says, <span class="scrip">“When you give them your breath, life is created, and you renew the face of the earth.”</span> <span class="ref">Psalm 104:30 (NLT)</span> Life has always come from Him, and it still does. Notice that the breath is not summoned by Ezekiel; it is commanded by the Sovereign Lord, and Ezekiel simply speaks the message he is given. The “four winds” are not four powers and not a map of the end times; the phrase says that the breath comes from every direction at God’s command, and that nothing in the valley produced it. Then the people stand: “a great army.” The NLT’s phrase describes a multitude on its feet, alive, together and ready for God’s purpose. No one in this vision attacks anyone; there are no weapons, no enemies and no battle. It is a picture of a restored people, not a militant one. Ellen White states the principle exactly as the vision shows it: <span class="egw">“It is not the human agent that is to inspire with life. The Lord God of Israel will do that part, quickening the lifeless spiritual nature into activity. The breath of the Lord of hosts must enter into the lifeless bodies”</span> <span class="egw-ref">The SDA Bible Commentary, vol. 4, p. 1165 · 4BC 1165.5</span>. Ezekiel supplied obedience; he did not supply life. That truth cuts two ways. It forbids pride, because no preacher’s eloquence, no worship leader’s intensity and no evangelist’s technique can create spiritual life. And it forbids laziness, because God chose to give life through a spoken word, and He commanded His servant to speak it twice. Ezekiel’s voice was not the source of life, but Ezekiel’s obedience was not optional. Here is the great relief of Christian service: the messenger is not the Saviour. <strong>Ezekiel was responsible for obedience; God was responsible for life.</strong></p>
+    <section class="mv"><p>So God spoke again. <span class="scrip">“Then he said to me, ‘Speak a prophetic message to the winds, son of man. Speak a prophetic message and say, “This is what the Sovereign Lord says: Come, O breath, from the four winds! Breathe into these dead bodies so they may live again.”’ So I spoke the message as he commanded me, and breath came into their bodies. They all came to life and stood up on their feet—a great army.”</span> <span class="ref">Ezekiel 37:9–10 (NLT)</span> One Hebrew word runs through this whole passage, and English cannot hold it in a single term. </p><p>It can mean breath, wind or spirit, which is why the NLT speaks of “the winds,” of “breath,” and, in verse 14, of God’s “Spirit.” The wordplay is not a puzzle to be solved; it is the message. The same God who <span class="scrip">“breathed the breath of life into the man’s nostrils, and the man became a living person”</span> <span class="ref">Genesis 2:7 (NLT)</span> is the One of whom the psalmist says, <span class="scrip">“When you give them your breath, life is created, and you renew the face of the earth.”</span> <span class="ref">Psalm 104:30 (NLT)</span></p><p> Life has always come from Him, and it still does. Notice that the breath is not summoned by Ezekiel; it is commanded by the Sovereign Lord, and Ezekiel simply speaks the message he is given. The “four winds” are not four powers and not a map of the end times; the phrase says that the breath comes from every direction at God’s command, and that nothing in the valley produced it. Then the people stand: “a great army.” The NLT’s phrase describes a multitude on its feet, alive, together and ready for God’s purpose. </p><p>No one in this vision attacks anyone; there are no weapons, no enemies and no battle. It is a picture of a restored people, not a militant one. Ellen White states the principle exactly as the vision shows it: </p><blockquote class="egw-block"><span class="egw">“It is not the human agent that is to inspire with life. The Lord God of Israel will do that part, quickening the lifeless spiritual nature into activity. The breath of the Lord of hosts must enter into the lifeless bodies”</span>.  <span class="egw-ref">The SDA Bible Commentary, vol. 4, p. 1165 · 4BC 1165.5</span></blockquote><p>Ezekiel supplied obedience; he did not supply life. That truth cuts two ways. It forbids pride, because no preacher’s eloquence, no worship leader’s intensity and no evangelist’s technique can create spiritual life. And it forbids laziness, because God chose to give life through a spoken word, and He commanded His servant to speak it twice. Ezekiel’s voice was not the source of life, but Ezekiel’s obedience was not optional. Here is the great relief of Christian service: the messenger is not the Saviour. </p><p class="thesis"><strong>Ezekiel was responsible for obedience; God was responsible for life.</strong></p></section>
 
-    <p>We must not leave the valley without God’s own explanation, because He does not leave the meaning of the vision to our imagination. <span class="scrip">“Then he said to me, ‘Son of man, these bones represent the people of Israel. They are saying, “We have become old, dry bones—all hope is gone. Our nation is finished.”’”</span> <span class="ref">Ezekiel 37:11 (NLT)</span> The bones are not a general symbol of any problem we care to name. They are a real covenant people in a real exile, and the despair God quotes is their own. Their city had fallen, their temple had burned, their king had been taken, and they had drawn the only conclusion the evidence allowed: all hope is gone; our nation is finished. That is a corporate lament, not merely a private one. And God answers not only what His people had become, but the hopeless story they had begun telling about themselves. <span class="scrip">“Therefore, prophesy to them and say, ‘This is what the Sovereign Lord says: O my people, I will open your graves of exile and cause you to rise again. Then I will bring you back to the land of Israel. When this happens, O my people, you will know that I am the Lord. I will put my Spirit in you, and you will live again and return home to your own land. Then you will know that I, the Lord, have spoken, and I have done what I said. Yes, the Lord has spoken!’”</span> <span class="ref">Ezekiel 37:12–14 (NLT)</span> The NLT’s phrase “graves of exile” shows what the grave imagery means here: the national death of exile, which God promises to reverse by bringing His people home. Twice He says “O my people.” Twice He says “you will know.” The climax is not that bodies stand up, but that a people will live under God’s lordship, with His Spirit within them, in their own land, knowing Him. This promise sits inside a larger movement in Ezekiel from judgment toward restoration. In the previous chapter God had said, <span class="scrip">“I am bringing you back, but not because you deserve it. I am doing it to protect my holy name,”</span> <span class="ref">Ezekiel 36:22 (NLT)</span> and had promised, <span class="scrip">“I will give you a new heart, and I will put a new spirit in you. I will take out your stony, stubborn heart and give you a tender, responsive heart. And I will put my Spirit in you so that you will follow my decrees and be careful to obey my regulations.”</span> <span class="ref">Ezekiel 36:26–27 (NLT)</span> Immediately after the valley comes the sign of the two sticks, a separate sign with the same hope: a divided people made one, cleansed, under <span class="scrip">“only one shepherd,”</span> <span class="ref">Ezekiel 37:24 (NLT)</span> with God making His home among them. Restoration was an act of grace, not a reward. It concerned God’s honour, His covenant and His people’s knowledge of Him. Any Christian application must begin by honouring this. The vision does not erase Israel, and it does not become a chart of modern politics; it is God’s promise to a people who thought their story was over. <strong>Before the valley becomes a picture for our condition, it is God’s promise to a people who believed their national hope had died.</strong></p>
+    <section class="mv"><p>We must not leave the valley without God’s own explanation, because He does not leave the meaning of the vision to our imagination. <span class="scrip">“Then he said to me, ‘Son of man, these bones represent the people of Israel. They are saying, “We have become old, dry bones—all hope is gone. Our nation is finished.”’”</span> <span class="ref">Ezekiel 37:11 (NLT)</span> The bones are not a general symbol of any problem we care to name. They are a real covenant people in a real exile, and the despair God quotes is their own. </p><p>Their city had fallen, their temple had burned, their king had been taken, and they had drawn the only conclusion the evidence allowed: all hope is gone; our nation is finished. That is a corporate lament, not merely a private one. And God answers not only what His people had become, but the hopeless story they had begun telling about themselves. <span class="scrip">“Therefore, prophesy to them and say, ‘This is what the Sovereign Lord says: O my people, I will open your graves of exile and cause you to rise again. Then I will bring you back to the land of Israel. When this happens, O my people, you will know that I am the Lord. I will put my Spirit in you, and you will live again and return home to your own land. Then you will know that I, the Lord, have spoken, and I have done what I said. Yes, the Lord has spoken!’”</span> <span class="ref">Ezekiel 37:12–14 (NLT)</span></p><p> The NLT’s phrase “graves of exile” shows what the grave imagery means here: the national death of exile, which God promises to reverse by bringing His people home. Twice He says “O my people.” Twice He says “you will know.” The climax is not that bodies stand up, but that a people will live under God’s lordship, with His Spirit within them, in their own land, knowing Him. This promise sits inside a larger movement in Ezekiel from judgment toward restoration. In the previous chapter God had said, <span class="scrip">“I am bringing you back, but not because you deserve it. I am doing it to protect my holy name,”</span> <span class="ref">Ezekiel 36:22 (NLT)</span> and had promised, <span class="scrip">“I will give you a new heart, and I will put a new spirit in you. I will take out your stony, stubborn heart and give you a tender, responsive heart. And I will put my Spirit in you so that you will follow my decrees and be careful to obey my regulations.”</span> <span class="ref">Ezekiel 36:26–27 (NLT)</span></p><p> Immediately after the valley comes the sign of the two sticks, a separate sign with the same hope: a divided people made one, cleansed, under <span class="scrip">“only one shepherd,”</span> <span class="ref">Ezekiel 37:24 (NLT)</span> with God making His home among them. Restoration was an act of grace, not a reward. It concerned God’s honour, His covenant and His people’s knowledge of Him. Any Christian application must begin by honouring this. The vision does not erase Israel, and it does not become a chart of modern politics; it is God’s promise to a people who thought their story was over. </p><p class="thesis"><strong>Before the valley becomes a picture for our condition, it is God’s promise to a people who believed their national hope had died.</strong></p></section>
 
-    <p>Because the God of the valley has not changed, His people in every age may learn from it, and Ellen White draws the lesson to the church with striking directness: <span class="egw">“These bones represent the house of Israel, the church of God, and the hope of the church is the vivifying influence of the Holy Spirit. The Lord must breathe upon the dry bones, that they may live”</span> <span class="egw-ref">The SDA Bible Commentary, vol. 4, p. 1165 · 4BC 1165.6</span>. She then names the condition the vision exposes: <span class="egw">“Many who are without spiritual life have their names on the church records, but they are not written in the Lamb’s book of life. They may be joined to the church, but they are not united to the Lord. They may be diligent in the performance of a certain set of duties, and may be regarded as living men; but many are among those who have ‘a name that thou livest, and art dead’”</span> <span class="egw-ref">The SDA Bible Commentary, vol. 4, p. 1166 · 4BC 1166.1</span>. The phrase she quotes is Christ’s own word to the church in Sardis: <span class="scrip">“I know all the things you do, and that you have a reputation for being alive—but you are dead. Wake up! Strengthen what little remains, for even what is left is almost dead.”</span> <span class="ref">Revelation 3:1–2 (NLT)</span> This is a hard word, and it must be handled the way Ezekiel handled the valley: honestly and humbly, in the first person plural. It is not a weapon for pastors to use against congregations, or for members to use against pastors, or for one generation or worship style to use against another. A name on a church record proves neither conversion nor its absence; only God reads hearts. Membership, doctrine, organisation and faithful duty are good gifts, and the bodies in the valley needed their form. The question the vision presses on us is whether we have settled for form. Do we have a reputation for being alive, or the breath of God? Are we satisfied when the bones come together, or are we praying for the breath of God? The Lord’s word to Zerubbabel still stands over every church programme: <span class="scrip">“It is not by force nor by strength, but by my Spirit, says the Lord of Heaven’s Armies.”</span> <span class="ref">Zechariah 4:6 (NLT)</span> Revival cannot be manufactured by noise, pressure or technique, and it cannot be measured by volume, crowds or numbers; a quiet church is not thereby reverent and a loud one is not thereby revived. Spiritual life comes from God, through His Word, and it shows itself in repentance, in living union with Christ, in transformed character, in love among members and in a church that is sent. Ellen White ends one of her most solemn appeals to the church with exactly the prayer this vision teaches: <span class="egw">“I lay down my pen and lift up my soul in prayer, that the Lord would breathe upon His backslidden people, who are as dry bones, that they may live”</span> <span class="egw-ref">Christian Service, p. 41 · ChS 41.2; from The General Conference Daily Bulletin, February 4, 1893, pp. 132–133</span>. That is not contempt for the body; it is a prayer for the breath. <strong>A church can be correctly organized and still need the life-giving presence of God’s Spirit.</strong></p>
+    <section class="mv"><p>Because the God of the valley has not changed, His people in every age may learn from it, and Ellen White draws the lesson to the church with striking directness: </p><blockquote class="egw-block"><span class="egw">“These bones represent the house of Israel, the church of God, and the hope of the church is the vivifying influence of the Holy Spirit. The Lord must breathe upon the dry bones, that they may live”</span>.  <span class="egw-ref">The SDA Bible Commentary, vol. 4, p. 1165 · 4BC 1165.6</span></blockquote><p>She then names the condition the vision exposes: </p><blockquote class="egw-block"><span class="egw">“Many who are without spiritual life have their names on the church records, but they are not written in the Lamb’s book of life. They may be joined to the church, but they are not united to the Lord. They may be diligent in the performance of a certain set of duties, and may be regarded as living men; but many are among those who have ‘a name that thou livest, and art dead’”</span>.  <span class="egw-ref">The SDA Bible Commentary, vol. 4, p. 1166 · 4BC 1166.1</span></blockquote><p>The phrase she quotes is Christ’s own word to the church in Sardis: <span class="scrip">“I know all the things you do, and that you have a reputation for being alive—but you are dead. Wake up! Strengthen what little remains, for even what is left is almost dead.”</span> <span class="ref">Revelation 3:1–2 (NLT)</span> This is a hard word, and it must be handled the way Ezekiel handled the valley: honestly and humbly, in the first person plural. It is not a weapon for pastors to use against congregations, or for members to use against pastors, or for one generation or worship style to use against another. </p><p>A name on a church record proves neither conversion nor its absence; only God reads hearts. Membership, doctrine, organisation and faithful duty are good gifts, and the bodies in the valley needed their form. The question the vision presses on us is whether we have settled for form. Do we have a reputation for being alive, or the breath of God? Are we satisfied when the bones come together, or are we praying for the breath of God? The Lord’s word to Zerubbabel still stands over every church programme: <span class="scrip">“It is not by force nor by strength, but by my Spirit, says the Lord of Heaven’s Armies.”</span> <span class="ref">Zechariah 4:6 (NLT)</span></p><p> Revival cannot be manufactured by noise, pressure or technique, and it cannot be measured by volume, crowds or numbers; a quiet church is not thereby reverent and a loud one is not thereby revived. Spiritual life comes from God, through His Word, and it shows itself in repentance, in living union with Christ, in transformed character, in love among members and in a church that is sent. Ellen White ends one of her most solemn appeals to the church with exactly the prayer this vision teaches: <span class="egw">“I lay down my pen and lift up my soul in prayer, that the Lord would breathe upon His backslidden people, who are as dry bones, that they may live”</span> <span class="egw-ref">Christian Service, p. 41 · ChS 41.2; from The General Conference Daily Bulletin, February 4, 1893, pp. 132–133</span>. That is not contempt for the body; it is a prayer for the breath. </p><p class="thesis"><strong>A church can be correctly organized and still need the life-giving presence of God’s Spirit.</strong></p></section>
 
-    <p>The valley also speaks to how we see the people around us. Some of them appear as unpromising as the dry bones: the relative who mocks, the neighbour who has heard it all, the young person who walked away, the colleague who is polite and completely uninterested. Ellen White writes, “The souls of those whom we desire to save are like the representation which Ezekiel saw in vision,—a valley of dry bones,” and then gives the church its instruction: <span class="egw">“We are to preach the word of life to those whom we may judge to be as hopeless subjects as though they were in their graves. Though they may seem unwilling to hear or to receive the light of truth, without questioning or wavering we are to do our part”</span> <span class="egw-ref">The SDA Bible Commentary, vol. 4, p. 1165 · 4BC 1165.3–4</span>. Her counsel guards both sides of the truth. On the one hand, “The Master-worker is God, and not finite man; and yet he calls upon men to be the agents through whom he can impart light to those in darkness.” On the other, <span class="egw">“it is not for us to make sweeping denunciation of the professed religious world, but in humility and love, present to all the truth as it is in Jesus”</span> <span class="egw-ref">The Review and Herald, January 17, 1893, par. 5</span>. Paul says the same about every gospel worker: <span class="scrip">“It is not that we think we are qualified to do anything on our own. Our qualification comes from God.”</span> <span class="ref">2 Corinthians 3:5 (NLT)</span> And Abraham’s faith rested in <span class="scrip">“the God who brings the dead back to life and who creates new things out of nothing.”</span> <span class="ref">Romans 4:17 (NLT)</span> We should be honest about what this hope is and is not. It is not a guarantee that every person will respond; God has never removed human choice, and the same word that gave life in the valley is refused by some who hear it. It is not a licence to pressure, manipulate or ignore another person’s dignity and boundaries; Ezekiel spoke, he did not shout the bones into life. But it is a firm refusal to write anyone off. The temptation is to labour only where results come easily, to grow discouraged by indifference, and to quietly classify certain people as hopeless. The vision forbids that classification. If God can speak to bones that are completely dried out, no heart is beyond the reach of His Word and His Spirit, and no person should be declared unreachable while God is still sending us to them. Have I labelled a person, a family or a community hopeless when God has not given me permission to do so? <strong>We must not call a person hopeless while God still calls us to speak the word of life.</strong></p>
+    <section class="mv"><p>The valley also speaks to how we see the people around us. Some of them appear as unpromising as the dry bones: the relative who mocks, the neighbour who has heard it all, the young person who walked away, the colleague who is polite and completely uninterested. Ellen White writes, “The souls of those whom we desire to save are like the representation which Ezekiel saw in vision,—a valley of dry bones,” and then gives the church its instruction: </p><blockquote class="egw-block"><span class="egw">“We are to preach the word of life to those whom we may judge to be as hopeless subjects as though they were in their graves. Though they may seem unwilling to hear or to receive the light of truth, without questioning or wavering we are to do our part”</span>.  <span class="egw-ref">The SDA Bible Commentary, vol. 4, p. 1165 · 4BC 1165.3–4</span></blockquote><p>Her counsel guards both sides of the truth. On the one hand, “The Master-worker is God, and not finite man; and yet he calls upon men to be the agents through whom he can impart light to those in darkness.” On the other, <span class="egw">“it is not for us to make sweeping denunciation of the professed religious world, but in humility and love, present to all the truth as it is in Jesus”</span> <span class="egw-ref">The Review and Herald, January 17, 1893, par. 5</span>. Paul says the same about every gospel worker: <span class="scrip">“It is not that we think we are qualified to do anything on our own. Our qualification comes from God.”</span> <span class="ref">2 Corinthians 3:5 (NLT)</span></p><p> And Abraham’s faith rested in <span class="scrip">“the God who brings the dead back to life and who creates new things out of nothing.”</span> <span class="ref">Romans 4:17 (NLT)</span> We should be honest about what this hope is and is not. It is not a guarantee that every person will respond; God has never removed human choice, and the same word that gave life in the valley is refused by some who hear it. It is not a licence to pressure, manipulate or ignore another person’s dignity and boundaries; Ezekiel spoke, he did not shout the bones into life. </p><p>But it is a firm refusal to write anyone off. The temptation is to labour only where results come easily, to grow discouraged by indifference, and to quietly classify certain people as hopeless. The vision forbids that classification. If God can speak to bones that are completely dried out, no heart is beyond the reach of His Word and His Spirit, and no person should be declared unreachable while God is still sending us to them. Have I labelled a person, a family or a community hopeless when God has not given me permission to do so? </p><p class="thesis"><strong>We must not call a person hopeless while God still calls us to speak the word of life.</strong></p></section>
 
-    <p>All of this leads to Jesus Christ, because the New Testament describes our condition and our rescue in the language of the valley. <span class="scrip">“Once you were dead because of your disobedience and your many sins.”</span> <span class="ref">Ephesians 2:1 (NLT)</span> <span class="scrip">“But God is so rich in mercy, and he loved us so much, that even though we were dead because of our sins, he gave us life when he raised Christ from the dead. (It is only by God’s grace that you have been saved!)”</span> <span class="ref">Ephesians 2:4–5 (NLT)</span> Dead people do not revive themselves, and neither do we. <span class="scrip">“God saved you by his grace when you believed. And you can’t take credit for this; it is a gift from God.”</span> <span class="ref">Ephesians 2:8 (NLT)</span> The promised shepherd of Ezekiel 34 and 37 has come, and He says, <span class="scrip">“I am the good shepherd. The good shepherd sacrifices his life for the sheep.”</span> <span class="ref">John 10:11 (NLT)</span> Standing at a grave, He said, <span class="scrip">“I am the resurrection and the life. Anyone who believes in me will live, even after dying.”</span> <span class="ref">John 11:25 (NLT)</span> He taught that <span class="scrip">“The Spirit alone gives eternal life. Human effort accomplishes nothing,”</span> <span class="ref">John 6:63 (NLT)</span> and on the evening of His resurrection <span class="scrip">“he breathed on them and said, ‘Receive the Holy Spirit.’”</span> <span class="ref">John 20:22 (NLT)</span> The Spirit who gave Israel hope in the valley is <span class="scrip">“The Spirit of God, who raised Jesus from the dead,”</span> and He <span class="scrip">“lives in you.”</span> <span class="ref">Romans 8:11 (NLT)</span> So the vision’s primary meaning, Israel’s restoration from exile, stands; the New Testament’s teaching about new life in Christ now, and the future resurrection of all who belong to Him, illuminate it without replacing it. Ellen White keeps the whole matter centred on Christ: <span class="egw">“Unless there is genuine conversion of the soul to God; unless the vital breath of God quickens the soul to spiritual life; unless the professors of truth are actuated by heaven-born principle, they are not born of the incorruptible seed which liveth and abideth forever. Unless they trust in the righteousness of Christ as their only security; unless they copy His character, labor in His spirit, they are naked, they have not on the robe of His righteousness”</span> <span class="egw-ref">The SDA Bible Commentary, vol. 4, p. 1166 · 4BC 1166.2</span>. Perhaps you are reading this in your own valley. You feel spiritually dry, numb, weary or far from God; you have every religious habit in place and no breath in any of it; you are afraid that God is finished with you. The vision does not tell you to try harder, and it does not promise that every loss will be returned or every problem instantly solved. Grief, exhaustion, depression and illness are not evidence of spiritual death, and seeking the medical or professional help you need is not a failure of faith. What the vision does say is that you cannot resurrect your own heart, and you were never asked to. Come to Christ honestly, as you are. Hear His Word. Confess what needs confessing, receive His righteousness by faith, and ask for His Spirit; renewal begins with His grace and is sustained by His Spirit, usually patiently, in the company of His people. And what would a Spirit-breathed church look like? It would keep Scripture central and proclaim Christ faithfully. It would pray with humility rather than manipulate emotion, confess sin honestly, and seek genuine conversion rather than mere affiliation. It would welcome back discouraged and backslidden members with truth and grace, refuse to declare difficult people hopeless, and keep labouring where results are slow. It would let organisation serve life and mission rather than replace them, unite its members around Christ rather than personalities, repair broken relationships, make room for lament as well as praise, and give God the glory for every sign of life. Such a church is not merely busy; it is alive in Christ, united in love, grounded in Scripture and sent in mission. Ask yourself today: am I seeking the breath of God, or am I satisfied with the appearance of life? Do I speak God’s Word faithfully while remembering that only God can awaken the heart? When I feel dry, do I hide in shame, or do I come to Christ for the life His Spirit gives? The people in the valley said, “all hope is gone.” God said, “I will put my Spirit in you.” His word was the last word then, and in Jesus Christ, the resurrection and the life, it is still the last word now. <strong>Speak the Word faithfully. Seek the Spirit humbly. Trust God with what appears beyond hope.</strong></p>
+    <section class="mv"><p>All of this leads to Jesus Christ, because the New Testament describes our condition and our rescue in the language of the valley. <span class="scrip">“Once you were dead because of your disobedience and your many sins.”</span> <span class="ref">Ephesians 2:1 (NLT)</span> <span class="scrip">“But God is so rich in mercy, and he loved us so much, that even though we were dead because of our sins, he gave us life when he raised Christ from the dead. (It is only by God’s grace that you have been saved!)”</span> <span class="ref">Ephesians 2:4–5 (NLT)</span></p><p> Dead people do not revive themselves, and neither do we. <span class="scrip">“God saved you by his grace when you believed. And you can’t take credit for this; it is a gift from God.”</span> <span class="ref">Ephesians 2:8 (NLT)</span> The promised shepherd of Ezekiel 34 and 37 has come, and He says, <span class="scrip">“I am the good shepherd. The good shepherd sacrifices his life for the sheep.”</span> <span class="ref">John 10:11 (NLT)</span> Standing at a grave, He said, <span class="scrip">“I am the resurrection and the life. Anyone who believes in me will live, even after dying.”</span> <span class="ref">John 11:25 (NLT)</span></p><p> He taught that <span class="scrip">“The Spirit alone gives eternal life. Human effort accomplishes nothing,”</span> <span class="ref">John 6:63 (NLT)</span> and on the evening of His resurrection <span class="scrip">“he breathed on them and said, ‘Receive the Holy Spirit.’”</span> <span class="ref">John 20:22 (NLT)</span> The Spirit who gave Israel hope in the valley is <span class="scrip">“The Spirit of God, who raised Jesus from the dead,”</span> and He <span class="scrip">“lives in you.”</span> <span class="ref">Romans 8:11 (NLT)</span> So the vision’s primary meaning, Israel’s restoration from exile, stands; the New Testament’s teaching about new life in Christ now, and the future resurrection of all who belong to Him, illuminate it without replacing it. </p><p>Ellen White keeps the whole matter centred on Christ: </p><blockquote class="egw-block"><span class="egw">“Unless there is genuine conversion of the soul to God; unless the vital breath of God quickens the soul to spiritual life; unless the professors of truth are actuated by heaven-born principle, they are not born of the incorruptible seed which liveth and abideth forever. Unless they trust in the righteousness of Christ as their only security; unless they copy His character, labor in His spirit, they are naked, they have not on the robe of His righteousness”</span>.  <span class="egw-ref">The SDA Bible Commentary, vol. 4, p. 1166 · 4BC 1166.2</span></blockquote><p>Perhaps you are reading this in your own valley. You feel spiritually dry, numb, weary or far from God; you have every religious habit in place and no breath in any of it; you are afraid that God is finished with you. The vision does not tell you to try harder, and it does not promise that every loss will be returned or every problem instantly solved. Grief, exhaustion, depression and illness are not evidence of spiritual death, and seeking the medical or professional help you need is not a failure of faith. </p><p>What the vision does say is that you cannot resurrect your own heart, and you were never asked to. Come to Christ honestly, as you are. Hear His Word. Confess what needs confessing, receive His righteousness by faith, and ask for His Spirit; renewal begins with His grace and is sustained by His Spirit, usually patiently, in the company of His people. And what would a Spirit-breathed church look like? It would keep Scripture central and proclaim Christ faithfully. It would pray with humility rather than manipulate emotion, confess sin honestly, and seek genuine conversion rather than mere affiliation. </p><p>It would welcome back discouraged and backslidden members with truth and grace, refuse to declare difficult people hopeless, and keep labouring where results are slow. It would let organisation serve life and mission rather than replace them, unite its members around Christ rather than personalities, repair broken relationships, make room for lament as well as praise, and give God the glory for every sign of life. Such a church is not merely busy; it is alive in Christ, united in love, grounded in Scripture and sent in mission. </p><p>Ask yourself today: am I seeking the breath of God, or am I satisfied with the appearance of life? Do I speak God’s Word faithfully while remembering that only God can awaken the heart? When I feel dry, do I hide in shame, or do I come to Christ for the life His Spirit gives? The people in the valley said, “all hope is gone.” God said, “I will put my Spirit in you.” His word was the last word then, and in Jesus Christ, the resurrection and the life, it is still the last word now. </p><p class="thesis"><strong>Speak the Word faithfully. Seek the Spirit humbly. Trust God with what appears beyond hope.</strong></p></section>
 
   </div>
 
   <div class="divider" aria-hidden="true">
     <span class="line"></span>
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <svg width="26" height="26" viewbox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"></path></svg>
     <span class="line right"></span>
   </div>
 
@@ -311,9 +442,34 @@
   </ol>
 
   
-  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/Ab9kTRTNW9E" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">&#9654;</span>Watch the Short</a><a href="https://www.youtube.com/watch?v=A3yoxnVobxs" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">&#9654;</span>Watch the full film &middot; 7:36</a><p class="note">On YouTube as &ldquo;They Looked Alive… But Weren’t&rdquo; and &ldquo;The Bones Came Together. Still No Breath. | Ezekiel 37&rdquo; &mdash; from the channel <em>I Can Still Believe</em>.</p></div>
+  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/Ab9kTRTNW9E" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">▶</span>Watch the Short</a><a href="https://www.youtube.com/watch?v=A3yoxnVobxs" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">▶</span>Watch the full film · 7:36</a><p class="note">On YouTube as “They Looked Alive… But Weren’t” and “The Bones Came Together. Still No Breath. | Ezekiel 37” — from the channel <em>I Can Still Believe</em>.</p></div>
 
   <div class="sdg">Soli Deo Gloria</div>
 </article>
+<nav class="footnav"><a href="./">&#8592;&nbsp;All devotions</a><a href="#top">Back to top&nbsp;&#8593;</a></nav>
+<button class="lamp" id="lamp" type="button" aria-label="Night reading">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path class="moon" d="M20 13.4A8.2 8.2 0 1 1 10.6 4a6.4 6.4 0 0 0 9.4 9.4Z"/>
+  </svg>
+</button>
+<script>
+(function(){
+  var root=document.documentElement, lamp=document.getElementById('lamp');
+  try{ if(localStorage.getItem('devo-theme')==='night') root.setAttribute('data-theme','night'); }catch(e){}
+  if(lamp){ lamp.addEventListener('click',function(){
+    var on = root.getAttribute('data-theme')==='night';
+    if(on){ root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme','night'); }
+    try{ localStorage.setItem('devo-theme', on?'day':'night'); }catch(e){}
+  }); }
+  var bar=document.getElementById('prog');
+  function tick(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.width=(h>0?Math.min(100,(window.scrollY/h)*100):0)+'%';
+  }
+  if(bar){ window.addEventListener('scroll',tick,{passive:true});
+           window.addEventListener('resize',tick); tick(); }
+})();
+</script>
 </body>
 </html>

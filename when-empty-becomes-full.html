@@ -3,143 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>When Empty Becomes Full &mdash; Today's Devotion</title>
+<title>When Empty Becomes Full — Today's Devotion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Lora:ital,wght@0,400;0,600;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
 <style>
   :root{
-    --parchment:#f3ead4;
-    --parchment-deep:#eadfc2;
-    --ink:#3b2d18;
-    --ink-soft:#5a4629;
-    --gold:#a67c1e;
-    --gold-bright:#c9a227;
-    --gold-pale:#e3cf95;
-    --wine:#7a3b2e;
+    --bg1:#f8f2e1; --bg2:#f3ead4; --bg3:#e8dcbd;
+    --page-bg:rgba(255,252,241,.62);
+    --page-border:#a67c1e; --page-outline:#e3cf95;
+    --ink:#33281a; --ink-soft:#5a4629;
+    --gold:#a67c1e; --gold-bright:#c9a227; --gold-pale:#e3cf95;
+    --wine:#7a3b2e; --wine-solid:#7a3b2e; --wine-edge:#5d2b20;
+    --card1:rgba(255,250,232,.92); --card2:rgba(247,238,213,.92);
+    --emph:#7c5a12;
+    --num1:#f5e7bd; --num2:#e3cf95; --numfg:#7c5a12;
+    --shadow:rgba(90,70,30,.16);
+    --grain:.30;
+    --rule:rgba(166,124,30,.28);
+  }
+  :root[data-theme="night"]{
+    --bg1:#1a160f; --bg2:#15120c; --bg3:#100e09;
+    --page-bg:rgba(44,37,26,.42);
+    --page-border:#7d6524; --page-outline:#463a19;
+    --ink:#e9dfc8; --ink-soft:#c4b491;
+    --gold:#c2a03a; --gold-bright:#e0bf58; --gold-pale:#6a5828;
+    --wine:#e2a891; --wine-solid:#8a4537; --wine-edge:#6b3428;
+    --card1:rgba(56,47,32,.6); --card2:rgba(46,39,27,.6);
+    --emph:#e2c775;
+    --num1:#4c4024; --num2:#3a311b; --numfg:#e8ce7f;
+    --shadow:rgba(0,0,0,.55);
+    --grain:.16;
+    --rule:rgba(194,160,58,.26);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{
-    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    background:radial-gradient(ellipse at 50% 0%, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%);
+    background-attachment:fixed;
     color:var(--ink);
     font-family:'Lora',serif;
-    line-height:1.85;
-    padding:34px 14px 60px;
+    line-height:1.78;
+    padding:30px 14px 28px;
     position:relative;
+    -webkit-font-smoothing:antialiased;
+    transition:background-color .25s ease, color .25s ease;
   }
-  /* aged-paper grain */
+  /* aged-paper grain, lighter than before */
   body::before{
     content:"";
     position:fixed;inset:0;
     pointer-events:none;
-    opacity:.5;
+    opacity:var(--grain);
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
     z-index:2;
   }
-  .page{
-    max-width:760px;
-    margin:0 auto;
-    background:rgba(255,252,240,.55);
-    border:1.5px solid var(--gold);
-    outline:1px solid var(--gold-pale);
-    outline-offset:6px;
-    padding:64px 52px 56px;
-    position:relative;
-    box-shadow:0 18px 50px rgba(90,70,30,.18);
+
+  /* reading progress */
+  .progress{
+    position:fixed;top:0;left:0;height:3px;width:0;
+    background:linear-gradient(90deg,var(--gold-pale),var(--gold-bright));
+    z-index:12;transition:width .08s linear;
   }
-  @media(max-width:620px){.page{padding:52px 24px 44px;}}
-  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
-  .corner.tl{top:10px;left:10px;}
-  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
-  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
-  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+
+  .page{
+    max-width:720px;
+    margin:0 auto;
+    background:var(--page-bg);
+    border:1.5px solid var(--page-border);
+    outline:1px solid var(--page-outline);
+    outline-offset:6px;
+    padding:62px 56px 54px;
+    position:relative;
+    box-shadow:0 18px 50px var(--shadow);
+  }
+  @media(max-width:620px){.page{padding:48px 22px 40px;} body{padding:22px 11px 24px;}}
+
+  /* corners, quieter: smaller and lighter than before */
+  .corner{position:absolute;width:44px;height:44px;color:var(--gold);opacity:.55;}
+  .corner.tl{top:9px;left:9px;}
+  .corner.tr{top:9px;right:9px;transform:scaleX(-1);}
+  .corner.bl{bottom:9px;left:9px;transform:scaleY(-1);}
+  .corner.br{bottom:9px;right:9px;transform:scale(-1,-1);}
+
   .eyebrow{
     font-family:'Cinzel',serif;
-    font-size:.82rem;
-    letter-spacing:.42em;
+    font-size:.74rem;
+    letter-spacing:.34em;
     text-transform:uppercase;
     color:var(--gold);
     text-align:center;
-    margin-bottom:18px;
+    margin-bottom:16px;
   }
   h1{
     font-family:'Playfair Display',serif;
     font-weight:700;
-    font-size:clamp(2.1rem,5.4vw,3rem);
+    font-size:clamp(2rem,5vw,2.8rem);
+    line-height:1.18;
     text-align:center;
     color:var(--ink);
-    letter-spacing:.01em;
-    margin-bottom:26px;
+    letter-spacing:.005em;
+    margin-bottom:14px;
   }
+  .meta{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.16em;
+    font-size:.78rem;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:28px;
+  }
+  .meta span{opacity:.55;margin:0 7px;}
+
   /* Ellen G. White — companion ink */
   .egw{color:var(--wine);}
   .egw-ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.08em;
-    font-size:.88em;
+    letter-spacing:.07em;
+    font-size:.85em;
     color:var(--wine);
   }
-  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .egw-ref::before{content:"\2712";margin-right:.3em;font-size:.9em;}
+  /* long quotations stand as blocks */
+  blockquote.egw-block{
+    margin:26px 0 28px;
+    padding:2px 0 2px 22px;
+    border-left:2px solid var(--wine);
+    color:var(--wine);
+    font-size:1.01rem;
+    line-height:1.72;
+  }
+  blockquote.egw-block .egw-ref{
+    display:block;margin-top:9px;font-size:.78rem;
+    letter-spacing:.04em;line-height:1.55;opacity:.92;
+    text-wrap:pretty;          /* keeps a lone word off the last line */
+  }
+  @media(max-width:620px){blockquote.egw-block{padding-left:16px;}}
+
   .divider{
     display:flex;align-items:center;justify-content:center;
-    gap:14px;margin:30px 0;color:var(--gold);
+    gap:14px;margin:28px 0;color:var(--gold);
   }
   .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
   .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
   .divider svg{flex-shrink:0;}
+
   .verse-card{
     border:1px solid var(--gold-pale);
-    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
-    padding:30px 34px 26px;
+    background:linear-gradient(180deg,var(--card1),var(--card2));
+    padding:28px 32px 24px;
     text-align:center;
     margin:0 auto 8px;
     position:relative;
   }
   .verse-card .label{
     font-family:'Cinzel',serif;
-    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
-    color:var(--gold);margin-bottom:14px;
+    font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:13px;
   }
   .verse-card .scripture{
     font-family:'Cormorant Garamond',serif;
     font-style:italic;
-    font-size:1.42rem;
-    line-height:1.65;
+    font-size:1.38rem;
+    line-height:1.62;
     color:var(--ink-soft);
   }
   .verse-card .ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.14em;
-    font-size:.95rem;
+    letter-spacing:.13em;
+    font-size:.92rem;
     color:var(--gold);
-    margin-top:14px;
+    margin-top:13px;
   }
-  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
-  .body-text p:first-of-type::first-letter{
+
+  /* body — ragged right, book measure */
+  .body-text{margin-top:4px;}
+  .body-text p{
+    margin-bottom:1.15em;
+    font-size:1.075rem;
+    text-align:left;
+    hyphens:none;
+  }
+  .body-text .mv{margin-bottom:6px;}
+  .body-text > .mv:first-child > p:first-child::first-letter{
     font-family:'Playfair Display',serif;
-    font-size:3.9em;
+    font-size:3.7em;
     float:left;
     line-height:.82;
-    padding:6px 12px 0 0;
+    padding:5px 11px 0 0;
     color:var(--gold);
   }
-  .body-text strong{color:#7c5a12;font-weight:600;}
+  .body-text strong{color:var(--emph);font-weight:600;}
   .scrip{font-style:italic;color:var(--ink-soft);}
   .ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.1em;
-    font-size:.92em;
+    letter-spacing:.09em;
+    font-size:.9em;
     color:var(--gold);
     white-space:nowrap;
   }
+
+  /* the closing sentence of each movement, promoted */
+  .body-text p.thesis{
+    text-align:center;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.32rem;
+    line-height:1.55;
+    color:var(--ink);
+    margin:26px auto 34px;
+    max-width:34em;
+    padding-top:22px;
+    position:relative;
+  }
+  .body-text p.thesis::before{
+    content:"";
+    position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:58px;height:1px;background:var(--gold);opacity:.8;
+  }
+  .body-text p.thesis strong{font-weight:inherit;color:inherit;}
+  @media(max-width:620px){.body-text p.thesis{font-size:1.2rem;}}
+
   h2.takeaways{
     font-family:'Cinzel',serif;
     font-weight:600;
-    font-size:1.35rem;
-    letter-spacing:.18em;
+    font-size:1.22rem;
+    letter-spacing:.16em;
     text-transform:uppercase;
     text-align:center;
     color:var(--ink);
@@ -149,30 +242,45 @@
   ol.takeaway-list li{
     counter-increment:tk;
     position:relative;
-    padding-left:62px;
+    padding-left:54px;
     margin-bottom:20px;
-    font-size:1.03rem;
+    font-size:1.02rem;
   }
   ol.takeaway-list li::before{
     content:counter(tk);
-    position:absolute;left:0;top:2px;
-    width:42px;height:42px;
+    position:absolute;left:0;top:3px;
+    width:36px;height:36px;
     border-radius:50%;
     border:1.5px solid var(--gold);
-    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
-    color:#7c5a12;
+    background:radial-gradient(circle at 35% 30%,var(--num1),var(--num2));
+    color:var(--numfg);
     font-family:'Cinzel',serif;
     font-weight:600;
-    font-size:1.05rem;
+    font-size:.98rem;
     display:flex;align-items:center;justify-content:center;
-    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+    box-shadow:0 2px 6px var(--shadow), inset 0 1px 2px rgba(255,255,255,.35);
   }
-  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  ol.takeaway-list li strong{color:var(--emph);font-weight:600;}
+
+  .sources{
+    margin-top:34px;
+    font-size:.88rem;
+    line-height:1.7;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+  .sources .label{
+    font-family:'Cinzel',serif;
+    font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);display:block;margin-bottom:4px;
+  }
+
+  /* Watch It — unchanged treatment, tokenised for night reading */
   .watch{
     margin-top:38px;
     text-align:center;
     border:1px solid var(--gold);
-    background:linear-gradient(180deg,rgba(255,250,232,.75),rgba(247,238,213,.75));
+    background:linear-gradient(180deg,var(--card1),var(--card2));
     padding:26px 22px 22px;
   }
   .watch .label{
@@ -187,8 +295,8 @@
     letter-spacing:.08em;
     font-size:1.02rem;
     color:#fdf6e6;
-    background:var(--wine);
-    border:1px solid #5d2b20;
+    background:var(--wine-solid);
+    border:1px solid var(--wine-edge);
     text-decoration:none;
     padding:14px 26px;
     margin:6px 7px;
@@ -210,55 +318,78 @@
     .watch a{display:block;margin:9px 0;padding:15px 18px;}
     .watch{padding:22px 16px 18px;}
   }
+
   .sdg{
     font-family:'Pinyon Script',cursive;
-    font-size:2.5rem;
+    font-size:2.4rem;
     color:var(--gold);
     text-align:center;
     margin-top:40px;
   }
+
+  /* navigation */
+  .allnav,.footnav{max-width:720px;margin:0 auto 16px;text-align:center;}
+  .footnav{margin:26px auto 8px;display:flex;justify-content:center;gap:26px;}
+  .allnav a,.footnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.16em;
+    font-size:.8rem;color:var(--gold);text-decoration:none;
+    border-bottom:1px solid var(--rule);padding-bottom:2px;
+  }
+  .allnav a:hover,.footnav a:hover{border-bottom-color:var(--gold);}
+
+  /* night-reading toggle */
+  .lamp{
+    position:fixed;right:16px;bottom:16px;z-index:11;
+    width:44px;height:44px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--card1);
+    border:1px solid var(--gold);
+    color:var(--gold);
+    cursor:pointer;
+    box-shadow:0 4px 14px var(--shadow);
+    opacity:.72;
+    transition:opacity .18s ease, transform .18s ease;
+  }
+  .lamp:hover,.lamp:focus-visible{opacity:1;transform:translateY(-2px);outline:none;}
+  .lamp svg{width:20px;height:20px;}
+  @media print{.lamp,.progress,.allnav,.footnav{display:none;}}
 </style>
 </head>
 <body>
-<style>
-  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
-  .allnav a{
-    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
-    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
-    padding-bottom:2px;
-  }
-  .allnav a:hover{border-bottom-color:#a67c1e;}
-</style>
-<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+<div class="progress" id="prog"></div>
+<a id="top"></a>
+<nav class="allnav"><a href="./">← All devotions</a></nav>
 
 <article class="page">
-  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner tl" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner tr" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner bl" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner br" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
 
     <div class="eyebrow">Today's Devotion</div>
   <h1>When Empty Becomes Full</h1>
+
+  <div class="meta">Ruth 1 <span>·</span> 21 min read</div>
 
   <section class="verse-card">
     <div class="label">Key Verse</div>
@@ -268,49 +399,74 @@
 
   <div class="divider" aria-hidden="true">
     <span class="line"></span>
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <svg width="26" height="26" viewbox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"></path></svg>
     <span class="line right"></span>
   </div>
 
   <div class="body-text">
-    <p>Bethlehem means “house of bread,” and this story opens with the house of bread empty. <span class="scrip">“In the days when the judges ruled in Israel, a severe famine came upon the land. So a man from Bethlehem in Judah left his home and went to live in the country of Moab, taking his wife and two sons with him”</span> <span class="ref">Ruth 1:1 (NLT)</span>. His name was Elimelech, his wife was Naomi, and the boys were Mahlon and Kilion. Scripture does not stop to judge the move, and neither will we; a father looked at empty shelves and did what fathers do. But Moab was where the losses began. <span class="scrip">“Then Elimelech died, and Naomi was left with her two sons”</span> <span class="ref">Ruth 1:3 (NLT)</span>. The sons married Moabite women, Orpah and Ruth, and for about ten years the family held together in a foreign land. Then the sentence that empties the house: <span class="scrip">“both Mahlon and Kilion died. This left Naomi alone, without her two sons or her husband”</span> <span class="ref">Ruth 1:5 (NLT)</span>. Hear that as a woman of that world would have heard it. A widow with no sons had no income, no land she could work, no one to speak for her, and no future beyond the charity of strangers. Naomi had not lost one thing; she had lost everything that holds a life up, one piece after another, in a country that was not hers, with three graves to show for the journey. Then, in the middle of it, a rumour of bread: <span class="scrip">“Then Naomi heard in Moab that the L<small>ORD</small> had blessed his people in Judah by giving them good crops again. So Naomi and her daughters-in-law got ready to leave Moab to return to her homeland”</span> <span class="ref">Ruth 1:6 (NLT)</span>. It is the first thing the L<small>ORD</small> is said to do in this book, and it is quiet: He gave bread. And it was enough to turn a broken woman’s face toward home.</p>
+    <section class="mv"><p>Bethlehem means “house of bread,” and this story opens with the house of bread empty. <span class="scrip">“In the days when the judges ruled in Israel, a severe famine came upon the land. So a man from Bethlehem in Judah left his home and went to live in the country of Moab, taking his wife and two sons with him”</span> <span class="ref">Ruth 1:1 (NLT)</span>. His name was Elimelech, his wife was Naomi, and the boys were Mahlon and Kilion. Scripture does not stop to judge the move, and neither will we; a father looked at empty shelves and did what fathers do. </p><p>But Moab was where the losses began. <span class="scrip">“Then Elimelech died, and Naomi was left with her two sons”</span> <span class="ref">Ruth 1:3 (NLT)</span>. The sons married Moabite women, Orpah and Ruth, and for about ten years the family held together in a foreign land. Then the sentence that empties the house: <span class="scrip">“both Mahlon and Kilion died. This left Naomi alone, without her two sons or her husband”</span> <span class="ref">Ruth 1:5 (NLT)</span>. Hear that as a woman of that world would have heard it. A widow with no sons had no income, no land she could work, no one to speak for her, and no future beyond the charity of strangers. </p><p>Naomi had not lost one thing; she had lost everything that holds a life up, one piece after another, in a country that was not hers, with three graves to show for the journey. Then, in the middle of it, a rumour of bread: <span class="scrip">“Then Naomi heard in Moab that the L<small>ORD</small> had blessed his people in Judah by giving them good crops again. So Naomi and her daughters-in-law got ready to leave Moab to return to her homeland”</span> <span class="ref">Ruth 1:6 (NLT)</span>. It is the first thing the L<small>ORD</small> is said to do in this book, and it is quiet: He gave bread. And it was enough to turn a broken woman’s face toward home.</p></section>
 
-    <p>On the road, Naomi did a generous thing. <span class="scrip">“Go back to your mothers’ homes. And may the L<small>ORD</small> reward you for your kindness to your husbands and to me. May the L<small>ORD</small> bless you with the security of another marriage”</span> <span class="ref">Ruth 1:8-9 (NLT)</span>. A woman who will shortly say God has emptied her is still able to bless in His name; grief and faith were sharing the same breath. And she meant the release; she had nothing to offer two young widows. <span class="scrip">“Things are far more bitter for me than for you, because the L<small>ORD</small> himself has raised his fist against me”</span> <span class="ref">Ruth 1:13 (NLT)</span>. Then the parting. <span class="scrip">“And again they wept together, and Orpah kissed her mother-in-law good-bye. But Ruth clung tightly to Naomi”</span> <span class="ref">Ruth 1:14 (NLT)</span>. Be fair to Orpah. She did what she was asked, what was sensible, and what Naomi herself had just blessed; the Bible does not condemn her, and neither should we. She is in the story so that we can see how far beyond reasonable Ruth went. Naomi tried once more: <span class="scrip">“your sister-in-law has gone back to her people and to her gods. You should do the same”</span> <span class="ref">Ruth 1:15 (NLT)</span>. And Ruth answered: <span class="scrip">“Don’t ask me to leave you and turn back. Wherever you go, I will go; wherever you live, I will live. Your people will be my people, and your God will be my God. Wherever you die, I will die, and there I will be buried. May the L<small>ORD</small> punish me severely if I allow anything but death to separate us!”</span> <span class="ref">Ruth 1:16-17 (NLT)</span>. Count what she chose: a person, a place, a people, a God, and a grave. This was not romance; there was no Boaz on the horizon. It was not calculation; Naomi had just explained that there was nothing to gain. It was a conversion. Ruth was leaving the gods of Moab for the L<small>ORD</small>, and she swore her oath by His name. Ellen White reads it exactly so: <span class="egw">“All who, like Rahab the Canaanite and Ruth the Moabitess, turned from idolatry to the worship of the true God were to unite themselves with His chosen people.”</span> She turned from idolatry, and she united herself with His people, exactly as that sentence says such converts were to do; both verbs describe Ruth. She was choosing a people whose law, at that time, read, <span class="scrip">“No Ammonite or Moabite or any of their descendants for ten generations may be admitted to the assembly of the L<small>ORD</small>”</span> <span class="ref">Deuteronomy 23:3 (NLT)</span>; she walked toward the God of Israel through a door that looked shut. And she did it blind. Ruth did not know about the field, or the redeemer, or the baby, or the king, or the Messiah. She chose faithfulness in chapter one without reading chapter four, for <span class="scrip">“we live by believing and not by seeing”</span> <span class="ref">2 Corinthians 5:7 (NLT)</span>. Faithfulness usually comes before understanding; we are often asked to obey God in one chapter without being told what He is preparing in the next.</p>
+    <section class="mv"><p>On the road, Naomi did a generous thing. <span class="scrip">“Go back to your mothers’ homes. And may the L<small>ORD</small> reward you for your kindness to your husbands and to me. May the L<small>ORD</small> bless you with the security of another marriage”</span> <span class="ref">Ruth 1:8-9 (NLT)</span>. A woman who will shortly say God has emptied her is still able to bless in His name; grief and faith were sharing the same breath. And she meant the release; she had nothing to offer two young widows. <span class="scrip">“Things are far more bitter for me than for you, because the L<small>ORD</small> himself has raised his fist against me”</span> <span class="ref">Ruth 1:13 (NLT)</span>. </p><p>Then the parting. <span class="scrip">“And again they wept together, and Orpah kissed her mother-in-law good-bye. But Ruth clung tightly to Naomi”</span> <span class="ref">Ruth 1:14 (NLT)</span>. Be fair to Orpah. She did what she was asked, what was sensible, and what Naomi herself had just blessed; the Bible does not condemn her, and neither should we. She is in the story so that we can see how far beyond reasonable Ruth went. Naomi tried once more: <span class="scrip">“your sister-in-law has gone back to her people and to her gods. You should do the same”</span> <span class="ref">Ruth 1:15 (NLT)</span>. </p><p>And Ruth answered: <span class="scrip">“Don’t ask me to leave you and turn back. Wherever you go, I will go; wherever you live, I will live. Your people will be my people, and your God will be my God. Wherever you die, I will die, and there I will be buried. May the L<small>ORD</small> punish me severely if I allow anything but death to separate us!”</span> <span class="ref">Ruth 1:16-17 (NLT)</span>. Count what she chose: a person, a place, a people, a God, and a grave. This was not romance; there was no Boaz on the horizon. </p><p>It was not calculation; Naomi had just explained that there was nothing to gain. It was a conversion. Ruth was leaving the gods of Moab for the L<small>ORD</small>, and she swore her oath by His name. Ellen White reads it exactly so: <span class="egw">“All who, like Rahab the Canaanite and Ruth the Moabitess, turned from idolatry to the worship of the true God were to unite themselves with His chosen people.”</span> She turned from idolatry, and she united herself with His people, exactly as that sentence says such converts were to do; both verbs describe Ruth. </p><p>She was choosing a people whose law, at that time, read, <span class="scrip">“No Ammonite or Moabite or any of their descendants for ten generations may be admitted to the assembly of the L<small>ORD</small>”</span> <span class="ref">Deuteronomy 23:3 (NLT)</span>; she walked toward the God of Israel through a door that looked shut. And she did it blind. Ruth did not know about the field, or the redeemer, or the baby, or the king, or the Messiah. She chose faithfulness in chapter one without reading chapter four, for <span class="scrip">“we live by believing and not by seeing”</span> <span class="ref">2 Corinthians 5:7 (NLT)</span>. </p><p>Faithfulness usually comes before understanding; we are often asked to obey God in one chapter without being told what He is preparing in the next.</p></section>
 
-    <p>Then Bethlehem. <span class="scrip">“When they came to Bethlehem, the entire town was excited by their arrival. ‘Is it really Naomi?’ the women asked”</span> <span class="ref">Ruth 1:19 (NLT)</span>. The name means “pleasant,” and the woman in front of them did not feel she could carry it any more. <span class="scrip">“‘Don’t call me Naomi,’ she responded. ‘Instead, call me Mara, for the Almighty has made life very bitter for me. I went away full, but the L<small>ORD</small> has brought me home empty. Why call me Naomi when the L<small>ORD</small> has caused me to suffer and the Almighty has sent such tragedy upon me?’”</span> <span class="ref">Ruth 1:20-21 (NLT)</span>. Mara means “bitter.” Hear her with compassion before you hear her with correction. Naomi is not the villain of her own story, and she is not a warning about weak faith. She had buried a husband and two sons; she was old, poor, and home only because there was nowhere else to go; and she said so, out loud, in God’s name, in front of everybody. That is not unbelief. An unbeliever would not bother to bring God into it. Naomi still believed that the L<small>ORD</small> was sovereign over her life; what she could no longer see was that He was kind. The Bible keeps her words without editing them, as it keeps Job’s and David’s, because <span class="scrip">“The L<small>ORD</small> is close to the brokenhearted; he rescues those whose spirits are crushed”</span> <span class="ref">Psalm 34:18 (NLT)</span>, and He is not threatened by a grieving woman telling the truth about how it feels. Faithful people can grieve deeply and still not understand what God is doing. But now read the very next verse, because the narrator answers her in the next breath, and he does it without raising his voice. <span class="scrip">“So Naomi returned from Moab, accompanied by her daughter-in-law Ruth, the young Moabite woman. They arrived in Bethlehem in late spring, at the beginning of the barley harvest”</span> <span class="ref">Ruth 1:22 (NLT)</span>. Empty, accompanied by Ruth. Empty, at the beginning of the harvest. While Naomi was describing what she had lost, the answer to her loss was standing beside her, and the fields around the town were turning gold. She had told the whole truth about her grief; she had not yet told the whole truth about her life, because from inside chapter one she could not see it. So here is the question this story presses on everyone who has ever called themselves empty: what if some of the things we call “empty” are chapters God has not finished writing yet?</p>
+    <section class="mv"><p>Then Bethlehem. <span class="scrip">“When they came to Bethlehem, the entire town was excited by their arrival. ‘Is it really Naomi?’ the women asked”</span> <span class="ref">Ruth 1:19 (NLT)</span>. The name means “pleasant,” and the woman in front of them did not feel she could carry it any more. <span class="scrip">“‘Don’t call me Naomi,’ she responded. ‘Instead, call me Mara, for the Almighty has made life very bitter for me. I went away full, but the L<small>ORD</small> has brought me home empty. Why call me Naomi when the L<small>ORD</small> has caused me to suffer and the Almighty has sent such tragedy upon me?’”</span> <span class="ref">Ruth 1:20-21 (NLT)</span>. </p><p>Mara means “bitter.” Hear her with compassion before you hear her with correction. Naomi is not the villain of her own story, and she is not a warning about weak faith. She had buried a husband and two sons; she was old, poor, and home only because there was nowhere else to go; and she said so, out loud, in God’s name, in front of everybody. That is not unbelief. An unbeliever would not bother to bring God into it. Naomi still believed that the L<small>ORD</small> was sovereign over her life; what she could no longer see was that He was kind. </p><p>The Bible keeps her words without editing them, as it keeps Job’s and David’s, because <span class="scrip">“The L<small>ORD</small> is close to the brokenhearted; he rescues those whose spirits are crushed”</span> <span class="ref">Psalm 34:18 (NLT)</span>, and He is not threatened by a grieving woman telling the truth about how it feels. Faithful people can grieve deeply and still not understand what God is doing. But now read the very next verse, because the narrator answers her in the next breath, and he does it without raising his voice. </p><p><span class="scrip">“So Naomi returned from Moab, accompanied by her daughter-in-law Ruth, the young Moabite woman. They arrived in Bethlehem in late spring, at the beginning of the barley harvest”</span> <span class="ref">Ruth 1:22 (NLT)</span>. Empty, accompanied by Ruth. Empty, at the beginning of the harvest. While Naomi was describing what she had lost, the answer to her loss was standing beside her, and the fields around the town were turning gold. She had told the whole truth about her grief; she had not yet told the whole truth about her life, because from inside chapter one she could not see it. </p><p>So here is the question this story presses on everyone who has ever called themselves empty: what if some of the things we call “empty” are chapters God has not finished writing yet?</p></section>
 
-    <p>Watch how the next chapter begins: not with a vision or a prophet, but with a young widow asking permission to go to work. <span class="scrip">“One day Ruth the Moabite said to Naomi, ‘Let me go out into the harvest fields to pick up the stalks of grain left behind by anyone who is kind enough to let me do it’”</span> <span class="ref">Ruth 2:2 (NLT)</span>. Israel’s law told harvesters to leave the edges of their fields and the dropped stalks for the poor and the foreigner (Leviticus 19:9-10), and Ruth was both. Gleaning was hot, humbling work behind the reapers, and it was the only thing she could do; so she did it. Then the narrator smiles. <span class="scrip">“So Ruth went out to gather grain behind the harvesters. And as it happened, she found herself working in a field that belonged to Boaz, the relative of her father-in-law, Elimelech”</span> <span class="ref">Ruth 2:3 (NLT)</span>. As it happened. Her feet took her to the one field that belonged to a relative, and she did not know it; she was not following a plan, she was following the reapers. This is how the providence of God usually works: not by lightning, but by a faithful person doing the next ordinary thing while God quietly arranges where the ordinary thing leads. Ruth’s part was diligence, <span class="scrip">“hard at work ever since, except for a few minutes’ rest in the shelter”</span> <span class="ref">Ruth 2:7 (NLT)</span>; God’s part was the field. Then Boaz arrived, and the story shows us what compassion toward the vulnerable looks like when it has money and authority behind it: <span class="scrip">“I have warned the young men not to treat you roughly. And when you are thirsty, help yourself to the water they have drawn from the well”</span> <span class="ref">Ruth 2:9 (NLT)</span>. Protection, water, a place among his own workers, bread at his table, and handfuls of barley dropped on purpose in her path; Boaz did not make a poor foreigner feel poor or foreign. Ruth was overwhelmed: <span class="scrip">“‘What have I done to deserve such kindness?’ she asked. ‘I am only a foreigner’”</span> <span class="ref">Ruth 2:10 (NLT)</span>. And Boaz answered with the best summary of her life that anyone ever gave: <span class="scrip">“But I also know about everything you have done for your mother-in-law since the death of your husband. I have heard how you left your father and mother and your own land to live here among complete strangers. May the L<small>ORD</small>, the God of Israel, under whose wings you have come to take refuge, reward you fully for what you have done”</span> <span class="ref">Ruth 2:11-12 (NLT)</span>. Under whose wings. Ruth had taken refuge in a God she had known for a few weeks, and He was already sheltering her, through a field and a farmer who kept the law of Moses with his heart as well as his hands. <span class="scrip">“The L<small>ORD</small> protects the foreigners among us. He cares for the orphans and widows”</span> <span class="ref">Psalm 146:9 (NLT)</span>; in Bethlehem that spring, His protection wore sandals and gave orders to reapers.</p>
+    <section class="mv"><p>Watch how the next chapter begins: not with a vision or a prophet, but with a young widow asking permission to go to work. <span class="scrip">“One day Ruth the Moabite said to Naomi, ‘Let me go out into the harvest fields to pick up the stalks of grain left behind by anyone who is kind enough to let me do it’”</span> <span class="ref">Ruth 2:2 (NLT)</span>. Israel’s law told harvesters to leave the edges of their fields and the dropped stalks for the poor and the foreigner (Leviticus 19:9-10), and Ruth was both. </p><p>Gleaning was hot, humbling work behind the reapers, and it was the only thing she could do; so she did it. Then the narrator smiles. <span class="scrip">“So Ruth went out to gather grain behind the harvesters. And as it happened, she found herself working in a field that belonged to Boaz, the relative of her father-in-law, Elimelech”</span> <span class="ref">Ruth 2:3 (NLT)</span>. As it happened. Her feet took her to the one field that belonged to a relative, and she did not know it; she was not following a plan, she was following the reapers. </p><p>This is how the providence of God usually works: not by lightning, but by a faithful person doing the next ordinary thing while God quietly arranges where the ordinary thing leads. Ruth’s part was diligence, <span class="scrip">“hard at work ever since, except for a few minutes’ rest in the shelter”</span> <span class="ref">Ruth 2:7 (NLT)</span>; God’s part was the field. Then Boaz arrived, and the story shows us what compassion toward the vulnerable looks like when it has money and authority behind it: <span class="scrip">“I have warned the young men not to treat you roughly. And when you are thirsty, help yourself to the water they have drawn from the well”</span> <span class="ref">Ruth 2:9 (NLT)</span>. </p><p>Protection, water, a place among his own workers, bread at his table, and handfuls of barley dropped on purpose in her path; Boaz did not make a poor foreigner feel poor or foreign. Ruth was overwhelmed: <span class="scrip">“‘What have I done to deserve such kindness?’ she asked. ‘I am only a foreigner’”</span> <span class="ref">Ruth 2:10 (NLT)</span>. And Boaz answered with the best summary of her life that anyone ever gave: <span class="scrip">“But I also know about everything you have done for your mother-in-law since the death of your husband. I have heard how you left your father and mother and your own land to live here among complete strangers. May the L<small>ORD</small>, the God of Israel, under whose wings you have come to take refuge, reward you fully for what you have done”</span> <span class="ref">Ruth 2:11-12 (NLT)</span>. </p><p>Under whose wings. Ruth had taken refuge in a God she had known for a few weeks, and He was already sheltering her, through a field and a farmer who kept the law of Moses with his heart as well as his hands. <span class="scrip">“The L<small>ORD</small> protects the foreigners among us. He cares for the orphans and widows”</span> <span class="ref">Psalm 146:9 (NLT)</span>; in Bethlehem that spring, His protection wore sandals and gave orders to reapers.</p></section>
 
-    <p>Evening came. <span class="scrip">“So Ruth gathered barley there all day, and when she beat out the grain that evening, it filled an entire basket. She carried it back into town and showed it to her mother-in-law”</span> <span class="ref">Ruth 2:17-18 (NLT)</span>. Now watch Naomi, because this is where empty begins, very slowly, to become full. <span class="scrip">“‘Where did you gather all this grain today?’ Naomi asked. ‘Where did you work? May the L<small>ORD</small> bless the one who helped you!’”</span> <span class="ref">Ruth 2:19 (NLT)</span>. Ruth said the name, and something in Naomi that had been shut since Moab came open. <span class="scrip">“‘May the L<small>ORD</small> bless him!’ Naomi told her daughter-in-law. ‘He is showing his kindness to us as well as to your dead husband. That man is one of our closest relatives, one of our family redeemers’”</span> <span class="ref">Ruth 2:20 (NLT)</span>. Set that beside the key verse. The woman who said the L<small>ORD</small> had brought her home empty is now saying the L<small>ORD</small> is showing kindness. What had changed? Not her widowhood, not her age, not her poverty; one basket of barley, and one name. Naomi had begun to recognise providence, and she recognised it in something small enough to carry. Most of us are waiting for God to prove His kindness with something large; He usually starts with a basket. A family redeemer, in Israel’s law, was a close relative with the right and the duty to buy back a relative’s land when poverty had forced its sale, and to raise up an heir so that a dead man’s name would not disappear. Naomi knew that law, and for the first time since Moab she could see a way forward. So the third chapter is Naomi planning again and Ruth trusting her again. At the threshing floor, in the dark, Ruth made her request in the language of the law, not of romance: <span class="scrip">“Spread the corner of your covering over me, for you are my family redeemer”</span> <span class="ref">Ruth 3:9 (NLT)</span>. The Hebrew word behind that “covering” is the word Boaz had used for the L<small>ORD</small>’s “wings”; Ruth was asking him to become part of the answer to his own prayer. There was a nearer relative to be dealt with first, but Boaz gave his word, and he sent her home before dawn with six scoops of barley and a sentence the whole book has been waiting for: <span class="scrip">“Don’t go back to your mother-in-law empty-handed”</span> <span class="ref">Ruth 3:17 (NLT)</span>. Empty was Naomi’s word at the gate. Here it is again, in Boaz’s mouth, being overturned. And Naomi, who once could see only what was gone, now says, <span class="scrip">“Just be patient, my daughter, until we hear what happens. The man won’t rest until he has settled things today”</span> <span class="ref">Ruth 3:18 (NLT)</span>. Bitterness has become hope, and hope is waiting on a man of his word.</p>
+    <section class="mv"><p>Evening came. <span class="scrip">“So Ruth gathered barley there all day, and when she beat out the grain that evening, it filled an entire basket. She carried it back into town and showed it to her mother-in-law”</span> <span class="ref">Ruth 2:17-18 (NLT)</span>. Now watch Naomi, because this is where empty begins, very slowly, to become full. <span class="scrip">“‘Where did you gather all this grain today?’ Naomi asked. ‘Where did you work? May the L<small>ORD</small> bless the one who helped you!’”</span> <span class="ref">Ruth 2:19 (NLT)</span>. Ruth said the name, and something in Naomi that had been shut since Moab came open. </p><p><span class="scrip">“‘May the L<small>ORD</small> bless him!’ Naomi told her daughter-in-law. ‘He is showing his kindness to us as well as to your dead husband. That man is one of our closest relatives, one of our family redeemers’”</span> <span class="ref">Ruth 2:20 (NLT)</span>. Set that beside the key verse. The woman who said the L<small>ORD</small> had brought her home empty is now saying the L<small>ORD</small> is showing kindness. What had changed? Not her widowhood, not her age, not her poverty; one basket of barley, and one name. </p><p>Naomi had begun to recognise providence, and she recognised it in something small enough to carry. Most of us are waiting for God to prove His kindness with something large; He usually starts with a basket. A family redeemer, in Israel’s law, was a close relative with the right and the duty to buy back a relative’s land when poverty had forced its sale, and to raise up an heir so that a dead man’s name would not disappear. Naomi knew that law, and for the first time since Moab she could see a way forward. </p><p>So the third chapter is Naomi planning again and Ruth trusting her again. At the threshing floor, in the dark, Ruth made her request in the language of the law, not of romance: <span class="scrip">“Spread the corner of your covering over me, for you are my family redeemer”</span> <span class="ref">Ruth 3:9 (NLT)</span>. The Hebrew word behind that “covering” is the word Boaz had used for the L<small>ORD</small>’s “wings”; Ruth was asking him to become part of the answer to his own prayer. There was a nearer relative to be dealt with first, but Boaz gave his word, and he sent her home before dawn with six scoops of barley and a sentence the whole book has been waiting for: <span class="scrip">“Don’t go back to your mother-in-law empty-handed”</span> <span class="ref">Ruth 3:17 (NLT)</span>. </p><p>Empty was Naomi’s word at the gate. Here it is again, in Boaz’s mouth, being overturned. And Naomi, who once could see only what was gone, now says, <span class="scrip">“Just be patient, my daughter, until we hear what happens. The man won’t rest until he has settled things today”</span> <span class="ref">Ruth 3:18 (NLT)</span>. Bitterness has become hope, and hope is waiting on a man of his word.</p></section>
 
-    <p>Boaz went to the town gate, called ten elders, and put the matter to the nearer relative in public. The man was willing to take the land until he heard that it came with Ruth and with a duty to a dead man’s name; then he stepped back: <span class="scrip">“You redeem the land; I cannot do it”</span> <span class="ref">Ruth 4:6 (NLT)</span>. Redemption has a price, and not everyone with the right to pay it is willing. Boaz was, and he paid it before witnesses. <span class="scrip">“So Boaz took Ruth into his home, and she became his wife. When he slept with her, the L<small>ORD</small> enabled her to become pregnant, and she gave birth to a son”</span> <span class="ref">Ruth 4:13 (NLT)</span>. Read the whole book again and notice how seldom the narrator says outright that the L<small>ORD</small> did something. He gave His people bread (1:6), and He gave Ruth a son (4:13). Everything in between, the road, the field, the basket, the threshing floor, the gate, is people being faithful and kind while God works underneath them, unnamed and unhurried. He was not absent from the middle; that is simply how He usually works in the middle. Now listen to the women of Bethlehem, the same women who had asked “Is it really Naomi?” and had been told to call her Mara. <span class="scrip">“Then the women of the town said to Naomi, ‘Praise the L<small>ORD</small>, who has now provided a redeemer for your family! May this child be famous in Israel. May he restore your youth and care for you in your old age. For he is the son of your daughter-in-law who loves you and has been better to you than seven sons!’”</span> <span class="ref">Ruth 4:14-15 (NLT)</span>. They do not call her Mara. They praise the L<small>ORD</small>, and then they say what Naomi could not have believed at the gate: that the daughter-in-law standing quietly beside her when she said “empty” had been worth more than seven sons all along. <span class="scrip">“Naomi took the baby and cuddled him to her breast. And she cared for him as if he were her own. The neighbor women said, ‘Now at last Naomi has a son again!’ And they named him Obed. He became the father of Jesse and the grandfather of David”</span> <span class="ref">Ruth 4:16-17 (NLT)</span>. The hands that came home empty are holding a child. But be honest about what this restoration was and was not, because the story is. Elimelech did not come back. Mahlon and Kilion did not come back. God did not undo Moab; He redeemed it. The restoration was not a replacement, and it came through a young foreigner’s loyalty and an older man’s costly kindness rather than through anything anyone would have called a miracle. This is a true story, not a formula. It does not promise that every marriage will be mended, every grave reopened, or every empty chair filled in this life; people of deep faith have carried some losses all the way to their own graves. What it does promise is a God of whom it is written, <span class="scrip">“The faithful love of the L<small>ORD</small> never ends! His mercies never cease. Great is his faithfulness; his mercies begin afresh each morning”</span> <span class="ref">Lamentations 3:22-23 (NLT)</span>, and who, in His time and in His way, is able to make even Moab serve His purposes.</p>
+    <section class="mv"><p>Boaz went to the town gate, called ten elders, and put the matter to the nearer relative in public. The man was willing to take the land until he heard that it came with Ruth and with a duty to a dead man’s name; then he stepped back: <span class="scrip">“You redeem the land; I cannot do it”</span> <span class="ref">Ruth 4:6 (NLT)</span>. Redemption has a price, and not everyone with the right to pay it is willing. Boaz was, and he paid it before witnesses. <span class="scrip">“So Boaz took Ruth into his home, and she became his wife. When he slept with her, the L<small>ORD</small> enabled her to become pregnant, and she gave birth to a son”</span> <span class="ref">Ruth 4:13 (NLT)</span>. </p><p>Read the whole book again and notice how seldom the narrator says outright that the L<small>ORD</small> did something. He gave His people bread (1:6), and He gave Ruth a son (4:13). Everything in between, the road, the field, the basket, the threshing floor, the gate, is people being faithful and kind while God works underneath them, unnamed and unhurried. He was not absent from the middle; that is simply how He usually works in the middle. Now listen to the women of Bethlehem, the same women who had asked “Is it really Naomi?” and had been told to call her Mara. </p><p><span class="scrip">“Then the women of the town said to Naomi, ‘Praise the L<small>ORD</small>, who has now provided a redeemer for your family! May this child be famous in Israel. May he restore your youth and care for you in your old age. For he is the son of your daughter-in-law who loves you and has been better to you than seven sons!’”</span> <span class="ref">Ruth 4:14-15 (NLT)</span>. They do not call her Mara. They praise the L<small>ORD</small>, and then they say what Naomi could not have believed at the gate: that the daughter-in-law standing quietly beside her when she said “empty” had been worth more than seven sons all along. </p><p><span class="scrip">“Naomi took the baby and cuddled him to her breast. And she cared for him as if he were her own. The neighbor women said, ‘Now at last Naomi has a son again!’ And they named him Obed. He became the father of Jesse and the grandfather of David”</span> <span class="ref">Ruth 4:16-17 (NLT)</span>. The hands that came home empty are holding a child. But be honest about what this restoration was and was not, because the story is. Elimelech did not come back. Mahlon and Kilion did not come back. </p><p>God did not undo Moab; He redeemed it. The restoration was not a replacement, and it came through a young foreigner’s loyalty and an older man’s costly kindness rather than through anything anyone would have called a miracle. This is a true story, not a formula. It does not promise that every marriage will be mended, every grave reopened, or every empty chair filled in this life; people of deep faith have carried some losses all the way to their own graves. What it does promise is a God of whom it is written, <span class="scrip">“The faithful love of the L<small>ORD</small> never ends! His mercies never cease. Great is his faithfulness; his mercies begin afresh each morning”</span> <span class="ref">Lamentations 3:22-23 (NLT)</span>, and who, in His time and in His way, is able to make even Moab serve His purposes.</p></section>
 
-    <p>And Bethlehem was not finished. A short genealogy closes the book, and a thousand years later Matthew opens the New Testament with the same names and adds the ones Ruth never saw: <span class="scrip">“Salmon was the father of Boaz (whose mother was Rahab). Boaz was the father of Obed (whose mother was Ruth). Obed was the father of Jesse. Jesse was the father of King David”</span> <span class="ref">Matthew 1:5-6 (NLT)</span>, and the line runs on until <span class="scrip">“Jacob was the father of Joseph, the husband of Mary. Mary gave birth to Jesus, who is called the Messiah”</span> <span class="ref">Matthew 1:16 (NLT)</span>. Ruth’s name is in the family record of Jesus Christ. A Moabite, a woman from a nation the law barred from the assembly for ten generations, is written into the ancestry of the Messiah, beside Rahab of Jericho. That is what the God of Israel does with outsiders who turn to Him: He does not merely tolerate them at the edge of the field; He writes them into His own family. <span class="scrip">“So now you Gentiles are no longer strangers and foreigners. You are citizens along with all of God’s holy people. You are members of God’s family”</span> <span class="ref">Ephesians 2:19 (NLT)</span>. Your past does not disqualify you from God; Ruth’s did not. Where you came from does not decide where God can take you; Moab did not. And Boaz points beyond himself. He was a good man in Bethlehem, not a parable, and we should not force every detail of his story onto Christ; but the law he obeyed teaches what a redeemer is. A redeemer had to be a relative, he had to be willing, and he had to be able to pay. <span class="scrip">“But when the right time came, God sent his Son, born of a woman, subject to the law. God sent him to buy freedom for us who were slaves to the law, so that he could adopt us as his very own children”</span> <span class="ref">Galatians 4:4-5 (NLT)</span>. He became our relative. He was willing; there was no nearer kinsman who declined, only a Son who said yes. And He paid: <span class="scrip">“For you know that God paid a ransom to save you from the empty life you inherited from your ancestors. And it was not paid with mere gold or silver, which lose their value. It was the precious blood of Christ, the sinless, spotless Lamb of God”</span> <span class="ref">1 Peter 1:18-19 (NLT)</span>. From the empty life. Naomi’s emptiness was terrible, but humanity’s deepest emptiness is older and wider: the separation from God that sin has made, the hunger no harvest fills. Into that emptiness the Redeemer came, to Bethlehem of all places, the house of bread that had once run out of bread, where Obed was born and where David was born, and He said, <span class="scrip">“I am the bread of life. Whoever comes to me will never be hungry again”</span> <span class="ref">John 6:35 (NLT)</span>. That is where empty finally becomes full. And it is why the Christian’s deepest hope is not that every loss will be reversed in this life, but that every loss is held by a Redeemer who has promised to reverse all of it: <span class="scrip">“He will wipe every tear from their eyes, and there will be no more death or sorrow or crying or pain. All these things are gone forever”</span> <span class="ref">Revelation 21:4 (NLT)</span>.</p>
+    <section class="mv"><p>And Bethlehem was not finished. A short genealogy closes the book, and a thousand years later Matthew opens the New Testament with the same names and adds the ones Ruth never saw: <span class="scrip">“Salmon was the father of Boaz (whose mother was Rahab). Boaz was the father of Obed (whose mother was Ruth). Obed was the father of Jesse. Jesse was the father of King David”</span> <span class="ref">Matthew 1:5-6 (NLT)</span>, and the line runs on until <span class="scrip">“Jacob was the father of Joseph, the husband of Mary. Mary gave birth to Jesus, who is called the Messiah”</span> <span class="ref">Matthew 1:16 (NLT)</span>. </p><p>Ruth’s name is in the family record of Jesus Christ. A Moabite, a woman from a nation the law barred from the assembly for ten generations, is written into the ancestry of the Messiah, beside Rahab of Jericho. That is what the God of Israel does with outsiders who turn to Him: He does not merely tolerate them at the edge of the field; He writes them into His own family. <span class="scrip">“So now you Gentiles are no longer strangers and foreigners. You are citizens along with all of God’s holy people. You are members of God’s family”</span> <span class="ref">Ephesians 2:19 (NLT)</span>. </p><p>Your past does not disqualify you from God; Ruth’s did not. Where you came from does not decide where God can take you; Moab did not. And Boaz points beyond himself. He was a good man in Bethlehem, not a parable, and we should not force every detail of his story onto Christ; but the law he obeyed teaches what a redeemer is. A redeemer had to be a relative, he had to be willing, and he had to be able to pay. <span class="scrip">“But when the right time came, God sent his Son, born of a woman, subject to the law. God sent him to buy freedom for us who were slaves to the law, so that he could adopt us as his very own children”</span> <span class="ref">Galatians 4:4-5 (NLT)</span>. </p><p>He became our relative. He was willing; there was no nearer kinsman who declined, only a Son who said yes. And He paid: <span class="scrip">“For you know that God paid a ransom to save you from the empty life you inherited from your ancestors. And it was not paid with mere gold or silver, which lose their value. It was the precious blood of Christ, the sinless, spotless Lamb of God”</span> <span class="ref">1 Peter 1:18-19 (NLT)</span>. From the empty life. Naomi’s emptiness was terrible, but humanity’s deepest emptiness is older and wider: the separation from God that sin has made, the hunger no harvest fills. </p><p>Into that emptiness the Redeemer came, to Bethlehem of all places, the house of bread that had once run out of bread, where Obed was born and where David was born, and He said, <span class="scrip">“I am the bread of life. Whoever comes to me will never be hungry again”</span> <span class="ref">John 6:35 (NLT)</span>. That is where empty finally becomes full. And it is why the Christian’s deepest hope is not that every loss will be reversed in this life, but that every loss is held by a Redeemer who has promised to reverse all of it: <span class="scrip">“He will wipe every tear from their eyes, and there will be no more death or sorrow or crying or pain. All these things are gone forever”</span> <span class="ref">Revelation 21:4 (NLT)</span>.</p></section>
 
-    <p>So, where has life emptied you? Perhaps you know the day: the funeral, the diagnosis, the door that closed. Perhaps it was slower, a marriage or a friendship or a season of life that drained out over years until you found you were telling your story, as Naomi did, mainly by what was missing. Hear three things from Bethlehem. First, you may tell God the truth. Naomi did, in His name and in public, and the L<small>ORD</small> kept her words in His book and kept His hand on her life. He can bear your honesty; what He asks is that you bring it to Him rather than take it away from Him. Second, look beside you. When Naomi said “empty,” Ruth was standing there. God’s provision in a season of loss is very often a person we have been too grieved to count: a daughter-in-law, a friend who keeps turning up, a church member who quietly leaves grain in your path. And look at your own hands, too, because you may be someone’s Ruth. Ellen White lists, among the gifts God has always enlisted for His work, <span class="egw">“the filial affection of Ruth”</span>: the plain, daughterly, unglamorous love that stays, goes to the field, and carries the barley home. Heaven counts that among its instruments. The most spiritual thing you can do for a grieving person this week may be to refuse to leave. Third, be faithful before you understand. Ruth chose God in chapter one without a glimpse of chapter four; the field, the redeemer, the child and the King were all still hidden when she said “your God will be my God.” You may be standing in a chapter that makes no sense yet, asked to obey today without being shown tomorrow. That is not a sign that God has left the story. It is what the middle of every story of His looks like from the inside. He is at work in the ordinary now, in the field you will go to tomorrow and the kindness you will show or receive; “as it happened” is very often His signature. Then lift your eyes past Bethlehem. The God who wrote a Moabite widow into the family line of His Son has not run out of grace for outsiders, or for the bitter, or for the old, or for the poor, or for you. The Redeemer has already come; the price has already been paid; the welcome is already open. Naomi’s neighbours praised the L<small>ORD</small> for a redeemer at the end of a story she had once called empty. You are not at the end of yours. <strong>Naomi said she had come home empty while Ruth stood beside her and the harvest was beginning. God had not finished her story, and He has not finished yours. Trust the God Ruth chose, and the Redeemer her story leads to; in His hands, empty is never the last word.</strong></p>
+    <section class="mv"><p>So, where has life emptied you? Perhaps you know the day: the funeral, the diagnosis, the door that closed. Perhaps it was slower, a marriage or a friendship or a season of life that drained out over years until you found you were telling your story, as Naomi did, mainly by what was missing. Hear three things from Bethlehem. First, you may tell God the truth. Naomi did, in His name and in public, and the L<small>ORD</small> kept her words in His book and kept His hand on her life. </p><p>He can bear your honesty; what He asks is that you bring it to Him rather than take it away from Him. Second, look beside you. When Naomi said “empty,” Ruth was standing there. God’s provision in a season of loss is very often a person we have been too grieved to count: a daughter-in-law, a friend who keeps turning up, a church member who quietly leaves grain in your path. And look at your own hands, too, because you may be someone’s Ruth. Ellen White lists, among the gifts God has always enlisted for His work, <span class="egw">“the filial affection of Ruth”</span>: the plain, daughterly, unglamorous love that stays, goes to the field, and carries the barley home. </p><p>Heaven counts that among its instruments. The most spiritual thing you can do for a grieving person this week may be to refuse to leave. Third, be faithful before you understand. Ruth chose God in chapter one without a glimpse of chapter four; the field, the redeemer, the child and the King were all still hidden when she said “your God will be my God.” You may be standing in a chapter that makes no sense yet, asked to obey today without being shown tomorrow. </p><p>That is not a sign that God has left the story. It is what the middle of every story of His looks like from the inside. He is at work in the ordinary now, in the field you will go to tomorrow and the kindness you will show or receive; “as it happened” is very often His signature. Then lift your eyes past Bethlehem. The God who wrote a Moabite widow into the family line of His Son has not run out of grace for outsiders, or for the bitter, or for the old, or for the poor, or for you. </p><p>The Redeemer has already come; the price has already been paid; the welcome is already open. Naomi’s neighbours praised the L<small>ORD</small> for a redeemer at the end of a story she had once called empty. You are not at the end of yours. </p><p class="thesis"><strong>Naomi said she had come home empty while Ruth stood beside her and the harvest was beginning. God had not finished her story, and He has not finished yours. Trust the God Ruth chose, and the Redeemer her story leads to; in His hands, empty is never the last word.</strong></p></section>
   </div>
 
   <div class="divider" aria-hidden="true">
     <span class="line"></span>
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <svg width="26" height="26" viewbox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"></path></svg>
     <span class="line right"></span>
   </div>
 
   <h2 class="takeaways">Key Takeaways</h2>
   <ol class="takeaway-list">
-    <li><strong>The loss was real, and Scripture says so</strong> &mdash; famine, three graves in Moab, a widow with no sons and no future. The Bible does not minimise Naomi’s emptiness, and it lets her name it out loud in God’s presence. Faithful people can grieve deeply and still not understand what God is doing.</li>
-    <li><strong>Ruth chose God before she knew the ending</strong> &mdash; a person, a place, a people, a God, and a grave (Ruth 1:16-17), with no Boaz, no baby and no king in view. Ellen White says she <em>turned from idolatry to the worship of the true God.</em> Faithfulness came before understanding, and it usually does.</li>
-    <li><strong>Naomi’s “empty” was honest but incomplete</strong> &mdash; she told the truth about her grief; the next verse tells the truth about her life: <em>accompanied by her daughter-in-law Ruth &hellip; at the beginning of the barley harvest</em> (Ruth 1:22). What if some of the things we call empty are chapters God has not finished writing yet?</li>
-    <li><strong>Providence wore ordinary clothes</strong> &mdash; <em>as it happened,</em> Ruth’s feet took her to Boaz’s field (Ruth 2:3). Her part was to go to work; God’s part was the field. The narrator names the L<small>ORD</small>’s hand only at the bread (1:6) and the birth (4:13); everything in between was His as well.</li>
-    <li><strong>Empty began to fill with a basket</strong> &mdash; Naomi’s <em>He is showing his kindness to us</em> (Ruth 2:20) came with one basket of barley and one name. He usually starts small. And her word from the gate is overturned in Boaz’s mouth: <em>Don’t go back to your mother-in-law empty-handed</em> (Ruth 3:17).</li>
-    <li><strong>Restoration, not replacement</strong> &mdash; the women who heard “call me Mara” now praise the L<small>ORD</small> for a redeemer, and Ruth has been <em>better to you than seven sons</em> (Ruth 4:15). But Elimelech and the boys did not come back; God redeemed Moab, He did not undo it. A true story, not a formula; what it promises is the God whose mercies begin afresh each morning.</li>
-    <li><strong>The Moabite is in the Messiah’s family</strong> &mdash; <em>Boaz was the father of Obed (whose mother was Ruth)</em> (Matthew 1:5). Boaz was a relative, willing and able to pay; Christ became our relative, was willing, and paid with His own blood for <em>the empty life</em> (1 Peter 1:18-19). Tell God the truth; look beside you; be faithful before you understand; and trust the Redeemer, in whom empty finally becomes full.</li>
+    <li><strong>The loss was real, and Scripture says so</strong> — famine, three graves in Moab, a widow with no sons and no future. The Bible does not minimise Naomi’s emptiness, and it lets her name it out loud in God’s presence. Faithful people can grieve deeply and still not understand what God is doing.</li>
+    <li><strong>Ruth chose God before she knew the ending</strong> — a person, a place, a people, a God, and a grave (Ruth 1:16-17), with no Boaz, no baby and no king in view. Ellen White says she <em>turned from idolatry to the worship of the true God.</em> Faithfulness came before understanding, and it usually does.</li>
+    <li><strong>Naomi’s “empty” was honest but incomplete</strong> — she told the truth about her grief; the next verse tells the truth about her life: <em>accompanied by her daughter-in-law Ruth … at the beginning of the barley harvest</em> (Ruth 1:22). What if some of the things we call empty are chapters God has not finished writing yet?</li>
+    <li><strong>Providence wore ordinary clothes</strong> — <em>as it happened,</em> Ruth’s feet took her to Boaz’s field (Ruth 2:3). Her part was to go to work; God’s part was the field. The narrator names the L<small>ORD</small>’s hand only at the bread (1:6) and the birth (4:13); everything in between was His as well.</li>
+    <li><strong>Empty began to fill with a basket</strong> — Naomi’s <em>He is showing his kindness to us</em> (Ruth 2:20) came with one basket of barley and one name. He usually starts small. And her word from the gate is overturned in Boaz’s mouth: <em>Don’t go back to your mother-in-law empty-handed</em> (Ruth 3:17).</li>
+    <li><strong>Restoration, not replacement</strong> — the women who heard “call me Mara” now praise the L<small>ORD</small> for a redeemer, and Ruth has been <em>better to you than seven sons</em> (Ruth 4:15). But Elimelech and the boys did not come back; God redeemed Moab, He did not undo it. A true story, not a formula; what it promises is the God whose mercies begin afresh each morning.</li>
+    <li><strong>The Moabite is in the Messiah’s family</strong> — <em>Boaz was the father of Obed (whose mother was Ruth)</em> (Matthew 1:5). Boaz was a relative, willing and able to pay; Christ became our relative, was willing, and paid with His own blood for <em>the empty life</em> (1 Peter 1:18-19). Tell God the truth; look beside you; be faithful before you understand; and trust the Redeemer, in whom empty finally becomes full.</li>
   </ol>
 
   
-  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/7uTN0Gd58aY" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">&#9654;</span>Watch the Short</a><a href="https://www.youtube.com/watch?v=B73HyukztqI" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">&#9654;</span>Watch the full film &middot; 10:42</a><p class="note">On YouTube as &ldquo;The Answer Was Standing Beside Her&rdquo; and &ldquo;Naomi Thought Her Story Was Over&rdquo; &mdash; from the channel <em>I Can Still Believe</em>.</p></div>
+  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/7uTN0Gd58aY" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">▶</span>Watch the Short</a><a href="https://www.youtube.com/watch?v=B73HyukztqI" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">▶</span>Watch the full film · 10:42</a><p class="note">On YouTube as “The Answer Was Standing Beside Her” and “Naomi Thought Her Story Was Over” — from the channel <em>I Can Still Believe</em>.</p></div>
 
   <div class="sdg">Soli Deo Gloria</div>
 </article>
+<nav class="footnav"><a href="./">&#8592;&nbsp;All devotions</a><a href="#top">Back to top&nbsp;&#8593;</a></nav>
+<button class="lamp" id="lamp" type="button" aria-label="Night reading">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path class="moon" d="M20 13.4A8.2 8.2 0 1 1 10.6 4a6.4 6.4 0 0 0 9.4 9.4Z"/>
+  </svg>
+</button>
+<script>
+(function(){
+  var root=document.documentElement, lamp=document.getElementById('lamp');
+  try{ if(localStorage.getItem('devo-theme')==='night') root.setAttribute('data-theme','night'); }catch(e){}
+  if(lamp){ lamp.addEventListener('click',function(){
+    var on = root.getAttribute('data-theme')==='night';
+    if(on){ root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme','night'); }
+    try{ localStorage.setItem('devo-theme', on?'day':'night'); }catch(e){}
+  }); }
+  var bar=document.getElementById('prog');
+  function tick(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.width=(h>0?Math.min(100,(window.scrollY/h)*100):0)+'%';
+  }
+  if(bar){ window.addEventListener('scroll',tick,{passive:true});
+           window.addEventListener('resize',tick); tick(); }
+})();
+</script>
 </body>
 </html>

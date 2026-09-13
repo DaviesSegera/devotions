@@ -3,143 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>When Pride Bows to the Word of God &mdash; Today's Devotion</title>
+<title>When Pride Bows to the Word of God — Today's Devotion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Lora:ital,wght@0,400;0,600;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
 <style>
   :root{
-    --parchment:#f3ead4;
-    --parchment-deep:#eadfc2;
-    --ink:#3b2d18;
-    --ink-soft:#5a4629;
-    --gold:#a67c1e;
-    --gold-bright:#c9a227;
-    --gold-pale:#e3cf95;
-    --wine:#7a3b2e;
+    --bg1:#f8f2e1; --bg2:#f3ead4; --bg3:#e8dcbd;
+    --page-bg:rgba(255,252,241,.62);
+    --page-border:#a67c1e; --page-outline:#e3cf95;
+    --ink:#33281a; --ink-soft:#5a4629;
+    --gold:#a67c1e; --gold-bright:#c9a227; --gold-pale:#e3cf95;
+    --wine:#7a3b2e; --wine-solid:#7a3b2e; --wine-edge:#5d2b20;
+    --card1:rgba(255,250,232,.92); --card2:rgba(247,238,213,.92);
+    --emph:#7c5a12;
+    --num1:#f5e7bd; --num2:#e3cf95; --numfg:#7c5a12;
+    --shadow:rgba(90,70,30,.16);
+    --grain:.30;
+    --rule:rgba(166,124,30,.28);
+  }
+  :root[data-theme="night"]{
+    --bg1:#1a160f; --bg2:#15120c; --bg3:#100e09;
+    --page-bg:rgba(44,37,26,.42);
+    --page-border:#7d6524; --page-outline:#463a19;
+    --ink:#e9dfc8; --ink-soft:#c4b491;
+    --gold:#c2a03a; --gold-bright:#e0bf58; --gold-pale:#6a5828;
+    --wine:#e2a891; --wine-solid:#8a4537; --wine-edge:#6b3428;
+    --card1:rgba(56,47,32,.6); --card2:rgba(46,39,27,.6);
+    --emph:#e2c775;
+    --num1:#4c4024; --num2:#3a311b; --numfg:#e8ce7f;
+    --shadow:rgba(0,0,0,.55);
+    --grain:.16;
+    --rule:rgba(194,160,58,.26);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{
-    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    background:radial-gradient(ellipse at 50% 0%, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%);
+    background-attachment:fixed;
     color:var(--ink);
     font-family:'Lora',serif;
-    line-height:1.85;
-    padding:34px 14px 60px;
+    line-height:1.78;
+    padding:30px 14px 28px;
     position:relative;
+    -webkit-font-smoothing:antialiased;
+    transition:background-color .25s ease, color .25s ease;
   }
-  /* aged-paper grain */
+  /* aged-paper grain, lighter than before */
   body::before{
     content:"";
     position:fixed;inset:0;
     pointer-events:none;
-    opacity:.5;
+    opacity:var(--grain);
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
     z-index:2;
   }
-  .page{
-    max-width:760px;
-    margin:0 auto;
-    background:rgba(255,252,240,.55);
-    border:1.5px solid var(--gold);
-    outline:1px solid var(--gold-pale);
-    outline-offset:6px;
-    padding:64px 52px 56px;
-    position:relative;
-    box-shadow:0 18px 50px rgba(90,70,30,.18);
+
+  /* reading progress */
+  .progress{
+    position:fixed;top:0;left:0;height:3px;width:0;
+    background:linear-gradient(90deg,var(--gold-pale),var(--gold-bright));
+    z-index:12;transition:width .08s linear;
   }
-  @media(max-width:620px){.page{padding:52px 24px 44px;}}
-  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
-  .corner.tl{top:10px;left:10px;}
-  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
-  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
-  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+
+  .page{
+    max-width:720px;
+    margin:0 auto;
+    background:var(--page-bg);
+    border:1.5px solid var(--page-border);
+    outline:1px solid var(--page-outline);
+    outline-offset:6px;
+    padding:62px 56px 54px;
+    position:relative;
+    box-shadow:0 18px 50px var(--shadow);
+  }
+  @media(max-width:620px){.page{padding:48px 22px 40px;} body{padding:22px 11px 24px;}}
+
+  /* corners, quieter: smaller and lighter than before */
+  .corner{position:absolute;width:44px;height:44px;color:var(--gold);opacity:.55;}
+  .corner.tl{top:9px;left:9px;}
+  .corner.tr{top:9px;right:9px;transform:scaleX(-1);}
+  .corner.bl{bottom:9px;left:9px;transform:scaleY(-1);}
+  .corner.br{bottom:9px;right:9px;transform:scale(-1,-1);}
+
   .eyebrow{
     font-family:'Cinzel',serif;
-    font-size:.82rem;
-    letter-spacing:.42em;
+    font-size:.74rem;
+    letter-spacing:.34em;
     text-transform:uppercase;
     color:var(--gold);
     text-align:center;
-    margin-bottom:18px;
+    margin-bottom:16px;
   }
   h1{
     font-family:'Playfair Display',serif;
     font-weight:700;
-    font-size:clamp(2.1rem,5.4vw,3rem);
+    font-size:clamp(2rem,5vw,2.8rem);
+    line-height:1.18;
     text-align:center;
     color:var(--ink);
-    letter-spacing:.01em;
-    margin-bottom:26px;
+    letter-spacing:.005em;
+    margin-bottom:14px;
   }
+  .meta{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.16em;
+    font-size:.78rem;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:28px;
+  }
+  .meta span{opacity:.55;margin:0 7px;}
+
   /* Ellen G. White — companion ink */
   .egw{color:var(--wine);}
   .egw-ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.08em;
-    font-size:.88em;
+    letter-spacing:.07em;
+    font-size:.85em;
     color:var(--wine);
   }
-  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .egw-ref::before{content:"\2712";margin-right:.3em;font-size:.9em;}
+  /* long quotations stand as blocks */
+  blockquote.egw-block{
+    margin:26px 0 28px;
+    padding:2px 0 2px 22px;
+    border-left:2px solid var(--wine);
+    color:var(--wine);
+    font-size:1.01rem;
+    line-height:1.72;
+  }
+  blockquote.egw-block .egw-ref{
+    display:block;margin-top:9px;font-size:.78rem;
+    letter-spacing:.04em;line-height:1.55;opacity:.92;
+    text-wrap:pretty;          /* keeps a lone word off the last line */
+  }
+  @media(max-width:620px){blockquote.egw-block{padding-left:16px;}}
+
   .divider{
     display:flex;align-items:center;justify-content:center;
-    gap:14px;margin:30px 0;color:var(--gold);
+    gap:14px;margin:28px 0;color:var(--gold);
   }
   .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
   .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
   .divider svg{flex-shrink:0;}
+
   .verse-card{
     border:1px solid var(--gold-pale);
-    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
-    padding:30px 34px 26px;
+    background:linear-gradient(180deg,var(--card1),var(--card2));
+    padding:28px 32px 24px;
     text-align:center;
     margin:0 auto 8px;
     position:relative;
   }
   .verse-card .label{
     font-family:'Cinzel',serif;
-    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
-    color:var(--gold);margin-bottom:14px;
+    font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:13px;
   }
   .verse-card .scripture{
     font-family:'Cormorant Garamond',serif;
     font-style:italic;
-    font-size:1.42rem;
-    line-height:1.65;
+    font-size:1.38rem;
+    line-height:1.62;
     color:var(--ink-soft);
   }
   .verse-card .ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.14em;
-    font-size:.95rem;
+    letter-spacing:.13em;
+    font-size:.92rem;
     color:var(--gold);
-    margin-top:14px;
+    margin-top:13px;
   }
-  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
-  .body-text p:first-of-type::first-letter{
+
+  /* body — ragged right, book measure */
+  .body-text{margin-top:4px;}
+  .body-text p{
+    margin-bottom:1.15em;
+    font-size:1.075rem;
+    text-align:left;
+    hyphens:none;
+  }
+  .body-text .mv{margin-bottom:6px;}
+  .body-text > .mv:first-child > p:first-child::first-letter{
     font-family:'Playfair Display',serif;
-    font-size:3.9em;
+    font-size:3.7em;
     float:left;
     line-height:.82;
-    padding:6px 12px 0 0;
+    padding:5px 11px 0 0;
     color:var(--gold);
   }
-  .body-text strong{color:#7c5a12;font-weight:600;}
+  .body-text strong{color:var(--emph);font-weight:600;}
   .scrip{font-style:italic;color:var(--ink-soft);}
   .ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.1em;
-    font-size:.92em;
+    letter-spacing:.09em;
+    font-size:.9em;
     color:var(--gold);
     white-space:nowrap;
   }
+
+  /* the closing sentence of each movement, promoted */
+  .body-text p.thesis{
+    text-align:center;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.32rem;
+    line-height:1.55;
+    color:var(--ink);
+    margin:26px auto 34px;
+    max-width:34em;
+    padding-top:22px;
+    position:relative;
+  }
+  .body-text p.thesis::before{
+    content:"";
+    position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:58px;height:1px;background:var(--gold);opacity:.8;
+  }
+  .body-text p.thesis strong{font-weight:inherit;color:inherit;}
+  @media(max-width:620px){.body-text p.thesis{font-size:1.2rem;}}
+
   h2.takeaways{
     font-family:'Cinzel',serif;
     font-weight:600;
-    font-size:1.35rem;
-    letter-spacing:.18em;
+    font-size:1.22rem;
+    letter-spacing:.16em;
     text-transform:uppercase;
     text-align:center;
     color:var(--ink);
@@ -149,30 +242,45 @@
   ol.takeaway-list li{
     counter-increment:tk;
     position:relative;
-    padding-left:62px;
+    padding-left:54px;
     margin-bottom:20px;
-    font-size:1.03rem;
+    font-size:1.02rem;
   }
   ol.takeaway-list li::before{
     content:counter(tk);
-    position:absolute;left:0;top:2px;
-    width:42px;height:42px;
+    position:absolute;left:0;top:3px;
+    width:36px;height:36px;
     border-radius:50%;
     border:1.5px solid var(--gold);
-    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
-    color:#7c5a12;
+    background:radial-gradient(circle at 35% 30%,var(--num1),var(--num2));
+    color:var(--numfg);
     font-family:'Cinzel',serif;
     font-weight:600;
-    font-size:1.05rem;
+    font-size:.98rem;
     display:flex;align-items:center;justify-content:center;
-    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+    box-shadow:0 2px 6px var(--shadow), inset 0 1px 2px rgba(255,255,255,.35);
   }
-  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  ol.takeaway-list li strong{color:var(--emph);font-weight:600;}
+
+  .sources{
+    margin-top:34px;
+    font-size:.88rem;
+    line-height:1.7;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+  .sources .label{
+    font-family:'Cinzel',serif;
+    font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);display:block;margin-bottom:4px;
+  }
+
+  /* Watch It — unchanged treatment, tokenised for night reading */
   .watch{
     margin-top:38px;
     text-align:center;
     border:1px solid var(--gold);
-    background:linear-gradient(180deg,rgba(255,250,232,.75),rgba(247,238,213,.75));
+    background:linear-gradient(180deg,var(--card1),var(--card2));
     padding:26px 22px 22px;
   }
   .watch .label{
@@ -187,8 +295,8 @@
     letter-spacing:.08em;
     font-size:1.02rem;
     color:#fdf6e6;
-    background:var(--wine);
-    border:1px solid #5d2b20;
+    background:var(--wine-solid);
+    border:1px solid var(--wine-edge);
     text-decoration:none;
     padding:14px 26px;
     margin:6px 7px;
@@ -210,91 +318,114 @@
     .watch a{display:block;margin:9px 0;padding:15px 18px;}
     .watch{padding:22px 16px 18px;}
   }
+
   .sdg{
     font-family:'Pinyon Script',cursive;
-    font-size:2.5rem;
+    font-size:2.4rem;
     color:var(--gold);
     text-align:center;
     margin-top:40px;
   }
+
+  /* navigation */
+  .allnav,.footnav{max-width:720px;margin:0 auto 16px;text-align:center;}
+  .footnav{margin:26px auto 8px;display:flex;justify-content:center;gap:26px;}
+  .allnav a,.footnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.16em;
+    font-size:.8rem;color:var(--gold);text-decoration:none;
+    border-bottom:1px solid var(--rule);padding-bottom:2px;
+  }
+  .allnav a:hover,.footnav a:hover{border-bottom-color:var(--gold);}
+
+  /* night-reading toggle */
+  .lamp{
+    position:fixed;right:16px;bottom:16px;z-index:11;
+    width:44px;height:44px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--card1);
+    border:1px solid var(--gold);
+    color:var(--gold);
+    cursor:pointer;
+    box-shadow:0 4px 14px var(--shadow);
+    opacity:.72;
+    transition:opacity .18s ease, transform .18s ease;
+  }
+  .lamp:hover,.lamp:focus-visible{opacity:1;transform:translateY(-2px);outline:none;}
+  .lamp svg{width:20px;height:20px;}
+  @media print{.lamp,.progress,.allnav,.footnav{display:none;}}
 </style>
 </head>
 <body>
-<style>
-  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
-  .allnav a{
-    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
-    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
-    padding-bottom:2px;
-  }
-  .allnav a:hover{border-bottom-color:#a67c1e;}
-</style>
-<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+<div class="progress" id="prog"></div>
+<a id="top"></a>
+<nav class="allnav"><a href="./">← All devotions</a></nav>
 
 <article class="page">
-  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner tl" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner tr" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner bl" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner br" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
 
     <div class="eyebrow">Today's Devotion</div>
   <h1>When Pride Bows to the Word of God</h1>
 
+  <div class="meta">2 Kings 5 <span>·</span> 20 min read</div>
+
   <section class="verse-card">
     <div class="label">Key Verse</div>
-    <div class="scripture">“Sir, if the prophet had told you to do something very difficult &hellip; So Naaman went down &hellip; and dipped himself seven times &hellip;”</div>
+    <div class="scripture">“Sir, if the prophet had told you to do something very difficult … So Naaman went down … and dipped himself seven times …”</div>
     <div class="ref">2 Kings 5:13–14 (NLT)</div>
   </section>
 
   <div class="divider" aria-hidden="true">
     <span class="line"></span>
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <svg width="26" height="26" viewbox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"></path></svg>
     <span class="line right"></span>
   </div>
 
   <div class="body-text">
-    <p>2 Kings 5 opens by placing two realities side by side. Naaman was commander of the army of Aram, respected by his king, celebrated for military success and known for courage. Scripture says that <span class="scrip">“through him the L<small>ORD</small> had given Aram great victories”</span> <span class="ref">2 Kings 5:1 (NLT)</span>, reminding us that God's sovereign activity was never confined to Israel's borders. By every public measure, Naaman was a great man. His rank could move soldiers, his reputation could open royal doors, and his wealth could finance a journey across national boundaries. Yet Scripture says, <span class="scrip">“But though Naaman was a mighty warrior, he suffered from leprosy.”</span> <span class="ref">2 Kings 5:1 (NLT)</span> His serious condition was something none of those advantages could cure. The Hebrew term traditionally rendered as leprosy can describe several serious skin conditions, so we should not force a modern diagnosis upon the text. Nor does the chapter say that Naaman's illness was caused by his pride, by some hidden sin or by deficient faith. His condition is not permission to treat physical illness as a sign of moral inferiority. It simply reveals a truth every human life eventually encounters: <strong>there are needs before which status becomes powerless.</strong> The uniform still fitted, the victories still stood and the king's admiration remained, but beneath all that public honour was a private vulnerability Naaman could neither command nor conceal. Perhaps that is why the story speaks so tenderly to people who appear capable while carrying burdens few others can see. A person may lead an organisation, provide for a family, solve difficult problems and still lie awake before a need that money, education, influence and determination cannot reach. Competence is a gift, and Scripture does not belittle Naaman's accomplishments. It does, however, expose their limits. Human greatness can take us far, but it cannot make us self-sufficient. Naaman's journey towards healing began when he became willing to receive help from beyond the world in which his authority usually worked. Long before he bowed in the Jordan, something in him had already begun to bend: this powerful commander listened when hope came from an unlikely voice. His need did not erase his dignity; it opened a door through which grace could find him.</p>
+    <section class="mv"><p>2 Kings 5 opens by placing two realities side by side. Naaman was commander of the army of Aram, respected by his king, celebrated for military success and known for courage. Scripture says that <span class="scrip">“through him the L<small>ORD</small> had given Aram great victories”</span> <span class="ref">2 Kings 5:1 (NLT)</span>, reminding us that God's sovereign activity was never confined to Israel's borders. By every public measure, Naaman was a great man. His rank could move soldiers, his reputation could open royal doors, and his wealth could finance a journey across national boundaries. </p><p>Yet Scripture says, <span class="scrip">“But though Naaman was a mighty warrior, he suffered from leprosy.”</span> <span class="ref">2 Kings 5:1 (NLT)</span> His serious condition was something none of those advantages could cure. The Hebrew term traditionally rendered as leprosy can describe several serious skin conditions, so we should not force a modern diagnosis upon the text. Nor does the chapter say that Naaman's illness was caused by his pride, by some hidden sin or by deficient faith. His condition is not permission to treat physical illness as a sign of moral inferiority. </p><p>It simply reveals a truth every human life eventually encounters: <strong>there are needs before which status becomes powerless.</strong> The uniform still fitted, the victories still stood and the king's admiration remained, but beneath all that public honour was a private vulnerability Naaman could neither command nor conceal. Perhaps that is why the story speaks so tenderly to people who appear capable while carrying burdens few others can see. A person may lead an organisation, provide for a family, solve difficult problems and still lie awake before a need that money, education, influence and determination cannot reach. </p><p>Competence is a gift, and Scripture does not belittle Naaman's accomplishments. It does, however, expose their limits. Human greatness can take us far, but it cannot make us self-sufficient. Naaman's journey towards healing began when he became willing to receive help from beyond the world in which his authority usually worked. Long before he bowed in the Jordan, something in him had already begun to bend: this powerful commander listened when hope came from an unlikely voice. His need did not erase his dignity; it opened a door through which grace could find him.</p></section>
 
-    <p>That unlikely voice belonged to a young Israelite girl whose name Scripture does not record. Aramean raiders had taken her from her homeland; Scripture records that <span class="scrip">“among their captives was a young girl”</span> <span class="ref">2 Kings 5:2 (NLT)</span>, and that she had been given to Naaman's wife as a maid. The Bible does not soften the injustice of that displacement, and neither should we. She had not chosen this household, this country or this work. Faithfulness in captivity does not make captivity good, and God's use of her witness does not mean He approved the violence that carried her away. Yet suffering had not erased her memory of God, and captivity had not extinguished her compassion. She knew of Elisha in Samaria, and she believed that the God whose prophet lived there could help the man whose household now held her. She could have remained silent. Instead, she spoke to her mistress: <span class="scrip">“I wish my master would go to see the prophet in Samaria.”</span> <span class="ref">2 Kings 5:3 (NLT)</span> In that one sentence, she directed a powerful enemy commander towards the mercy of Israel's God. In <em>The Ministry of Healing</em>, “The Discipline of Trial,” Ellen White observes that a difficult place may still contain someone whom our witness can help. The statement does not ask us to pretend that every painful place is easy or that every wound should be quickly explained. It asks whether grace can still flow through us where life has not been fair. The girl had no title, platform, wealth or freedom to arrange an audience with the king. She possessed only a living confidence in God and enough compassion to speak. Yet her brief testimony set kings, servants, gifts, horses and chariots in motion. <strong>The whole visible procession began with the faith of someone the ancient world could easily overlook.</strong> God often places decisive influence in hands that history does not name. A child may speak hope into an adult's despair. An employee may offer wisdom to a leader. A person whose circumstances seem small may point someone with enormous influence towards God. The worth of a witness is not measured by social position but by the truth and love carried in that witness. And notice Naaman's own grace here: he did not dismiss the message because it came through a captive girl. His desperation made him listen, and listening was one of the first humble acts in his transformation.</p>
+    <section class="mv"><p>That unlikely voice belonged to a young Israelite girl whose name Scripture does not record. Aramean raiders had taken her from her homeland; Scripture records that <span class="scrip">“among their captives was a young girl”</span> <span class="ref">2 Kings 5:2 (NLT)</span>, and that she had been given to Naaman's wife as a maid. The Bible does not soften the injustice of that displacement, and neither should we. She had not chosen this household, this country or this work. Faithfulness in captivity does not make captivity good, and God's use of her witness does not mean He approved the violence that carried her away. </p><p>Yet suffering had not erased her memory of God, and captivity had not extinguished her compassion. She knew of Elisha in Samaria, and she believed that the God whose prophet lived there could help the man whose household now held her. She could have remained silent. Instead, she spoke to her mistress: <span class="scrip">“I wish my master would go to see the prophet in Samaria.”</span> <span class="ref">2 Kings 5:3 (NLT)</span> In that one sentence, she directed a powerful enemy commander towards the mercy of Israel's God. In <em>The Ministry of Healing</em>, “The Discipline of Trial,” Ellen White observes that a difficult place may still contain someone whom our witness can help. </p><p>The statement does not ask us to pretend that every painful place is easy or that every wound should be quickly explained. It asks whether grace can still flow through us where life has not been fair. The girl had no title, platform, wealth or freedom to arrange an audience with the king. She possessed only a living confidence in God and enough compassion to speak. Yet her brief testimony set kings, servants, gifts, horses and chariots in motion. <strong>The whole visible procession began with the faith of someone the ancient world could easily overlook.</strong> God often places decisive influence in hands that history does not name. </p><p>A child may speak hope into an adult's despair. An employee may offer wisdom to a leader. A person whose circumstances seem small may point someone with enormous influence towards God. The worth of a witness is not measured by social position but by the truth and love carried in that witness. And notice Naaman's own grace here: he did not dismiss the message because it came through a captive girl. His desperation made him listen, and listening was one of the first humble acts in his transformation.</p></section>
 
-    <p>Naaman then sought help in the way a commander and royal servant naturally understood. He reported the girl's words to the king of Aram, who supplied a letter to Israel's king, and Naaman travelled with an extraordinary amount of silver, gold and fine clothing. The narrative says, <span class="scrip">“So Naaman started out, carrying as gifts 750 pounds of silver, 150 pounds of gold, and ten sets of clothing.”</span> <span class="ref">2 Kings 5:4–5 (NLT)</span> This was not merely pride. It was the language of his world: kings negotiated with kings, important matters moved through official channels, and generous gifts honoured the one who rendered a great service. Naaman was genuinely willing to seek help. He crossed a border, accepted advice from beneath his social station and brought what he thought the occasion required. Yet he still approached grace as though it might be arranged through influence, diplomacy or payment. The king of Israel read the letter as a demand that he personally cure Naaman and tore his clothes in alarm. His cry, <span class="scrip">“Am I God, that I can give life and take it away?”</span> <span class="ref">2 Kings 5:7 (NLT)</span>, exposed both the limit of royal power and his suspicion that Aram's impossible request was designed to provoke another conflict. While two kings interpreted the situation through political power, Elisha sent word that Naaman should come so <span class="scrip">“he will learn that there is a true prophet here in Israel.”</span> <span class="ref">2 Kings 5:8 (NLT)</span> The contrast is striking. The king of Aram could authorise the journey, but he could not guarantee the result. The king of Israel occupied the throne, but he could not supply the miracle. The gifts were impressive, but they could not purchase what Naaman needed. <strong>God was quietly moving the search away from royal leverage and towards His word.</strong> We often bring to God the currencies that have worked elsewhere: achievement, connections, effort, promises about what we will do if He answers, or a careful account of why we deserve His intervention. There is wisdom in seeking appropriate human help; doctors, counsellors, pastors, family members and practical resources may all be part of God's care. But no human channel becomes God, and no gift places Him in our debt. Naaman's long journey, vulnerability and desire for healing were real. What he still had to discover was that mercy would not arrive as a reward for importance. It would come as grace, on God's terms.</p>
+    <section class="mv"><p>Naaman then sought help in the way a commander and royal servant naturally understood. He reported the girl's words to the king of Aram, who supplied a letter to Israel's king, and Naaman travelled with an extraordinary amount of silver, gold and fine clothing. The narrative says, <span class="scrip">“So Naaman started out, carrying as gifts 750 pounds of silver, 150 pounds of gold, and ten sets of clothing.”</span> <span class="ref">2 Kings 5:4–5 (NLT)</span> This was not merely pride. It was the language of his world: kings negotiated with kings, important matters moved through official channels, and generous gifts honoured the one who rendered a great service. </p><p>Naaman was genuinely willing to seek help. He crossed a border, accepted advice from beneath his social station and brought what he thought the occasion required. Yet he still approached grace as though it might be arranged through influence, diplomacy or payment. The king of Israel read the letter as a demand that he personally cure Naaman and tore his clothes in alarm. His cry, <span class="scrip">“Am I God, that I can give life and take it away?”</span> <span class="ref">2 Kings 5:7 (NLT)</span>, exposed both the limit of royal power and his suspicion that Aram's impossible request was designed to provoke another conflict. </p><p>While two kings interpreted the situation through political power, Elisha sent word that Naaman should come so <span class="scrip">“he will learn that there is a true prophet here in Israel.”</span> <span class="ref">2 Kings 5:8 (NLT)</span> The contrast is striking. The king of Aram could authorise the journey, but he could not guarantee the result. The king of Israel occupied the throne, but he could not supply the miracle. The gifts were impressive, but they could not purchase what Naaman needed. <strong>God was quietly moving the search away from royal leverage and towards His word.</strong> We often bring to God the currencies that have worked elsewhere: achievement, connections, effort, promises about what we will do if He answers, or a careful account of why we deserve His intervention. </p><p>There is wisdom in seeking appropriate human help; doctors, counsellors, pastors, family members and practical resources may all be part of God's care. But no human channel becomes God, and no gift places Him in our debt. Naaman's long journey, vulnerability and desire for healing were real. What he still had to discover was that mercy would not arrive as a reward for importance. It would come as grace, on God's terms.</p></section>
 
-    <p>Naaman arrived with horses and chariots and <span class="scrip">“waited at the door of Elisha’s house.”</span> <span class="ref">2 Kings 5:9 (NLT)</span> His rank was visible even before he spoke. He expected an encounter fitted to the seriousness of his need and the dignity of his office. Instead, Elisha remained inside and sent a messenger with a simple instruction: <span class="scrip">“Go and wash yourself seven times in the Jordan River.”</span> <span class="ref">2 Kings 5:10 (NLT)</span> The commander became angry: <span class="scrip">“I thought he would certainly come out to meet me!”</span> <span class="ref">2 Kings 5:11 (NLT)</span> He had imagined the prophet coming out personally, invoking God's name, moving his hand dramatically over the diseased area and producing an impressive healing. The actual instruction offended not only his expectations but his sense of what an important visitor should receive. He protested, <span class="scrip">“Why shouldn’t I wash in them and be healed?”</span> <span class="ref">2 Kings 5:12 (NLT)</span>, because he considered the rivers of Damascus superior to the waters of Israel and saw no reason that washing in the Jordan should accomplish what washing at home could not. We need not caricature him. He had travelled far because he believed help might be found, and disappointment can be especially sharp when hope has cost us something. The method appeared ordinary, the messenger seemed impersonal and the river looked unworthy of the miracle. Yet Naaman's anger revealed that he was not merely asking God to heal him; he was also carrying a script for how God should do it. Most of us have one. We imagine the answer arriving through a particular person, at a particular time, with an unmistakable feeling and a result everyone can recognise. When God's direction is quieter, slower or less impressive, we may mistake wounded expectation for spiritual discernment. <strong>Pride does not always announce itself as boasting. Sometimes it appears as offence that God has not followed our preferred script.</strong> Sometimes it prefers a difficult deed that preserves our sense of control to a simple response that requires surrender. This does not mean every disappointment is pride or every unanswered prayer results from resistance. Scripture gives no licence to blame suffering people for not obtaining the outcome they desire. It does mean that Naaman's particular blessing stood behind a particular word he was preparing to reject. The obstacle was not the distance to the river, the number seven or the quality of the water. It was his insistence that God's answer must resemble the answer he had already imagined.</p>
+    <section class="mv"><p>Naaman arrived with horses and chariots and <span class="scrip">“waited at the door of Elisha’s house.”</span> <span class="ref">2 Kings 5:9 (NLT)</span> His rank was visible even before he spoke. He expected an encounter fitted to the seriousness of his need and the dignity of his office. Instead, Elisha remained inside and sent a messenger with a simple instruction: <span class="scrip">“Go and wash yourself seven times in the Jordan River.”</span> <span class="ref">2 Kings 5:10 (NLT)</span> The commander became angry: <span class="scrip">“I thought he would certainly come out to meet me!”</span> <span class="ref">2 Kings 5:11 (NLT)</span></p><p> He had imagined the prophet coming out personally, invoking God's name, moving his hand dramatically over the diseased area and producing an impressive healing. The actual instruction offended not only his expectations but his sense of what an important visitor should receive. He protested, <span class="scrip">“Why shouldn’t I wash in them and be healed?”</span> <span class="ref">2 Kings 5:12 (NLT)</span>, because he considered the rivers of Damascus superior to the waters of Israel and saw no reason that washing in the Jordan should accomplish what washing at home could not. </p><p>We need not caricature him. He had travelled far because he believed help might be found, and disappointment can be especially sharp when hope has cost us something. The method appeared ordinary, the messenger seemed impersonal and the river looked unworthy of the miracle. Yet Naaman's anger revealed that he was not merely asking God to heal him; he was also carrying a script for how God should do it. Most of us have one. We imagine the answer arriving through a particular person, at a particular time, with an unmistakable feeling and a result everyone can recognise. </p><p>When God's direction is quieter, slower or less impressive, we may mistake wounded expectation for spiritual discernment. <strong>Pride does not always announce itself as boasting. Sometimes it appears as offence that God has not followed our preferred script.</strong> Sometimes it prefers a difficult deed that preserves our sense of control to a simple response that requires surrender. This does not mean every disappointment is pride or every unanswered prayer results from resistance. Scripture gives no licence to blame suffering people for not obtaining the outcome they desire. </p><p>It does mean that Naaman's particular blessing stood behind a particular word he was preparing to reject. The obstacle was not the distance to the river, the number seven or the quality of the water. It was his insistence that God's answer must resemble the answer he had already imagined.</p></section>
 
-    <p>Then Naaman's officers came near. Their approach was respectful, but their counsel was brave. They reasoned that if the prophet had required some demanding achievement, Naaman would surely have attempted it; therefore, he should not reject what had been said so simply: <span class="scrip">“Go and wash and be cured!”</span> <span class="ref">2 Kings 5:13 (NLT)</span> Once again, God placed wisdom in the mouth of someone with less rank. The captive girl had told Naaman where to seek help, and now his own officers helped him remain where grace could reach him. A wise person does not ask only whether counsel comes from someone impressive; a wise person asks whether it is true. Naaman could command these men, but in that moment he allowed them to reason with him. <strong>Humility is not pretending to have no strength; it is strength becoming teachable.</strong> The commander turned back, went down to the Jordan and followed the instruction he had received. The text does not describe what happened during the first six immersions, so we should not invent a sequence of partial changes or disappointed glances. It tells us that after he had dipped seven times in accordance with the word given through Elisha, <span class="scrip">“his skin became as healthy as the skin of a young child &hellip;”</span> <span class="ref">2 Kings 5:14 (NLT)</span> In <em>Prophets and Kings</em>, chapter 20, “Naaman,” Ellen White describes faith and pride contending until faith prevailed. The Jordan possessed no magical power. Seven immersions did not form a secret technique. Naaman did not earn healing by completing a religious task, and his obedience did not make God indebted to him. God healed him by sovereign grace and power; obedience was the response through which Naaman stopped resisting the grace freely offered. Faith took God's word seriously enough to act, even when the action contradicted his preferences. This was a specific miracle given in a specific biblical moment. It must never be turned into a promise that every sick person will receive immediate physical healing by performing the right act, reaching the right level of humility or exercising enough faith. Believers may pray earnestly, obey faithfully and still live with illness. Naaman's account gives us no formula for controlling God. It gives us a portrait of surrender: the man accustomed to giving orders received one, the man who preferred Damascus entered the Jordan, and the man prepared to leave angry remained long enough to receive mercy.</p>
+    <section class="mv"><p>Then Naaman's officers came near. Their approach was respectful, but their counsel was brave. They reasoned that if the prophet had required some demanding achievement, Naaman would surely have attempted it; therefore, he should not reject what had been said so simply: <span class="scrip">“Go and wash and be cured!”</span> <span class="ref">2 Kings 5:13 (NLT)</span> Once again, God placed wisdom in the mouth of someone with less rank. The captive girl had told Naaman where to seek help, and now his own officers helped him remain where grace could reach him. </p><p>A wise person does not ask only whether counsel comes from someone impressive; a wise person asks whether it is true. Naaman could command these men, but in that moment he allowed them to reason with him. <strong>Humility is not pretending to have no strength; it is strength becoming teachable.</strong> The commander turned back, went down to the Jordan and followed the instruction he had received. The text does not describe what happened during the first six immersions, so we should not invent a sequence of partial changes or disappointed glances. </p><p>It tells us that after he had dipped seven times in accordance with the word given through Elisha, <span class="scrip">“his skin became as healthy as the skin of a young child …”</span> <span class="ref">2 Kings 5:14 (NLT)</span> In <em>Prophets and Kings</em>, chapter 20, “Naaman,” Ellen White describes faith and pride contending until faith prevailed. The Jordan possessed no magical power. Seven immersions did not form a secret technique. Naaman did not earn healing by completing a religious task, and his obedience did not make God indebted to him. </p><p>God healed him by sovereign grace and power; obedience was the response through which Naaman stopped resisting the grace freely offered. Faith took God's word seriously enough to act, even when the action contradicted his preferences. This was a specific miracle given in a specific biblical moment. It must never be turned into a promise that every sick person will receive immediate physical healing by performing the right act, reaching the right level of humility or exercising enough faith. Believers may pray earnestly, obey faithfully and still live with illness. </p><p>Naaman's account gives us no formula for controlling God. It gives us a portrait of surrender: the man accustomed to giving orders received one, the man who preferred Damascus entered the Jordan, and the man prepared to leave angry remained long enough to receive mercy.</p></section>
 
-    <p>The healed commander did not simply continue home with improved skin. <span class="scrip">“Then Naaman and his entire party went back &hellip;”</span> <span class="ref">2 Kings 5:15 (NLT)</span> and stood personally before Elisha. The man who had first arrived expecting the prophet to stand before him now stood before the prophet, and his words showed that more than his outward condition had changed. His confession was unmistakable: <span class="scrip">“Now I know that there is no God in all the world &hellip;”</span> <span class="ref">2 Kings 5:15 (NLT)</span> The miracle had become revelation; bodily relief had awakened worship and allegiance. Naaman again offered a gift, probably from gratitude as well as from the customs of his world, but Elisha answered, <span class="scrip">“I will not accept any gifts.”</span> <span class="ref">2 Kings 5:16 (NLT)</span>, and refused despite repeated urging. The refusal protected the meaning of what had happened. Israel's God was not a local wonder-worker whose favour could be bought, and Elisha was not a spiritual broker collecting payment for access to divine power. The grace that restored Naaman had been freely given. His wealth had funded the journey, but it had not caused the healing. His gratitude was appropriate; the idea of purchase was not. Naaman's subsequent requests reveal a man whose understanding was sincere but still developing. He asked to carry earth from Israel back to Aram and declared, <span class="scrip">“From now on I will never again offer burnt offerings &hellip;”</span> He also raised the difficult matter of his public duty when his king entered the temple of Rimmon leaning on his arm and prayed, <span class="scrip">“may the L<small>ORD</small> pardon me when I bow, too.”</span> <span class="ref">2 Kings 5:17–18 (NLT)</span> Elisha did not sell him a rulebook or attempt to control every future decision from a distance. His reply was brief: <span class="scrip">“Go in peace,” Elisha said.</span> <span class="ref">2 Kings 5:19 (NLT)</span> We should not make Naaman's request for earth into a doctrine the passage does not teach, nor should we flatten the complexity of a new believer returning to a pagan court. The important movement is clear: <strong>he arrived trusting rank, gifts and a planned performance; he left confessing God, carrying an altered allegiance and knowing that mercy could not be purchased.</strong> A genuine encounter with God should produce more than the relief of a problem. We may begin by asking Him to change our circumstances, and He graciously hears us, but His deepest purpose is to bring us into truth, worship and relationship with Himself.</p>
+    <section class="mv"><p>The healed commander did not simply continue home with improved skin. <span class="scrip">“Then Naaman and his entire party went back …”</span> <span class="ref">2 Kings 5:15 (NLT)</span> and stood personally before Elisha. The man who had first arrived expecting the prophet to stand before him now stood before the prophet, and his words showed that more than his outward condition had changed. His confession was unmistakable: <span class="scrip">“Now I know that there is no God in all the world …”</span> <span class="ref">2 Kings 5:15 (NLT)</span> The miracle had become revelation; bodily relief had awakened worship and allegiance. </p><p>Naaman again offered a gift, probably from gratitude as well as from the customs of his world, but Elisha answered, <span class="scrip">“I will not accept any gifts.”</span> <span class="ref">2 Kings 5:16 (NLT)</span>, and refused despite repeated urging. The refusal protected the meaning of what had happened. Israel's God was not a local wonder-worker whose favour could be bought, and Elisha was not a spiritual broker collecting payment for access to divine power. The grace that restored Naaman had been freely given. His wealth had funded the journey, but it had not caused the healing. </p><p>His gratitude was appropriate; the idea of purchase was not. Naaman's subsequent requests reveal a man whose understanding was sincere but still developing. He asked to carry earth from Israel back to Aram and declared, <span class="scrip">“From now on I will never again offer burnt offerings …”</span> He also raised the difficult matter of his public duty when his king entered the temple of Rimmon leaning on his arm and prayed, <span class="scrip">“may the L<small>ORD</small> pardon me when I bow, too.”</span> <span class="ref">2 Kings 5:17–18 (NLT)</span> Elisha did not sell him a rulebook or attempt to control every future decision from a distance. </p><p>His reply was brief: <span class="scrip">“Go in peace,” Elisha said.</span> <span class="ref">2 Kings 5:19 (NLT)</span> We should not make Naaman's request for earth into a doctrine the passage does not teach, nor should we flatten the complexity of a new believer returning to a pagan court. The important movement is clear: <strong>he arrived trusting rank, gifts and a planned performance; he left confessing God, carrying an altered allegiance and knowing that mercy could not be purchased.</strong> A genuine encounter with God should produce more than the relief of a problem. </p><p>We may begin by asking Him to change our circumstances, and He graciously hears us, but His deepest purpose is to bring us into truth, worship and relationship with Himself.</p></section>
 
-    <p>The chapter then turns from Naaman's generosity to Gehazi's greed. This warning belongs to the story, though it must not eclipse the central movement from pride to faith. Gehazi had witnessed Elisha refuse payment, yet he decided, <span class="scrip">“I will chase after him and get something from him.”</span> <span class="ref">2 Kings 5:20 (NLT)</span> He pursued Naaman and falsely claimed that the prophet had changed his mind because two young prophetic servants had arrived. He used Elisha's name, Naaman's gratitude and a fabricated ministry need to obtain silver and clothing. Naaman gave readily, even sending servants to carry the goods, while Gehazi hid what he had taken and then lied again: <span class="scrip">“Where have you been, Gehazi?” “I haven’t been anywhere,” he replied.</span> <span class="ref">2 Kings 5:25 (NLT)</span> His sin was not merely wanting material provision. Scripture does not condemn honest support for ministry or the responsible use of resources. Gehazi's offence was that he commercialised a gift God had freely bestowed, misrepresented spiritual authority, manipulated a grateful recipient and concealed the proceeds. Elisha exposed the lie by asking, <span class="scrip">“Is this the time to receive money and clothing &hellip;?”</span> <span class="ref">2 Kings 5:26 (NLT)</span> The chapter closes with the severe judgment, <span class="scrip">“you and your descendants will suffer from Naaman’s leprosy forever.”</span> <span class="ref">2 Kings 5:27 (NLT)</span> That specific judgment belongs to this inspired narrative; it does not establish a rule that illness proves personal wrongdoing, and it must never be used to stigmatise people living with disease. The moral contrast lies elsewhere. <strong>Elisha would not profit from grace; Gehazi tried to turn grace into an opportunity for gain.</strong> Naaman, the foreign outsider, became receptive and truthful about God, while someone close to the prophet chose deceit. Spiritual proximity is not the same as spiritual transformation. Churches and ministries therefore need transparent stewardship, truthful appeals and leaders who refuse to exploit vulnerability. The gospel must never be presented as though prayer, healing, access or divine favour can be bought. God's servants may receive legitimate support, but God's mercy is never their merchandise. What He freely gives must not be enclosed behind manipulation, secrecy or personal ambition.</p>
+    <section class="mv"><p>The chapter then turns from Naaman's generosity to Gehazi's greed. This warning belongs to the story, though it must not eclipse the central movement from pride to faith. Gehazi had witnessed Elisha refuse payment, yet he decided, <span class="scrip">“I will chase after him and get something from him.”</span> <span class="ref">2 Kings 5:20 (NLT)</span> He pursued Naaman and falsely claimed that the prophet had changed his mind because two young prophetic servants had arrived. He used Elisha's name, Naaman's gratitude and a fabricated ministry need to obtain silver and clothing. </p><p>Naaman gave readily, even sending servants to carry the goods, while Gehazi hid what he had taken and then lied again: <span class="scrip">“Where have you been, Gehazi?” “I haven’t been anywhere,” he replied.</span> <span class="ref">2 Kings 5:25 (NLT)</span> His sin was not merely wanting material provision. Scripture does not condemn honest support for ministry or the responsible use of resources. Gehazi's offence was that he commercialised a gift God had freely bestowed, misrepresented spiritual authority, manipulated a grateful recipient and concealed the proceeds. Elisha exposed the lie by asking, <span class="scrip">“Is this the time to receive money and clothing …?”</span> <span class="ref">2 Kings 5:26 (NLT)</span></p><p> The chapter closes with the severe judgment, <span class="scrip">“you and your descendants will suffer from Naaman’s leprosy forever.”</span> <span class="ref">2 Kings 5:27 (NLT)</span> That specific judgment belongs to this inspired narrative; it does not establish a rule that illness proves personal wrongdoing, and it must never be used to stigmatise people living with disease. The moral contrast lies elsewhere. <strong>Elisha would not profit from grace; Gehazi tried to turn grace into an opportunity for gain.</strong> Naaman, the foreign outsider, became receptive and truthful about God, while someone close to the prophet chose deceit. </p><p>Spiritual proximity is not the same as spiritual transformation. Churches and ministries therefore need transparent stewardship, truthful appeals and leaders who refuse to exploit vulnerability. The gospel must never be presented as though prayer, healing, access or divine favour can be bought. God's servants may receive legitimate support, but God's mercy is never their merchandise. What He freely gives must not be enclosed behind manipulation, secrecy or personal ambition.</p></section>
 
-    <p>Centuries later, Jesus brought Naaman's story into the synagogue at Nazareth. After reading from Isaiah, He announced, <span class="scrip">“The Scripture you’ve just heard has been fulfilled this very day!”</span> <span class="ref">Luke 4:16–21 (NLT)</span> Initial wonder soon gave way to resistance as His neighbours measured Him by their familiarity with His earthly family and expected signs like those reported from Capernaum. Jesus answered by recalling two occasions when God's mercy crossed the boundaries of Israel: Elijah was sent to a widow in Sidon, while in Elisha's time <span class="scrip">“the only one healed was Naaman, a Syrian.”</span> <span class="ref">Luke 4:27 (NLT)</span> Jesus was not teaching contempt for Israel or providing a basis for anti-Jewish readings. He was confronting a temptation common to every religious community: the belief that familiarity, heritage or privilege gives us a claim upon grace while people outside our circle are less worthy of it. Naaman did not receive because Syrians were superior to Israelites. He received as an outsider who became willing to trust the word that came to him. Religious privilege is a gift meant to form gratitude and witness, not entitlement. In <em>The Desire of Ages</em>, chapter 24, “Is Not This the Carpenter's Son?” Ellen White presents Naaman's felt need as making him receptive to God's grace. Naaman's anger at first nearly carried him away from the river, but he allowed wise counsel to interrupt it. The anger in Nazareth hardened as the congregation attempted to drive Jesus from the town, yet <span class="scrip">“he passed right through the crowd and went on his way.”</span> <span class="ref">Luke 4:28–30 (NLT)</span> The contrast is sobering. <strong>Offence need not have the final word. Pride can bow, anger can listen and an outsider can become a worshipper.</strong> But privilege can also resist the very Christ it claims to know. Jesus' use of Naaman's story declares that God's mercy is not fenced in by nationality, social standing, background or previous religious access. Grace reaches beyond the lines we draw, and it humbles everyone who receives it because no one receives it as an entitlement. The Christ rejected in His hometown is the Saviour whose invitation still reaches both the respected commander and the unnamed servant.</p>
+    <section class="mv"><p>Centuries later, Jesus brought Naaman's story into the synagogue at Nazareth. After reading from Isaiah, He announced, <span class="scrip">“The Scripture you’ve just heard has been fulfilled this very day!”</span> <span class="ref">Luke 4:16–21 (NLT)</span> Initial wonder soon gave way to resistance as His neighbours measured Him by their familiarity with His earthly family and expected signs like those reported from Capernaum. Jesus answered by recalling two occasions when God's mercy crossed the boundaries of Israel: Elijah was sent to a widow in Sidon, while in Elisha's time <span class="scrip">“the only one healed was Naaman, a Syrian.”</span> <span class="ref">Luke 4:27 (NLT)</span></p><p> Jesus was not teaching contempt for Israel or providing a basis for anti-Jewish readings. He was confronting a temptation common to every religious community: the belief that familiarity, heritage or privilege gives us a claim upon grace while people outside our circle are less worthy of it. Naaman did not receive because Syrians were superior to Israelites. He received as an outsider who became willing to trust the word that came to him. Religious privilege is a gift meant to form gratitude and witness, not entitlement. </p><p>In <em>The Desire of Ages</em>, chapter 24, “Is Not This the Carpenter's Son?” Ellen White presents Naaman's felt need as making him receptive to God's grace. Naaman's anger at first nearly carried him away from the river, but he allowed wise counsel to interrupt it. The anger in Nazareth hardened as the congregation attempted to drive Jesus from the town, yet <span class="scrip">“he passed right through the crowd and went on his way.”</span> <span class="ref">Luke 4:28–30 (NLT)</span> The contrast is sobering. <strong>Offence need not have the final word. Pride can bow, anger can listen and an outsider can become a worshipper.</strong> But privilege can also resist the very Christ it claims to know. </p><p>Jesus' use of Naaman's story declares that God's mercy is not fenced in by nationality, social standing, background or previous religious access. Grace reaches beyond the lines we draw, and it humbles everyone who receives it because no one receives it as an entitlement. The Christ rejected in His hometown is the Saviour whose invitation still reaches both the respected commander and the unnamed servant.</p></section>
 
-    <p>Naaman's cleansing was physical, real and gracious; it should not be reduced to an illustration that makes his suffering less important. Yet his story also leads naturally to humanity's deeper need. Sin cannot be removed by rank, achievement, influence, wealth or religious effort. We cannot command a clean heart into existence, purchase forgiveness, or arrange reconciliation with God through impressive works. The New Testament announces, <span class="scrip">“he saved us, not because of the righteous things we had done &hellip;”</span> <span class="ref">Titus 3:5 (NLT)</span>, and, <span class="scrip">“God saved you by his grace when you believed.”</span> <span class="ref">Ephesians 2:8 (NLT)</span> That gift comes to us through Jesus Christ. At the cross, Christ bore our sin; <span class="scrip">“the blood of Jesus, his Son, cleanses us from all sin.”</span> <span class="ref">1 John 1:7 (NLT)</span> Through His resurrection He gives new life, for Scripture says, <span class="scrip">“God raised Jesus Christ from the dead.”</span> <span class="ref">1 Peter 1:3 (NLT)</span> The Jordan was not Naaman's saviour, and entering it was not payment. In the same way, Christian obedience does not purchase salvation. We obey because grace has called us, because Christ is trustworthy and because faith is willing to surrender the right to rule itself. That distinction protects both assurance and humility. We do not stand before God presenting our obedience as a price; we come empty-handed, receive what Christ alone can give, and then follow Him in grateful allegiance. Perhaps the word confronting you today is simple: confess what you have hidden, forgive the person whose debt you keep rehearsing, seek wise help, release a dishonest advantage, make restitution, return to prayer, or obey a clear command of Scripture that pride has complicated. Test every impression by God's written word and seek mature counsel; surrender is not an invitation to abandon discernment or submit to manipulation. And if you are carrying illness, do not hear this story as an accusation or a guarantee of immediate cure. Pray, seek appropriate care and trust God's presence without concluding that continued suffering proves failed faith. Naaman's miracle was God's particular gift to Naaman. The universal invitation is deeper and surer: everyone who comes to Christ in faith may receive forgiveness, reconciliation and new life. The turning point is not learning how to make God follow our preferred method. It is discovering that the One who meets us is wise, merciful and worthy of trust. God may not work in the manner we expect, but His word remains trustworthy. <strong>The Jordan did not save Naaman, and his obedience did not buy the gift; God's grace did what power, wealth and reputation could never do. Our deepest cleansing still begins when pride bows to the word of Christ.</strong></p>
+    <section class="mv"><p>Naaman's cleansing was physical, real and gracious; it should not be reduced to an illustration that makes his suffering less important. Yet his story also leads naturally to humanity's deeper need. Sin cannot be removed by rank, achievement, influence, wealth or religious effort. We cannot command a clean heart into existence, purchase forgiveness, or arrange reconciliation with God through impressive works. The New Testament announces, <span class="scrip">“he saved us, not because of the righteous things we had done …”</span> <span class="ref">Titus 3:5 (NLT)</span>, and, <span class="scrip">“God saved you by his grace when you believed.”</span> <span class="ref">Ephesians 2:8 (NLT)</span></p><p> That gift comes to us through Jesus Christ. At the cross, Christ bore our sin; <span class="scrip">“the blood of Jesus, his Son, cleanses us from all sin.”</span> <span class="ref">1 John 1:7 (NLT)</span> Through His resurrection He gives new life, for Scripture says, <span class="scrip">“God raised Jesus Christ from the dead.”</span> <span class="ref">1 Peter 1:3 (NLT)</span> The Jordan was not Naaman's saviour, and entering it was not payment. In the same way, Christian obedience does not purchase salvation. We obey because grace has called us, because Christ is trustworthy and because faith is willing to surrender the right to rule itself. </p><p>That distinction protects both assurance and humility. We do not stand before God presenting our obedience as a price; we come empty-handed, receive what Christ alone can give, and then follow Him in grateful allegiance. Perhaps the word confronting you today is simple: confess what you have hidden, forgive the person whose debt you keep rehearsing, seek wise help, release a dishonest advantage, make restitution, return to prayer, or obey a clear command of Scripture that pride has complicated. Test every impression by God's written word and seek mature counsel; surrender is not an invitation to abandon discernment or submit to manipulation. </p><p>And if you are carrying illness, do not hear this story as an accusation or a guarantee of immediate cure. Pray, seek appropriate care and trust God's presence without concluding that continued suffering proves failed faith. Naaman's miracle was God's particular gift to Naaman. The universal invitation is deeper and surer: everyone who comes to Christ in faith may receive forgiveness, reconciliation and new life. The turning point is not learning how to make God follow our preferred method. It is discovering that the One who meets us is wise, merciful and worthy of trust. God may not work in the manner we expect, but His word remains trustworthy. </p><p class="thesis"><strong>The Jordan did not save Naaman, and his obedience did not buy the gift; God's grace did what power, wealth and reputation could never do. Our deepest cleansing still begins when pride bows to the word of Christ.</strong></p></section>
   </div>
 
   <div class="divider" aria-hidden="true">
     <span class="line"></span>
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <svg width="26" height="26" viewbox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"></path></svg>
     <span class="line right"></span>
   </div>
 
@@ -310,9 +441,34 @@
   </ol>
 
   
-  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/McNEce0QrLA" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">&#9654;</span>Watch the Short</a><p class="note">On YouTube as &ldquo;When Help Comes From the Unexpected&rdquo; &mdash; from the channel <em>I Can Still Believe</em>.</p></div>
+  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/McNEce0QrLA" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">▶</span>Watch the Short</a><p class="note">On YouTube as “When Help Comes From the Unexpected” — from the channel <em>I Can Still Believe</em>.</p></div>
 
   <div class="sdg">Soli Deo Gloria</div>
 </article>
+<nav class="footnav"><a href="./">&#8592;&nbsp;All devotions</a><a href="#top">Back to top&nbsp;&#8593;</a></nav>
+<button class="lamp" id="lamp" type="button" aria-label="Night reading">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path class="moon" d="M20 13.4A8.2 8.2 0 1 1 10.6 4a6.4 6.4 0 0 0 9.4 9.4Z"/>
+  </svg>
+</button>
+<script>
+(function(){
+  var root=document.documentElement, lamp=document.getElementById('lamp');
+  try{ if(localStorage.getItem('devo-theme')==='night') root.setAttribute('data-theme','night'); }catch(e){}
+  if(lamp){ lamp.addEventListener('click',function(){
+    var on = root.getAttribute('data-theme')==='night';
+    if(on){ root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme','night'); }
+    try{ localStorage.setItem('devo-theme', on?'day':'night'); }catch(e){}
+  }); }
+  var bar=document.getElementById('prog');
+  function tick(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.width=(h>0?Math.min(100,(window.scrollY/h)*100):0)+'%';
+  }
+  if(bar){ window.addEventListener('scroll',tick,{passive:true});
+           window.addEventListener('resize',tick); tick(); }
+})();
+</script>
 </body>
 </html>

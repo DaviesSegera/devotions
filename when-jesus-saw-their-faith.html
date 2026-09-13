@@ -9,137 +9,230 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
 <style>
   :root{
-    --parchment:#f3ead4;
-    --parchment-deep:#eadfc2;
-    --ink:#3b2d18;
-    --ink-soft:#5a4629;
-    --gold:#a67c1e;
-    --gold-bright:#c9a227;
-    --gold-pale:#e3cf95;
-    --wine:#7a3b2e;
+    --bg1:#f8f2e1; --bg2:#f3ead4; --bg3:#e8dcbd;
+    --page-bg:rgba(255,252,241,.62);
+    --page-border:#a67c1e; --page-outline:#e3cf95;
+    --ink:#33281a; --ink-soft:#5a4629;
+    --gold:#a67c1e; --gold-bright:#c9a227; --gold-pale:#e3cf95;
+    --wine:#7a3b2e; --wine-solid:#7a3b2e; --wine-edge:#5d2b20;
+    --card1:rgba(255,250,232,.92); --card2:rgba(247,238,213,.92);
+    --emph:#7c5a12;
+    --num1:#f5e7bd; --num2:#e3cf95; --numfg:#7c5a12;
+    --shadow:rgba(90,70,30,.16);
+    --grain:.30;
+    --rule:rgba(166,124,30,.28);
+  }
+  :root[data-theme="night"]{
+    --bg1:#1a160f; --bg2:#15120c; --bg3:#100e09;
+    --page-bg:rgba(44,37,26,.42);
+    --page-border:#7d6524; --page-outline:#463a19;
+    --ink:#e9dfc8; --ink-soft:#c4b491;
+    --gold:#c2a03a; --gold-bright:#e0bf58; --gold-pale:#6a5828;
+    --wine:#e2a891; --wine-solid:#8a4537; --wine-edge:#6b3428;
+    --card1:rgba(56,47,32,.6); --card2:rgba(46,39,27,.6);
+    --emph:#e2c775;
+    --num1:#4c4024; --num2:#3a311b; --numfg:#e8ce7f;
+    --shadow:rgba(0,0,0,.55);
+    --grain:.16;
+    --rule:rgba(194,160,58,.26);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{
-    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    background:radial-gradient(ellipse at 50% 0%, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%);
+    background-attachment:fixed;
     color:var(--ink);
     font-family:'Lora',serif;
-    line-height:1.85;
-    padding:34px 14px 60px;
+    line-height:1.78;
+    padding:30px 14px 28px;
     position:relative;
+    -webkit-font-smoothing:antialiased;
+    transition:background-color .25s ease, color .25s ease;
   }
-  /* aged-paper grain */
+  /* aged-paper grain, lighter than before */
   body::before{
     content:"";
     position:fixed;inset:0;
     pointer-events:none;
-    opacity:.5;
+    opacity:var(--grain);
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
     z-index:2;
   }
-  .page{
-    max-width:760px;
-    margin:0 auto;
-    background:rgba(255,252,240,.55);
-    border:1.5px solid var(--gold);
-    outline:1px solid var(--gold-pale);
-    outline-offset:6px;
-    padding:64px 52px 56px;
-    position:relative;
-    box-shadow:0 18px 50px rgba(90,70,30,.18);
+
+  /* reading progress */
+  .progress{
+    position:fixed;top:0;left:0;height:3px;width:0;
+    background:linear-gradient(90deg,var(--gold-pale),var(--gold-bright));
+    z-index:12;transition:width .08s linear;
   }
-  @media(max-width:620px){.page{padding:52px 24px 44px;}}
-  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
-  .corner.tl{top:10px;left:10px;}
-  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
-  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
-  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+
+  .page{
+    max-width:720px;
+    margin:0 auto;
+    background:var(--page-bg);
+    border:1.5px solid var(--page-border);
+    outline:1px solid var(--page-outline);
+    outline-offset:6px;
+    padding:62px 56px 54px;
+    position:relative;
+    box-shadow:0 18px 50px var(--shadow);
+  }
+  @media(max-width:620px){.page{padding:48px 22px 40px;} body{padding:22px 11px 24px;}}
+
+  /* corners, quieter: smaller and lighter than before */
+  .corner{position:absolute;width:44px;height:44px;color:var(--gold);opacity:.55;}
+  .corner.tl{top:9px;left:9px;}
+  .corner.tr{top:9px;right:9px;transform:scaleX(-1);}
+  .corner.bl{bottom:9px;left:9px;transform:scaleY(-1);}
+  .corner.br{bottom:9px;right:9px;transform:scale(-1,-1);}
+
   .eyebrow{
     font-family:'Cinzel',serif;
-    font-size:.82rem;
-    letter-spacing:.42em;
+    font-size:.74rem;
+    letter-spacing:.34em;
     text-transform:uppercase;
     color:var(--gold);
     text-align:center;
-    margin-bottom:18px;
+    margin-bottom:16px;
   }
   h1{
     font-family:'Playfair Display',serif;
     font-weight:700;
-    font-size:clamp(2.1rem,5.4vw,3rem);
+    font-size:clamp(2rem,5vw,2.8rem);
+    line-height:1.18;
     text-align:center;
     color:var(--ink);
-    letter-spacing:.01em;
-    margin-bottom:26px;
+    letter-spacing:.005em;
+    margin-bottom:14px;
   }
+  .meta{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.16em;
+    font-size:.78rem;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:28px;
+  }
+  .meta span{opacity:.55;margin:0 7px;}
+
   /* Ellen G. White — companion ink */
   .egw{color:var(--wine);}
   .egw-ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.08em;
-    font-size:.88em;
+    letter-spacing:.07em;
+    font-size:.85em;
     color:var(--wine);
   }
-  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .egw-ref::before{content:"\2712";margin-right:.3em;font-size:.9em;}
+  /* long quotations stand as blocks */
+  blockquote.egw-block{
+    margin:26px 0 28px;
+    padding:2px 0 2px 22px;
+    border-left:2px solid var(--wine);
+    color:var(--wine);
+    font-size:1.01rem;
+    line-height:1.72;
+  }
+  blockquote.egw-block .egw-ref{
+    display:block;margin-top:9px;font-size:.78rem;
+    letter-spacing:.04em;line-height:1.55;opacity:.92;
+    text-wrap:pretty;          /* keeps a lone word off the last line */
+  }
+  @media(max-width:620px){blockquote.egw-block{padding-left:16px;}}
+
   .divider{
     display:flex;align-items:center;justify-content:center;
-    gap:14px;margin:30px 0;color:var(--gold);
+    gap:14px;margin:28px 0;color:var(--gold);
   }
   .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
   .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
   .divider svg{flex-shrink:0;}
+
   .verse-card{
     border:1px solid var(--gold-pale);
-    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
-    padding:30px 34px 26px;
+    background:linear-gradient(180deg,var(--card1),var(--card2));
+    padding:28px 32px 24px;
     text-align:center;
     margin:0 auto 8px;
     position:relative;
   }
   .verse-card .label{
     font-family:'Cinzel',serif;
-    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
-    color:var(--gold);margin-bottom:14px;
+    font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:13px;
   }
   .verse-card .scripture{
     font-family:'Cormorant Garamond',serif;
     font-style:italic;
-    font-size:1.42rem;
-    line-height:1.65;
+    font-size:1.38rem;
+    line-height:1.62;
     color:var(--ink-soft);
   }
   .verse-card .ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.14em;
-    font-size:.95rem;
+    letter-spacing:.13em;
+    font-size:.92rem;
     color:var(--gold);
-    margin-top:14px;
+    margin-top:13px;
   }
-  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
-  .body-text p:first-of-type::first-letter{
+
+  /* body — ragged right, book measure */
+  .body-text{margin-top:4px;}
+  .body-text p{
+    margin-bottom:1.15em;
+    font-size:1.075rem;
+    text-align:left;
+    hyphens:none;
+  }
+  .body-text .mv{margin-bottom:6px;}
+  .body-text > .mv:first-child > p:first-child::first-letter{
     font-family:'Playfair Display',serif;
-    font-size:3.9em;
+    font-size:3.7em;
     float:left;
     line-height:.82;
-    padding:6px 12px 0 0;
+    padding:5px 11px 0 0;
     color:var(--gold);
   }
-  .body-text strong{color:#7c5a12;font-weight:600;}
+  .body-text strong{color:var(--emph);font-weight:600;}
   .scrip{font-style:italic;color:var(--ink-soft);}
   .ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.1em;
-    font-size:.92em;
+    letter-spacing:.09em;
+    font-size:.9em;
     color:var(--gold);
     white-space:nowrap;
   }
+
+  /* the closing sentence of each movement, promoted */
+  .body-text p.thesis{
+    text-align:center;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.32rem;
+    line-height:1.55;
+    color:var(--ink);
+    margin:26px auto 34px;
+    max-width:34em;
+    padding-top:22px;
+    position:relative;
+  }
+  .body-text p.thesis::before{
+    content:"";
+    position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:58px;height:1px;background:var(--gold);opacity:.8;
+  }
+  .body-text p.thesis strong{font-weight:inherit;color:inherit;}
+  @media(max-width:620px){.body-text p.thesis{font-size:1.2rem;}}
+
   h2.takeaways{
     font-family:'Cinzel',serif;
     font-weight:600;
-    font-size:1.35rem;
-    letter-spacing:.18em;
+    font-size:1.22rem;
+    letter-spacing:.16em;
     text-transform:uppercase;
     text-align:center;
     color:var(--ink);
@@ -149,42 +242,45 @@
   ol.takeaway-list li{
     counter-increment:tk;
     position:relative;
-    padding-left:62px;
+    padding-left:54px;
     margin-bottom:20px;
-    font-size:1.03rem;
+    font-size:1.02rem;
   }
   ol.takeaway-list li::before{
     content:counter(tk);
-    position:absolute;left:0;top:2px;
-    width:42px;height:42px;
+    position:absolute;left:0;top:3px;
+    width:36px;height:36px;
     border-radius:50%;
     border:1.5px solid var(--gold);
-    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
-    color:#7c5a12;
+    background:radial-gradient(circle at 35% 30%,var(--num1),var(--num2));
+    color:var(--numfg);
     font-family:'Cinzel',serif;
     font-weight:600;
-    font-size:1.05rem;
+    font-size:.98rem;
     display:flex;align-items:center;justify-content:center;
-    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+    box-shadow:0 2px 6px var(--shadow), inset 0 1px 2px rgba(255,255,255,.35);
   }
-  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  ol.takeaway-list li strong{color:var(--emph);font-weight:600;}
+
   .sources{
     margin-top:34px;
-    font-size:.9rem;
+    font-size:.88rem;
     line-height:1.7;
     color:var(--ink-soft);
     text-align:center;
   }
   .sources .label{
     font-family:'Cinzel',serif;
-    font-size:.68rem;letter-spacing:.36em;text-transform:uppercase;
+    font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;
     color:var(--gold);display:block;margin-bottom:4px;
   }
+
+  /* Watch It — unchanged treatment, tokenised for night reading */
   .watch{
     margin-top:38px;
     text-align:center;
     border:1px solid var(--gold);
-    background:linear-gradient(180deg,rgba(255,250,232,.75),rgba(247,238,213,.75));
+    background:linear-gradient(180deg,var(--card1),var(--card2));
     padding:26px 22px 22px;
   }
   .watch .label{
@@ -199,8 +295,8 @@
     letter-spacing:.08em;
     font-size:1.02rem;
     color:#fdf6e6;
-    background:var(--wine);
-    border:1px solid #5d2b20;
+    background:var(--wine-solid);
+    border:1px solid var(--wine-edge);
     text-decoration:none;
     padding:14px 26px;
     margin:6px 7px;
@@ -222,25 +318,46 @@
     .watch a{display:block;margin:9px 0;padding:15px 18px;}
     .watch{padding:22px 16px 18px;}
   }
+
   .sdg{
     font-family:'Pinyon Script',cursive;
-    font-size:2.5rem;
+    font-size:2.4rem;
     color:var(--gold);
     text-align:center;
     margin-top:40px;
   }
+
+  /* navigation */
+  .allnav,.footnav{max-width:720px;margin:0 auto 16px;text-align:center;}
+  .footnav{margin:26px auto 8px;display:flex;justify-content:center;gap:26px;}
+  .allnav a,.footnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.16em;
+    font-size:.8rem;color:var(--gold);text-decoration:none;
+    border-bottom:1px solid var(--rule);padding-bottom:2px;
+  }
+  .allnav a:hover,.footnav a:hover{border-bottom-color:var(--gold);}
+
+  /* night-reading toggle */
+  .lamp{
+    position:fixed;right:16px;bottom:16px;z-index:11;
+    width:44px;height:44px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--card1);
+    border:1px solid var(--gold);
+    color:var(--gold);
+    cursor:pointer;
+    box-shadow:0 4px 14px var(--shadow);
+    opacity:.72;
+    transition:opacity .18s ease, transform .18s ease;
+  }
+  .lamp:hover,.lamp:focus-visible{opacity:1;transform:translateY(-2px);outline:none;}
+  .lamp svg{width:20px;height:20px;}
+  @media print{.lamp,.progress,.allnav,.footnav{display:none;}}
 </style>
 </head>
 <body>
-<style>
-  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
-  .allnav a{
-    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
-    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
-    padding-bottom:2px;
-  }
-  .allnav a:hover{border-bottom-color:#a67c1e;}
-</style>
+<div class="progress" id="prog"></div>
+<a id="top"></a>
 <nav class="allnav"><a href="./">← All devotions</a></nav>
 
 <article class="page">
@@ -272,6 +389,8 @@
   <div class="eyebrow">Today's Devotion</div>
   <h1>When Jesus Saw Their Faith</h1>
 
+  <div class="meta">Mark 2 <span>·</span> 17 min read</div>
+
   <section class="verse-card">
     <div class="label">Key Verse</div>
     <div class="scripture">“Seeing their faith, Jesus said to the paralyzed man, ‘My child, your sins are forgiven.’”</div>
@@ -285,21 +404,21 @@
   </div>
 
   <div class="body-text">
-    <p>Capernaum knew the sound of a crowd by now. <span class="scrip">“When Jesus returned to Capernaum several days later, the news spread quickly that he was back home. Soon the house where he was staying was so packed with visitors that there was no more room, even outside the door”</span> <span class="ref">Mark 2:1-2 (NLT)</span>. Luke tells us who had come: <span class="scrip">“some Pharisees and teachers of religious law were sitting nearby”</span>, men who <span class="scrip">“showed up from every village in all Galilee and Judea, as well as from Jerusalem”</span> <span class="ref">Luke 5:17 (NLT)</span>. Ellen White places the scene in <span class="egw">“the house of Peter”</span> and says of those officials that they <span class="egw">“had come as spies, seeking an accusation against Jesus,”</span> while beyond them pressed <span class="egw">“the eager, the reverent, the curious, and the unbelieving.”</span> Yet Luke adds the sentence that makes everything that follows possible: <span class="scrip">“And the Lord’s healing power was strongly with Jesus”</span> <span class="ref">Luke 5:17 (NLT)</span>. Power to heal, in a room full of people who did not think they needed it; Ellen White’s verdict on those men is sharp: <span class="egw">“They felt no sense of need, and the healing was not for them.”</span> <span class="egw-ref">The Desire of Ages, p. 267 &middot; DA 267.5</span>. Then Mark turns to the street. <span class="scrip">“Four men arrived carrying a paralyzed man on a mat”</span> <span class="ref">Mark 2:3 (NLT)</span>. Scripture gives us no name, no age, no history, only a body that could not move itself and four pairs of hands that had decided it would move anyway. Everything he needed was inside that house, and he could not take a single step toward it. Ellen White describes his inner state in words worth hearing slowly: <span class="egw">“Like the leper, this paralytic had lost all hope of recovery.”</span> <span class="egw-ref">The Desire of Ages, p. 267 &middot; DA 267.2</span> <span class="egw">“The palsied man was entirely helpless, and, seeing no prospect of aid from any quarter, he had sunk into despair.”</span> <span class="egw-ref">The Desire of Ages, p. 267 &middot; DA 267.3</span>. And then a detail that changes how the whole story should be read: <span class="egw">“it was not physical restoration he desired so much as relief from the burden of sin. If he could see Jesus, and receive the assurance of forgiveness and peace with Heaven, he would be content to live or die, according to God’s will.”</span> Underneath everything else she hears one cry: <span class="egw">“Oh that I might come into His presence!”</span> <span class="egw-ref">The Desire of Ages, p. 267 &middot; DA 267.4</span>. That is a man who knew exactly where help was and had no way to get there. It is also, if we are honest, a fair description of a great many people we love.</p>
+    <section class="mv"><p>Capernaum knew the sound of a crowd by now. <span class="scrip">“When Jesus returned to Capernaum several days later, the news spread quickly that he was back home. Soon the house where he was staying was so packed with visitors that there was no more room, even outside the door”</span> <span class="ref">Mark 2:1-2 (NLT)</span>. Luke tells us who had come: <span class="scrip">“some Pharisees and teachers of religious law were sitting nearby”</span>, men who <span class="scrip">“showed up from every village in all Galilee and Judea, as well as from Jerusalem”</span> <span class="ref">Luke 5:17 (NLT)</span>. </p><p>Ellen White places the scene in <span class="egw">“the house of Peter”</span> and says of those officials that they <span class="egw">“had come as spies, seeking an accusation against Jesus,”</span> while beyond them pressed <span class="egw">“the eager, the reverent, the curious, and the unbelieving.”</span> Yet Luke adds the sentence that makes everything that follows possible: <span class="scrip">“And the Lord’s healing power was strongly with Jesus”</span> <span class="ref">Luke 5:17 (NLT)</span>. Power to heal, in a room full of people who did not think they needed it; Ellen White’s verdict on those men is sharp: <span class="egw">“They felt no sense of need, and the healing was not for them.”</span> <span class="egw-ref">The Desire of Ages, p. 267 · DA 267.5</span>. </p><p>Then Mark turns to the street. <span class="scrip">“Four men arrived carrying a paralyzed man on a mat”</span> <span class="ref">Mark 2:3 (NLT)</span>. Scripture gives us no name, no age, no history, only a body that could not move itself and four pairs of hands that had decided it would move anyway. Everything he needed was inside that house, and he could not take a single step toward it. Ellen White describes his inner state in words worth hearing slowly: <span class="egw">“Like the leper, this paralytic had lost all hope of recovery.”</span> <span class="egw-ref">The Desire of Ages, p. 267 · DA 267.2</span> <span class="egw">“The palsied man was entirely helpless, and, seeing no prospect of aid from any quarter, he had sunk into despair.”</span> <span class="egw-ref">The Desire of Ages, p. 267 · DA 267.3</span>. </p><p>And then a detail that changes how the whole story should be read: </p><blockquote class="egw-block"><span class="egw">“it was not physical restoration he desired so much as relief from the burden of sin. If he could see Jesus, and receive the assurance of forgiveness and peace with Heaven, he would be content to live or die, according to God’s will.”</span></blockquote><p> Underneath everything else she hears one cry: <span class="egw">“Oh that I might come into His presence!”</span> <span class="egw-ref">The Desire of Ages, p. 267 · DA 267.4</span>. That is a man who knew exactly where help was and had no way to get there. It is also, if we are honest, a fair description of a great many people we love.</p></section>
 
-    <p>Now look at the four. Mark does not name them; Ellen White tells us they were his friends, and says that when he <span class="egw">“besought his friends to carry him on his bed to Jesus,”</span> <span class="egw">“this they gladly undertook to do.”</span> <span class="egw-ref">The Desire of Ages, p. 267 &middot; DA 267.4</span>. She adds that it was they who had first put hope back into him: <span class="egw">“the friends who reported these things encouraged him to believe that he too might be cured if he could be carried to Jesus.”</span> <span class="egw-ref">The Desire of Ages, p. 267 &middot; DA 267.3</span>. Sit with what that carrying cost. A grown man on a mat is heavy; the corners of a mat cut into the hands; and a crowd is never kind to people who move slowly. The four did not send word to Jesus about their friend. They did not tell him to have faith and wish him well. They picked up his weight and walked with it, and that is the first thing this story has to say: some faith is measured not by what it says but by what it is willing to carry. Paul gave the church its shortest job description in these words: <span class="scrip">“Share each other’s burdens, and in this way obey the law of Christ”</span> <span class="ref">Galatians 6:2 (NLT)</span>. And notice, so that the man on the mat keeps his dignity, that the faith in this story is not only theirs. Ellen White is clear that the request to go was his, and Jesus will shortly speak of <em>their</em> faith, a plural wide enough to hold five people. He could not walk, but he could want; he could not push through a crowd, but he could ask to be carried. There is no shame in being carried. It is often the bravest thing a person ever does.</p>
+    <section class="mv"><p>Now look at the four. Mark does not name them; Ellen White tells us they were his friends, and says that when he <span class="egw">“besought his friends to carry him on his bed to Jesus,”</span> <span class="egw">“this they gladly undertook to do.”</span> <span class="egw-ref">The Desire of Ages, p. 267 · DA 267.4</span>. She adds that it was they who had first put hope back into him: <span class="egw">“the friends who reported these things encouraged him to believe that he too might be cured if he could be carried to Jesus.”</span> <span class="egw-ref">The Desire of Ages, p. 267 · DA 267.3</span>. </p><p>Sit with what that carrying cost. A grown man on a mat is heavy; the corners of a mat cut into the hands; and a crowd is never kind to people who move slowly. The four did not send word to Jesus about their friend. They did not tell him to have faith and wish him well. They picked up his weight and walked with it, and that is the first thing this story has to say: some faith is measured not by what it says but by what it is willing to carry. </p><p>Paul gave the church its shortest job description in these words: <span class="scrip">“Share each other’s burdens, and in this way obey the law of Christ”</span> <span class="ref">Galatians 6:2 (NLT)</span>. And notice, so that the man on the mat keeps his dignity, that the faith in this story is not only theirs. Ellen White is clear that the request to go was his, and Jesus will shortly speak of <em>their</em> faith, a plural wide enough to hold five people. He could not walk, but he could want; he could not push through a crowd, but he could ask to be carried. There is no shame in being carried. It is often the bravest thing a person ever does.</p></section>
 
-    <p>Then they reached the house and met a wall of backs. <span class="scrip">“They couldn’t bring him to Jesus because of the crowd”</span> <span class="ref">Mark 2:4 (NLT)</span>. Ellen White will not let us hurry past the moment: <span class="egw">“Again and again the bearers of the paralytic tried to push their way through the crowd, but in vain. The sick man looked about him in unutterable anguish. When the longed-for help was so near, how could he relinquish hope?”</span> Consider what the obstacle was made of. It was not Pharisees, and it was not demons. It was people who had come to hear Jesus. The very crowd that proved how wonderful He was stood between a dying man and the door, and that is worth remembering the next time something good, a full church, a busy programme, a ministry, a tradition, turns out to be the thing keeping someone on the outside. Here the story could have ended, and nobody would have blamed them: <em>we tried; the house was full; perhaps another day.</em> Instead: <span class="scrip">“so they dug a hole through the roof above his head. Then they lowered the man on his mat, right down in front of Jesus”</span> <span class="ref">Mark 2:4 (NLT)</span>. Luke puts it this way: they <span class="scrip">“went up to the roof and took off some tiles”</span> <span class="ref">Luke 5:19 (NLT)</span>; either way, somebody’s roof was coming apart and there was dust falling on the front row. Ellen White adds a detail worth noticing: <span class="egw">“At his suggestion his friends bore him to the top of the house and, breaking up the roof, let him down at the feet of Jesus.”</span> And then, drily: <span class="egw">“The discourse was interrupted.”</span> <span class="egw-ref">The Desire of Ages, p. 268 &middot; DA 268.1</span>. Whoever thought of it, the point stands. When the ordinary way was blocked, they did not read the blocked way as God’s answer. They read it as a reason to find another way. A closed door is not a closed heaven. Their faith did not go quiet under pressure; it became creative.</p>
+    <section class="mv"><p>Then they reached the house and met a wall of backs. <span class="scrip">“They couldn’t bring him to Jesus because of the crowd”</span> <span class="ref">Mark 2:4 (NLT)</span>. Ellen White will not let us hurry past the moment: </p><blockquote class="egw-block"><span class="egw">“Again and again the bearers of the paralytic tried to push their way through the crowd, but in vain. The sick man looked about him in unutterable anguish. When the longed-for help was so near, how could he relinquish hope?”</span></blockquote><p> Consider what the obstacle was made of. It was not Pharisees, and it was not demons. It was people who had come to hear Jesus. The very crowd that proved how wonderful He was stood between a dying man and the door, and that is worth remembering the next time something good, a full church, a busy programme, a ministry, a tradition, turns out to be the thing keeping someone on the outside. Here the story could have ended, and nobody would have blamed them: <em>we tried; the house was full; perhaps another day.</em> Instead: <span class="scrip">“so they dug a hole through the roof above his head. Then they lowered the man on his mat, right down in front of Jesus”</span> <span class="ref">Mark 2:4 (NLT)</span>. </p><p>Luke puts it this way: they <span class="scrip">“went up to the roof and took off some tiles”</span> <span class="ref">Luke 5:19 (NLT)</span>; either way, somebody’s roof was coming apart and there was dust falling on the front row. Ellen White adds a detail worth noticing: <span class="egw">“At his suggestion his friends bore him to the top of the house and, breaking up the roof, let him down at the feet of Jesus.”</span> And then, drily: <span class="egw">“The discourse was interrupted.”</span> <span class="egw-ref">The Desire of Ages, p. 268 · DA 268.1</span>. </p><p>Whoever thought of it, the point stands. When the ordinary way was blocked, they did not read the blocked way as God’s answer. They read it as a reason to find another way. A closed door is not a closed heaven. Their faith did not go quiet under pressure; it became creative.</p></section>
 
-    <p>And now the sentence this devotion is named for. <span class="scrip">“Seeing their faith, Jesus said to the paralyzed man, “My child, your sins are forgiven””</span> <span class="ref">Mark 2:5 (NLT)</span>. Read the first two words again. Jesus did not hear their faith; no one in the story has yet said a word to Him. He <em>saw</em> it. He saw it in a hole in the ceiling, in four pairs of rope-burned hands, in a man on a mat lying in the light at His feet. Faith, in this house, was not a feeling in the heart or a sentence on the lips; it was visible, and it had the shape of what it was willing to do for somebody else. Ellen White describes the look that passed between them: <span class="egw">“The Saviour looked upon the mournful countenance, and saw the pleading eyes fixed upon Him. He understood the case.”</span> And she says something about the timing of faith that ought to steady every person who has prayed for a long time: <span class="egw">“Jesus had watched the first glimmer of faith grow into a belief that He was the sinner’s only helper, and had seen it grow stronger with every effort to come into His presence.”</span> <span class="egw-ref">The Desire of Ages, p. 268 &middot; DA 268.1</span>. Every effort. He was watching long before they reached the roof. Then Jesus spoke, and He did not say what everyone in the room was waiting for. The friends had carried the man for his legs. Jesus went first to his heart. Matthew keeps the tenderness of it: <span class="scrip">“Be encouraged, my child! Your sins are forgiven”</span> <span class="ref">Matthew 9:2 (NLT)</span>. Everyone in that house could see the paralysis. Only Jesus could see the guilt, and He went to the deeper need first. In <em>The Ministry of Healing</em> Ellen White explains why: <span class="egw">“He needed health of soul before he could appreciate health of body.”</span> <span class="egw-ref">The Ministry of Healing, p. 77 &middot; MH 77.3</span>. The words, she says, <span class="egw">“fell like music on the sufferer’s ear,”</span> <span class="egw-ref">The Desire of Ages, p. 268 &middot; DA 268.2</span> and <span class="egw">“The burden of despair rolls from the sick man’s soul; the peace of forgiveness rests upon his spirit, and shines out upon his countenance.”</span> <span class="egw-ref">The Desire of Ages, p. 268 &middot; DA 268.3</span>. Think of the friends at the hole in the roof, looking down. They had brought him for one thing, and Jesus began with another. We do the same: we carry someone to Jesus asking for a job, a marriage, a diagnosis to change, and He starts where we cannot see. It is not that He has ignored the request. It is that He sees the whole person.</p>
+    <section class="mv"><p>And now the sentence this devotion is named for. <span class="scrip">“Seeing their faith, Jesus said to the paralyzed man, “My child, your sins are forgiven””</span> <span class="ref">Mark 2:5 (NLT)</span>. Read the first two words again. Jesus did not hear their faith; no one in the story has yet said a word to Him. He <em>saw</em> it. He saw it in a hole in the ceiling, in four pairs of rope-burned hands, in a man on a mat lying in the light at His feet. Faith, in this house, was not a feeling in the heart or a sentence on the lips; it was visible, and it had the shape of what it was willing to do for somebody else. </p><p>Ellen White describes the look that passed between them: <span class="egw">“The Saviour looked upon the mournful countenance, and saw the pleading eyes fixed upon Him. He understood the case.”</span> And she says something about the timing of faith that ought to steady every person who has prayed for a long time: <span class="egw">“Jesus had watched the first glimmer of faith grow into a belief that He was the sinner’s only helper, and had seen it grow stronger with every effort to come into His presence.”</span> <span class="egw-ref">The Desire of Ages, p. 268 · DA 268.1</span>. </p><p>Every effort. He was watching long before they reached the roof. Then Jesus spoke, and He did not say what everyone in the room was waiting for. The friends had carried the man for his legs. Jesus went first to his heart. Matthew keeps the tenderness of it: <span class="scrip">“Be encouraged, my child! Your sins are forgiven”</span> <span class="ref">Matthew 9:2 (NLT)</span>. Everyone in that house could see the paralysis. Only Jesus could see the guilt, and He went to the deeper need first. In <em>The Ministry of Healing</em> Ellen White explains why: <span class="egw">“He needed health of soul before he could appreciate health of body.”</span> <span class="egw-ref">The Ministry of Healing, p. 77 · MH 77.3</span>. </p><p>The words, she says, <span class="egw">“fell like music on the sufferer’s ear,”</span> <span class="egw-ref">The Desire of Ages, p. 268 · DA 268.2</span> and <span class="egw">“The burden of despair rolls from the sick man’s soul; the peace of forgiveness rests upon his spirit, and shines out upon his countenance.”</span> <span class="egw-ref">The Desire of Ages, p. 268 · DA 268.3</span>. Think of the friends at the hole in the roof, looking down. They had brought him for one thing, and Jesus began with another. We do the same: we carry someone to Jesus asking for a job, a marriage, a diagnosis to change, and He starts where we cannot see. It is not that He has ignored the request. It is that He sees the whole person.</p></section>
 
-    <p>A word of care here, because this story can be twisted. Ellen White gives us the background of this particular man: his disease <span class="egw">“was the result of a life of sin, and his sufferings were embittered by remorse,”</span> <span class="egw-ref">The Desire of Ages, p. 267 &middot; DA 267.2</span> and the rabbis he had once turned to had <span class="egw">“refused him hope or sympathy”</span> and <span class="egw">“declared that he was suffering the curse of God for his sins.”</span> <span class="egw-ref">The Desire of Ages, p. 268 &middot; DA 268.5</span>. That was the verdict men had passed on him; watch what the story does with it: Jesus overturned it. The people in the room who treated sickness as proof of God’s displeasure are the people the passage exposes; Ellen White notes that <span class="egw">“the Pharisees regarded affliction as an evidence of divine displeasure, and they held themselves aloof from the sick and the needy,”</span> <span class="egw-ref">The Desire of Ages, p. 267 &middot; DA 267.2</span> and she does not mean it as praise. Asked once whose sin had caused a man’s blindness, Jesus answered, <span class="scrip">“It was not because of his sins or his parents’ sins”</span> <span class="ref">John 9:3 (NLT)</span>. Never read anyone’s illness or disability, or your own, as a sentence from heaven. What Jesus gave this man was not a diagnosis; it was a pardon. And the pardon started a fight. <span class="scrip">“But some of the teachers of religious law who were sitting there thought to themselves, “What is he saying? This is blasphemy! Only God can forgive sins!””</span> <span class="ref">Mark 2:6-7 (NLT)</span>. They were right about one thing: only God can. Jesus did not argue the point; He answered it. <span class="scrip">“Jesus knew immediately what they were thinking, so he asked them, “Why do you question this in your hearts? Is it easier to say to the paralyzed man ‘Your sins are forgiven,’ or ‘Stand up, pick up your mat, and walk’? So I will prove to you that the Son of Man has the authority on earth to forgive sins””</span> <span class="ref">Mark 2:8-10 (NLT)</span>. Anyone can say <em>your sins are forgiven</em>; no one can check. So Jesus tied the invisible gift to a visible one and let the room watch. Ellen White puts it exactly: <span class="egw">“The healing of the body was an evidence of the power that had renewed the heart.”</span> And she names what kind of power it was: <span class="egw">“It required nothing less than creative power to restore health to that decaying body.”</span> <span class="egw-ref">The Desire of Ages, p. 269 &middot; DA 269.5</span>. The voice that had just forgiven was the voice that had spoken the world into being. Forgiveness and restoration are not two ministries of Christ; they are one power, seen from two sides.</p>
+    <section class="mv"><p>A word of care here, because this story can be twisted. Ellen White gives us the background of this particular man: his disease <span class="egw">“was the result of a life of sin, and his sufferings were embittered by remorse,”</span> <span class="egw-ref">The Desire of Ages, p. 267 · DA 267.2</span> and the rabbis he had once turned to had <span class="egw">“refused him hope or sympathy”</span> and <span class="egw">“declared that he was suffering the curse of God for his sins.”</span> <span class="egw-ref">The Desire of Ages, p. 268 · DA 268.5</span>. That was the verdict men had passed on him; watch what the story does with it: Jesus overturned it. </p><p>The people in the room who treated sickness as proof of God’s displeasure are the people the passage exposes; Ellen White notes that <span class="egw">“the Pharisees regarded affliction as an evidence of divine displeasure, and they held themselves aloof from the sick and the needy,”</span> <span class="egw-ref">The Desire of Ages, p. 267 · DA 267.2</span> and she does not mean it as praise. Asked once whose sin had caused a man’s blindness, Jesus answered, <span class="scrip">“It was not because of his sins or his parents’ sins”</span> <span class="ref">John 9:3 (NLT)</span>. </p><p>Never read anyone’s illness or disability, or your own, as a sentence from heaven. What Jesus gave this man was not a diagnosis; it was a pardon. And the pardon started a fight. <span class="scrip">“But some of the teachers of religious law who were sitting there thought to themselves, “What is he saying? This is blasphemy! Only God can forgive sins!””</span> <span class="ref">Mark 2:6-7 (NLT)</span>. They were right about one thing: only God can. Jesus did not argue the point; He answered it. <span class="scrip">“Jesus knew immediately what they were thinking, so he asked them, “Why do you question this in your hearts? Is it easier to say to the paralyzed man ‘Your sins are forgiven,’ or ‘Stand up, pick up your mat, and walk’? So I will prove to you that the Son of Man has the authority on earth to forgive sins””</span> <span class="ref">Mark 2:8-10 (NLT)</span>. </p><p>Anyone can say <em>your sins are forgiven</em>; no one can check. So Jesus tied the invisible gift to a visible one and let the room watch. Ellen White puts it exactly: <span class="egw">“The healing of the body was an evidence of the power that had renewed the heart.”</span> And she names what kind of power it was: <span class="egw">“It required nothing less than creative power to restore health to that decaying body.”</span> <span class="egw-ref">The Desire of Ages, p. 269 · DA 269.5</span>. The voice that had just forgiven was the voice that had spoken the world into being. Forgiveness and restoration are not two ministries of Christ; they are one power, seen from two sides.</p></section>
 
-    <p><span class="scrip">“Then Jesus turned to the paralyzed man and said, “Stand up, pick up your mat, and go home!” And the man jumped up, grabbed his mat, and walked out through the stunned onlookers”</span> <span class="ref">Mark 2:11-12 (NLT)</span>. The crowd that had blocked the door now parted to let him through it. Luke says he <span class="scrip">“went home praising God”</span> and that the people cried, <span class="scrip">“We have seen amazing things today!”</span> <span class="ref">Luke 5:25-26 (NLT)</span>; Mark hears them say, <span class="scrip">“We’ve never seen anything like this before!”</span> <span class="ref">Mark 2:12 (NLT)</span>. Ellen White: <span class="egw">“Then he who had been borne on a litter to Jesus rises to his feet with the elasticity and strength of youth,”</span> <span class="egw-ref">The Desire of Ages, p. 269 &middot; DA 269.3</span> and he went home <span class="egw">“carrying with ease the couch upon which he had been slowly borne from their presence but a short time before.”</span> <span class="egw-ref">The Desire of Ages, p. 271 &middot; DA 271.2</span>. The mat that had carried him, he now carried. Now stand back from the whole story and notice what the four men did not do. They did not forgive him. They did not heal him. They did not so much as speak; not one word of theirs is recorded. Their entire ministry was a direction: toward Jesus. They could not heal their friend. They could only carry him to the One who could. And that was enough, because it was all that was theirs to do. The rest belonged to Christ, and Christ did all of it: He saw, He forgave, He answered the critics, He healed, He sent him home. Paul understood the division of labour: <span class="scrip">“I planted the seed in your hearts, and Apollos watered it, but it was God who made it grow. It’s not important who does the planting, or who does the watering. What’s important is that God makes the seed grow”</span> <span class="ref">1 Corinthians 3:6-7 (NLT)</span>. There is a freedom in that which many tired intercessors have never allowed themselves. You are not responsible for producing another person’s transformation. You could not do it if you tried. <span class="scrip">“He forgives all my sins and heals all my diseases”</span> <span class="ref">Psalm 103:3 (NLT)</span>: <em>He</em> does. Your task is the mat, the stairs, and the rope, and then to step back and let Him be Jesus.</p>
+    <section class="mv"><p><span class="scrip">“Then Jesus turned to the paralyzed man and said, “Stand up, pick up your mat, and go home!” And the man jumped up, grabbed his mat, and walked out through the stunned onlookers”</span> <span class="ref">Mark 2:11-12 (NLT)</span>. The crowd that had blocked the door now parted to let him through it. Luke says he <span class="scrip">“went home praising God”</span> and that the people cried, <span class="scrip">“We have seen amazing things today!”</span> <span class="ref">Luke 5:25-26 (NLT)</span>; Mark hears them say, <span class="scrip">“We’ve never seen anything like this before!”</span> <span class="ref">Mark 2:12 (NLT)</span>. </p><p>Ellen White: <span class="egw">“Then he who had been borne on a litter to Jesus rises to his feet with the elasticity and strength of youth,”</span> <span class="egw-ref">The Desire of Ages, p. 269 · DA 269.3</span> and he went home <span class="egw">“carrying with ease the couch upon which he had been slowly borne from their presence but a short time before.”</span> <span class="egw-ref">The Desire of Ages, p. 271 · DA 271.2</span>. The mat that had carried him, he now carried. Now stand back from the whole story and notice what the four men did not do. </p><p>They did not forgive him. They did not heal him. They did not so much as speak; not one word of theirs is recorded. Their entire ministry was a direction: toward Jesus. They could not heal their friend. They could only carry him to the One who could. And that was enough, because it was all that was theirs to do. The rest belonged to Christ, and Christ did all of it: He saw, He forgave, He answered the critics, He healed, He sent him home. </p><p>Paul understood the division of labour: <span class="scrip">“I planted the seed in your hearts, and Apollos watered it, but it was God who made it grow. It’s not important who does the planting, or who does the watering. What’s important is that God makes the seed grow”</span> <span class="ref">1 Corinthians 3:6-7 (NLT)</span>. There is a freedom in that which many tired intercessors have never allowed themselves. You are not responsible for producing another person’s transformation. You could not do it if you tried. <span class="scrip">“He forgives all my sins and heals all my diseases”</span> <span class="ref">Psalm 103:3 (NLT)</span>: <em>He</em> does. </p><p>Your task is the mat, the stairs, and the rope, and then to step back and let Him be Jesus.</p></section>
 
-    <p>So, who are you carrying? Most of us can name them without thinking: a son who no longer comes to church; a wife or husband who has heard every argument and is tired of them; a brother who walked away from the faith years ago and now changes the subject; a friend so deep in discouragement that praying feels like lifting a stone; a church member who was wounded by the church and cannot come back through that door. They cannot get to Jesus by themselves right now, and you cannot make them. But you can carry. Carrying looks like prayer that does not stop. Jesus told a story precisely so that His disciples <span class="scrip">“should always pray and never give up”</span> <span class="ref">Luke 18:1 (NLT)</span>; Paul commended a man named Epaphras who <span class="scrip">“always prays earnestly for you”</span> <span class="ref">Colossians 4:12 (NLT)</span>; and Samuel drew a line for every intercessor since: <span class="scrip">“I will certainly not sin against the L<small>ORD</small> by ending my prayers for you”</span> <span class="ref">1 Samuel 12:23 (NLT)</span>. Carrying also looks like encouragement, a meal, a message that expects nothing back, a refusal to write someone off. And it means finding another way when the first way is blocked, because the crowd is still there; it only wears different clothes. Your own discouragement. The inconvenience of showing up again. The memory of the last time you tried and it went badly. The unanswered prayer that has quietly hardened into a verdict. The people who think you should have given up by now. Church hurt. Your own weakness. None of those is Jesus saying no. A blocked door is a reason to look for the stairs. But carry this honestly, on two counts. First, carrying is not controlling. The four men did not argue their friend into the house; they brought him to Jesus and stepped back, and what happened next was between him and the Lord. You may bring a person; you may not force one. Second, persistence is not a lever that moves God. Paul begged three times and was told, <span class="scrip">“My grace is all you need. My power works best in weakness”</span> <span class="ref">2 Corinthians 12:9 (NLT)</span>. Jesus answered this man’s deepest need before He answered the one his friends had carried him for, and He may answer your prayers in a shape you did not carry them for, or on a day you will not see. Our part is faithfulness; the outcome is His. And take heart in this: you are joining a prayer already being prayed. Before Peter fell, Jesus told him, <span class="scrip">“I have pleaded in prayer for you, Simon, that your faith should not fail”</span> <span class="ref">Luke 22:32 (NLT)</span>, and of the risen Christ it is written, <span class="scrip">“He lives forever to intercede with God on their behalf”</span> <span class="ref">Hebrews 7:25 (NLT)</span>. When you carry someone to Jesus, you are not talking Him into caring. You are bringing them to the One who has been carrying them all along.</p>
+    <section class="mv"><p>So, who are you carrying? Most of us can name them without thinking: a son who no longer comes to church; a wife or husband who has heard every argument and is tired of them; a brother who walked away from the faith years ago and now changes the subject; a friend so deep in discouragement that praying feels like lifting a stone; a church member who was wounded by the church and cannot come back through that door. They cannot get to Jesus by themselves right now, and you cannot make them. </p><p>But you can carry. Carrying looks like prayer that does not stop. Jesus told a story precisely so that His disciples <span class="scrip">“should always pray and never give up”</span> <span class="ref">Luke 18:1 (NLT)</span>; Paul commended a man named Epaphras who <span class="scrip">“always prays earnestly for you”</span> <span class="ref">Colossians 4:12 (NLT)</span>; and Samuel drew a line for every intercessor since: <span class="scrip">“I will certainly not sin against the L<small>ORD</small> by ending my prayers for you”</span> <span class="ref">1 Samuel 12:23 (NLT)</span>. Carrying also looks like encouragement, a meal, a message that expects nothing back, a refusal to write someone off. </p><p>And it means finding another way when the first way is blocked, because the crowd is still there; it only wears different clothes. Your own discouragement. The inconvenience of showing up again. The memory of the last time you tried and it went badly. The unanswered prayer that has quietly hardened into a verdict. The people who think you should have given up by now. Church hurt. Your own weakness. None of those is Jesus saying no. A blocked door is a reason to look for the stairs. </p><p>But carry this honestly, on two counts. First, carrying is not controlling. The four men did not argue their friend into the house; they brought him to Jesus and stepped back, and what happened next was between him and the Lord. You may bring a person; you may not force one. Second, persistence is not a lever that moves God. Paul begged three times and was told, <span class="scrip">“My grace is all you need. My power works best in weakness”</span> <span class="ref">2 Corinthians 12:9 (NLT)</span>. Jesus answered this man’s deepest need before He answered the one his friends had carried him for, and He may answer your prayers in a shape you did not carry them for, or on a day you will not see. </p><p>Our part is faithfulness; the outcome is His. And take heart in this: you are joining a prayer already being prayed. Before Peter fell, Jesus told him, <span class="scrip">“I have pleaded in prayer for you, Simon, that your faith should not fail”</span> <span class="ref">Luke 22:32 (NLT)</span>, and of the risen Christ it is written, <span class="scrip">“He lives forever to intercede with God on their behalf”</span> <span class="ref">Hebrews 7:25 (NLT)</span>. When you carry someone to Jesus, you are not talking Him into caring. You are bringing them to the One who has been carrying them all along.</p></section>
 
-    <p>One more question before you go, and it comes first, not last. Who carried you? Somebody prayed for you before you could pray for yourself: a mother at a kitchen table, a grandmother who would not stop, a Sabbath School teacher, a friend who kept asking, a stranger whose name you will learn in the kingdom. You were once the one on the mat. <span class="scrip">“When we were utterly helpless, Christ came at just the right time and died for us sinners”</span> <span class="ref">Romans 5:6 (NLT)</span>, and part of how He came to you was through hands. Ellen White ends the story in the man’s own home, where <span class="egw">“God was glorified through His Son, who had restored hope to the hopeless, and strength to the stricken one.”</span> <span class="egw-ref">The Desire of Ages, p. 271 &middot; DA 271.2</span>. That is still what He does. He still sees faith, not the faith that says the right words, but the faith that picks up a corner of someone’s mat and refuses to be turned back by a crowd. And He still does the part that no friend can. So pick that person up again today. Pray again. Show up again. Find the stairs. <strong>You cannot heal them. But you can carry them to the One who can, and He is still looking for faith like that.</strong></p>
+    <section class="mv"><p>One more question before you go, and it comes first, not last. Who carried you? Somebody prayed for you before you could pray for yourself: a mother at a kitchen table, a grandmother who would not stop, a Sabbath School teacher, a friend who kept asking, a stranger whose name you will learn in the kingdom. You were once the one on the mat. <span class="scrip">“When we were utterly helpless, Christ came at just the right time and died for us sinners”</span> <span class="ref">Romans 5:6 (NLT)</span>, and part of how He came to you was through hands. </p><p>Ellen White ends the story in the man’s own home, where <span class="egw">“God was glorified through His Son, who had restored hope to the hopeless, and strength to the stricken one.”</span> <span class="egw-ref">The Desire of Ages, p. 271 · DA 271.2</span>. That is still what He does. He still sees faith, not the faith that says the right words, but the faith that picks up a corner of someone’s mat and refuses to be turned back by a crowd. And He still does the part that no friend can. So pick that person up again today. Pray again. Show up again. Find the stairs. </p><p class="thesis"><strong>You cannot heal them. But you can carry them to the One who can, and He is still looking for faith like that.</strong></p></section>
   </div>
 
   <div class="divider" aria-hidden="true">
@@ -323,9 +442,34 @@
   <p class="sources"><span class="label">Sources and Further Reading</span>Scripture: Mark 2:1–12 (parallels Matthew 9:1–8; Luke 5:17–26); with John 9:3; Galatians 6:2; Psalm 103:3; 2 Corinthians 12:9; Hebrews 7:25; Romans 5:6 (NLT). Ellen G. White: <em>The Desire of Ages</em>, chapter 27, “Thou Canst Make Me Clean,” pp. 267–271 (DA 267.2–271.2); <em>The Ministry of Healing</em>, chapter 5, “Healing of the Soul,” p. 77 (MH 77.3).</p>
 
   
-  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/U6SclWGHOlw" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">&#9654;</span>Watch the Short</a><p class="note">On YouTube as &ldquo;Faith That Opened a Roof&rdquo; &mdash; from the channel <em>I Can Still Believe</em>.</p></div>
+  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/U6SclWGHOlw" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">▶</span>Watch the Short</a><p class="note">On YouTube as “Faith That Opened a Roof” — from the channel <em>I Can Still Believe</em>.</p></div>
 
   <div class="sdg">Soli Deo Gloria</div>
 </article>
+<nav class="footnav"><a href="./">&#8592;&nbsp;All devotions</a><a href="#top">Back to top&nbsp;&#8593;</a></nav>
+<button class="lamp" id="lamp" type="button" aria-label="Night reading">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path class="moon" d="M20 13.4A8.2 8.2 0 1 1 10.6 4a6.4 6.4 0 0 0 9.4 9.4Z"/>
+  </svg>
+</button>
+<script>
+(function(){
+  var root=document.documentElement, lamp=document.getElementById('lamp');
+  try{ if(localStorage.getItem('devo-theme')==='night') root.setAttribute('data-theme','night'); }catch(e){}
+  if(lamp){ lamp.addEventListener('click',function(){
+    var on = root.getAttribute('data-theme')==='night';
+    if(on){ root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme','night'); }
+    try{ localStorage.setItem('devo-theme', on?'day':'night'); }catch(e){}
+  }); }
+  var bar=document.getElementById('prog');
+  function tick(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.width=(h>0?Math.min(100,(window.scrollY/h)*100):0)+'%';
+  }
+  if(bar){ window.addEventListener('scroll',tick,{passive:true});
+           window.addEventListener('resize',tick); tick(); }
+})();
+</script>
 </body>
 </html>

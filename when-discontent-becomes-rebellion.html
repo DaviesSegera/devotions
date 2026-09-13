@@ -3,143 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>When Discontent Becomes Rebellion &mdash; Today's Devotion</title>
+<title>When Discontent Becomes Rebellion — Today's Devotion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
 <style>
   :root{
-    --parchment:#f3ead4;
-    --parchment-deep:#eadfc2;
-    --ink:#3b2d18;
-    --ink-soft:#5a4629;
-    --gold:#a67c1e;
-    --gold-bright:#c9a227;
-    --gold-pale:#e3cf95;
-    --wine:#7a3b2e;
+    --bg1:#f8f2e1; --bg2:#f3ead4; --bg3:#e8dcbd;
+    --page-bg:rgba(255,252,241,.62);
+    --page-border:#a67c1e; --page-outline:#e3cf95;
+    --ink:#33281a; --ink-soft:#5a4629;
+    --gold:#a67c1e; --gold-bright:#c9a227; --gold-pale:#e3cf95;
+    --wine:#7a3b2e; --wine-solid:#7a3b2e; --wine-edge:#5d2b20;
+    --card1:rgba(255,250,232,.92); --card2:rgba(247,238,213,.92);
+    --emph:#7c5a12;
+    --num1:#f5e7bd; --num2:#e3cf95; --numfg:#7c5a12;
+    --shadow:rgba(90,70,30,.16);
+    --grain:.30;
+    --rule:rgba(166,124,30,.28);
+  }
+  :root[data-theme="night"]{
+    --bg1:#1a160f; --bg2:#15120c; --bg3:#100e09;
+    --page-bg:rgba(44,37,26,.42);
+    --page-border:#7d6524; --page-outline:#463a19;
+    --ink:#e9dfc8; --ink-soft:#c4b491;
+    --gold:#c2a03a; --gold-bright:#e0bf58; --gold-pale:#6a5828;
+    --wine:#e2a891; --wine-solid:#8a4537; --wine-edge:#6b3428;
+    --card1:rgba(56,47,32,.6); --card2:rgba(46,39,27,.6);
+    --emph:#e2c775;
+    --num1:#4c4024; --num2:#3a311b; --numfg:#e8ce7f;
+    --shadow:rgba(0,0,0,.55);
+    --grain:.16;
+    --rule:rgba(194,160,58,.26);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{
-    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    background:radial-gradient(ellipse at 50% 0%, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%);
+    background-attachment:fixed;
     color:var(--ink);
     font-family:'Lora',serif;
-    line-height:1.85;
-    padding:34px 14px 60px;
+    line-height:1.78;
+    padding:30px 14px 28px;
     position:relative;
+    -webkit-font-smoothing:antialiased;
+    transition:background-color .25s ease, color .25s ease;
   }
-  /* aged-paper grain */
+  /* aged-paper grain, lighter than before */
   body::before{
     content:"";
     position:fixed;inset:0;
     pointer-events:none;
-    opacity:.5;
+    opacity:var(--grain);
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
     z-index:2;
   }
-  .page{
-    max-width:760px;
-    margin:0 auto;
-    background:rgba(255,252,240,.55);
-    border:1.5px solid var(--gold);
-    outline:1px solid var(--gold-pale);
-    outline-offset:6px;
-    padding:64px 52px 56px;
-    position:relative;
-    box-shadow:0 18px 50px rgba(90,70,30,.18);
+
+  /* reading progress */
+  .progress{
+    position:fixed;top:0;left:0;height:3px;width:0;
+    background:linear-gradient(90deg,var(--gold-pale),var(--gold-bright));
+    z-index:12;transition:width .08s linear;
   }
-  @media(max-width:620px){.page{padding:52px 24px 44px;}}
-  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
-  .corner.tl{top:10px;left:10px;}
-  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
-  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
-  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+
+  .page{
+    max-width:720px;
+    margin:0 auto;
+    background:var(--page-bg);
+    border:1.5px solid var(--page-border);
+    outline:1px solid var(--page-outline);
+    outline-offset:6px;
+    padding:62px 56px 54px;
+    position:relative;
+    box-shadow:0 18px 50px var(--shadow);
+  }
+  @media(max-width:620px){.page{padding:48px 22px 40px;} body{padding:22px 11px 24px;}}
+
+  /* corners, quieter: smaller and lighter than before */
+  .corner{position:absolute;width:44px;height:44px;color:var(--gold);opacity:.55;}
+  .corner.tl{top:9px;left:9px;}
+  .corner.tr{top:9px;right:9px;transform:scaleX(-1);}
+  .corner.bl{bottom:9px;left:9px;transform:scaleY(-1);}
+  .corner.br{bottom:9px;right:9px;transform:scale(-1,-1);}
+
   .eyebrow{
     font-family:'Cinzel',serif;
-    font-size:.82rem;
-    letter-spacing:.42em;
+    font-size:.74rem;
+    letter-spacing:.34em;
     text-transform:uppercase;
     color:var(--gold);
     text-align:center;
-    margin-bottom:18px;
+    margin-bottom:16px;
   }
   h1{
     font-family:'Playfair Display',serif;
     font-weight:700;
-    font-size:clamp(2.1rem,5.4vw,3rem);
+    font-size:clamp(2rem,5vw,2.8rem);
+    line-height:1.18;
     text-align:center;
     color:var(--ink);
-    letter-spacing:.01em;
-    margin-bottom:26px;
+    letter-spacing:.005em;
+    margin-bottom:14px;
   }
+  .meta{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.16em;
+    font-size:.78rem;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:28px;
+  }
+  .meta span{opacity:.55;margin:0 7px;}
+
   /* Ellen G. White — companion ink */
   .egw{color:var(--wine);}
   .egw-ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.08em;
-    font-size:.88em;
+    letter-spacing:.07em;
+    font-size:.85em;
     color:var(--wine);
   }
-  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .egw-ref::before{content:"\2712";margin-right:.3em;font-size:.9em;}
+  /* long quotations stand as blocks */
+  blockquote.egw-block{
+    margin:26px 0 28px;
+    padding:2px 0 2px 22px;
+    border-left:2px solid var(--wine);
+    color:var(--wine);
+    font-size:1.01rem;
+    line-height:1.72;
+  }
+  blockquote.egw-block .egw-ref{
+    display:block;margin-top:9px;font-size:.78rem;
+    letter-spacing:.04em;line-height:1.55;opacity:.92;
+    text-wrap:pretty;          /* keeps a lone word off the last line */
+  }
+  @media(max-width:620px){blockquote.egw-block{padding-left:16px;}}
+
   .divider{
     display:flex;align-items:center;justify-content:center;
-    gap:14px;margin:30px 0;color:var(--gold);
+    gap:14px;margin:28px 0;color:var(--gold);
   }
   .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
   .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
   .divider svg{flex-shrink:0;}
+
   .verse-card{
     border:1px solid var(--gold-pale);
-    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
-    padding:30px 34px 26px;
+    background:linear-gradient(180deg,var(--card1),var(--card2));
+    padding:28px 32px 24px;
     text-align:center;
     margin:0 auto 8px;
     position:relative;
   }
   .verse-card .label{
     font-family:'Cinzel',serif;
-    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
-    color:var(--gold);margin-bottom:14px;
+    font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:13px;
   }
   .verse-card .scripture{
     font-family:'Cormorant Garamond',serif;
     font-style:italic;
-    font-size:1.42rem;
-    line-height:1.65;
+    font-size:1.38rem;
+    line-height:1.62;
     color:var(--ink-soft);
   }
   .verse-card .ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.14em;
-    font-size:.95rem;
+    letter-spacing:.13em;
+    font-size:.92rem;
     color:var(--gold);
-    margin-top:14px;
+    margin-top:13px;
   }
-  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
-  .body-text p:first-of-type::first-letter{
+
+  /* body — ragged right, book measure */
+  .body-text{margin-top:4px;}
+  .body-text p{
+    margin-bottom:1.15em;
+    font-size:1.075rem;
+    text-align:left;
+    hyphens:none;
+  }
+  .body-text .mv{margin-bottom:6px;}
+  .body-text > .mv:first-child > p:first-child::first-letter{
     font-family:'Playfair Display',serif;
-    font-size:3.9em;
+    font-size:3.7em;
     float:left;
     line-height:.82;
-    padding:6px 12px 0 0;
+    padding:5px 11px 0 0;
     color:var(--gold);
   }
-  .body-text strong{color:#7c5a12;font-weight:600;}
+  .body-text strong{color:var(--emph);font-weight:600;}
   .scrip{font-style:italic;color:var(--ink-soft);}
   .ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.1em;
-    font-size:.92em;
+    letter-spacing:.09em;
+    font-size:.9em;
     color:var(--gold);
     white-space:nowrap;
   }
+
+  /* the closing sentence of each movement, promoted */
+  .body-text p.thesis{
+    text-align:center;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.32rem;
+    line-height:1.55;
+    color:var(--ink);
+    margin:26px auto 34px;
+    max-width:34em;
+    padding-top:22px;
+    position:relative;
+  }
+  .body-text p.thesis::before{
+    content:"";
+    position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:58px;height:1px;background:var(--gold);opacity:.8;
+  }
+  .body-text p.thesis strong{font-weight:inherit;color:inherit;}
+  @media(max-width:620px){.body-text p.thesis{font-size:1.2rem;}}
+
   h2.takeaways{
     font-family:'Cinzel',serif;
     font-weight:600;
-    font-size:1.35rem;
-    letter-spacing:.18em;
+    font-size:1.22rem;
+    letter-spacing:.16em;
     text-transform:uppercase;
     text-align:center;
     color:var(--ink);
@@ -149,42 +242,45 @@
   ol.takeaway-list li{
     counter-increment:tk;
     position:relative;
-    padding-left:62px;
+    padding-left:54px;
     margin-bottom:20px;
-    font-size:1.03rem;
+    font-size:1.02rem;
   }
   ol.takeaway-list li::before{
     content:counter(tk);
-    position:absolute;left:0;top:2px;
-    width:42px;height:42px;
+    position:absolute;left:0;top:3px;
+    width:36px;height:36px;
     border-radius:50%;
     border:1.5px solid var(--gold);
-    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
-    color:#7c5a12;
+    background:radial-gradient(circle at 35% 30%,var(--num1),var(--num2));
+    color:var(--numfg);
     font-family:'Cinzel',serif;
     font-weight:600;
-    font-size:1.05rem;
+    font-size:.98rem;
     display:flex;align-items:center;justify-content:center;
-    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+    box-shadow:0 2px 6px var(--shadow), inset 0 1px 2px rgba(255,255,255,.35);
   }
-  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  ol.takeaway-list li strong{color:var(--emph);font-weight:600;}
+
   .sources{
     margin-top:34px;
-    font-size:.9rem;
+    font-size:.88rem;
     line-height:1.7;
     color:var(--ink-soft);
     text-align:center;
   }
   .sources .label{
     font-family:'Cinzel',serif;
-    font-size:.68rem;letter-spacing:.36em;text-transform:uppercase;
+    font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;
     color:var(--gold);display:block;margin-bottom:4px;
   }
+
+  /* Watch It — unchanged treatment, tokenised for night reading */
   .watch{
     margin-top:38px;
     text-align:center;
     border:1px solid var(--gold);
-    background:linear-gradient(180deg,rgba(255,250,232,.75),rgba(247,238,213,.75));
+    background:linear-gradient(180deg,var(--card1),var(--card2));
     padding:26px 22px 22px;
   }
   .watch .label{
@@ -199,8 +295,8 @@
     letter-spacing:.08em;
     font-size:1.02rem;
     color:#fdf6e6;
-    background:var(--wine);
-    border:1px solid #5d2b20;
+    background:var(--wine-solid);
+    border:1px solid var(--wine-edge);
     text-decoration:none;
     padding:14px 26px;
     margin:6px 7px;
@@ -222,55 +318,78 @@
     .watch a{display:block;margin:9px 0;padding:15px 18px;}
     .watch{padding:22px 16px 18px;}
   }
+
   .sdg{
     font-family:'Pinyon Script',cursive;
-    font-size:2.5rem;
+    font-size:2.4rem;
     color:var(--gold);
     text-align:center;
     margin-top:40px;
   }
+
+  /* navigation */
+  .allnav,.footnav{max-width:720px;margin:0 auto 16px;text-align:center;}
+  .footnav{margin:26px auto 8px;display:flex;justify-content:center;gap:26px;}
+  .allnav a,.footnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.16em;
+    font-size:.8rem;color:var(--gold);text-decoration:none;
+    border-bottom:1px solid var(--rule);padding-bottom:2px;
+  }
+  .allnav a:hover,.footnav a:hover{border-bottom-color:var(--gold);}
+
+  /* night-reading toggle */
+  .lamp{
+    position:fixed;right:16px;bottom:16px;z-index:11;
+    width:44px;height:44px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--card1);
+    border:1px solid var(--gold);
+    color:var(--gold);
+    cursor:pointer;
+    box-shadow:0 4px 14px var(--shadow);
+    opacity:.72;
+    transition:opacity .18s ease, transform .18s ease;
+  }
+  .lamp:hover,.lamp:focus-visible{opacity:1;transform:translateY(-2px);outline:none;}
+  .lamp svg{width:20px;height:20px;}
+  @media print{.lamp,.progress,.allnav,.footnav{display:none;}}
 </style>
 </head>
 <body>
-<style>
-  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
-  .allnav a{
-    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
-    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
-    padding-bottom:2px;
-  }
-  .allnav a:hover{border-bottom-color:#a67c1e;}
-</style>
-<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+<div class="progress" id="prog"></div>
+<a id="top"></a>
+<nav class="allnav"><a href="./">← All devotions</a></nav>
 
 <article class="page">
-  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner tl" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner tr" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner bl" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner br" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
 
     <div class="eyebrow">Today's Devotion</div>
   <h1>When Discontent Becomes Rebellion</h1>
+
+  <div class="meta">Numbers 16 <span>·</span> 6 min read</div>
 
   <section class="verse-card">
     <div class="label">Key Verse</div>
@@ -280,23 +399,23 @@
 
   <div class="divider" aria-hidden="true">
     <span class="line"></span>
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <svg width="26" height="26" viewbox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"></path></svg>
     <span class="line right"></span>
   </div>
 
   <div class="body-text">
-    <p>Korah’s rebellion did not begin when he stood against Moses. By the time the confrontation became public, something had already been growing in the heart. Numbers 16 opens with Korah, a Levite, joined by Dathan and Abiram of the tribe of Reuben and by 250 leaders, <span class="scrip">“all prominent members of the assembly,”</span> <span class="ref">Numbers 16:2 (NLT)</span> confronting Moses and Aaron: <span class="scrip">“You have gone too far! The whole community of Israel has been set apart by the Lord, and he is with all of us.”</span> <span class="ref">Numbers 16:3 (NLT)</span> It sounded like zeal for holiness. Moses’ reply shows what was underneath. Korah already had a place in God’s service, chosen <span class="scrip">“to be near him so you can serve in the Lord’s Tabernacle.”</span> <span class="ref">Numbers 16:9 (NLT)</span> Then the question that names the heart of the matter: <span class="scrip">“Are you now demanding the priesthood as well?”</span> <span class="ref">Numbers 16:10 (NLT)</span> Numbers 16 shows Korah’s opposition becoming public, but the crisis did not begin in public. Ellen G. White draws attention to the dissatisfaction and ambition that had already been developing in his heart: <span class="egw">“Though appointed to the service of the tabernacle, he had become dissatisfied with his position and aspired to the dignity of the priesthood. … for some time Korah had been secretly opposing the authority of Moses and Aaron, though he had not ventured upon any open act of rebellion”</span> <span class="egw-ref">Patriarchs and Prophets, p. 395 · PP 395.2</span>. Discontent made Korah look past the privilege God had already given him and fix his attention on the position he did not have. <strong>Korah’s rebellion became public long after dissatisfaction had taken root privately.</strong></p>
+    <section class="mv"><p>Korah’s rebellion did not begin when he stood against Moses. By the time the confrontation became public, something had already been growing in the heart. Numbers 16 opens with Korah, a Levite, joined by Dathan and Abiram of the tribe of Reuben and by 250 leaders, <span class="scrip">“all prominent members of the assembly,”</span> <span class="ref">Numbers 16:2 (NLT)</span> confronting Moses and Aaron: <span class="scrip">“You have gone too far! The whole community of Israel has been set apart by the Lord, and he is with all of us.”</span> <span class="ref">Numbers 16:3 (NLT)</span></p><p> It sounded like zeal for holiness. Moses’ reply shows what was underneath. Korah already had a place in God’s service, chosen <span class="scrip">“to be near him so you can serve in the Lord’s Tabernacle.”</span> <span class="ref">Numbers 16:9 (NLT)</span> Then the question that names the heart of the matter: <span class="scrip">“Are you now demanding the priesthood as well?”</span> <span class="ref">Numbers 16:10 (NLT)</span> Numbers 16 shows Korah’s opposition becoming public, but the crisis did not begin in public. Ellen G. White draws attention to the dissatisfaction and ambition that had already been developing in his heart: </p><blockquote class="egw-block"><span class="egw">“Though appointed to the service of the tabernacle, he had become dissatisfied with his position and aspired to the dignity of the priesthood. … for some time Korah had been secretly opposing the authority of Moses and Aaron, though he had not ventured upon any open act of rebellion”</span>.  <span class="egw-ref">Patriarchs and Prophets, p. 395 · PP 395.2</span></blockquote><p>Discontent made Korah look past the privilege God had already given him and fix his attention on the position he did not have. </p><p class="thesis"><strong>Korah’s rebellion became public long after dissatisfaction had taken root privately.</strong></p></section>
 
-    <p>A cherished grievance does not stay private for long. Korah gathered Dathan and Abiram, then 250 respected leaders, until <span class="scrip">“Korah had stirred up the entire community against Moses and Aaron.”</span> <span class="ref">Numbers 16:19 (NLT)</span> In harmony with the biblical account, Ellen White traces the path from whispered discontent to organised resistance: <span class="egw">“Professing great interest in the prosperity of the people, they first whispered their discontent to one another and then to leading men of Israel. Their insinuations were so readily received that they ventured still further, and at last they really believed themselves to be actuated by zeal for God”</span> <span class="egw-ref">Patriarchs and Prophets, p. 396 · PP 396.4</span>. They deceived themselves until resentment felt like righteousness. Grievance also rewrote their memory: Dathan and Abiram refused to come to Moses and called Egypt—the land of their slavery—<span class="scrip">“a land flowing with milk and honey,”</span> <span class="ref">Numbers 16:13 (NLT)</span> accusing Moses of bringing them out to die. When resentment becomes our interpreter, even deliverance can begin to look like oppression. A crowd can be sincere, influential, and still be wrong. <strong>A grievance does not remain private once we begin recruiting others to carry it with us.</strong></p>
+    <section class="mv"><p>A cherished grievance does not stay private for long. Korah gathered Dathan and Abiram, then 250 respected leaders, until <span class="scrip">“Korah had stirred up the entire community against Moses and Aaron.”</span> <span class="ref">Numbers 16:19 (NLT)</span> In harmony with the biblical account, Ellen White traces the path from whispered discontent to organised resistance: </p><blockquote class="egw-block"><span class="egw">“Professing great interest in the prosperity of the people, they first whispered their discontent to one another and then to leading men of Israel. Their insinuations were so readily received that they ventured still further, and at last they really believed themselves to be actuated by zeal for God”</span>.  <span class="egw-ref">Patriarchs and Prophets, p. 396 · PP 396.4</span></blockquote><p>They deceived themselves until resentment felt like righteousness. Grievance also rewrote their memory: Dathan and Abiram refused to come to Moses and called Egypt—the land of their slavery—<span class="scrip">“a land flowing with milk and honey,”</span> <span class="ref">Numbers 16:13 (NLT)</span> accusing Moses of bringing them out to die. When resentment becomes our interpreter, even deliverance can begin to look like oppression. A crowd can be sincere, influential, and still be wrong. </p><p class="thesis"><strong>A grievance does not remain private once we begin recruiting others to carry it with us.</strong></p></section>
 
-    <p>Moses answered the crowd by going down, not up. <span class="scrip">“When Moses heard what they were saying, he fell face down on the ground.”</span> <span class="ref">Numbers 16:4 (NLT)</span> He referred the matter to God—<span class="scrip">“Tomorrow morning the Lord will show us who belongs to him and who is holy”</span> <span class="ref">Numbers 16:5 (NLT)</span>—and when the Lord threatened the whole community, Moses and Aaron fell on their faces again and pleaded for the people (Numbers 16:22). Korah gathered a crowd; Moses fell before God. Then God answered. The ground opened beneath Dathan and Abiram and their households, fire consumed the 250 who were offering incense, and Korah perished in that judgment (Numbers 16:31–35; 26:10). Scripture does not dwell on the horror; the point is that rebellion is not spiritually harmless. Yet the most sobering verse comes the next day: <span class="scrip">“But the very next morning the whole community of Israel began muttering again against Moses and Aaron, saying, ‘You have killed the Lord’s people!’”</span> <span class="ref">Numbers 16:41 (NLT)</span> They had seen the earth open, and the heart that produced the murmuring was unchanged. Ellen White names the condition: <span class="egw">“while they fled from the judgments, through fear of destruction, their rebellion was not cured. They returned to their tents that night terrified, but not repentant”</span> <span class="egw-ref">Patriarchs and Prophets, p. 401 · PP 401.3</span>. A plague began, and Aaron ran with the censer and <span class="scrip">“stood between the dead and the living, and the plague stopped.”</span> <span class="ref">Numbers 16:48 (NLT)</span> Even in a chapter of rebellion and judgment, mercy was still moving toward sinners. <strong>Evidence can settle a controversy without surrendering the heart.</strong></p>
+    <section class="mv"><p>Moses answered the crowd by going down, not up. <span class="scrip">“When Moses heard what they were saying, he fell face down on the ground.”</span> <span class="ref">Numbers 16:4 (NLT)</span> He referred the matter to God—<span class="scrip">“Tomorrow morning the Lord will show us who belongs to him and who is holy”</span> <span class="ref">Numbers 16:5 (NLT)</span>—and when the Lord threatened the whole community, Moses and Aaron fell on their faces again and pleaded for the people (Numbers 16:22). Korah gathered a crowd; Moses fell before God. Then God answered. The ground opened beneath Dathan and Abiram and their households, fire consumed the 250 who were offering incense, and Korah perished in that judgment (Numbers 16:31–35; 26:10). </p><p>Scripture does not dwell on the horror; the point is that rebellion is not spiritually harmless. Yet the most sobering verse comes the next day: <span class="scrip">“But the very next morning the whole community of Israel began muttering again against Moses and Aaron, saying, ‘You have killed the Lord’s people!’”</span> <span class="ref">Numbers 16:41 (NLT)</span> They had seen the earth open, and the heart that produced the murmuring was unchanged. Ellen White names the condition: <span class="egw">“while they fled from the judgments, through fear of destruction, their rebellion was not cured. They returned to their tents that night terrified, but not repentant”</span> <span class="egw-ref">Patriarchs and Prophets, p. 401 · PP 401.3</span>. </p><p>A plague began, and Aaron ran with the censer and <span class="scrip">“stood between the dead and the living, and the plague stopped.”</span> <span class="ref">Numbers 16:48 (NLT)</span> Even in a chapter of rebellion and judgment, mercy was still moving toward sinners. </p><p class="thesis"><strong>Evidence can settle a controversy without surrendering the heart.</strong></p></section>
 
-    <p>Then God gave a quieter sign. Twelve staffs were laid before the Ark, and the next morning Aaron’s staff <span class="scrip">“had sprouted, budded, blossomed, and produced ripe almonds!”</span> <span class="ref">Numbers 17:8 (NLT)</span> God’s stated purpose was peace: <span class="scrip">“Then I will finally put an end to the people’s murmuring and complaining against you.”</span> <span class="ref">Numbers 17:5 (NLT)</span> After the noise of rebellion, God answered with a rod that quietly came to life. What does this ask of us? Not that every question or disagreement is rebellion. Numbers 16 describes jealousy, ambition, misrepresentation, refusal to listen and the recruitment of others, all joined together. Respectful questions, reporting wrongdoing and seeking accountability are not Korah’s sin; leaders stand under God’s authority as much as members, and Moses himself referred the dispute to God rather than to his own office. The warning is about disappointment that is fed instead of surrendered. So the first prayer is “Lord, search me,” never “Lord, show me who the rebels are.” Korah grasped for a position God had not given him; Jesus <span class="scrip">“did not think of equality with God as something to cling to. Instead, he gave up his divine privileges.”</span> <span class="ref">Philippians 2:6–7 (NLT)</span> Korah’s story shows where self-exaltation leads; Jesus shows us another way—humility, surrender, service and obedience to the Father. Is there any disappointment, jealousy, resentment or wounded ambition in my heart that I have begun to justify instead of surrendering to God? Am I seeking wise counsel, or quietly gathering people around my grievance? <strong>Only Christ can change the heart that evidence alone cannot soften.</strong></p>
+    <section class="mv"><p>Then God gave a quieter sign. Twelve staffs were laid before the Ark, and the next morning Aaron’s staff <span class="scrip">“had sprouted, budded, blossomed, and produced ripe almonds!”</span> <span class="ref">Numbers 17:8 (NLT)</span> God’s stated purpose was peace: <span class="scrip">“Then I will finally put an end to the people’s murmuring and complaining against you.”</span> <span class="ref">Numbers 17:5 (NLT)</span> After the noise of rebellion, God answered with a rod that quietly came to life. What does this ask of us? Not that every question or disagreement is rebellion. Numbers 16 describes jealousy, ambition, misrepresentation, refusal to listen and the recruitment of others, all joined together. </p><p>Respectful questions, reporting wrongdoing and seeking accountability are not Korah’s sin; leaders stand under God’s authority as much as members, and Moses himself referred the dispute to God rather than to his own office. The warning is about disappointment that is fed instead of surrendered. So the first prayer is “Lord, search me,” never “Lord, show me who the rebels are.” Korah grasped for a position God had not given him; Jesus <span class="scrip">“did not think of equality with God as something to cling to. Instead, he gave up his divine privileges.”</span> <span class="ref">Philippians 2:6–7 (NLT)</span></p><p> Korah’s story shows where self-exaltation leads; Jesus shows us another way—humility, surrender, service and obedience to the Father. Is there any disappointment, jealousy, resentment or wounded ambition in my heart that I have begun to justify instead of surrendering to God? Am I seeking wise counsel, or quietly gathering people around my grievance? </p><p class="thesis"><strong>Only Christ can change the heart that evidence alone cannot soften.</strong></p></section>
   </div>
 
   <div class="divider" aria-hidden="true">
     <span class="line"></span>
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <svg width="26" height="26" viewbox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"></path></svg>
     <span class="line right"></span>
   </div>
 
@@ -311,9 +430,34 @@
   <p class="sources"><span class="label">Sources and Further Reading</span>Scripture: Numbers 16:1–50; 17:1–13 (context Numbers 13–15; 26:9–11); Psalm 106:16–18; Philippians 2:3–8 (NLT). Ellen G. White: <em>Patriarchs and Prophets</em>, chapter 35, “The Rebellion of Korah,” pp. 395–405 (PP 395.2, 396.4, 401.3); the same history with church application appears in <em>Testimonies for the Church</em>, vol. 3, “The Great Rebellion,” pp. 343–354.</p>
 
   
-  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/33R2In5LgbM" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">&#9654;</span>Watch the Short</a><p class="note">On YouTube as &ldquo;Chosen, Yet Yearning for More&rdquo; &mdash; from the channel <em>I Can Still Believe</em>.</p></div>
+  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/33R2In5LgbM" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">▶</span>Watch the Short</a><p class="note">On YouTube as “Chosen, Yet Yearning for More” — from the channel <em>I Can Still Believe</em>.</p></div>
 
   <div class="sdg">Soli Deo Gloria</div>
 </article>
+<nav class="footnav"><a href="./">&#8592;&nbsp;All devotions</a><a href="#top">Back to top&nbsp;&#8593;</a></nav>
+<button class="lamp" id="lamp" type="button" aria-label="Night reading">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path class="moon" d="M20 13.4A8.2 8.2 0 1 1 10.6 4a6.4 6.4 0 0 0 9.4 9.4Z"/>
+  </svg>
+</button>
+<script>
+(function(){
+  var root=document.documentElement, lamp=document.getElementById('lamp');
+  try{ if(localStorage.getItem('devo-theme')==='night') root.setAttribute('data-theme','night'); }catch(e){}
+  if(lamp){ lamp.addEventListener('click',function(){
+    var on = root.getAttribute('data-theme')==='night';
+    if(on){ root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme','night'); }
+    try{ localStorage.setItem('devo-theme', on?'day':'night'); }catch(e){}
+  }); }
+  var bar=document.getElementById('prog');
+  function tick(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.width=(h>0?Math.min(100,(window.scrollY/h)*100):0)+'%';
+  }
+  if(bar){ window.addEventListener('scroll',tick,{passive:true});
+           window.addEventListener('resize',tick); tick(); }
+})();
+</script>
 </body>
 </html>

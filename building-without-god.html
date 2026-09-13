@@ -9,137 +9,230 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
 <style>
   :root{
-    --parchment:#f3ead4;
-    --parchment-deep:#eadfc2;
-    --ink:#3b2d18;
-    --ink-soft:#5a4629;
-    --gold:#a67c1e;
-    --gold-bright:#c9a227;
-    --gold-pale:#e3cf95;
-    --wine:#7a3b2e;
+    --bg1:#f8f2e1; --bg2:#f3ead4; --bg3:#e8dcbd;
+    --page-bg:rgba(255,252,241,.62);
+    --page-border:#a67c1e; --page-outline:#e3cf95;
+    --ink:#33281a; --ink-soft:#5a4629;
+    --gold:#a67c1e; --gold-bright:#c9a227; --gold-pale:#e3cf95;
+    --wine:#7a3b2e; --wine-solid:#7a3b2e; --wine-edge:#5d2b20;
+    --card1:rgba(255,250,232,.92); --card2:rgba(247,238,213,.92);
+    --emph:#7c5a12;
+    --num1:#f5e7bd; --num2:#e3cf95; --numfg:#7c5a12;
+    --shadow:rgba(90,70,30,.16);
+    --grain:.30;
+    --rule:rgba(166,124,30,.28);
+  }
+  :root[data-theme="night"]{
+    --bg1:#1a160f; --bg2:#15120c; --bg3:#100e09;
+    --page-bg:rgba(44,37,26,.42);
+    --page-border:#7d6524; --page-outline:#463a19;
+    --ink:#e9dfc8; --ink-soft:#c4b491;
+    --gold:#c2a03a; --gold-bright:#e0bf58; --gold-pale:#6a5828;
+    --wine:#e2a891; --wine-solid:#8a4537; --wine-edge:#6b3428;
+    --card1:rgba(56,47,32,.6); --card2:rgba(46,39,27,.6);
+    --emph:#e2c775;
+    --num1:#4c4024; --num2:#3a311b; --numfg:#e8ce7f;
+    --shadow:rgba(0,0,0,.55);
+    --grain:.16;
+    --rule:rgba(194,160,58,.26);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{
-    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    background:radial-gradient(ellipse at 50% 0%, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%);
+    background-attachment:fixed;
     color:var(--ink);
     font-family:'Lora',serif;
-    line-height:1.85;
-    padding:34px 14px 60px;
+    line-height:1.78;
+    padding:30px 14px 28px;
     position:relative;
+    -webkit-font-smoothing:antialiased;
+    transition:background-color .25s ease, color .25s ease;
   }
-  /* aged-paper grain */
+  /* aged-paper grain, lighter than before */
   body::before{
     content:"";
     position:fixed;inset:0;
     pointer-events:none;
-    opacity:.5;
+    opacity:var(--grain);
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
     z-index:2;
   }
-  .page{
-    max-width:760px;
-    margin:0 auto;
-    background:rgba(255,252,240,.55);
-    border:1.5px solid var(--gold);
-    outline:1px solid var(--gold-pale);
-    outline-offset:6px;
-    padding:64px 52px 56px;
-    position:relative;
-    box-shadow:0 18px 50px rgba(90,70,30,.18);
+
+  /* reading progress */
+  .progress{
+    position:fixed;top:0;left:0;height:3px;width:0;
+    background:linear-gradient(90deg,var(--gold-pale),var(--gold-bright));
+    z-index:12;transition:width .08s linear;
   }
-  @media(max-width:620px){.page{padding:52px 24px 44px;}}
-  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
-  .corner.tl{top:10px;left:10px;}
-  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
-  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
-  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+
+  .page{
+    max-width:720px;
+    margin:0 auto;
+    background:var(--page-bg);
+    border:1.5px solid var(--page-border);
+    outline:1px solid var(--page-outline);
+    outline-offset:6px;
+    padding:62px 56px 54px;
+    position:relative;
+    box-shadow:0 18px 50px var(--shadow);
+  }
+  @media(max-width:620px){.page{padding:48px 22px 40px;} body{padding:22px 11px 24px;}}
+
+  /* corners, quieter: smaller and lighter than before */
+  .corner{position:absolute;width:44px;height:44px;color:var(--gold);opacity:.55;}
+  .corner.tl{top:9px;left:9px;}
+  .corner.tr{top:9px;right:9px;transform:scaleX(-1);}
+  .corner.bl{bottom:9px;left:9px;transform:scaleY(-1);}
+  .corner.br{bottom:9px;right:9px;transform:scale(-1,-1);}
+
   .eyebrow{
     font-family:'Cinzel',serif;
-    font-size:.82rem;
-    letter-spacing:.42em;
+    font-size:.74rem;
+    letter-spacing:.34em;
     text-transform:uppercase;
     color:var(--gold);
     text-align:center;
-    margin-bottom:18px;
+    margin-bottom:16px;
   }
   h1{
     font-family:'Playfair Display',serif;
     font-weight:700;
-    font-size:clamp(2.1rem,5.4vw,3rem);
+    font-size:clamp(2rem,5vw,2.8rem);
+    line-height:1.18;
     text-align:center;
     color:var(--ink);
-    letter-spacing:.01em;
-    margin-bottom:26px;
+    letter-spacing:.005em;
+    margin-bottom:14px;
   }
+  .meta{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.16em;
+    font-size:.78rem;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:28px;
+  }
+  .meta span{opacity:.55;margin:0 7px;}
+
   /* Ellen G. White — companion ink */
   .egw{color:var(--wine);}
   .egw-ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.08em;
-    font-size:.88em;
+    letter-spacing:.07em;
+    font-size:.85em;
     color:var(--wine);
   }
-  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .egw-ref::before{content:"\2712";margin-right:.3em;font-size:.9em;}
+  /* long quotations stand as blocks */
+  blockquote.egw-block{
+    margin:26px 0 28px;
+    padding:2px 0 2px 22px;
+    border-left:2px solid var(--wine);
+    color:var(--wine);
+    font-size:1.01rem;
+    line-height:1.72;
+  }
+  blockquote.egw-block .egw-ref{
+    display:block;margin-top:9px;font-size:.78rem;
+    letter-spacing:.04em;line-height:1.55;opacity:.92;
+    text-wrap:pretty;          /* keeps a lone word off the last line */
+  }
+  @media(max-width:620px){blockquote.egw-block{padding-left:16px;}}
+
   .divider{
     display:flex;align-items:center;justify-content:center;
-    gap:14px;margin:30px 0;color:var(--gold);
+    gap:14px;margin:28px 0;color:var(--gold);
   }
   .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
   .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
   .divider svg{flex-shrink:0;}
+
   .verse-card{
     border:1px solid var(--gold-pale);
-    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
-    padding:30px 34px 26px;
+    background:linear-gradient(180deg,var(--card1),var(--card2));
+    padding:28px 32px 24px;
     text-align:center;
     margin:0 auto 8px;
     position:relative;
   }
   .verse-card .label{
     font-family:'Cinzel',serif;
-    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
-    color:var(--gold);margin-bottom:14px;
+    font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:13px;
   }
   .verse-card .scripture{
     font-family:'Cormorant Garamond',serif;
     font-style:italic;
-    font-size:1.42rem;
-    line-height:1.65;
+    font-size:1.38rem;
+    line-height:1.62;
     color:var(--ink-soft);
   }
   .verse-card .ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.14em;
-    font-size:.95rem;
+    letter-spacing:.13em;
+    font-size:.92rem;
     color:var(--gold);
-    margin-top:14px;
+    margin-top:13px;
   }
-  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
-  .body-text p:first-of-type::first-letter{
+
+  /* body — ragged right, book measure */
+  .body-text{margin-top:4px;}
+  .body-text p{
+    margin-bottom:1.15em;
+    font-size:1.075rem;
+    text-align:left;
+    hyphens:none;
+  }
+  .body-text .mv{margin-bottom:6px;}
+  .body-text > .mv:first-child > p:first-child::first-letter{
     font-family:'Playfair Display',serif;
-    font-size:3.9em;
+    font-size:3.7em;
     float:left;
     line-height:.82;
-    padding:6px 12px 0 0;
+    padding:5px 11px 0 0;
     color:var(--gold);
   }
-  .body-text strong{color:#7c5a12;font-weight:600;}
+  .body-text strong{color:var(--emph);font-weight:600;}
   .scrip{font-style:italic;color:var(--ink-soft);}
   .ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.1em;
-    font-size:.92em;
+    letter-spacing:.09em;
+    font-size:.9em;
     color:var(--gold);
     white-space:nowrap;
   }
+
+  /* the closing sentence of each movement, promoted */
+  .body-text p.thesis{
+    text-align:center;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.32rem;
+    line-height:1.55;
+    color:var(--ink);
+    margin:26px auto 34px;
+    max-width:34em;
+    padding-top:22px;
+    position:relative;
+  }
+  .body-text p.thesis::before{
+    content:"";
+    position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:58px;height:1px;background:var(--gold);opacity:.8;
+  }
+  .body-text p.thesis strong{font-weight:inherit;color:inherit;}
+  @media(max-width:620px){.body-text p.thesis{font-size:1.2rem;}}
+
   h2.takeaways{
     font-family:'Cinzel',serif;
     font-weight:600;
-    font-size:1.35rem;
-    letter-spacing:.18em;
+    font-size:1.22rem;
+    letter-spacing:.16em;
     text-transform:uppercase;
     text-align:center;
     color:var(--ink);
@@ -149,42 +242,45 @@
   ol.takeaway-list li{
     counter-increment:tk;
     position:relative;
-    padding-left:62px;
+    padding-left:54px;
     margin-bottom:20px;
-    font-size:1.03rem;
+    font-size:1.02rem;
   }
   ol.takeaway-list li::before{
     content:counter(tk);
-    position:absolute;left:0;top:2px;
-    width:42px;height:42px;
+    position:absolute;left:0;top:3px;
+    width:36px;height:36px;
     border-radius:50%;
     border:1.5px solid var(--gold);
-    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
-    color:#7c5a12;
+    background:radial-gradient(circle at 35% 30%,var(--num1),var(--num2));
+    color:var(--numfg);
     font-family:'Cinzel',serif;
     font-weight:600;
-    font-size:1.05rem;
+    font-size:.98rem;
     display:flex;align-items:center;justify-content:center;
-    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+    box-shadow:0 2px 6px var(--shadow), inset 0 1px 2px rgba(255,255,255,.35);
   }
-  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  ol.takeaway-list li strong{color:var(--emph);font-weight:600;}
+
   .sources{
     margin-top:34px;
-    font-size:.9rem;
+    font-size:.88rem;
     line-height:1.7;
     color:var(--ink-soft);
     text-align:center;
   }
   .sources .label{
     font-family:'Cinzel',serif;
-    font-size:.68rem;letter-spacing:.36em;text-transform:uppercase;
+    font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;
     color:var(--gold);display:block;margin-bottom:4px;
   }
+
+  /* Watch It — unchanged treatment, tokenised for night reading */
   .watch{
     margin-top:38px;
     text-align:center;
     border:1px solid var(--gold);
-    background:linear-gradient(180deg,rgba(255,250,232,.75),rgba(247,238,213,.75));
+    background:linear-gradient(180deg,var(--card1),var(--card2));
     padding:26px 22px 22px;
   }
   .watch .label{
@@ -199,8 +295,8 @@
     letter-spacing:.08em;
     font-size:1.02rem;
     color:#fdf6e6;
-    background:var(--wine);
-    border:1px solid #5d2b20;
+    background:var(--wine-solid);
+    border:1px solid var(--wine-edge);
     text-decoration:none;
     padding:14px 26px;
     margin:6px 7px;
@@ -222,25 +318,46 @@
     .watch a{display:block;margin:9px 0;padding:15px 18px;}
     .watch{padding:22px 16px 18px;}
   }
+
   .sdg{
     font-family:'Pinyon Script',cursive;
-    font-size:2.5rem;
+    font-size:2.4rem;
     color:var(--gold);
     text-align:center;
     margin-top:40px;
   }
+
+  /* navigation */
+  .allnav,.footnav{max-width:720px;margin:0 auto 16px;text-align:center;}
+  .footnav{margin:26px auto 8px;display:flex;justify-content:center;gap:26px;}
+  .allnav a,.footnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.16em;
+    font-size:.8rem;color:var(--gold);text-decoration:none;
+    border-bottom:1px solid var(--rule);padding-bottom:2px;
+  }
+  .allnav a:hover,.footnav a:hover{border-bottom-color:var(--gold);}
+
+  /* night-reading toggle */
+  .lamp{
+    position:fixed;right:16px;bottom:16px;z-index:11;
+    width:44px;height:44px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--card1);
+    border:1px solid var(--gold);
+    color:var(--gold);
+    cursor:pointer;
+    box-shadow:0 4px 14px var(--shadow);
+    opacity:.72;
+    transition:opacity .18s ease, transform .18s ease;
+  }
+  .lamp:hover,.lamp:focus-visible{opacity:1;transform:translateY(-2px);outline:none;}
+  .lamp svg{width:20px;height:20px;}
+  @media print{.lamp,.progress,.allnav,.footnav{display:none;}}
 </style>
 </head>
 <body>
-<style>
-  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
-  .allnav a{
-    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
-    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
-    padding-bottom:2px;
-  }
-  .allnav a:hover{border-bottom-color:#a67c1e;}
-</style>
+<div class="progress" id="prog"></div>
+<a id="top"></a>
 <nav class="allnav"><a href="./">← All devotions</a></nav>
 
 <article class="page">
@@ -272,6 +389,8 @@
   <div class="eyebrow">Today's Devotion</div>
   <h1>Building Without God</h1>
 
+  <div class="meta">Genesis 11 <span>·</span> 6 min read</div>
+
   <section class="verse-card">
     <div class="label">Key Verse</div>
     <div class="scripture">“Come, let’s build a great city for ourselves with a tower that reaches into the sky.”</div>
@@ -285,19 +404,19 @@
   </div>
 
   <div class="body-text">
-    <p>The story does not begin with a crime. It begins with a building site. <span class="scrip">“At one time all the people of the world spoke the same language and used the same words”</span> <span class="ref">Genesis 11:1 (NLT)</span>. They travelled east and found flat, open country: <span class="scrip">“As the people migrated to the east, they found a plain in the land of Babylonia and settled there”</span> <span class="ref">Genesis 11:2 (NLT)</span>. Then they got organised: <span class="scrip">“They began saying to each other, ’Let’s make bricks and harden them with fire’”</span> <span class="ref">Genesis 11:3 (NLT)</span>. Notice the small detail the Bible slips in. There was no good stone on that plain. So they made their own. Brick instead of rock. Tar instead of mortar. Every single thing in that project was manufactured. Nothing in it was received. Hold on to that, because the whole story is hiding in it.</p>
+    <section class="mv"><p>The story does not begin with a crime. It begins with a building site. <span class="scrip">“At one time all the people of the world spoke the same language and used the same words”</span> <span class="ref">Genesis 11:1 (NLT)</span>. They travelled east and found flat, open country: <span class="scrip">“As the people migrated to the east, they found a plain in the land of Babylonia and settled there”</span> <span class="ref">Genesis 11:2 (NLT)</span>. Then they got organised: <span class="scrip">“They began saying to each other, ’Let’s make bricks and harden them with fire’”</span> <span class="ref">Genesis 11:3 (NLT)</span>. </p><p>Notice the small detail the Bible slips in. There was no good stone on that plain. So they made their own. Brick instead of rock. Tar instead of mortar. Every single thing in that project was manufactured. Nothing in it was received. Hold on to that, because the whole story is hiding in it.</p></section>
 
-    <p>Then came the plan: <span class="scrip">“Come, let’s build a great city for ourselves with a tower that reaches into the sky. This will make us famous and keep us from being scattered all over the world”</span> <span class="ref">Genesis 11:4 (NLT)</span>. Read that again, slowly. Two small words decide everything: <strong>for ourselves</strong>. This was not a bad building. Building is not a sin. God gave people the ability to make things, and He is pleased when we use it well. The problem was never the bricks. The problem was the address. And look at the two things they wanted out of it. First, a name — <em>this will make us famous</em>. Second, safety — <em>keep us from being scattered</em>. Fame and security. Four thousand years later, that is still the whole list.</p>
+    <section class="mv"><p>Then came the plan: <span class="scrip">“Come, let’s build a great city for ourselves with a tower that reaches into the sky. This will make us famous and keep us from being scattered all over the world”</span> <span class="ref">Genesis 11:4 (NLT)</span>. Read that again, slowly. Two small words decide everything: <strong>for ourselves</strong>. This was not a bad building. Building is not a sin. God gave people the ability to make things, and He is pleased when we use it well. The problem was never the bricks. </p><p>The problem was the address. And look at the two things they wanted out of it. First, a name — <em>this will make us famous</em>. Second, safety — <em>keep us from being scattered</em>. Fame and security. Four thousand years later, that is still the whole list.</p></section>
 
-    <p>There may have been something sadder underneath it. After the flood, God had promised that He would never destroy the earth that way again. But these builders did not believe Him. Ellen White writes that <span class="egw">“the dwellers on the plain of Shinar disbelieved God’s covenant that He would not again bring a flood upon the earth.”</span> By raising the tower higher than the flood waters had reached, <span class="egw">“they thought to place themselves beyond all possibility of danger.”</span> <span class="egw-ref">Patriarchs and Prophets, p. 119 &middot; PP 119.1</span>. Sit with what that means. The tower was not only a monument. It was an insurance policy against God’s own word. They were building a place to be safe <em>from</em> the One who had already promised to keep them safe. That is what unbelief does to us. It makes us work very hard to provide for ourselves the very thing God has already promised to give.</p>
+    <section class="mv"><p>There may have been something sadder underneath it. After the flood, God had promised that He would never destroy the earth that way again. But these builders did not believe Him. Ellen White writes that <span class="egw">“the dwellers on the plain of Shinar disbelieved God’s covenant that He would not again bring a flood upon the earth.”</span> By raising the tower higher than the flood waters had reached, <span class="egw">“they thought to place themselves beyond all possibility of danger.”</span> <span class="egw-ref">Patriarchs and Prophets, p. 119 · PP 119.1</span>. </p><p>Sit with what that means. The tower was not only a monument. It was an insurance policy against God’s own word. They were building a place to be safe <em>from</em> the One who had already promised to keep them safe. That is what unbelief does to us. It makes us work very hard to provide for ourselves the very thing God has already promised to give.</p></section>
 
-    <p>Then comes one of the quietest, most humbling lines in the whole Bible: <span class="scrip">“But the Lord came down to look at the city and the tower the people were building”</span> <span class="ref">Genesis 11:5 (NLT)</span>. He came <em>down</em>. They had built the tallest thing on earth. It was designed to reach the sky. And God still had to stoop to see it. There is no anger in that sentence. There is no mockery in it either. But there is perspective, and it is humbling. Everything they were proudest of was, from where He sits, very small. Yet notice the kindness hiding in it. He came down. He did not stay far away and let them finish.</p>
+    <section class="mv"><p>Then comes one of the quietest, most humbling lines in the whole Bible: <span class="scrip">“But the Lord came down to look at the city and the tower the people were building”</span> <span class="ref">Genesis 11:5 (NLT)</span>. He came <em>down</em>. They had built the tallest thing on earth. It was designed to reach the sky. And God still had to stoop to see it. There is no anger in that sentence. There is no mockery in it either. But there is perspective, and it is humbling. Everything they were proudest of was, from where He sits, very small. </p><p>Yet notice the kindness hiding in it. He came down. He did not stay far away and let them finish.</p></section>
 
-    <p><span class="scrip">“The people are united, and they all speak the same language. After this, nothing they set out to do will be impossible for them!”</span> <span class="ref">Genesis 11:6 (NLT)</span>. God was not frightened of them. He was describing a danger. Human power joined together with no reference to God does not become safe. It becomes unstoppable. History has shown us that again and again since. Ellen White names their real project plainly: it was <span class="egw">“a kingdom established for self-exaltation, but in which God was to have no rule or honor.”</span> <span class="egw-ref">Patriarchs and Prophets, p. 123 &middot; PP 123.1</span>. So God acted: <span class="scrip">“Come, let’s go down and confuse the people with different languages. Then they won’t be able to understand each other”</span> <span class="ref">Genesis 11:7 (NLT)</span>. It reads like judgment, and it was. But it was mercy too. Sometimes the kindest thing God can do for a person is to stop a project that would have destroyed them.</p>
+    <section class="mv"><p><span class="scrip">“The people are united, and they all speak the same language. After this, nothing they set out to do will be impossible for them!”</span> <span class="ref">Genesis 11:6 (NLT)</span>. God was not frightened of them. He was describing a danger. Human power joined together with no reference to God does not become safe. It becomes unstoppable. History has shown us that again and again since. Ellen White names their real project plainly: it was <span class="egw">“a kingdom established for self-exaltation, but in which God was to have no rule or honor.”</span> <span class="egw-ref">Patriarchs and Prophets, p. 123 · PP 123.1</span>. </p><p>So God acted: <span class="scrip">“Come, let’s go down and confuse the people with different languages. Then they won’t be able to understand each other”</span> <span class="ref">Genesis 11:7 (NLT)</span>. It reads like judgment, and it was. But it was mercy too. Sometimes the kindest thing God can do for a person is to stop a project that would have destroyed them.</p></section>
 
-    <p><span class="scrip">“In that way, the Lord scattered them all over the world, and they stopped building the city”</span> <span class="ref">Genesis 11:8 (NLT)</span>. Now look at what they lost. They wanted a name. The name they got was <strong>Babel</strong> — a word that sounds like the Hebrew for <em>confusion</em>. They wanted to stay together. They were scattered, which is the one thing the tower was built to prevent. Both goals collapsed. Ellen White says it in a single line: <span class="egw">“The monument to their pride became the memorial of their folly.”</span> <span class="egw-ref">Patriarchs and Prophets, p. 123 &middot; PP 123.3</span>. But do not miss the mercy waiting in the very next chapter. One page later, God speaks to one ordinary man called Abram, and says: <span class="scrip">“I will bless you and make you famous, and you will be a blessing to others”</span> <span class="ref">Genesis 12:2 (NLT)</span>. Do you see it? The exact thing they tried to seize by force, God simply gives away — to a man who was not building a tower.</p>
+    <section class="mv"><p><span class="scrip">“In that way, the Lord scattered them all over the world, and they stopped building the city”</span> <span class="ref">Genesis 11:8 (NLT)</span>. Now look at what they lost. They wanted a name. The name they got was <strong>Babel</strong> — a word that sounds like the Hebrew for <em>confusion</em>. They wanted to stay together. They were scattered, which is the one thing the tower was built to prevent. Both goals collapsed. Ellen White says it in a single line: <span class="egw">“The monument to their pride became the memorial of their folly.”</span> <span class="egw-ref">Patriarchs and Prophets, p. 123 · PP 123.3</span>. </p><p>But do not miss the mercy waiting in the very next chapter. One page later, God speaks to one ordinary man called Abram, and says: <span class="scrip">“I will bless you and make you famous, and you will be a blessing to others”</span> <span class="ref">Genesis 12:2 (NLT)</span>. Do you see it? The exact thing they tried to seize by force, God simply gives away — to a man who was not building a tower.</p></section>
 
-    <p>So the question today is not whether you are building. You are. We all are — a career, a home, some savings, a reputation, a ministry, a future for the children. God is not against any of that. Please hear that clearly. This is not a story about ambition being sinful, and it does not say that making plans is faithless. Hard work and good building can be worship. The question is only this: <strong>who is it for, and who is in it?</strong> <span class="scrip">“Unless the Lord builds a house, the work of the builders is wasted”</span> <span class="ref">Psalm 127:1 (NLT)</span>. James says the same thing about our plans, and he is not scolding us: <span class="scrip">“What you ought to say is, ’If the Lord wants us to, we will live and do this or that’”</span> <span class="ref">James 4:15 (NLT)</span>. So take one honest look at what you are building this week. Ask where God is in it — not as a decoration on the top, but down in the foundation. And then remember how the story finally ends. At Babel, God confused the languages and scattered the people. At Pentecost, He filled a room with His Spirit, and <span class="scrip">“they were bewildered to hear their own languages being spoken”</span> <span class="ref">Acts 2:6 (NLT)</span>. What pride broke, grace gathered back together. So build. Just build with Him.</p>
+    <section class="mv"><p>So the question today is not whether you are building. You are. We all are — a career, a home, some savings, a reputation, a ministry, a future for the children. God is not against any of that. Please hear that clearly. This is not a story about ambition being sinful, and it does not say that making plans is faithless. Hard work and good building can be worship. The question is only this: <strong>who is it for, and who is in it?</strong> <span class="scrip">“Unless the Lord builds a house, the work of the builders is wasted”</span> <span class="ref">Psalm 127:1 (NLT)</span>. </p><p>James says the same thing about our plans, and he is not scolding us: <span class="scrip">“What you ought to say is, ’If the Lord wants us to, we will live and do this or that’”</span> <span class="ref">James 4:15 (NLT)</span>. So take one honest look at what you are building this week. Ask where God is in it — not as a decoration on the top, but down in the foundation. And then remember how the story finally ends. At Babel, God confused the languages and scattered the people. </p><p>At Pentecost, He filled a room with His Spirit, and <span class="scrip">“they were bewildered to hear their own languages being spoken”</span> <span class="ref">Acts 2:6 (NLT)</span>. What pride broke, grace gathered back together. So build. Just build with Him.</p></section>
   </div>
 
   <div class="divider" aria-hidden="true">
@@ -321,9 +440,34 @@
   <p class="sources"><span class="label">Sources and Further Reading</span>Scripture: Genesis 11:1–9; with Genesis 12:2; Psalm 127:1; James 4:15; Acts 2:6 (NLT). Ellen G. White: <em>Patriarchs and Prophets</em>, chapter 10, “The Tower of Babel,” pp. 119–123 (PP 119.1–123.3).</p>
 
   
-  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/nNTkAFPtTcQ" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">&#9654;</span>Watch the Short</a><p class="note">On YouTube as &ldquo;When The Lord Came Down&rdquo; &mdash; from the channel <em>I Can Still Believe</em>.</p></div>
+  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/nNTkAFPtTcQ" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">▶</span>Watch the Short</a><p class="note">On YouTube as “When The Lord Came Down” — from the channel <em>I Can Still Believe</em>.</p></div>
 
   <div class="sdg">Soli Deo Gloria</div>
 </article>
+<nav class="footnav"><a href="./">&#8592;&nbsp;All devotions</a><a href="#top">Back to top&nbsp;&#8593;</a></nav>
+<button class="lamp" id="lamp" type="button" aria-label="Night reading">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path class="moon" d="M20 13.4A8.2 8.2 0 1 1 10.6 4a6.4 6.4 0 0 0 9.4 9.4Z"/>
+  </svg>
+</button>
+<script>
+(function(){
+  var root=document.documentElement, lamp=document.getElementById('lamp');
+  try{ if(localStorage.getItem('devo-theme')==='night') root.setAttribute('data-theme','night'); }catch(e){}
+  if(lamp){ lamp.addEventListener('click',function(){
+    var on = root.getAttribute('data-theme')==='night';
+    if(on){ root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme','night'); }
+    try{ localStorage.setItem('devo-theme', on?'day':'night'); }catch(e){}
+  }); }
+  var bar=document.getElementById('prog');
+  function tick(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.width=(h>0?Math.min(100,(window.scrollY/h)*100):0)+'%';
+  }
+  if(bar){ window.addEventListener('scroll',tick,{passive:true});
+           window.addEventListener('resize',tick); tick(); }
+})();
+</script>
 </body>
 </html>

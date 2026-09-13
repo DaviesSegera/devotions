@@ -3,143 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daniel Prayed Anyway &mdash; Today's Devotion</title>
+<title>Daniel Prayed Anyway — Today's Devotion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
 <style>
   :root{
-    --parchment:#f3ead4;
-    --parchment-deep:#eadfc2;
-    --ink:#3b2d18;
-    --ink-soft:#5a4629;
-    --gold:#a67c1e;
-    --gold-bright:#c9a227;
-    --gold-pale:#e3cf95;
-    --wine:#7a3b2e;
+    --bg1:#f8f2e1; --bg2:#f3ead4; --bg3:#e8dcbd;
+    --page-bg:rgba(255,252,241,.62);
+    --page-border:#a67c1e; --page-outline:#e3cf95;
+    --ink:#33281a; --ink-soft:#5a4629;
+    --gold:#a67c1e; --gold-bright:#c9a227; --gold-pale:#e3cf95;
+    --wine:#7a3b2e; --wine-solid:#7a3b2e; --wine-edge:#5d2b20;
+    --card1:rgba(255,250,232,.92); --card2:rgba(247,238,213,.92);
+    --emph:#7c5a12;
+    --num1:#f5e7bd; --num2:#e3cf95; --numfg:#7c5a12;
+    --shadow:rgba(90,70,30,.16);
+    --grain:.30;
+    --rule:rgba(166,124,30,.28);
+  }
+  :root[data-theme="night"]{
+    --bg1:#1a160f; --bg2:#15120c; --bg3:#100e09;
+    --page-bg:rgba(44,37,26,.42);
+    --page-border:#7d6524; --page-outline:#463a19;
+    --ink:#e9dfc8; --ink-soft:#c4b491;
+    --gold:#c2a03a; --gold-bright:#e0bf58; --gold-pale:#6a5828;
+    --wine:#e2a891; --wine-solid:#8a4537; --wine-edge:#6b3428;
+    --card1:rgba(56,47,32,.6); --card2:rgba(46,39,27,.6);
+    --emph:#e2c775;
+    --num1:#4c4024; --num2:#3a311b; --numfg:#e8ce7f;
+    --shadow:rgba(0,0,0,.55);
+    --grain:.16;
+    --rule:rgba(194,160,58,.26);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{
-    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    background:radial-gradient(ellipse at 50% 0%, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%);
+    background-attachment:fixed;
     color:var(--ink);
     font-family:'Lora',serif;
-    line-height:1.85;
-    padding:34px 14px 60px;
+    line-height:1.78;
+    padding:30px 14px 28px;
     position:relative;
+    -webkit-font-smoothing:antialiased;
+    transition:background-color .25s ease, color .25s ease;
   }
-  /* aged-paper grain */
+  /* aged-paper grain, lighter than before */
   body::before{
     content:"";
     position:fixed;inset:0;
     pointer-events:none;
-    opacity:.5;
+    opacity:var(--grain);
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
     z-index:2;
   }
-  .page{
-    max-width:760px;
-    margin:0 auto;
-    background:rgba(255,252,240,.55);
-    border:1.5px solid var(--gold);
-    outline:1px solid var(--gold-pale);
-    outline-offset:6px;
-    padding:64px 52px 56px;
-    position:relative;
-    box-shadow:0 18px 50px rgba(90,70,30,.18);
+
+  /* reading progress */
+  .progress{
+    position:fixed;top:0;left:0;height:3px;width:0;
+    background:linear-gradient(90deg,var(--gold-pale),var(--gold-bright));
+    z-index:12;transition:width .08s linear;
   }
-  @media(max-width:620px){.page{padding:52px 24px 44px;}}
-  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
-  .corner.tl{top:10px;left:10px;}
-  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
-  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
-  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+
+  .page{
+    max-width:720px;
+    margin:0 auto;
+    background:var(--page-bg);
+    border:1.5px solid var(--page-border);
+    outline:1px solid var(--page-outline);
+    outline-offset:6px;
+    padding:62px 56px 54px;
+    position:relative;
+    box-shadow:0 18px 50px var(--shadow);
+  }
+  @media(max-width:620px){.page{padding:48px 22px 40px;} body{padding:22px 11px 24px;}}
+
+  /* corners, quieter: smaller and lighter than before */
+  .corner{position:absolute;width:44px;height:44px;color:var(--gold);opacity:.55;}
+  .corner.tl{top:9px;left:9px;}
+  .corner.tr{top:9px;right:9px;transform:scaleX(-1);}
+  .corner.bl{bottom:9px;left:9px;transform:scaleY(-1);}
+  .corner.br{bottom:9px;right:9px;transform:scale(-1,-1);}
+
   .eyebrow{
     font-family:'Cinzel',serif;
-    font-size:.82rem;
-    letter-spacing:.42em;
+    font-size:.74rem;
+    letter-spacing:.34em;
     text-transform:uppercase;
     color:var(--gold);
     text-align:center;
-    margin-bottom:18px;
+    margin-bottom:16px;
   }
   h1{
     font-family:'Playfair Display',serif;
     font-weight:700;
-    font-size:clamp(2.1rem,5.4vw,3rem);
+    font-size:clamp(2rem,5vw,2.8rem);
+    line-height:1.18;
     text-align:center;
     color:var(--ink);
-    letter-spacing:.01em;
-    margin-bottom:26px;
+    letter-spacing:.005em;
+    margin-bottom:14px;
   }
+  .meta{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.16em;
+    font-size:.78rem;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:28px;
+  }
+  .meta span{opacity:.55;margin:0 7px;}
+
   /* Ellen G. White — companion ink */
   .egw{color:var(--wine);}
   .egw-ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.08em;
-    font-size:.88em;
+    letter-spacing:.07em;
+    font-size:.85em;
     color:var(--wine);
   }
-  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .egw-ref::before{content:"\2712";margin-right:.3em;font-size:.9em;}
+  /* long quotations stand as blocks */
+  blockquote.egw-block{
+    margin:26px 0 28px;
+    padding:2px 0 2px 22px;
+    border-left:2px solid var(--wine);
+    color:var(--wine);
+    font-size:1.01rem;
+    line-height:1.72;
+  }
+  blockquote.egw-block .egw-ref{
+    display:block;margin-top:9px;font-size:.78rem;
+    letter-spacing:.04em;line-height:1.55;opacity:.92;
+    text-wrap:pretty;          /* keeps a lone word off the last line */
+  }
+  @media(max-width:620px){blockquote.egw-block{padding-left:16px;}}
+
   .divider{
     display:flex;align-items:center;justify-content:center;
-    gap:14px;margin:30px 0;color:var(--gold);
+    gap:14px;margin:28px 0;color:var(--gold);
   }
   .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
   .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
   .divider svg{flex-shrink:0;}
+
   .verse-card{
     border:1px solid var(--gold-pale);
-    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
-    padding:30px 34px 26px;
+    background:linear-gradient(180deg,var(--card1),var(--card2));
+    padding:28px 32px 24px;
     text-align:center;
     margin:0 auto 8px;
     position:relative;
   }
   .verse-card .label{
     font-family:'Cinzel',serif;
-    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
-    color:var(--gold);margin-bottom:14px;
+    font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:13px;
   }
   .verse-card .scripture{
     font-family:'Cormorant Garamond',serif;
     font-style:italic;
-    font-size:1.42rem;
-    line-height:1.65;
+    font-size:1.38rem;
+    line-height:1.62;
     color:var(--ink-soft);
   }
   .verse-card .ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.14em;
-    font-size:.95rem;
+    letter-spacing:.13em;
+    font-size:.92rem;
     color:var(--gold);
-    margin-top:14px;
+    margin-top:13px;
   }
-  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
-  .body-text p:first-of-type::first-letter{
+
+  /* body — ragged right, book measure */
+  .body-text{margin-top:4px;}
+  .body-text p{
+    margin-bottom:1.15em;
+    font-size:1.075rem;
+    text-align:left;
+    hyphens:none;
+  }
+  .body-text .mv{margin-bottom:6px;}
+  .body-text > .mv:first-child > p:first-child::first-letter{
     font-family:'Playfair Display',serif;
-    font-size:3.9em;
+    font-size:3.7em;
     float:left;
     line-height:.82;
-    padding:6px 12px 0 0;
+    padding:5px 11px 0 0;
     color:var(--gold);
   }
-  .body-text strong{color:#7c5a12;font-weight:600;}
+  .body-text strong{color:var(--emph);font-weight:600;}
   .scrip{font-style:italic;color:var(--ink-soft);}
   .ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.1em;
-    font-size:.92em;
+    letter-spacing:.09em;
+    font-size:.9em;
     color:var(--gold);
     white-space:nowrap;
   }
+
+  /* the closing sentence of each movement, promoted */
+  .body-text p.thesis{
+    text-align:center;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.32rem;
+    line-height:1.55;
+    color:var(--ink);
+    margin:26px auto 34px;
+    max-width:34em;
+    padding-top:22px;
+    position:relative;
+  }
+  .body-text p.thesis::before{
+    content:"";
+    position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:58px;height:1px;background:var(--gold);opacity:.8;
+  }
+  .body-text p.thesis strong{font-weight:inherit;color:inherit;}
+  @media(max-width:620px){.body-text p.thesis{font-size:1.2rem;}}
+
   h2.takeaways{
     font-family:'Cinzel',serif;
     font-weight:600;
-    font-size:1.35rem;
-    letter-spacing:.18em;
+    font-size:1.22rem;
+    letter-spacing:.16em;
     text-transform:uppercase;
     text-align:center;
     color:var(--ink);
@@ -149,30 +242,45 @@
   ol.takeaway-list li{
     counter-increment:tk;
     position:relative;
-    padding-left:62px;
+    padding-left:54px;
     margin-bottom:20px;
-    font-size:1.03rem;
+    font-size:1.02rem;
   }
   ol.takeaway-list li::before{
     content:counter(tk);
-    position:absolute;left:0;top:2px;
-    width:42px;height:42px;
+    position:absolute;left:0;top:3px;
+    width:36px;height:36px;
     border-radius:50%;
     border:1.5px solid var(--gold);
-    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
-    color:#7c5a12;
+    background:radial-gradient(circle at 35% 30%,var(--num1),var(--num2));
+    color:var(--numfg);
     font-family:'Cinzel',serif;
     font-weight:600;
-    font-size:1.05rem;
+    font-size:.98rem;
     display:flex;align-items:center;justify-content:center;
-    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+    box-shadow:0 2px 6px var(--shadow), inset 0 1px 2px rgba(255,255,255,.35);
   }
-  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  ol.takeaway-list li strong{color:var(--emph);font-weight:600;}
+
+  .sources{
+    margin-top:34px;
+    font-size:.88rem;
+    line-height:1.7;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+  .sources .label{
+    font-family:'Cinzel',serif;
+    font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);display:block;margin-bottom:4px;
+  }
+
+  /* Watch It — unchanged treatment, tokenised for night reading */
   .watch{
     margin-top:38px;
     text-align:center;
     border:1px solid var(--gold);
-    background:linear-gradient(180deg,rgba(255,250,232,.75),rgba(247,238,213,.75));
+    background:linear-gradient(180deg,var(--card1),var(--card2));
     padding:26px 22px 22px;
   }
   .watch .label{
@@ -187,8 +295,8 @@
     letter-spacing:.08em;
     font-size:1.02rem;
     color:#fdf6e6;
-    background:var(--wine);
-    border:1px solid #5d2b20;
+    background:var(--wine-solid);
+    border:1px solid var(--wine-edge);
     text-decoration:none;
     padding:14px 26px;
     margin:6px 7px;
@@ -210,55 +318,78 @@
     .watch a{display:block;margin:9px 0;padding:15px 18px;}
     .watch{padding:22px 16px 18px;}
   }
+
   .sdg{
     font-family:'Pinyon Script',cursive;
-    font-size:2.5rem;
+    font-size:2.4rem;
     color:var(--gold);
     text-align:center;
     margin-top:40px;
   }
+
+  /* navigation */
+  .allnav,.footnav{max-width:720px;margin:0 auto 16px;text-align:center;}
+  .footnav{margin:26px auto 8px;display:flex;justify-content:center;gap:26px;}
+  .allnav a,.footnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.16em;
+    font-size:.8rem;color:var(--gold);text-decoration:none;
+    border-bottom:1px solid var(--rule);padding-bottom:2px;
+  }
+  .allnav a:hover,.footnav a:hover{border-bottom-color:var(--gold);}
+
+  /* night-reading toggle */
+  .lamp{
+    position:fixed;right:16px;bottom:16px;z-index:11;
+    width:44px;height:44px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--card1);
+    border:1px solid var(--gold);
+    color:var(--gold);
+    cursor:pointer;
+    box-shadow:0 4px 14px var(--shadow);
+    opacity:.72;
+    transition:opacity .18s ease, transform .18s ease;
+  }
+  .lamp:hover,.lamp:focus-visible{opacity:1;transform:translateY(-2px);outline:none;}
+  .lamp svg{width:20px;height:20px;}
+  @media print{.lamp,.progress,.allnav,.footnav{display:none;}}
 </style>
 </head>
 <body>
-<style>
-  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
-  .allnav a{
-    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
-    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
-    padding-bottom:2px;
-  }
-  .allnav a:hover{border-bottom-color:#a67c1e;}
-</style>
-<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+<div class="progress" id="prog"></div>
+<a id="top"></a>
+<nav class="allnav"><a href="./">← All devotions</a></nav>
 
 <article class="page">
-  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner tl" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner tr" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner bl" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner br" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
 
     <div class="eyebrow">Today's Devotion</div>
   <h1>Daniel Prayed Anyway</h1>
+
+  <div class="meta">Daniel 6 <span>·</span> 24 min read</div>
 
   <section class="verse-card">
     <div class="label">Key Verse</div>
@@ -268,34 +399,34 @@
 
   <div class="divider" aria-hidden="true">
     <span class="line"></span>
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <svg width="26" height="26" viewbox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"></path></svg>
     <span class="line right"></span>
   </div>
 
   <div class="body-text">
-    <p>Daniel’s enemies investigated his work, his decisions and his conduct. They found nothing they could honestly use against him—so they decided to use his faithfulness to God. The chapter opens with a new administration. <span class="scrip">“Darius the Mede decided to divide the kingdom into 120 provinces, and he appointed a high officer to rule over each province. The king also chose Daniel and two others as administrators to supervise the high officers and protect the king’s interests.”</span> <span class="ref">Daniel 6:1–2 (NLT)</span> Daniel was not a new arrival in Babylon; he had served through the whole Babylonian period, and now a new ruler found him just as useful. <span class="scrip">“Daniel soon proved himself more capable than all the other administrators and high officers. Because of Daniel’s great ability, the king made plans to place him over the entire empire.”</span> <span class="ref">Daniel 6:3 (NLT)</span> That is where the trouble began. <span class="scrip">“Then the other administrators and high officers began searching for some fault in the way Daniel was handling government affairs, but they couldn’t find anything to criticize or condemn. He was faithful, always responsible, and completely trustworthy.”</span> <span class="ref">Daniel 6:4 (NLT)</span> Read that verse slowly, because it is the foundation of everything that follows. These were not casual observers. They were rivals with access to the records, motivated by envy, looking for corruption, negligence or dishonesty. They found none. Ellen White draws out what that scrutiny means: <span class="egw">“His business transactions, when subjected to the closest scrutiny of his enemies, were found to be without one flaw. He was an example of what every businessman may become when his heart is converted and consecrated, and when his motives are right in the sight of God”</span> <span class="egw-ref">Prophets and Kings, chapter 44, “In the Lions’ Den,” p. 546 · PK 546.1</span>. She adds that Daniel <span class="egw">“made no claim to sanctification, but he did that which was infinitely better—he lived a life of faithfulness and consecration”</span> <span class="egw-ref">The Sanctified Life, chapter 5, “Daniel in the Lions’ Den,” p. 42 · SL 42.2</span>. So the officials changed their strategy. <span class="scrip">“So they concluded, ‘Our only chance of finding grounds for accusing Daniel will be in connection with the rules of his religion.’”</span> <span class="ref">Daniel 6:5 (NLT)</span> Notice what they were admitting. The only thing about Daniel they could turn into a charge was his loyalty to God. That is not a statement about his salvation—integrity earns no one heaven, and Daniel would be the first to say so—but it is a statement about consecrated character. Our faith should be visible not only in worship, but in the honesty, competence and reliability of our daily work, in the office, the classroom, the clinic, the market and the church committee. Integrity did not prevent the attack; it exposed the attack as dishonest. <strong>Daniel’s enemies could attack his faith, but they could not truthfully attack his work.</strong></p>
+    <section class="mv"><p>Daniel’s enemies investigated his work, his decisions and his conduct. They found nothing they could honestly use against him—so they decided to use his faithfulness to God. The chapter opens with a new administration. <span class="scrip">“Darius the Mede decided to divide the kingdom into 120 provinces, and he appointed a high officer to rule over each province. The king also chose Daniel and two others as administrators to supervise the high officers and protect the king’s interests.”</span> <span class="ref">Daniel 6:1–2 (NLT)</span> Daniel was not a new arrival in Babylon; he had served through the whole Babylonian period, and now a new ruler found him just as useful. </p><p><span class="scrip">“Daniel soon proved himself more capable than all the other administrators and high officers. Because of Daniel’s great ability, the king made plans to place him over the entire empire.”</span> <span class="ref">Daniel 6:3 (NLT)</span> That is where the trouble began. <span class="scrip">“Then the other administrators and high officers began searching for some fault in the way Daniel was handling government affairs, but they couldn’t find anything to criticize or condemn. He was faithful, always responsible, and completely trustworthy.”</span> <span class="ref">Daniel 6:4 (NLT)</span> Read that verse slowly, because it is the foundation of everything that follows. </p><p>These were not casual observers. They were rivals with access to the records, motivated by envy, looking for corruption, negligence or dishonesty. They found none. Ellen White draws out what that scrutiny means: </p><blockquote class="egw-block"><span class="egw">“His business transactions, when subjected to the closest scrutiny of his enemies, were found to be without one flaw. He was an example of what every businessman may become when his heart is converted and consecrated, and when his motives are right in the sight of God”</span>.  <span class="egw-ref">Prophets and Kings, chapter 44, “In the Lions’ Den,” p. 546 · PK 546.1</span></blockquote><p>She adds that Daniel <span class="egw">“made no claim to sanctification, but he did that which was infinitely better—he lived a life of faithfulness and consecration”</span> <span class="egw-ref">The Sanctified Life, chapter 5, “Daniel in the Lions’ Den,” p. 42 · SL 42.2</span>. So the officials changed their strategy. <span class="scrip">“So they concluded, ‘Our only chance of finding grounds for accusing Daniel will be in connection with the rules of his religion.’”</span> <span class="ref">Daniel 6:5 (NLT)</span> Notice what they were admitting. The only thing about Daniel they could turn into a charge was his loyalty to God. </p><p>That is not a statement about his salvation—integrity earns no one heaven, and Daniel would be the first to say so—but it is a statement about consecrated character. Our faith should be visible not only in worship, but in the honesty, competence and reliability of our daily work, in the office, the classroom, the clinic, the market and the church committee. Integrity did not prevent the attack; it exposed the attack as dishonest. </p><p class="thesis"><strong>Daniel’s enemies could attack his faith, but they could not truthfully attack his work.</strong></p></section>
 
-    <p>The man who knelt in that upstairs room was not improvising. Daniel 6 is the last of the narrative chapters, and it comes immediately after the fall of Babylon: <span class="scrip">“That very night Belshazzar, the Babylonian king, was killed. And Darius the Mede took over the kingdom at the age of sixty-two.”</span> <span class="ref">Daniel 5:30–31 (NLT)</span> Scripture tells us Darius’s age; it does not tell us Daniel’s, and we should not invent it. What it does show is a long history. Decades earlier, as a young captive, <span class="scrip">“Daniel was determined not to defile himself by eating the food and wine given to them by the king. He asked the chief of staff for permission not to eat these unacceptable foods.”</span> <span class="ref">Daniel 1:8 (NLT)</span> Notice the pattern already present in that first recorded decision: a settled conviction, expressed through a respectful request rather than a confrontation. When Nebuchadnezzar’s dream threatened every wise man in Babylon, <span class="scrip">“Daniel went home and told his friends Hananiah, Mishael, and Azariah what had happened. He urged them to ask the God of heaven to show them his mercy by telling them the secret, so they would not be executed along with the other wise men of Babylon.”</span> <span class="ref">Daniel 2:17–18 (NLT)</span> Faced with death, Daniel’s first instinct was prayer—and that was long before chapter 6. Ellen White describes the character these years produced: <span class="egw">“Exposed in youth to all the allurements of a royal court, he became a man of unbending integrity and fervent devotion to God. He was subjected to the fierce temptations of Satan, yet his character was not vacillating, nor his course changeable”</span> <span class="egw-ref">Our High Calling, August 31, “Hold High the Standard,” p. 249 · OHC 249.2; originally The Review and Herald, November 7, 1882</span>. This matters for how we read the crisis. The decree did not create a new Daniel. It found the Daniel who already existed, and it found him at prayer, because that is where he had been found for a lifetime. A crisis rarely produces a character; it reveals one. That is not a rebuke to anyone whose prayer life is still young—God welcomes every person who calls on Him in trouble, and many of us met Him first in a crisis. It is an invitation to begin now, in ordinary days, the communion that will hold us in extraordinary ones. <strong>The lions’ den did not create Daniel’s faithfulness; it revealed the faithfulness he had already been practising.</strong></p>
+    <section class="mv"><p>The man who knelt in that upstairs room was not improvising. Daniel 6 is the last of the narrative chapters, and it comes immediately after the fall of Babylon: <span class="scrip">“That very night Belshazzar, the Babylonian king, was killed. And Darius the Mede took over the kingdom at the age of sixty-two.”</span> <span class="ref">Daniel 5:30–31 (NLT)</span> Scripture tells us Darius’s age; it does not tell us Daniel’s, and we should not invent it. What it does show is a long history. Decades earlier, as a young captive, <span class="scrip">“Daniel was determined not to defile himself by eating the food and wine given to them by the king. He asked the chief of staff for permission not to eat these unacceptable foods.”</span> <span class="ref">Daniel 1:8 (NLT)</span></p><p> Notice the pattern already present in that first recorded decision: a settled conviction, expressed through a respectful request rather than a confrontation. When Nebuchadnezzar’s dream threatened every wise man in Babylon, <span class="scrip">“Daniel went home and told his friends Hananiah, Mishael, and Azariah what had happened. He urged them to ask the God of heaven to show them his mercy by telling them the secret, so they would not be executed along with the other wise men of Babylon.”</span> <span class="ref">Daniel 2:17–18 (NLT)</span> Faced with death, Daniel’s first instinct was prayer—and that was long before chapter 6. </p><p>Ellen White describes the character these years produced: </p><blockquote class="egw-block"><span class="egw">“Exposed in youth to all the allurements of a royal court, he became a man of unbending integrity and fervent devotion to God. He was subjected to the fierce temptations of Satan, yet his character was not vacillating, nor his course changeable”</span>.  <span class="egw-ref">Our High Calling, August 31, “Hold High the Standard,” p. 249 · OHC 249.2; originally The Review and Herald, November 7, 1882</span></blockquote><p>This matters for how we read the crisis. The decree did not create a new Daniel. It found the Daniel who already existed, and it found him at prayer, because that is where he had been found for a lifetime. A crisis rarely produces a character; it reveals one. That is not a rebuke to anyone whose prayer life is still young—God welcomes every person who calls on Him in trouble, and many of us met Him first in a crisis. It is an invitation to begin now, in ordinary days, the communion that will hold us in extraordinary ones. </p><p class="thesis"><strong>The lions’ den did not create Daniel’s faithfulness; it revealed the faithfulness he had already been practising.</strong></p></section>
 
-    <p>Since no fault could be found, one would have to be manufactured. <span class="scrip">“So the administrators and high officers went to the king and said, ‘Long live King Darius! We are all in agreement—we administrators, officials, high officers, advisers, and governors—that the king should make a law that will be strictly enforced. Give orders that for the next thirty days any person who prays to anyone, divine or human—except to you, Your Majesty—will be thrown into the den of lions.’”</span> <span class="ref">Daniel 6:6–7 (NLT)</span> Everything about the approach was calculated. They came as a group, so it sounded like consensus. They claimed unanimity that did not exist—Daniel, one of the three administrators, was evidently not among them. They dressed a private vendetta as public policy and made it flattering to the man who had to sign it. <span class="scrip">“And now, Your Majesty, issue and sign this law so it cannot be changed, an official law of the Medes and Persians that cannot be revoked.”</span> <span class="ref">Daniel 6:8 (NLT)</span> Then, in one short sentence, the trap closed: <span class="scrip">“So King Darius signed the law.”</span> <span class="ref">Daniel 6:9 (NLT)</span> Ellen White describes the mechanism exactly: <span class="egw">“Appealing to his vanity, they persuaded him that the carrying out of this edict would add greatly to his honor and authority. Ignorant of the subtle purpose of the princes, the king did not discern their animosity as revealed in the decree, and, yielding to their flattery, he signed it”</span> <span class="egw-ref">Prophets and Kings, chapter 44, p. 540 · PK 540.2</span>. She also names the deeper agency behind the envy, writing that in the conspiracy “Satan had played an important part,” and that <span class="egw">“It was these satanic agencies who had stirred the princes to envy and jealousy”</span> <span class="egw-ref">Prophets and Kings, chapter 44, p. 540 · PK 540.3</span>. Jealousy is still doing this. It resents another person’s faithfulness, influence or recognition; it misrepresents motives; it recruits a group so that malice sounds like a consensus; it turns policies and procedures into weapons; it flatters leaders into signing things they have not examined. Darius’s failure is a warning to every leader, in a government, a business or a church board: ask who may be harmed before you sign. But we need pastoral balance here. Not every criticism is jealousy, and some correction is legitimate and should be received humbly. Daniel’s case is specific: the text says his opponents looked for fault and found none. A persecution complex is not a spiritual gift. <strong>Jealousy could not find a fault in Daniel, so it manufactured a law to make his faithfulness a crime.</strong></p>
+    <section class="mv"><p>Since no fault could be found, one would have to be manufactured. <span class="scrip">“So the administrators and high officers went to the king and said, ‘Long live King Darius! We are all in agreement—we administrators, officials, high officers, advisers, and governors—that the king should make a law that will be strictly enforced. Give orders that for the next thirty days any person who prays to anyone, divine or human—except to you, Your Majesty—will be thrown into the den of lions.’”</span> <span class="ref">Daniel 6:6–7 (NLT)</span> Everything about the approach was calculated. </p><p>They came as a group, so it sounded like consensus. They claimed unanimity that did not exist—Daniel, one of the three administrators, was evidently not among them. They dressed a private vendetta as public policy and made it flattering to the man who had to sign it. <span class="scrip">“And now, Your Majesty, issue and sign this law so it cannot be changed, an official law of the Medes and Persians that cannot be revoked.”</span> <span class="ref">Daniel 6:8 (NLT)</span> Then, in one short sentence, the trap closed: <span class="scrip">“So King Darius signed the law.”</span> <span class="ref">Daniel 6:9 (NLT)</span></p><p> Ellen White describes the mechanism exactly: </p><blockquote class="egw-block"><span class="egw">“Appealing to his vanity, they persuaded him that the carrying out of this edict would add greatly to his honor and authority. Ignorant of the subtle purpose of the princes, the king did not discern their animosity as revealed in the decree, and, yielding to their flattery, he signed it”</span>.  <span class="egw-ref">Prophets and Kings, chapter 44, p. 540 · PK 540.2</span></blockquote><p>She also names the deeper agency behind the envy, writing that in the conspiracy “Satan had played an important part,” and that <span class="egw">“It was these satanic agencies who had stirred the princes to envy and jealousy”</span> <span class="egw-ref">Prophets and Kings, chapter 44, p. 540 · PK 540.3</span>. Jealousy is still doing this. It resents another person’s faithfulness, influence or recognition; it misrepresents motives; it recruits a group so that malice sounds like a consensus; it turns policies and procedures into weapons; it flatters leaders into signing things they have not examined. </p><p>Darius’s failure is a warning to every leader, in a government, a business or a church board: ask who may be harmed before you sign. But we need pastoral balance here. Not every criticism is jealousy, and some correction is legitimate and should be received humbly. Daniel’s case is specific: the text says his opponents looked for fault and found none. A persecution complex is not a spiritual gift. </p><p class="thesis"><strong>Jealousy could not find a fault in Daniel, so it manufactured a law to make his faithfulness a crime.</strong></p></section>
 
-    <p>Now comes the verse this devotion is named for. <span class="scrip">“But when Daniel learned that the law had been signed, he went home and knelt down as usual in his upstairs room, with its windows open toward Jerusalem. He prayed three times a day, just as he had always done, giving thanks to his God.”</span> <span class="ref">Daniel 6:10 (NLT)</span> Every phrase carries weight. He <span class="scrip">“learned that the law had been signed”</span>—this was not ignorance or a miscalculation; he knew the decree and he knew the penalty. He <span class="scrip">“knelt down as usual”</span> and prayed <span class="scrip">“just as he had always done”</span>—the emphasis of the verse is continuity, not novelty. The windows were open toward Jerusalem because that is how his room already was; the narrative gives no hint that he flung them open to be seen, and it must never be read as a publicity stunt. Daniel prayed the way he had always prayed; he simply refused to stop. Ellen White captures the moment: <span class="egw">“He quickly read their malignant purpose in framing the decree, but he did not change his course in a single particular. Why should he cease to pray now, when he most needed to pray? Rather would he relinquish life itself, than his hope of help in God. With calmness he performed his duties as chief of the princes; and at the hour of prayer he went to his chamber, and with his windows open toward Jerusalem, in accordance with his usual custom, he offered his petition to the God of heaven. He did not try to conceal his act”</span> <span class="egw-ref">Prophets and Kings, chapter 44, pp. 540–542 · PK 540.4</span>. Prayer was not Daniel’s emergency escape plan. It was his established way of life. Then there is the phrase that is easiest to miss: he was <span class="scrip">“giving thanks to his God.”</span> <span class="ref">Daniel 6:10 (NLT)</span> The decree had not been reversed. The den was still ahead. And Daniel’s prayer included thanksgiving. This is not denial; the same verse tells us he knew exactly what had been signed. It is the posture Paul would later describe: <span class="scrip">“Don’t worry about anything; instead, pray about everything. Tell God what you need, and thank him for all he has done. Then you will experience God’s peace, which exceeds anything we can understand.”</span> <span class="ref">Philippians 4:6–7 (NLT)</span> Thanksgiving before deliverance is gratitude rooted in God’s character rather than in circumstances—remembering past faithfulness while facing present danger. It does not require pretending danger is not real, and it does not forbid fear, grief, lament or honest questions; biblical trust can coexist with tears. Nor is “three times a day” a rule by which everyone’s spirituality is to be measured. The psalmist prayed <span class="scrip">“Morning, noon, and night”</span> <span class="ref">Psalm 55:17 (NLT)</span> and Daniel did too, but the point is a settled relationship, not a schedule. Scripture simply says, <span class="scrip">“Never stop praying. Be thankful in all circumstances, for this is God’s will for you who belong to Christ Jesus.”</span> <span class="ref">1 Thessalonians 5:17–18 (NLT)</span> The question the verse presses on each of us is not whether we would pray in a crisis. It is whether there would be an “as usual” for the crisis to interrupt. <strong>The decree changed, but Daniel’s devotion did not.</strong></p>
+    <section class="mv"><p>Now comes the verse this devotion is named for. <span class="scrip">“But when Daniel learned that the law had been signed, he went home and knelt down as usual in his upstairs room, with its windows open toward Jerusalem. He prayed three times a day, just as he had always done, giving thanks to his God.”</span> <span class="ref">Daniel 6:10 (NLT)</span> Every phrase carries weight. He <span class="scrip">“learned that the law had been signed”</span>—this was not ignorance or a miscalculation; he knew the decree and he knew the penalty. </p><p>He <span class="scrip">“knelt down as usual”</span> and prayed <span class="scrip">“just as he had always done”</span>—the emphasis of the verse is continuity, not novelty. The windows were open toward Jerusalem because that is how his room already was; the narrative gives no hint that he flung them open to be seen, and it must never be read as a publicity stunt. Daniel prayed the way he had always prayed; he simply refused to stop. Ellen White captures the moment: </p><blockquote class="egw-block"><span class="egw">“He quickly read their malignant purpose in framing the decree, but he did not change his course in a single particular. Why should he cease to pray now, when he most needed to pray? Rather would he relinquish life itself, than his hope of help in God. With calmness he performed his duties as chief of the princes; and at the hour of prayer he went to his chamber, and with his windows open toward Jerusalem, in accordance with his usual custom, he offered his petition to the God of heaven. He did not try to conceal his act”</span>.  <span class="egw-ref">Prophets and Kings, chapter 44, pp. 540–542 · PK 540.4</span></blockquote><p>Prayer was not Daniel’s emergency escape plan. It was his established way of life. Then there is the phrase that is easiest to miss: he was <span class="scrip">“giving thanks to his God.”</span> <span class="ref">Daniel 6:10 (NLT)</span> The decree had not been reversed. The den was still ahead. And Daniel’s prayer included thanksgiving. This is not denial; the same verse tells us he knew exactly what had been signed. It is the posture Paul would later describe: <span class="scrip">“Don’t worry about anything; instead, pray about everything. Tell God what you need, and thank him for all he has done. Then you will experience God’s peace, which exceeds anything we can understand.”</span> <span class="ref">Philippians 4:6–7 (NLT)</span></p><p> Thanksgiving before deliverance is gratitude rooted in God’s character rather than in circumstances—remembering past faithfulness while facing present danger. It does not require pretending danger is not real, and it does not forbid fear, grief, lament or honest questions; biblical trust can coexist with tears. Nor is “three times a day” a rule by which everyone’s spirituality is to be measured. The psalmist prayed <span class="scrip">“Morning, noon, and night”</span> <span class="ref">Psalm 55:17 (NLT)</span> and Daniel did too, but the point is a settled relationship, not a schedule. </p><p>Scripture simply says, <span class="scrip">“Never stop praying. Be thankful in all circumstances, for this is God’s will for you who belong to Christ Jesus.”</span> <span class="ref">1 Thessalonians 5:17–18 (NLT)</span> The question the verse presses on each of us is not whether we would pray in a crisis. It is whether there would be an “as usual” for the crisis to interrupt. </p><p class="thesis"><strong>The decree changed, but Daniel’s devotion did not.</strong></p></section>
 
-    <p>His enemies had been waiting. <span class="scrip">“Then the officials went together to Daniel’s house and found him praying and asking for God’s help. So they went straight to the king and reminded him about his law.”</span> <span class="ref">Daniel 6:11–12 (NLT)</span> They got the king to confirm the decree before naming the offender, and then they identified Daniel in the most prejudicial way available: <span class="scrip">“That man Daniel, one of the captives from Judah, is ignoring you and your law. He still prays to his God three times a day.”</span> <span class="ref">Daniel 6:13 (NLT)</span> Their charge was that Daniel was “ignoring” the king. It was false. Daniel had not ignored Darius; he had served him so well that the king planned to promote him over the empire, and even from the den he would address him with respect. What Daniel would not do was give the king the place that belonged to God. Ellen White states the boundary precisely: <span class="egw">“In all cases where the king had a right to command, Daniel would obey; but neither the king nor his decree could make him swerve from allegiance to the King of kings”</span> <span class="egw-ref">Prophets and Kings, chapter 44, pp. 540–542 · PK 540.4</span>. And she describes the manner of it: <span class="egw">“Thus the prophet boldly yet quietly and humbly declared that no earthly power has a right to interpose between the soul and God”</span> <span class="egw-ref">Prophets and Kings, chapter 44, p. 542 · PK 542.1</span>. Boldly, quietly, humbly—hold those three words together. There was no revolt, no insult, no abandoned post, no speech from the balcony. Courage is not always loud; sometimes courage quietly kneels and continues doing what faithfulness has always done. The New Testament draws the same line from both sides. <span class="scrip">“Everyone must submit to governing authorities. For all authority comes from God, and those in positions of authority have been placed there by God.”</span> <span class="ref">Romans 13:1 (NLT)</span> <span class="scrip">“Respect everyone, and love the family of believers. Fear God, and respect the king.”</span> <span class="ref">1 Peter 2:17 (NLT)</span> And when human authority commanded silence about Christ, <span class="scrip">“Peter and the apostles replied, ‘We must obey God rather than any human authority.’”</span> <span class="ref">Acts 5:29 (NLT)</span> Both truths stand. Christians normally honour lawful authority, pay their taxes, keep reasonable rules and respect leaders they did not choose. Daniel 6 gives no licence for disrespect, disorder, partisan hostility or refusing every rule we dislike. The issue in this chapter is narrow and exact: a human law directly attempted to interrupt worship and prayer owed to God. Meanwhile the king discovered what he had signed. <span class="scrip">“Hearing this, the king was deeply troubled, and he tried to think of a way to save Daniel. He spent the rest of the day looking for a way to get Daniel out of this predicament.”</span> <span class="ref">Daniel 6:14 (NLT)</span> Darius had the power to sign a law and no power to undo it: <span class="scrip">“Your Majesty, you know that according to the law of the Medes and the Persians, no law that the king signs can be changed.”</span> <span class="ref">Daniel 6:15 (NLT)</span> His regret was real, his effort was sincere, and his authority was not enough. <strong>Daniel obeyed the king wherever obedience did not require disobedience to God.</strong></p>
+    <section class="mv"><p>His enemies had been waiting. <span class="scrip">“Then the officials went together to Daniel’s house and found him praying and asking for God’s help. So they went straight to the king and reminded him about his law.”</span> <span class="ref">Daniel 6:11–12 (NLT)</span> They got the king to confirm the decree before naming the offender, and then they identified Daniel in the most prejudicial way available: <span class="scrip">“That man Daniel, one of the captives from Judah, is ignoring you and your law. He still prays to his God three times a day.”</span> <span class="ref">Daniel 6:13 (NLT)</span></p><p> Their charge was that Daniel was “ignoring” the king. It was false. Daniel had not ignored Darius; he had served him so well that the king planned to promote him over the empire, and even from the den he would address him with respect. What Daniel would not do was give the king the place that belonged to God. Ellen White states the boundary precisely: <span class="egw">“In all cases where the king had a right to command, Daniel would obey; but neither the king nor his decree could make him swerve from allegiance to the King of kings”</span> <span class="egw-ref">Prophets and Kings, chapter 44, pp. 540–542 · PK 540.4</span>. </p><p>And she describes the manner of it: <span class="egw">“Thus the prophet boldly yet quietly and humbly declared that no earthly power has a right to interpose between the soul and God”</span> <span class="egw-ref">Prophets and Kings, chapter 44, p. 542 · PK 542.1</span>. Boldly, quietly, humbly—hold those three words together. There was no revolt, no insult, no abandoned post, no speech from the balcony. Courage is not always loud; sometimes courage quietly kneels and continues doing what faithfulness has always done. The New Testament draws the same line from both sides. </p><p><span class="scrip">“Everyone must submit to governing authorities. For all authority comes from God, and those in positions of authority have been placed there by God.”</span> <span class="ref">Romans 13:1 (NLT)</span> <span class="scrip">“Respect everyone, and love the family of believers. Fear God, and respect the king.”</span> <span class="ref">1 Peter 2:17 (NLT)</span> And when human authority commanded silence about Christ, <span class="scrip">“Peter and the apostles replied, ‘We must obey God rather than any human authority.’”</span> <span class="ref">Acts 5:29 (NLT)</span> Both truths stand. Christians normally honour lawful authority, pay their taxes, keep reasonable rules and respect leaders they did not choose. </p><p>Daniel 6 gives no licence for disrespect, disorder, partisan hostility or refusing every rule we dislike. The issue in this chapter is narrow and exact: a human law directly attempted to interrupt worship and prayer owed to God. Meanwhile the king discovered what he had signed. <span class="scrip">“Hearing this, the king was deeply troubled, and he tried to think of a way to save Daniel. He spent the rest of the day looking for a way to get Daniel out of this predicament.”</span> <span class="ref">Daniel 6:14 (NLT)</span></p><p> Darius had the power to sign a law and no power to undo it: <span class="scrip">“Your Majesty, you know that according to the law of the Medes and the Persians, no law that the king signs can be changed.”</span> <span class="ref">Daniel 6:15 (NLT)</span> His regret was real, his effort was sincere, and his authority was not enough. </p><p class="thesis"><strong>Daniel obeyed the king wherever obedience did not require disobedience to God.</strong></p></section>
 
-    <p>What follows is told with restraint, and we should keep it that way. <span class="scrip">“So at last the king gave orders for Daniel to be arrested and thrown into the den of lions. The king said to him, ‘May your God, whom you serve so faithfully, rescue you.’”</span> <span class="ref">Daniel 6:16 (NLT)</span> Even the pagan king had understood something true: Daniel’s service to his God was continual, and if there was any hope, it lay with that God. <span class="scrip">“A stone was brought and placed over the mouth of the den. The king sealed the stone with his own royal seal and the seals of his nobles, so that no one could rescue Daniel.”</span> <span class="ref">Daniel 6:17 (NLT)</span> The seals made the matter official and final. No human hand could reopen the den without breaking the authority of the empire. Scripture then leaves Daniel in the dark and follows the king home: <span class="scrip">“Then the king returned to his palace and spent the night fasting. He refused his usual entertainment and couldn’t sleep at all that night.”</span> <span class="ref">Daniel 6:18 (NLT)</span> We are told nothing about the inside of the den, nothing about what the lions did, nothing about what Daniel said or felt in the dark; the Bible does not narrate it and neither should we. Ellen White helps us see the purpose in God’s permitting the plot to go this far: <span class="egw">“God did not prevent Daniel’s enemies from casting him into the lions’ den; He permitted evil angels and wicked men thus far to accomplish their purpose; but it was that He might make the deliverance of His servant more marked, and the defeat of the enemies of truth and righteousness more complete”</span> <span class="egw-ref">Prophets and Kings, chapter 44, pp. 543–544 · PK 543.3</span>. That sentence rearranges the whole picture. The stone, the seals and the sleepless palace all announce that human authority has reached its limit. The same God Daniel served in the palace was with him in the den. Human laws, royal seals and hungry lions could not place Daniel beyond His reach. Here is the deepest miracle of the chapter, and it happened before dawn: Daniel went into the den with his integrity intact. Whatever the morning brought, he had already refused to abandon his God. <strong>The seal could stop every human rescuer; it could not stop God.</strong></p>
+    <section class="mv"><p>What follows is told with restraint, and we should keep it that way. <span class="scrip">“So at last the king gave orders for Daniel to be arrested and thrown into the den of lions. The king said to him, ‘May your God, whom you serve so faithfully, rescue you.’”</span> <span class="ref">Daniel 6:16 (NLT)</span> Even the pagan king had understood something true: Daniel’s service to his God was continual, and if there was any hope, it lay with that God. <span class="scrip">“A stone was brought and placed over the mouth of the den. The king sealed the stone with his own royal seal and the seals of his nobles, so that no one could rescue Daniel.”</span> <span class="ref">Daniel 6:17 (NLT)</span></p><p> The seals made the matter official and final. No human hand could reopen the den without breaking the authority of the empire. Scripture then leaves Daniel in the dark and follows the king home: <span class="scrip">“Then the king returned to his palace and spent the night fasting. He refused his usual entertainment and couldn’t sleep at all that night.”</span> <span class="ref">Daniel 6:18 (NLT)</span> We are told nothing about the inside of the den, nothing about what the lions did, nothing about what Daniel said or felt in the dark; the Bible does not narrate it and neither should we. </p><p>Ellen White helps us see the purpose in God’s permitting the plot to go this far: </p><blockquote class="egw-block"><span class="egw">“God did not prevent Daniel’s enemies from casting him into the lions’ den; He permitted evil angels and wicked men thus far to accomplish their purpose; but it was that He might make the deliverance of His servant more marked, and the defeat of the enemies of truth and righteousness more complete”</span>.  <span class="egw-ref">Prophets and Kings, chapter 44, pp. 543–544 · PK 543.3</span></blockquote><p>That sentence rearranges the whole picture. The stone, the seals and the sleepless palace all announce that human authority has reached its limit. The same God Daniel served in the palace was with him in the den. Human laws, royal seals and hungry lions could not place Daniel beyond His reach. Here is the deepest miracle of the chapter, and it happened before dawn: Daniel went into the den with his integrity intact. Whatever the morning brought, he had already refused to abandon his God. </p><p class="thesis"><strong>The seal could stop every human rescuer; it could not stop God.</strong></p></section>
 
-    <p><span class="scrip">“Very early the next morning, the king got up and hurried out to the lions’ den. When he got there, he called out in anguish, ‘Daniel, servant of the living God! Was your God, whom you serve so faithfully, able to rescue you from the lions?’”</span> <span class="ref">Daniel 6:19–20 (NLT)</span> The answer came in the most respectful form possible: <span class="scrip">“Daniel answered, ‘Long live the king! My God sent his angel to shut the lions’ mouths so that they would not hurt me, for I have been found innocent in his sight. And I have not wronged you, Your Majesty.’”</span> <span class="ref">Daniel 6:21–22 (NLT)</span> Daniel’s first word to the man who had sealed him in was a blessing, and his explanation gave all the credit to God. He did not survive by calm, by courage or by any skill with animals; God sent His angel. The psalmist had said as much: <span class="scrip">“For the angel of the Lord is a guard; he surrounds and defends all who fear him.”</span> <span class="ref">Psalm 34:7 (NLT)</span> <span class="scrip">“The king was overjoyed and ordered that Daniel be lifted from the den. Not a scratch was found on him, for he had trusted in his God.”</span> <span class="ref">Daniel 6:23 (NLT)</span> The narrator connects the preservation to trust, and we must be careful about what that means. It does not mean Daniel knew the lions could not hurt him, or that he was certain he would walk out in the morning; the text says he trusted God, not that he controlled God’s method. Scripture itself refuses to let this story become a guarantee. Hebrews remembers those who by faith <span class="scrip">“shut the mouths of lions, quenched the flames of fire, and escaped death by the edge of the sword,”</span> and then, without changing subject, others who <span class="scrip">“were tortured, refusing to turn from God in order to be set free. They placed their hope in a better life after the resurrection.”</span> <span class="ref">Hebrews 11:33–35 (NLT)</span> The rescued and the unrescued are honoured with the same word: faith. Daniel’s own friends had said it before the furnace: <span class="scrip">“the God whom we serve is able to save us … But even if he doesn’t … we will never serve your gods.”</span> <span class="ref">Daniel 3:17–18 (NLT)</span> Trust in God is not a demand that He give us our preferred outcome; it is the decision to remain His whatever the outcome. Some members reading this are in a den that has not opened—illness, bereavement, unemployment, discrimination, family conflict, a prayer that has not been answered. This chapter does not promise you a morning like Daniel’s. It promises you the God of Daniel’s morning. Ellen White puts the comfort exactly where it belongs: <span class="egw">“Heaven is very near those who suffer for righteousness’ sake. Christ identifies His interests with the interests of His faithful people; He suffers in the person of His saints, and whoever touches His chosen ones touches Him. The power that is near to deliver from physical harm or distress is also near to save from the greater evil, making it possible for the servant of God to maintain his integrity under all circumstances, and to triumph through divine grace”</span> <span class="egw-ref">Prophets and Kings, chapter 44, p. 545 · PK 545.3</span>. God may deliver from suffering, sustain through it, or keep His people faithful until the resurrection; in every case He is near, and no faithful life is abandoned. <strong>Faith is not certainty about the circumstance; it is confidence in the God who holds us within it.</strong></p>
+    <section class="mv"><p><span class="scrip">“Very early the next morning, the king got up and hurried out to the lions’ den. When he got there, he called out in anguish, ‘Daniel, servant of the living God! Was your God, whom you serve so faithfully, able to rescue you from the lions?’”</span> <span class="ref">Daniel 6:19–20 (NLT)</span> The answer came in the most respectful form possible: <span class="scrip">“Daniel answered, ‘Long live the king! My God sent his angel to shut the lions’ mouths so that they would not hurt me, for I have been found innocent in his sight. And I have not wronged you, Your Majesty.’”</span> <span class="ref">Daniel 6:21–22 (NLT)</span></p><p> Daniel’s first word to the man who had sealed him in was a blessing, and his explanation gave all the credit to God. He did not survive by calm, by courage or by any skill with animals; God sent His angel. The psalmist had said as much: <span class="scrip">“For the angel of the Lord is a guard; he surrounds and defends all who fear him.”</span> <span class="ref">Psalm 34:7 (NLT)</span> <span class="scrip">“The king was overjoyed and ordered that Daniel be lifted from the den. Not a scratch was found on him, for he had trusted in his God.”</span> <span class="ref">Daniel 6:23 (NLT)</span></p><p> The narrator connects the preservation to trust, and we must be careful about what that means. It does not mean Daniel knew the lions could not hurt him, or that he was certain he would walk out in the morning; the text says he trusted God, not that he controlled God’s method. Scripture itself refuses to let this story become a guarantee. Hebrews remembers those who by faith <span class="scrip">“shut the mouths of lions, quenched the flames of fire, and escaped death by the edge of the sword,”</span> and then, without changing subject, others who <span class="scrip">“were tortured, refusing to turn from God in order to be set free. They placed their hope in a better life after the resurrection.”</span> <span class="ref">Hebrews 11:33–35 (NLT)</span></p><p> The rescued and the unrescued are honoured with the same word: faith. Daniel’s own friends had said it before the furnace: <span class="scrip">“the God whom we serve is able to save us … But even if he doesn’t … we will never serve your gods.”</span> <span class="ref">Daniel 3:17–18 (NLT)</span> Trust in God is not a demand that He give us our preferred outcome; it is the decision to remain His whatever the outcome. Some members reading this are in a den that has not opened—illness, bereavement, unemployment, discrimination, family conflict, a prayer that has not been answered. </p><p>This chapter does not promise you a morning like Daniel’s. It promises you the God of Daniel’s morning. Ellen White puts the comfort exactly where it belongs: </p><blockquote class="egw-block"><span class="egw">“Heaven is very near those who suffer for righteousness’ sake. Christ identifies His interests with the interests of His faithful people; He suffers in the person of His saints, and whoever touches His chosen ones touches Him. The power that is near to deliver from physical harm or distress is also near to save from the greater evil, making it possible for the servant of God to maintain his integrity under all circumstances, and to triumph through divine grace”</span>.  <span class="egw-ref">Prophets and Kings, chapter 44, p. 545 · PK 545.3</span></blockquote><p>God may deliver from suffering, sustain through it, or keep His people faithful until the resurrection; in every case He is near, and no faithful life is abandoned. </p><p class="thesis"><strong>Faith is not certainty about the circumstance; it is confidence in the God who holds us within it.</strong></p></section>
 
-    <p>The chapter does not end with Daniel’s rescue, and neither should we. First there is a hard verse. <span class="scrip">“Then the king gave orders to arrest the men who had maliciously accused Daniel. He had them thrown into the lions’ den, along with their wives and children. The lions leaped on them and tore them apart before they even hit the floor of the den.”</span> <span class="ref">Daniel 6:24 (NLT)</span> We do not skip it, and we do not dwell on it. It records the severe justice of an ancient court, and it also proves something about the lions: they were not tame. The same beasts that would not touch Daniel destroyed the accusers at once. But this verse describes what a Persian king did; it does not prescribe what a Christian should want. The suffering of those families is not something to celebrate, and the verse must never be turned into a prayer for our enemies’ destruction. Jesus governs our response: <span class="scrip">“But I say, love your enemies! Pray for those who persecute you!”</span> <span class="ref">Matthew 5:44 (NLT)</span> What the verse does teach is that malicious injustice destroys those who practise it. Then the story lifts its eyes. <span class="scrip">“Then King Darius sent this message to the people of every race and nation and language throughout the world: ‘Peace and prosperity to you! I decree that everyone throughout my kingdom should tremble with fear before the God of Daniel. For he is the living God, and he will endure forever. His kingdom will never be destroyed, and his rule will never end. He rescues and saves his people; he performs miraculous signs and wonders in the heavens and on earth. He has rescued Daniel from the power of the lions.’”</span> <span class="ref">Daniel 6:25–27 (NLT)</span> Read what the decree is about. It is not about Daniel’s bravery. It is about <span class="scrip">“the living God”</span> who <span class="scrip">“rescues and saves his people”</span> and whose <span class="scrip">“kingdom will never be destroyed.”</span> <span class="ref">Daniel 6:26–27 (NLT)</span> A conspiracy meant to end one man’s prayers ended with an empire being told to fear his God. We should not claim more for Darius than the text does; his proclamation is recorded, not his whole heart. But the witness of a faithful life reached the throne, and a faithful life is still the most persuasive sermon most leaders and neighbours will ever hear. Ellen White draws the lesson from the whole account: <span class="egw">“Daniel in the lions’ den was the same Daniel who stood before the king as chief among the ministers of state and as a prophet of the Most High. A man whose heart is stayed upon God will be the same in the hour of his greatest trial as he is in prosperity, when the light and favor of God and of man beam upon him. Faith reaches to the unseen, and grasps eternal realities”</span> <span class="egw-ref">Prophets and Kings, chapter 44, p. 545 · PK 545.2</span>. Promotion, accusation, confinement and vindication changed his surroundings; they did not change his God or his allegiance. And the story closes quietly: <span class="scrip">“So Daniel prospered during the reign of Darius and the reign of Cyrus the Persian.”</span> <span class="ref">Daniel 6:28 (NLT)</span> Kingdoms came and went; the man who prayed anyway was still serving. <strong>God’s deliverance turned a private conspiracy into a public testimony about the living God.</strong></p>
+    <section class="mv"><p>The chapter does not end with Daniel’s rescue, and neither should we. First there is a hard verse. <span class="scrip">“Then the king gave orders to arrest the men who had maliciously accused Daniel. He had them thrown into the lions’ den, along with their wives and children. The lions leaped on them and tore them apart before they even hit the floor of the den.”</span> <span class="ref">Daniel 6:24 (NLT)</span> We do not skip it, and we do not dwell on it. It records the severe justice of an ancient court, and it also proves something about the lions: they were not tame. </p><p>The same beasts that would not touch Daniel destroyed the accusers at once. But this verse describes what a Persian king did; it does not prescribe what a Christian should want. The suffering of those families is not something to celebrate, and the verse must never be turned into a prayer for our enemies’ destruction. Jesus governs our response: <span class="scrip">“But I say, love your enemies! Pray for those who persecute you!”</span> <span class="ref">Matthew 5:44 (NLT)</span> What the verse does teach is that malicious injustice destroys those who practise it. </p><p>Then the story lifts its eyes. <span class="scrip">“Then King Darius sent this message to the people of every race and nation and language throughout the world: ‘Peace and prosperity to you! I decree that everyone throughout my kingdom should tremble with fear before the God of Daniel. For he is the living God, and he will endure forever. His kingdom will never be destroyed, and his rule will never end. He rescues and saves his people; he performs miraculous signs and wonders in the heavens and on earth. He has rescued Daniel from the power of the lions.’”</span> <span class="ref">Daniel 6:25–27 (NLT)</span></p><p> Read what the decree is about. It is not about Daniel’s bravery. It is about <span class="scrip">“the living God”</span> who <span class="scrip">“rescues and saves his people”</span> and whose <span class="scrip">“kingdom will never be destroyed.”</span> <span class="ref">Daniel 6:26–27 (NLT)</span> A conspiracy meant to end one man’s prayers ended with an empire being told to fear his God. We should not claim more for Darius than the text does; his proclamation is recorded, not his whole heart. But the witness of a faithful life reached the throne, and a faithful life is still the most persuasive sermon most leaders and neighbours will ever hear. </p><p>Ellen White draws the lesson from the whole account: </p><blockquote class="egw-block"><span class="egw">“Daniel in the lions’ den was the same Daniel who stood before the king as chief among the ministers of state and as a prophet of the Most High. A man whose heart is stayed upon God will be the same in the hour of his greatest trial as he is in prosperity, when the light and favor of God and of man beam upon him. Faith reaches to the unseen, and grasps eternal realities”</span>.  <span class="egw-ref">Prophets and Kings, chapter 44, p. 545 · PK 545.2</span></blockquote><p>Promotion, accusation, confinement and vindication changed his surroundings; they did not change his God or his allegiance. And the story closes quietly: <span class="scrip">“So Daniel prospered during the reign of Darius and the reign of Cyrus the Persian.”</span> <span class="ref">Daniel 6:28 (NLT)</span> Kingdoms came and went; the man who prayed anyway was still serving. </p><p class="thesis"><strong>God’s deliverance turned a private conspiracy into a public testimony about the living God.</strong></p></section>
 
-    <p>Daniel points beyond himself. He was a faithful but human servant; Jesus is the sinless Son of God and the Saviour, and the echoes between the two accounts are worth hearing carefully, as devotional echoes rather than a proof that every detail predicts Christ. A faithful servant targeted by jealous opponents. A legal mechanism used to secure a condemnation. Innocence in the face of accusation. A stone and a seal. A public vindication after the opponents believed the case was closed. Above all, an established practice of prayer that held under the worst pressure: on the night He was betrayed, Jesus <span class="scrip">“walked away, about a stone’s throw, and knelt down and prayed, ‘Father, if you are willing, please take this cup of suffering away from me. Yet I want your will to be done, not mine.’”</span> <span class="ref">Luke 22:41–42 (NLT)</span> That is the prayer Daniel’s prayer was reaching toward: honest about the cost, surrendered about the outcome. And it is the difference between the two stories that saves us. Daniel was lifted from the den without a scratch; Jesus went through death itself and rose, so that everyone who trusts Him has a hope no den, no diagnosis and no decree can seal. Faithfulness under pressure is therefore not a feat of willpower. It is grace. Ellen White, preaching on Daniel, put it this way: <span class="egw">“We may know that if our life is hid with Christ in God, when we are brought into trial because of our faith, Jesus will be with us. … And if we are called to suffer for Christ’s sake, we shall be able to go to prison trusting in him as a little child trusts in its parents. Now is the time to cultivate faith in God”</span> <span class="egw-ref">The Review and Herald, May 3, 1892, par. 12; reprinted in Ye Shall Receive Power, September 17, “Daniel,” p. 269 · YRP 269.5</span>. Now is the time. Scripture is honest that <span class="scrip">“everyone who wants to live a godly life in Christ Jesus will suffer persecution,”</span> <span class="ref">2 Timothy 3:12 (NLT)</span> and equally clear about how to meet it: <span class="scrip">“But even if you suffer for doing what is right, God will reward you for it. So don’t worry or be afraid of their threats. Instead, you must worship Christ as Lord of your life.”</span> <span class="ref">1 Peter 3:14–15 (NLT)</span> So what would a Daniel-like church look like? It would be a congregation that cultivates daily prayer before the crisis arrives and gives thanks while still waiting for an answer. Its members would be dependable at work, at home, at school and in public office, and their integrity would survive an audit. It would refuse corruption, resist jealousy and gossip, and never weaponise church procedures against people. It would honour its leaders without making any human leader an object of unquestioning loyalty, stand for conscience calmly and respectfully, and pray for those who oppose it. It would trust God without demanding a particular outcome, support believers who suffer for conscience, and remember that faithful Christians may have different earthly endings and the same resurrection. And it would keep Christ at the centre of all its courage, because public witness grows out of private communion with Him. The church will not develop Daniel’s courage merely by admiring the den; it must cultivate Daniel’s life of prayer, integrity and trust. Ask yourself today: what would remain unchanged in my life if obedience to God suddenly carried a cost? Can I thank Him before I know how the story ends? Is my faith the same in public responsibility, private prayer and personal danger? Then go home, and kneel down as usual. <strong>Build the prayer life before the pressure comes. Remain faithful when the cost becomes real. Trust the living God with the outcome.</strong></p>
+    <section class="mv"><p>Daniel points beyond himself. He was a faithful but human servant; Jesus is the sinless Son of God and the Saviour, and the echoes between the two accounts are worth hearing carefully, as devotional echoes rather than a proof that every detail predicts Christ. A faithful servant targeted by jealous opponents. A legal mechanism used to secure a condemnation. Innocence in the face of accusation. A stone and a seal. A public vindication after the opponents believed the case was closed. Above all, an established practice of prayer that held under the worst pressure: on the night He was betrayed, Jesus <span class="scrip">“walked away, about a stone’s throw, and knelt down and prayed, ‘Father, if you are willing, please take this cup of suffering away from me. Yet I want your will to be done, not mine.’”</span> <span class="ref">Luke 22:41–42 (NLT)</span></p><p> That is the prayer Daniel’s prayer was reaching toward: honest about the cost, surrendered about the outcome. And it is the difference between the two stories that saves us. Daniel was lifted from the den without a scratch; Jesus went through death itself and rose, so that everyone who trusts Him has a hope no den, no diagnosis and no decree can seal. Faithfulness under pressure is therefore not a feat of willpower. It is grace. Ellen White, preaching on Daniel, put it this way: </p><blockquote class="egw-block"><span class="egw">“We may know that if our life is hid with Christ in God, when we are brought into trial because of our faith, Jesus will be with us. … And if we are called to suffer for Christ’s sake, we shall be able to go to prison trusting in him as a little child trusts in its parents. Now is the time to cultivate faith in God”</span>.  <span class="egw-ref">The Review and Herald, May 3, 1892, par. 12; reprinted in Ye Shall Receive Power, September 17, “Daniel,” p. 269 · YRP 269.5</span></blockquote><p>Now is the time. Scripture is honest that <span class="scrip">“everyone who wants to live a godly life in Christ Jesus will suffer persecution,”</span> <span class="ref">2 Timothy 3:12 (NLT)</span> and equally clear about how to meet it: <span class="scrip">“But even if you suffer for doing what is right, God will reward you for it. So don’t worry or be afraid of their threats. Instead, you must worship Christ as Lord of your life.”</span> <span class="ref">1 Peter 3:14–15 (NLT)</span> So what would a Daniel-like church look like? It would be a congregation that cultivates daily prayer before the crisis arrives and gives thanks while still waiting for an answer. </p><p>Its members would be dependable at work, at home, at school and in public office, and their integrity would survive an audit. It would refuse corruption, resist jealousy and gossip, and never weaponise church procedures against people. It would honour its leaders without making any human leader an object of unquestioning loyalty, stand for conscience calmly and respectfully, and pray for those who oppose it. It would trust God without demanding a particular outcome, support believers who suffer for conscience, and remember that faithful Christians may have different earthly endings and the same resurrection. </p><p>And it would keep Christ at the centre of all its courage, because public witness grows out of private communion with Him. The church will not develop Daniel’s courage merely by admiring the den; it must cultivate Daniel’s life of prayer, integrity and trust. Ask yourself today: what would remain unchanged in my life if obedience to God suddenly carried a cost? Can I thank Him before I know how the story ends? Is my faith the same in public responsibility, private prayer and personal danger? Then go home, and kneel down as usual. </p><p class="thesis"><strong>Build the prayer life before the pressure comes. Remain faithful when the cost becomes real. Trust the living God with the outcome.</strong></p></section>
 
   </div>
 
   <div class="divider" aria-hidden="true">
     <span class="line"></span>
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <svg width="26" height="26" viewbox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"></path></svg>
     <span class="line right"></span>
   </div>
 
@@ -311,9 +442,34 @@
   </ol>
 
   
-  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/VIzl1sZ_ic0" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">&#9654;</span>Watch the Short</a><p class="note">On YouTube as &ldquo;His Only “Crime” Was Prayer&rdquo; &mdash; from the channel <em>I Can Still Believe</em>.</p></div>
+  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/VIzl1sZ_ic0" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">▶</span>Watch the Short</a><p class="note">On YouTube as “His Only “Crime” Was Prayer” — from the channel <em>I Can Still Believe</em>.</p></div>
 
   <div class="sdg">Soli Deo Gloria</div>
 </article>
+<nav class="footnav"><a href="./">&#8592;&nbsp;All devotions</a><a href="#top">Back to top&nbsp;&#8593;</a></nav>
+<button class="lamp" id="lamp" type="button" aria-label="Night reading">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path class="moon" d="M20 13.4A8.2 8.2 0 1 1 10.6 4a6.4 6.4 0 0 0 9.4 9.4Z"/>
+  </svg>
+</button>
+<script>
+(function(){
+  var root=document.documentElement, lamp=document.getElementById('lamp');
+  try{ if(localStorage.getItem('devo-theme')==='night') root.setAttribute('data-theme','night'); }catch(e){}
+  if(lamp){ lamp.addEventListener('click',function(){
+    var on = root.getAttribute('data-theme')==='night';
+    if(on){ root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme','night'); }
+    try{ localStorage.setItem('devo-theme', on?'day':'night'); }catch(e){}
+  }); }
+  var bar=document.getElementById('prog');
+  function tick(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.width=(h>0?Math.min(100,(window.scrollY/h)*100):0)+'%';
+  }
+  if(bar){ window.addEventListener('scroll',tick,{passive:true});
+           window.addEventListener('resize',tick); tick(); }
+})();
+</script>
 </body>
 </html>

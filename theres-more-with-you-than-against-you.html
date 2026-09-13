@@ -3,143 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>There’s More With You Than Against You &mdash; Today's Devotion</title>
+<title>There’s More With You Than Against You — Today's Devotion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Lora:ital,wght@0,400;0,600;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
 <style>
   :root{
-    --parchment:#f3ead4;
-    --parchment-deep:#eadfc2;
-    --ink:#3b2d18;
-    --ink-soft:#5a4629;
-    --gold:#a67c1e;
-    --gold-bright:#c9a227;
-    --gold-pale:#e3cf95;
-    --wine:#7a3b2e;
+    --bg1:#f8f2e1; --bg2:#f3ead4; --bg3:#e8dcbd;
+    --page-bg:rgba(255,252,241,.62);
+    --page-border:#a67c1e; --page-outline:#e3cf95;
+    --ink:#33281a; --ink-soft:#5a4629;
+    --gold:#a67c1e; --gold-bright:#c9a227; --gold-pale:#e3cf95;
+    --wine:#7a3b2e; --wine-solid:#7a3b2e; --wine-edge:#5d2b20;
+    --card1:rgba(255,250,232,.92); --card2:rgba(247,238,213,.92);
+    --emph:#7c5a12;
+    --num1:#f5e7bd; --num2:#e3cf95; --numfg:#7c5a12;
+    --shadow:rgba(90,70,30,.16);
+    --grain:.30;
+    --rule:rgba(166,124,30,.28);
+  }
+  :root[data-theme="night"]{
+    --bg1:#1a160f; --bg2:#15120c; --bg3:#100e09;
+    --page-bg:rgba(44,37,26,.42);
+    --page-border:#7d6524; --page-outline:#463a19;
+    --ink:#e9dfc8; --ink-soft:#c4b491;
+    --gold:#c2a03a; --gold-bright:#e0bf58; --gold-pale:#6a5828;
+    --wine:#e2a891; --wine-solid:#8a4537; --wine-edge:#6b3428;
+    --card1:rgba(56,47,32,.6); --card2:rgba(46,39,27,.6);
+    --emph:#e2c775;
+    --num1:#4c4024; --num2:#3a311b; --numfg:#e8ce7f;
+    --shadow:rgba(0,0,0,.55);
+    --grain:.16;
+    --rule:rgba(194,160,58,.26);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{
-    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    background:radial-gradient(ellipse at 50% 0%, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%);
+    background-attachment:fixed;
     color:var(--ink);
     font-family:'Lora',serif;
-    line-height:1.85;
-    padding:34px 14px 60px;
+    line-height:1.78;
+    padding:30px 14px 28px;
     position:relative;
+    -webkit-font-smoothing:antialiased;
+    transition:background-color .25s ease, color .25s ease;
   }
-  /* aged-paper grain */
+  /* aged-paper grain, lighter than before */
   body::before{
     content:"";
     position:fixed;inset:0;
     pointer-events:none;
-    opacity:.5;
+    opacity:var(--grain);
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
     z-index:2;
   }
-  .page{
-    max-width:760px;
-    margin:0 auto;
-    background:rgba(255,252,240,.55);
-    border:1.5px solid var(--gold);
-    outline:1px solid var(--gold-pale);
-    outline-offset:6px;
-    padding:64px 52px 56px;
-    position:relative;
-    box-shadow:0 18px 50px rgba(90,70,30,.18);
+
+  /* reading progress */
+  .progress{
+    position:fixed;top:0;left:0;height:3px;width:0;
+    background:linear-gradient(90deg,var(--gold-pale),var(--gold-bright));
+    z-index:12;transition:width .08s linear;
   }
-  @media(max-width:620px){.page{padding:52px 24px 44px;}}
-  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
-  .corner.tl{top:10px;left:10px;}
-  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
-  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
-  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+
+  .page{
+    max-width:720px;
+    margin:0 auto;
+    background:var(--page-bg);
+    border:1.5px solid var(--page-border);
+    outline:1px solid var(--page-outline);
+    outline-offset:6px;
+    padding:62px 56px 54px;
+    position:relative;
+    box-shadow:0 18px 50px var(--shadow);
+  }
+  @media(max-width:620px){.page{padding:48px 22px 40px;} body{padding:22px 11px 24px;}}
+
+  /* corners, quieter: smaller and lighter than before */
+  .corner{position:absolute;width:44px;height:44px;color:var(--gold);opacity:.55;}
+  .corner.tl{top:9px;left:9px;}
+  .corner.tr{top:9px;right:9px;transform:scaleX(-1);}
+  .corner.bl{bottom:9px;left:9px;transform:scaleY(-1);}
+  .corner.br{bottom:9px;right:9px;transform:scale(-1,-1);}
+
   .eyebrow{
     font-family:'Cinzel',serif;
-    font-size:.82rem;
-    letter-spacing:.42em;
+    font-size:.74rem;
+    letter-spacing:.34em;
     text-transform:uppercase;
     color:var(--gold);
     text-align:center;
-    margin-bottom:18px;
+    margin-bottom:16px;
   }
   h1{
     font-family:'Playfair Display',serif;
     font-weight:700;
-    font-size:clamp(2.1rem,5.4vw,3rem);
+    font-size:clamp(2rem,5vw,2.8rem);
+    line-height:1.18;
     text-align:center;
     color:var(--ink);
-    letter-spacing:.01em;
-    margin-bottom:26px;
+    letter-spacing:.005em;
+    margin-bottom:14px;
   }
+  .meta{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.16em;
+    font-size:.78rem;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:28px;
+  }
+  .meta span{opacity:.55;margin:0 7px;}
+
   /* Ellen G. White — companion ink */
   .egw{color:var(--wine);}
   .egw-ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.08em;
-    font-size:.88em;
+    letter-spacing:.07em;
+    font-size:.85em;
     color:var(--wine);
   }
-  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .egw-ref::before{content:"\2712";margin-right:.3em;font-size:.9em;}
+  /* long quotations stand as blocks */
+  blockquote.egw-block{
+    margin:26px 0 28px;
+    padding:2px 0 2px 22px;
+    border-left:2px solid var(--wine);
+    color:var(--wine);
+    font-size:1.01rem;
+    line-height:1.72;
+  }
+  blockquote.egw-block .egw-ref{
+    display:block;margin-top:9px;font-size:.78rem;
+    letter-spacing:.04em;line-height:1.55;opacity:.92;
+    text-wrap:pretty;          /* keeps a lone word off the last line */
+  }
+  @media(max-width:620px){blockquote.egw-block{padding-left:16px;}}
+
   .divider{
     display:flex;align-items:center;justify-content:center;
-    gap:14px;margin:30px 0;color:var(--gold);
+    gap:14px;margin:28px 0;color:var(--gold);
   }
   .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
   .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
   .divider svg{flex-shrink:0;}
+
   .verse-card{
     border:1px solid var(--gold-pale);
-    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
-    padding:30px 34px 26px;
+    background:linear-gradient(180deg,var(--card1),var(--card2));
+    padding:28px 32px 24px;
     text-align:center;
     margin:0 auto 8px;
     position:relative;
   }
   .verse-card .label{
     font-family:'Cinzel',serif;
-    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
-    color:var(--gold);margin-bottom:14px;
+    font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:13px;
   }
   .verse-card .scripture{
     font-family:'Cormorant Garamond',serif;
     font-style:italic;
-    font-size:1.42rem;
-    line-height:1.65;
+    font-size:1.38rem;
+    line-height:1.62;
     color:var(--ink-soft);
   }
   .verse-card .ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.14em;
-    font-size:.95rem;
+    letter-spacing:.13em;
+    font-size:.92rem;
     color:var(--gold);
-    margin-top:14px;
+    margin-top:13px;
   }
-  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
-  .body-text p:first-of-type::first-letter{
+
+  /* body — ragged right, book measure */
+  .body-text{margin-top:4px;}
+  .body-text p{
+    margin-bottom:1.15em;
+    font-size:1.075rem;
+    text-align:left;
+    hyphens:none;
+  }
+  .body-text .mv{margin-bottom:6px;}
+  .body-text > .mv:first-child > p:first-child::first-letter{
     font-family:'Playfair Display',serif;
-    font-size:3.9em;
+    font-size:3.7em;
     float:left;
     line-height:.82;
-    padding:6px 12px 0 0;
+    padding:5px 11px 0 0;
     color:var(--gold);
   }
-  .body-text strong{color:#7c5a12;font-weight:600;}
+  .body-text strong{color:var(--emph);font-weight:600;}
   .scrip{font-style:italic;color:var(--ink-soft);}
   .ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.1em;
-    font-size:.92em;
+    letter-spacing:.09em;
+    font-size:.9em;
     color:var(--gold);
     white-space:nowrap;
   }
+
+  /* the closing sentence of each movement, promoted */
+  .body-text p.thesis{
+    text-align:center;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.32rem;
+    line-height:1.55;
+    color:var(--ink);
+    margin:26px auto 34px;
+    max-width:34em;
+    padding-top:22px;
+    position:relative;
+  }
+  .body-text p.thesis::before{
+    content:"";
+    position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:58px;height:1px;background:var(--gold);opacity:.8;
+  }
+  .body-text p.thesis strong{font-weight:inherit;color:inherit;}
+  @media(max-width:620px){.body-text p.thesis{font-size:1.2rem;}}
+
   h2.takeaways{
     font-family:'Cinzel',serif;
     font-weight:600;
-    font-size:1.35rem;
-    letter-spacing:.18em;
+    font-size:1.22rem;
+    letter-spacing:.16em;
     text-transform:uppercase;
     text-align:center;
     color:var(--ink);
@@ -149,30 +242,45 @@
   ol.takeaway-list li{
     counter-increment:tk;
     position:relative;
-    padding-left:62px;
+    padding-left:54px;
     margin-bottom:20px;
-    font-size:1.03rem;
+    font-size:1.02rem;
   }
   ol.takeaway-list li::before{
     content:counter(tk);
-    position:absolute;left:0;top:2px;
-    width:42px;height:42px;
+    position:absolute;left:0;top:3px;
+    width:36px;height:36px;
     border-radius:50%;
     border:1.5px solid var(--gold);
-    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
-    color:#7c5a12;
+    background:radial-gradient(circle at 35% 30%,var(--num1),var(--num2));
+    color:var(--numfg);
     font-family:'Cinzel',serif;
     font-weight:600;
-    font-size:1.05rem;
+    font-size:.98rem;
     display:flex;align-items:center;justify-content:center;
-    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+    box-shadow:0 2px 6px var(--shadow), inset 0 1px 2px rgba(255,255,255,.35);
   }
-  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  ol.takeaway-list li strong{color:var(--emph);font-weight:600;}
+
+  .sources{
+    margin-top:34px;
+    font-size:.88rem;
+    line-height:1.7;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+  .sources .label{
+    font-family:'Cinzel',serif;
+    font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);display:block;margin-bottom:4px;
+  }
+
+  /* Watch It — unchanged treatment, tokenised for night reading */
   .watch{
     margin-top:38px;
     text-align:center;
     border:1px solid var(--gold);
-    background:linear-gradient(180deg,rgba(255,250,232,.75),rgba(247,238,213,.75));
+    background:linear-gradient(180deg,var(--card1),var(--card2));
     padding:26px 22px 22px;
   }
   .watch .label{
@@ -187,8 +295,8 @@
     letter-spacing:.08em;
     font-size:1.02rem;
     color:#fdf6e6;
-    background:var(--wine);
-    border:1px solid #5d2b20;
+    background:var(--wine-solid);
+    border:1px solid var(--wine-edge);
     text-decoration:none;
     padding:14px 26px;
     margin:6px 7px;
@@ -210,55 +318,78 @@
     .watch a{display:block;margin:9px 0;padding:15px 18px;}
     .watch{padding:22px 16px 18px;}
   }
+
   .sdg{
     font-family:'Pinyon Script',cursive;
-    font-size:2.5rem;
+    font-size:2.4rem;
     color:var(--gold);
     text-align:center;
     margin-top:40px;
   }
+
+  /* navigation */
+  .allnav,.footnav{max-width:720px;margin:0 auto 16px;text-align:center;}
+  .footnav{margin:26px auto 8px;display:flex;justify-content:center;gap:26px;}
+  .allnav a,.footnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.16em;
+    font-size:.8rem;color:var(--gold);text-decoration:none;
+    border-bottom:1px solid var(--rule);padding-bottom:2px;
+  }
+  .allnav a:hover,.footnav a:hover{border-bottom-color:var(--gold);}
+
+  /* night-reading toggle */
+  .lamp{
+    position:fixed;right:16px;bottom:16px;z-index:11;
+    width:44px;height:44px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--card1);
+    border:1px solid var(--gold);
+    color:var(--gold);
+    cursor:pointer;
+    box-shadow:0 4px 14px var(--shadow);
+    opacity:.72;
+    transition:opacity .18s ease, transform .18s ease;
+  }
+  .lamp:hover,.lamp:focus-visible{opacity:1;transform:translateY(-2px);outline:none;}
+  .lamp svg{width:20px;height:20px;}
+  @media print{.lamp,.progress,.allnav,.footnav{display:none;}}
 </style>
 </head>
 <body>
-<style>
-  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
-  .allnav a{
-    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
-    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
-    padding-bottom:2px;
-  }
-  .allnav a:hover{border-bottom-color:#a67c1e;}
-</style>
-<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+<div class="progress" id="prog"></div>
+<a id="top"></a>
+<nav class="allnav"><a href="./">← All devotions</a></nav>
 
 <article class="page">
-  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner tl" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner tr" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner bl" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner br" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
 
   <div class="eyebrow">Today's Devotion</div>
   <h1>There’s More With You Than Against You</h1>
+
+  <div class="meta">2 Kings 6 <span>·</span> 8 min read</div>
 
   <section class="verse-card">
     <div class="label">Key Verse</div>
@@ -268,47 +399,72 @@
 
   <div class="divider" aria-hidden="true">
     <span class="line"></span>
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <svg width="26" height="26" viewbox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"></path></svg>
     <span class="line right"></span>
   </div>
 
   <div class="body-text">
-    <p>It began with a leak. <span class="scrip">“When the king of Aram was at war with Israel, he would confer with his officers and say, ‘We will mobilize our forces at such and such a place’”</span> <span class="ref">2 Kings 6:8 (NLT)</span>. Every time, Elisha warned the king of Israel first &mdash; <span class="scrip">“time and again”</span> <span class="ref">2 Kings 6:10 (NLT)</span> &mdash; until the king of Aram was sure he had a traitor at his own table. His officers set him straight: <span class="scrip">“Elisha, the prophet in Israel, tells the king of Israel even the words you speak in the privacy of your bedroom!”</span> <span class="ref">2 Kings 6:12 (NLT)</span>. Notice what that quietly tells you: nothing planned against God’s people behind a closed door is hidden from God. So the king did what frightened, powerful men do &mdash; he sent far too much. <span class="scrip">“So one night the king of Aram sent a great army with many chariots and horses to surround the city”</span> <span class="ref">2 Kings 6:14 (NLT)</span>. A great army. For one unarmed preacher in a small hill town called Dothan. Sometimes what comes against you is out of all proportion to you, and that is exactly how it feels.</p>
+    <section class="mv"><p>It began with a leak. <span class="scrip">“When the king of Aram was at war with Israel, he would confer with his officers and say, ‘We will mobilize our forces at such and such a place’”</span> <span class="ref">2 Kings 6:8 (NLT)</span>. Every time, Elisha warned the king of Israel first — <span class="scrip">“time and again”</span> <span class="ref">2 Kings 6:10 (NLT)</span> — until the king of Aram was sure he had a traitor at his own table. His officers set him straight: <span class="scrip">“Elisha, the prophet in Israel, tells the king of Israel even the words you speak in the privacy of your bedroom!”</span> <span class="ref">2 Kings 6:12 (NLT)</span>. </p><p>Notice what that quietly tells you: nothing planned against God’s people behind a closed door is hidden from God. So the king did what frightened, powerful men do — he sent far too much. <span class="scrip">“So one night the king of Aram sent a great army with many chariots and horses to surround the city”</span> <span class="ref">2 Kings 6:14 (NLT)</span>. A great army. For one unarmed preacher in a small hill town called Dothan. Sometimes what comes against you is out of all proportion to you, and that is exactly how it feels.</p></section>
 
-    <p>Then the sun came up. <span class="scrip">“When the servant of the man of God got up early the next morning and went outside, there were troops, horses, and chariots everywhere. ‘Oh, sir, what will we do now?’ the young man cried to Elisha”</span> <span class="ref">2 Kings 6:15 (NLT)</span>. Be fair to this young man, because most of us are him. The soldiers were real, the chariots were real, and they had come for the man he served. His fear was not a failure of faith; it was an honest reaction to an honest look. His problem was not that he saw too much. It was that he could not yet see enough. Many of us wake up to some version of that morning &mdash; the letter, the scan result, the message that changes everything, the people who have decided together to bring you down &mdash; and we go outside, and we count, and the count is against us.</p>
+    <section class="mv"><p>Then the sun came up. <span class="scrip">“When the servant of the man of God got up early the next morning and went outside, there were troops, horses, and chariots everywhere. ‘Oh, sir, what will we do now?’ the young man cried to Elisha”</span> <span class="ref">2 Kings 6:15 (NLT)</span>. Be fair to this young man, because most of us are him. The soldiers were real, the chariots were real, and they had come for the man he served. His fear was not a failure of faith; it was an honest reaction to an honest look. </p><p>His problem was not that he saw too much. It was that he could not yet see enough. Many of us wake up to some version of that morning — the letter, the scan result, the message that changes everything, the people who have decided together to bring you down — and we go outside, and we count, and the count is against us.</p></section>
 
-    <p>Elisha did not argue with the count. He corrected it. <span class="scrip">“Don’t be afraid!” Elisha told him. “For there are more on our side than on theirs!”</span> <span class="ref">2 Kings 6:16 (NLT)</span>. He does not say the army is not there. He says it is not the whole total. And notice what he prays for. Not <em>Lord, take them away</em>. Not <em>Lord, strike them down</em>. <span class="scrip">“Then Elisha prayed, ‘O LORD, open his eyes and let him see!’ The LORD opened the young man’s eyes, and when he looked up, he saw that the hillside around Elisha was filled with horses and chariots of fire”</span> <span class="ref">2 Kings 6:17 (NLT)</span>. Nothing outside had changed. What changed was his sight. And look at the geography: the enemy had surrounded the city; the fire had surrounded the prophet. The nearer ring was God’s. Ellen White describes it: <span class="egw">“Between the servant of God and the hosts of armed foemen was an encircling band of heavenly angels. They had come down in mighty power, not to destroy, not to exact homage, but to encamp round about and minister to the Lord’s weak and helpless ones.”</span> The young man had woken up surrounded. He simply had not known by whom.</p>
+    <section class="mv"><p>Elisha did not argue with the count. He corrected it. <span class="scrip">“Don’t be afraid!” Elisha told him. “For there are more on our side than on theirs!”</span> <span class="ref">2 Kings 6:16 (NLT)</span>. He does not say the army is not there. He says it is not the whole total. And notice what he prays for. Not <em>Lord, take them away</em>. Not <em>Lord, strike them down</em>. <span class="scrip">“Then Elisha prayed, ‘O LORD, open his eyes and let him see!’ The LORD opened the young man’s eyes, and when he looked up, he saw that the hillside around Elisha was filled with horses and chariots of fire”</span> <span class="ref">2 Kings 6:17 (NLT)</span>. </p><p>Nothing outside had changed. What changed was his sight. And look at the geography: the enemy had surrounded the city; the fire had surrounded the prophet. The nearer ring was God’s. Ellen White describes it: </p><blockquote class="egw-block"><span class="egw">“Between the servant of God and the hosts of armed foemen was an encircling band of heavenly angels. They had come down in mighty power, not to destroy, not to exact homage, but to encamp round about and minister to the Lord’s weak and helpless ones.”</span></blockquote><p> The young man had woken up surrounded. He simply had not known by whom.</p></section>
 
-    <p>So who, exactly, is with you &mdash; and how? Scripture is not vague about it. <span class="scrip">“For the angel of the LORD is a guard; he surrounds and defends all who fear him”</span> <span class="ref">Psalm 34:7 (NLT)</span>. <span class="scrip">“Therefore, angels are only servants&mdash;spirits sent to care for people who will inherit salvation”</span> <span class="ref">Hebrews 1:14 (NLT)</span>. And behind the servants stands their Commander. One of the names the Bible gives Him is <em>the LORD of Heaven’s Armies</em>: <span class="scrip">“The LORD of Heaven’s Armies is here among us; the God of Israel is our fortress”</span> <span class="ref">Psalm 46:7 (NLT)</span>. That is who. And the how is better than chariots: <span class="scrip">“If God is for us, who can ever be against us?”</span> <span class="ref">Romans 8:31 (NLT)</span>. The chariots were never the real security at Dothan; the God who commands them was. Jesus said the same armies were within His reach on the night He was arrested &mdash; <span class="scrip">“thousands of angels”</span> <span class="ref">Matthew 26:53 (NLT)</span> &mdash; and He chose not to call them, so that He could go to a cross for you. The One who is for you has already shown how far He will go.</p>
+    <section class="mv"><p>So who, exactly, is with you — and how? Scripture is not vague about it. <span class="scrip">“For the angel of the LORD is a guard; he surrounds and defends all who fear him”</span> <span class="ref">Psalm 34:7 (NLT)</span>. <span class="scrip">“Therefore, angels are only servants—spirits sent to care for people who will inherit salvation”</span> <span class="ref">Hebrews 1:14 (NLT)</span>. And behind the servants stands their Commander. One of the names the Bible gives Him is <em>the LORD of Heaven’s Armies</em>: <span class="scrip">“The LORD of Heaven’s Armies is here among us; the God of Israel is our fortress”</span> <span class="ref">Psalm 46:7 (NLT)</span>. </p><p>That is who. And the how is better than chariots: <span class="scrip">“If God is for us, who can ever be against us?”</span> <span class="ref">Romans 8:31 (NLT)</span>. The chariots were never the real security at Dothan; the God who commands them was. Jesus said the same armies were within His reach on the night He was arrested — <span class="scrip">“thousands of angels”</span> <span class="ref">Matthew 26:53 (NLT)</span> — and He chose not to call them, so that He could go to a cross for you. The One who is for you has already shown how far He will go.</p></section>
 
-    <p>Now watch what the greater army actually did. <span class="scrip">“As the Aramean army advanced toward him, Elisha prayed, ‘O LORD, please make them blind.’ So the LORD struck them with blindness as Elisha had asked”</span> <span class="ref">2 Kings 6:18 (NLT)</span>. Not one chariot of fire charged. Not one soldier was burned. Ellen White notes that the Syrians came on <span class="egw">“ignorant of the unseen hosts of heaven”</span> &mdash; and heaven answered them with blindness, not with fire. The men who came to seize the seer could no longer see, and the man they came for led them down the road himself, all the way to the enemy capital, where <span class="scrip">“the LORD opened their eyes, and they discovered that they were in the middle of Samaria”</span> <span class="ref">2 Kings 6:20 (NLT)</span>. God’s greater power was never used the way the servant feared or the way the enemy deserved. It was used to disarm, not to destroy. When God is more with you than anyone is against you, He does not need to be cruel in order to win.</p>
+    <section class="mv"><p>Now watch what the greater army actually did. <span class="scrip">“As the Aramean army advanced toward him, Elisha prayed, ‘O LORD, please make them blind.’ So the LORD struck them with blindness as Elisha had asked”</span> <span class="ref">2 Kings 6:18 (NLT)</span>. Not one chariot of fire charged. Not one soldier was burned. Ellen White notes that the Syrians came on <span class="egw">“ignorant of the unseen hosts of heaven”</span> — and heaven answered them with blindness, not with fire. The men who came to seize the seer could no longer see, and the man they came for led them down the road himself, all the way to the enemy capital, where <span class="scrip">“the LORD opened their eyes, and they discovered that they were in the middle of Samaria”</span> <span class="ref">2 Kings 6:20 (NLT)</span>. </p><p>God’s greater power was never used the way the servant feared or the way the enemy deserved. It was used to disarm, not to destroy. When God is more with you than anyone is against you, He does not need to be cruel in order to win.</p></section>
 
-    <p>Then comes the strangest scene of all. <span class="scrip">“When the king of Israel saw them, he shouted to Elisha, ‘My father, should I kill them? Should I kill them?’”</span> <span class="ref">2 Kings 6:21 (NLT)</span>. Twice &mdash; you can hear the eagerness. <span class="scrip">“Of course not!” Elisha replied. “Do we kill prisoners of war? Give them food and drink and send them home again to their master”</span> <span class="ref">2 Kings 6:22 (NLT)</span>. <span class="scrip">“So the king made a great feast for them and then sent them home to their master. After that, the Aramean raiders stayed away from the land of Israel”</span> <span class="ref">2 Kings 6:23 (NLT)</span>. The raids stopped &mdash; not because of a battle, but because of a meal. <span class="scrip">“If your enemies are hungry, feed them &hellip; Don’t let evil conquer you, but conquer evil by doing good”</span> <span class="ref">Romans 12:20&ndash;21 (NLT)</span>. Frightened people fight like people who are outnumbered: they grab, they strike first, they get even. People who know there is more with them than against them can afford to be generous, because their safety never rested on the other person’s defeat. One honest guardrail belongs here. Those soldiers were disarmed and inside the walls before anyone laid a table. Mercy toward an enemy is not the same as staying within reach of someone who is harming you. If you are in danger, get to safety and get help &mdash; that is wisdom, not a failure of faith.</p>
+    <section class="mv"><p>Then comes the strangest scene of all. <span class="scrip">“When the king of Israel saw them, he shouted to Elisha, ‘My father, should I kill them? Should I kill them?’”</span> <span class="ref">2 Kings 6:21 (NLT)</span>. Twice — you can hear the eagerness. <span class="scrip">“Of course not!” Elisha replied. “Do we kill prisoners of war? Give them food and drink and send them home again to their master”</span> <span class="ref">2 Kings 6:22 (NLT)</span>. <span class="scrip">“So the king made a great feast for them and then sent them home to their master. After that, the Aramean raiders stayed away from the land of Israel”</span> <span class="ref">2 Kings 6:23 (NLT)</span>. </p><p>The raids stopped — not because of a battle, but because of a meal. <span class="scrip">“If your enemies are hungry, feed them … Don’t let evil conquer you, but conquer evil by doing good”</span> <span class="ref">Romans 12:20–21 (NLT)</span>. Frightened people fight like people who are outnumbered: they grab, they strike first, they get even. People who know there is more with them than against them can afford to be generous, because their safety never rested on the other person’s defeat. One honest guardrail belongs here. Those soldiers were disarmed and inside the walls before anyone laid a table. </p><p>Mercy toward an enemy is not the same as staying within reach of someone who is harming you. If you are in danger, get to safety and get help — that is wisdom, not a failure of faith.</p></section>
 
-    <p>So what is surrounding you this morning? It is probably real. The Bible never asks you to pretend the army is not there; it insists that the army is not the whole count. And here is the honest part: God does not promise every one of His people a Dothan. Hebrews 11 names those who <span class="scrip">“escaped death by the edge of the sword”</span> and, in the same breath, those who <span class="scrip">“were killed with the sword”</span> <span class="ref">Hebrews 11:34, 37 (NLT)</span> &mdash; and calls all of them people of faith. Ellen White puts the deeper promise plainly: <span class="egw">“When the people of God are brought into strait places, and apparently there is no escape for them, the Lord alone must be their dependence.”</span> The promise is not that nothing can touch you. It is that nothing can outnumber Him, and that He is nearer to you than anything that is against you. So before you pray <em>Lord, take it away</em> today, try the older prayer first: <em>Lord, open my eyes.</em> Then look up. Whatever you are counting, count Him. <strong>There’s more with you than against you.</strong></p>
+    <section class="mv"><p>So what is surrounding you this morning? It is probably real. The Bible never asks you to pretend the army is not there; it insists that the army is not the whole count. And here is the honest part: God does not promise every one of His people a Dothan. Hebrews 11 names those who <span class="scrip">“escaped death by the edge of the sword”</span> and, in the same breath, those who <span class="scrip">“were killed with the sword”</span> <span class="ref">Hebrews 11:34, 37 (NLT)</span> — and calls all of them people of faith. </p><p>Ellen White puts the deeper promise plainly: <span class="egw">“When the people of God are brought into strait places, and apparently there is no escape for them, the Lord alone must be their dependence.”</span> The promise is not that nothing can touch you. It is that nothing can outnumber Him, and that He is nearer to you than anything that is against you. So before you pray <em>Lord, take it away</em> today, try the older prayer first: <em>Lord, open my eyes.</em> Then look up. Whatever you are counting, count Him. </p><p class="thesis"><strong>There’s more with you than against you.</strong></p></section>
   </div>
 
   <div class="divider" aria-hidden="true">
     <span class="line"></span>
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <svg width="26" height="26" viewbox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"></path></svg>
     <span class="line right"></span>
   </div>
 
   <h2 class="takeaways">Key Takeaways</h2>
   <ol class="takeaway-list">
-    <li><strong>Nothing plotted behind a closed door is hidden from God</strong> &mdash; the king of Aram’s bedroom plans were heard in Israel, <em>time and again</em>.</li>
-    <li><strong>The army was real, and so was the fear</strong> &mdash; the servant’s problem was not that he saw too much, but that he could not yet see enough.</li>
-    <li><strong>Elisha corrected the count, not the facts</strong> &mdash; <em>there are more on our side than on theirs</em> does not deny the enemy; it denies that the enemy is the whole total.</li>
-    <li><strong>The first prayer was for eyes, not for rescue</strong> &mdash; <em>O LORD, open his eyes and let him see!</em> Nothing outside changed; his sight did.</li>
-    <li><strong>The nearer ring was God’s</strong> &mdash; the enemy surrounded the city; the chariots of fire surrounded the prophet. Who is with you: the LORD of Heaven’s Armies and the angels He sends. How: He surrounds, He defends, and He is <em>for</em> you.</li>
-    <li><strong>Greater power was used to disarm, not destroy</strong> &mdash; blindness instead of fire, a feast instead of a slaughter, and the raids stopped; mercy did what swords could not. Mercy is never staying within reach of someone who is harming you.</li>
-    <li><strong>Not every believer gets a Dothan, but every believer gets Him</strong> &mdash; Hebrews 11 counts both those who escaped the sword and those who fell by it as people of faith; the promise is that nothing can outnumber Him.</li>
+    <li><strong>Nothing plotted behind a closed door is hidden from God</strong> — the king of Aram’s bedroom plans were heard in Israel, <em>time and again</em>.</li>
+    <li><strong>The army was real, and so was the fear</strong> — the servant’s problem was not that he saw too much, but that he could not yet see enough.</li>
+    <li><strong>Elisha corrected the count, not the facts</strong> — <em>there are more on our side than on theirs</em> does not deny the enemy; it denies that the enemy is the whole total.</li>
+    <li><strong>The first prayer was for eyes, not for rescue</strong> — <em>O LORD, open his eyes and let him see!</em> Nothing outside changed; his sight did.</li>
+    <li><strong>The nearer ring was God’s</strong> — the enemy surrounded the city; the chariots of fire surrounded the prophet. Who is with you: the LORD of Heaven’s Armies and the angels He sends. How: He surrounds, He defends, and He is <em>for</em> you.</li>
+    <li><strong>Greater power was used to disarm, not destroy</strong> — blindness instead of fire, a feast instead of a slaughter, and the raids stopped; mercy did what swords could not. Mercy is never staying within reach of someone who is harming you.</li>
+    <li><strong>Not every believer gets a Dothan, but every believer gets Him</strong> — Hebrews 11 counts both those who escaped the sword and those who fell by it as people of faith; the promise is that nothing can outnumber Him.</li>
   </ol>
 
   
-  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/Od3Yp4tcK34" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">&#9654;</span>Watch the Short</a><p class="note">On YouTube as &ldquo;When The Count Is Against Us&rdquo; &mdash; from the channel <em>I Can Still Believe</em>.</p></div>
+  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/Od3Yp4tcK34" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">▶</span>Watch the Short</a><p class="note">On YouTube as “When The Count Is Against Us” — from the channel <em>I Can Still Believe</em>.</p></div>
 
   <div class="sdg">Soli Deo Gloria</div>
 </article>
+<nav class="footnav"><a href="./">&#8592;&nbsp;All devotions</a><a href="#top">Back to top&nbsp;&#8593;</a></nav>
+<button class="lamp" id="lamp" type="button" aria-label="Night reading">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path class="moon" d="M20 13.4A8.2 8.2 0 1 1 10.6 4a6.4 6.4 0 0 0 9.4 9.4Z"/>
+  </svg>
+</button>
+<script>
+(function(){
+  var root=document.documentElement, lamp=document.getElementById('lamp');
+  try{ if(localStorage.getItem('devo-theme')==='night') root.setAttribute('data-theme','night'); }catch(e){}
+  if(lamp){ lamp.addEventListener('click',function(){
+    var on = root.getAttribute('data-theme')==='night';
+    if(on){ root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme','night'); }
+    try{ localStorage.setItem('devo-theme', on?'day':'night'); }catch(e){}
+  }); }
+  var bar=document.getElementById('prog');
+  function tick(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.width=(h>0?Math.min(100,(window.scrollY/h)*100):0)+'%';
+  }
+  if(bar){ window.addEventListener('scroll',tick,{passive:true});
+           window.addEventListener('resize',tick); tick(); }
+})();
+</script>
 </body>
 </html>

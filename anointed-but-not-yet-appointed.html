@@ -3,143 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anointed, But Not Yet Appointed &mdash; Today's Devotion</title>
+<title>Anointed, But Not Yet Appointed — Today's Devotion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Lora:ital,wght@0,400;0,600;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
 <style>
   :root{
-    --parchment:#f3ead4;
-    --parchment-deep:#eadfc2;
-    --ink:#3b2d18;
-    --ink-soft:#5a4629;
-    --gold:#a67c1e;
-    --gold-bright:#c9a227;
-    --gold-pale:#e3cf95;
-    --wine:#7a3b2e;
+    --bg1:#f8f2e1; --bg2:#f3ead4; --bg3:#e8dcbd;
+    --page-bg:rgba(255,252,241,.62);
+    --page-border:#a67c1e; --page-outline:#e3cf95;
+    --ink:#33281a; --ink-soft:#5a4629;
+    --gold:#a67c1e; --gold-bright:#c9a227; --gold-pale:#e3cf95;
+    --wine:#7a3b2e; --wine-solid:#7a3b2e; --wine-edge:#5d2b20;
+    --card1:rgba(255,250,232,.92); --card2:rgba(247,238,213,.92);
+    --emph:#7c5a12;
+    --num1:#f5e7bd; --num2:#e3cf95; --numfg:#7c5a12;
+    --shadow:rgba(90,70,30,.16);
+    --grain:.30;
+    --rule:rgba(166,124,30,.28);
+  }
+  :root[data-theme="night"]{
+    --bg1:#1a160f; --bg2:#15120c; --bg3:#100e09;
+    --page-bg:rgba(44,37,26,.42);
+    --page-border:#7d6524; --page-outline:#463a19;
+    --ink:#e9dfc8; --ink-soft:#c4b491;
+    --gold:#c2a03a; --gold-bright:#e0bf58; --gold-pale:#6a5828;
+    --wine:#e2a891; --wine-solid:#8a4537; --wine-edge:#6b3428;
+    --card1:rgba(56,47,32,.6); --card2:rgba(46,39,27,.6);
+    --emph:#e2c775;
+    --num1:#4c4024; --num2:#3a311b; --numfg:#e8ce7f;
+    --shadow:rgba(0,0,0,.55);
+    --grain:.16;
+    --rule:rgba(194,160,58,.26);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{
-    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    background:radial-gradient(ellipse at 50% 0%, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%);
+    background-attachment:fixed;
     color:var(--ink);
     font-family:'Lora',serif;
-    line-height:1.85;
-    padding:34px 14px 60px;
+    line-height:1.78;
+    padding:30px 14px 28px;
     position:relative;
+    -webkit-font-smoothing:antialiased;
+    transition:background-color .25s ease, color .25s ease;
   }
-  /* aged-paper grain */
+  /* aged-paper grain, lighter than before */
   body::before{
     content:"";
     position:fixed;inset:0;
     pointer-events:none;
-    opacity:.5;
+    opacity:var(--grain);
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
     z-index:2;
   }
-  .page{
-    max-width:760px;
-    margin:0 auto;
-    background:rgba(255,252,240,.55);
-    border:1.5px solid var(--gold);
-    outline:1px solid var(--gold-pale);
-    outline-offset:6px;
-    padding:64px 52px 56px;
-    position:relative;
-    box-shadow:0 18px 50px rgba(90,70,30,.18);
+
+  /* reading progress */
+  .progress{
+    position:fixed;top:0;left:0;height:3px;width:0;
+    background:linear-gradient(90deg,var(--gold-pale),var(--gold-bright));
+    z-index:12;transition:width .08s linear;
   }
-  @media(max-width:620px){.page{padding:52px 24px 44px;}}
-  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
-  .corner.tl{top:10px;left:10px;}
-  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
-  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
-  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+
+  .page{
+    max-width:720px;
+    margin:0 auto;
+    background:var(--page-bg);
+    border:1.5px solid var(--page-border);
+    outline:1px solid var(--page-outline);
+    outline-offset:6px;
+    padding:62px 56px 54px;
+    position:relative;
+    box-shadow:0 18px 50px var(--shadow);
+  }
+  @media(max-width:620px){.page{padding:48px 22px 40px;} body{padding:22px 11px 24px;}}
+
+  /* corners, quieter: smaller and lighter than before */
+  .corner{position:absolute;width:44px;height:44px;color:var(--gold);opacity:.55;}
+  .corner.tl{top:9px;left:9px;}
+  .corner.tr{top:9px;right:9px;transform:scaleX(-1);}
+  .corner.bl{bottom:9px;left:9px;transform:scaleY(-1);}
+  .corner.br{bottom:9px;right:9px;transform:scale(-1,-1);}
+
   .eyebrow{
     font-family:'Cinzel',serif;
-    font-size:.82rem;
-    letter-spacing:.42em;
+    font-size:.74rem;
+    letter-spacing:.34em;
     text-transform:uppercase;
     color:var(--gold);
     text-align:center;
-    margin-bottom:18px;
+    margin-bottom:16px;
   }
   h1{
     font-family:'Playfair Display',serif;
     font-weight:700;
-    font-size:clamp(2.1rem,5.4vw,3rem);
+    font-size:clamp(2rem,5vw,2.8rem);
+    line-height:1.18;
     text-align:center;
     color:var(--ink);
-    letter-spacing:.01em;
-    margin-bottom:26px;
+    letter-spacing:.005em;
+    margin-bottom:14px;
   }
+  .meta{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.16em;
+    font-size:.78rem;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:28px;
+  }
+  .meta span{opacity:.55;margin:0 7px;}
+
   /* Ellen G. White — companion ink */
   .egw{color:var(--wine);}
   .egw-ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.08em;
-    font-size:.88em;
+    letter-spacing:.07em;
+    font-size:.85em;
     color:var(--wine);
   }
-  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .egw-ref::before{content:"\2712";margin-right:.3em;font-size:.9em;}
+  /* long quotations stand as blocks */
+  blockquote.egw-block{
+    margin:26px 0 28px;
+    padding:2px 0 2px 22px;
+    border-left:2px solid var(--wine);
+    color:var(--wine);
+    font-size:1.01rem;
+    line-height:1.72;
+  }
+  blockquote.egw-block .egw-ref{
+    display:block;margin-top:9px;font-size:.78rem;
+    letter-spacing:.04em;line-height:1.55;opacity:.92;
+    text-wrap:pretty;          /* keeps a lone word off the last line */
+  }
+  @media(max-width:620px){blockquote.egw-block{padding-left:16px;}}
+
   .divider{
     display:flex;align-items:center;justify-content:center;
-    gap:14px;margin:30px 0;color:var(--gold);
+    gap:14px;margin:28px 0;color:var(--gold);
   }
   .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
   .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
   .divider svg{flex-shrink:0;}
+
   .verse-card{
     border:1px solid var(--gold-pale);
-    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
-    padding:30px 34px 26px;
+    background:linear-gradient(180deg,var(--card1),var(--card2));
+    padding:28px 32px 24px;
     text-align:center;
     margin:0 auto 8px;
     position:relative;
   }
   .verse-card .label{
     font-family:'Cinzel',serif;
-    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
-    color:var(--gold);margin-bottom:14px;
+    font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:13px;
   }
   .verse-card .scripture{
     font-family:'Cormorant Garamond',serif;
     font-style:italic;
-    font-size:1.42rem;
-    line-height:1.65;
+    font-size:1.38rem;
+    line-height:1.62;
     color:var(--ink-soft);
   }
   .verse-card .ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.14em;
-    font-size:.95rem;
+    letter-spacing:.13em;
+    font-size:.92rem;
     color:var(--gold);
-    margin-top:14px;
+    margin-top:13px;
   }
-  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
-  .body-text p:first-of-type::first-letter{
+
+  /* body — ragged right, book measure */
+  .body-text{margin-top:4px;}
+  .body-text p{
+    margin-bottom:1.15em;
+    font-size:1.075rem;
+    text-align:left;
+    hyphens:none;
+  }
+  .body-text .mv{margin-bottom:6px;}
+  .body-text > .mv:first-child > p:first-child::first-letter{
     font-family:'Playfair Display',serif;
-    font-size:3.9em;
+    font-size:3.7em;
     float:left;
     line-height:.82;
-    padding:6px 12px 0 0;
+    padding:5px 11px 0 0;
     color:var(--gold);
   }
-  .body-text strong{color:#7c5a12;font-weight:600;}
+  .body-text strong{color:var(--emph);font-weight:600;}
   .scrip{font-style:italic;color:var(--ink-soft);}
   .ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.1em;
-    font-size:.92em;
+    letter-spacing:.09em;
+    font-size:.9em;
     color:var(--gold);
     white-space:nowrap;
   }
+
+  /* the closing sentence of each movement, promoted */
+  .body-text p.thesis{
+    text-align:center;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.32rem;
+    line-height:1.55;
+    color:var(--ink);
+    margin:26px auto 34px;
+    max-width:34em;
+    padding-top:22px;
+    position:relative;
+  }
+  .body-text p.thesis::before{
+    content:"";
+    position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:58px;height:1px;background:var(--gold);opacity:.8;
+  }
+  .body-text p.thesis strong{font-weight:inherit;color:inherit;}
+  @media(max-width:620px){.body-text p.thesis{font-size:1.2rem;}}
+
   h2.takeaways{
     font-family:'Cinzel',serif;
     font-weight:600;
-    font-size:1.35rem;
-    letter-spacing:.18em;
+    font-size:1.22rem;
+    letter-spacing:.16em;
     text-transform:uppercase;
     text-align:center;
     color:var(--ink);
@@ -149,30 +242,45 @@
   ol.takeaway-list li{
     counter-increment:tk;
     position:relative;
-    padding-left:62px;
+    padding-left:54px;
     margin-bottom:20px;
-    font-size:1.03rem;
+    font-size:1.02rem;
   }
   ol.takeaway-list li::before{
     content:counter(tk);
-    position:absolute;left:0;top:2px;
-    width:42px;height:42px;
+    position:absolute;left:0;top:3px;
+    width:36px;height:36px;
     border-radius:50%;
     border:1.5px solid var(--gold);
-    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
-    color:#7c5a12;
+    background:radial-gradient(circle at 35% 30%,var(--num1),var(--num2));
+    color:var(--numfg);
     font-family:'Cinzel',serif;
     font-weight:600;
-    font-size:1.05rem;
+    font-size:.98rem;
     display:flex;align-items:center;justify-content:center;
-    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+    box-shadow:0 2px 6px var(--shadow), inset 0 1px 2px rgba(255,255,255,.35);
   }
-  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  ol.takeaway-list li strong{color:var(--emph);font-weight:600;}
+
+  .sources{
+    margin-top:34px;
+    font-size:.88rem;
+    line-height:1.7;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+  .sources .label{
+    font-family:'Cinzel',serif;
+    font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);display:block;margin-bottom:4px;
+  }
+
+  /* Watch It — unchanged treatment, tokenised for night reading */
   .watch{
     margin-top:38px;
     text-align:center;
     border:1px solid var(--gold);
-    background:linear-gradient(180deg,rgba(255,250,232,.75),rgba(247,238,213,.75));
+    background:linear-gradient(180deg,var(--card1),var(--card2));
     padding:26px 22px 22px;
   }
   .watch .label{
@@ -187,8 +295,8 @@
     letter-spacing:.08em;
     font-size:1.02rem;
     color:#fdf6e6;
-    background:var(--wine);
-    border:1px solid #5d2b20;
+    background:var(--wine-solid);
+    border:1px solid var(--wine-edge);
     text-decoration:none;
     padding:14px 26px;
     margin:6px 7px;
@@ -210,55 +318,78 @@
     .watch a{display:block;margin:9px 0;padding:15px 18px;}
     .watch{padding:22px 16px 18px;}
   }
+
   .sdg{
     font-family:'Pinyon Script',cursive;
-    font-size:2.5rem;
+    font-size:2.4rem;
     color:var(--gold);
     text-align:center;
     margin-top:40px;
   }
+
+  /* navigation */
+  .allnav,.footnav{max-width:720px;margin:0 auto 16px;text-align:center;}
+  .footnav{margin:26px auto 8px;display:flex;justify-content:center;gap:26px;}
+  .allnav a,.footnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.16em;
+    font-size:.8rem;color:var(--gold);text-decoration:none;
+    border-bottom:1px solid var(--rule);padding-bottom:2px;
+  }
+  .allnav a:hover,.footnav a:hover{border-bottom-color:var(--gold);}
+
+  /* night-reading toggle */
+  .lamp{
+    position:fixed;right:16px;bottom:16px;z-index:11;
+    width:44px;height:44px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--card1);
+    border:1px solid var(--gold);
+    color:var(--gold);
+    cursor:pointer;
+    box-shadow:0 4px 14px var(--shadow);
+    opacity:.72;
+    transition:opacity .18s ease, transform .18s ease;
+  }
+  .lamp:hover,.lamp:focus-visible{opacity:1;transform:translateY(-2px);outline:none;}
+  .lamp svg{width:20px;height:20px;}
+  @media print{.lamp,.progress,.allnav,.footnav{display:none;}}
 </style>
 </head>
 <body>
-<style>
-  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
-  .allnav a{
-    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
-    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
-    padding-bottom:2px;
-  }
-  .allnav a:hover{border-bottom-color:#a67c1e;}
-</style>
-<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+<div class="progress" id="prog"></div>
+<a id="top"></a>
+<nav class="allnav"><a href="./">← All devotions</a></nav>
 
 <article class="page">
-  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner tl" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner tr" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner bl" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner br" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
 
     <div class="eyebrow">Today's Devotion</div>
   <h1>Anointed, But Not Yet Appointed</h1>
+
+  <div class="meta">1 Samuel 16 <span>·</span> 23 min read</div>
 
   <section class="verse-card">
     <div class="label">Key Verse</div>
@@ -268,47 +399,72 @@
 
   <div class="divider" aria-hidden="true">
     <span class="line"></span>
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <svg width="26" height="26" viewbox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"></path></svg>
     <span class="line right"></span>
   </div>
 
   <div class="body-text">
-    <p>The story begins with an old prophet who has been grieving too long over a king who did not work out. <span class="scrip">“Now the L<small>ORD</small> said to Samuel, ‘You have mourned long enough for Saul. I have rejected him as king of Israel, so fill your flask with olive oil and go to Bethlehem. Find a man named Jesse who lives there, for I have selected one of his sons to be my king’”</span> <span class="ref">1 Samuel 16:1 (NLT)</span>. Samuel was afraid, and said so: <span class="scrip">“How can I do that? If Saul hears about it, he will kill me”</span> <span class="ref">1 Samuel 16:2 (NLT)</span>. God gave him a sacrifice to make and a family to invite, and Samuel went. When he arrived <span class="scrip">“the elders of the town came trembling to meet him”</span> <span class="ref">1 Samuel 16:4 (NLT)</span>; a prophet turning up unannounced in a small town in that political climate was not good news. Jesse’s sons were purified and brought to the sacrifice, and then the choosing began. <span class="scrip">“When they arrived, Samuel took one look at Eliab and thought, ‘Surely this is the L<small>ORD</small>’s anointed!’”</span> <span class="ref">1 Samuel 16:6 (NLT)</span>. One look. Notice who is making that mistake: not a careless man, not a worldly man, but Israel’s prophet, the one who had heard God’s voice since he was a boy. He saw height and bearing and the dignity of a firstborn, and his heart said <em>yes</em> before God had said anything at all. And God stopped him. <span class="scrip">“But the L<small>ORD</small> said to Samuel, ‘Don’t judge by his appearance or height, for I have rejected him. The L<small>ORD</small> doesn’t see things the way you see them. People judge by outward appearance, but the L<small>ORD</small> looks at the heart’”</span> <span class="ref">1 Samuel 16:7 (NLT)</span>. That is the sentence the whole chapter turns on, and it cuts in two directions at once. It is a warning, because it means our confident readings of people are often simply wrong. And it is a comfort, because it means the people our readings overlook are not overlooked by God. Ellen White puts the principle plainly in her account of this scene: <span class="egw">“No outward beauty can recommend the soul to God. The wisdom and excellence revealed in the character and deportment, express the true beauty of the man; and it is the inner worth, the excellency of the heart, that determines our acceptance with the Lord of hosts.”</span> So the sons came forward one by one, and one by one the answer was no. <span class="scrip">“In the same way all seven of Jesse’s sons were presented to Samuel. But Samuel said to Jesse, ‘The L<small>ORD</small> has not chosen any of these’”</span> <span class="ref">1 Samuel 16:10 (NLT)</span>. Seven fine young men, and heaven was silent through every one of them. The room must have gone very quiet.</p>
+    <section class="mv"><p>The story begins with an old prophet who has been grieving too long over a king who did not work out. <span class="scrip">“Now the L<small>ORD</small> said to Samuel, ‘You have mourned long enough for Saul. I have rejected him as king of Israel, so fill your flask with olive oil and go to Bethlehem. Find a man named Jesse who lives there, for I have selected one of his sons to be my king’”</span> <span class="ref">1 Samuel 16:1 (NLT)</span>. Samuel was afraid, and said so: <span class="scrip">“How can I do that? If Saul hears about it, he will kill me”</span> <span class="ref">1 Samuel 16:2 (NLT)</span>. </p><p>God gave him a sacrifice to make and a family to invite, and Samuel went. When he arrived <span class="scrip">“the elders of the town came trembling to meet him”</span> <span class="ref">1 Samuel 16:4 (NLT)</span>; a prophet turning up unannounced in a small town in that political climate was not good news. Jesse’s sons were purified and brought to the sacrifice, and then the choosing began. <span class="scrip">“When they arrived, Samuel took one look at Eliab and thought, ‘Surely this is the L<small>ORD</small>’s anointed!’”</span> <span class="ref">1 Samuel 16:6 (NLT)</span>. </p><p>One look. Notice who is making that mistake: not a careless man, not a worldly man, but Israel’s prophet, the one who had heard God’s voice since he was a boy. He saw height and bearing and the dignity of a firstborn, and his heart said <em>yes</em> before God had said anything at all. And God stopped him. <span class="scrip">“But the L<small>ORD</small> said to Samuel, ‘Don’t judge by his appearance or height, for I have rejected him. The L<small>ORD</small> doesn’t see things the way you see them. People judge by outward appearance, but the L<small>ORD</small> looks at the heart’”</span> <span class="ref">1 Samuel 16:7 (NLT)</span>. </p><p>That is the sentence the whole chapter turns on, and it cuts in two directions at once. It is a warning, because it means our confident readings of people are often simply wrong. And it is a comfort, because it means the people our readings overlook are not overlooked by God. Ellen White puts the principle plainly in her account of this scene: </p><blockquote class="egw-block"><span class="egw">“No outward beauty can recommend the soul to God. The wisdom and excellence revealed in the character and deportment, express the true beauty of the man; and it is the inner worth, the excellency of the heart, that determines our acceptance with the Lord of hosts.”</span></blockquote><p> So the sons came forward one by one, and one by one the answer was no. <span class="scrip">“In the same way all seven of Jesse’s sons were presented to Samuel. But Samuel said to Jesse, ‘The L<small>ORD</small> has not chosen any of these’”</span> <span class="ref">1 Samuel 16:10 (NLT)</span>. Seven fine young men, and heaven was silent through every one of them. The room must have gone very quiet.</p></section>
 
-    <p>Then Samuel asked the question that exposes everything: <span class="scrip">“Are these all the sons you have?” “There is still the youngest,” Jesse replied. “But he’s out in the fields watching the sheep and goats”</span> <span class="ref">1 Samuel 16:11 (NLT)</span>. Read that slowly, because it is one of the quietest cruelties in Scripture and nobody in the room seems to notice it. A prophet of God had come to Bethlehem. The family had been purified and summoned. Every son had been dressed and lined up and walked past the man of God &mdash; every son but one. Nobody thought to send for David. He was not rejected; he was simply not considered, which is its own kind of wound. And while a father was counting sons and coming up one short, heaven already knew the boy’s name, already knew his heart, and had already chosen him. <span class="scrip">“Send for him at once,” Samuel said. “We will not sit down to eat until he arrives”</span> <span class="ref">1 Samuel 16:11 (NLT)</span>. The meal waited. The prophet waited. Seven older brothers stood there and waited, while somebody ran out to the pasture for the one they had left with the animals. <span class="scrip">“So Jesse sent for him. He was dark and handsome, with beautiful eyes. And the L<small>ORD</small> said, ‘This is the one; anoint him’”</span> <span class="ref">1 Samuel 16:12 (NLT)</span>. And then the key verse: <span class="scrip">“So as David stood there among his brothers, Samuel took the flask of olive oil he had brought and anointed David with the oil. And the Spirit of the L<small>ORD</small> came powerfully upon David from that day on”</span> <span class="ref">1 Samuel 16:13 (NLT)</span>. Oil on a shepherd’s head. The Spirit of God on a shepherd’s life. Two things happened that afternoon that could never be undone, and both of them were real. But now read the last five words of the verse, because they are where this devotion lives: <span class="scrip">“Then Samuel returned to Ramah”</span> <span class="ref">1 Samuel 16:13 (NLT)</span>. That is all. No crown. No throne. No royal escort, no proclamation in the street, not even an explanation to the family. Ellen White notes exactly this about the scene: <span class="egw">“Samuel had not made known his errand, even to the family of Jesse, and the ceremony of anointing David had been performed in secret.”</span> The prophet packed his flask and went home. And the boy with the oil still in his hair went back out to the sheep. That gap &mdash; between the oil in 1 Samuel 16 and the crown in 2 Samuel 5 &mdash; is what these two words are describing: <strong>anointed, but not yet appointed.</strong> Scripture does not use those two words as technical terms, and we should not pretend it does; both simply mean what they mean. But the gap itself is not invented. It is in the text, it is measured in years, and everyone who has ever been sure God was calling them to something they cannot yet see has stood inside it.</p>
+    <section class="mv"><p>Then Samuel asked the question that exposes everything: <span class="scrip">“Are these all the sons you have?” “There is still the youngest,” Jesse replied. “But he’s out in the fields watching the sheep and goats”</span> <span class="ref">1 Samuel 16:11 (NLT)</span>. Read that slowly, because it is one of the quietest cruelties in Scripture and nobody in the room seems to notice it. A prophet of God had come to Bethlehem. The family had been purified and summoned. Every son had been dressed and lined up and walked past the man of God — every son but one. </p><p>Nobody thought to send for David. He was not rejected; he was simply not considered, which is its own kind of wound. And while a father was counting sons and coming up one short, heaven already knew the boy’s name, already knew his heart, and had already chosen him. <span class="scrip">“Send for him at once,” Samuel said. “We will not sit down to eat until he arrives”</span> <span class="ref">1 Samuel 16:11 (NLT)</span>. The meal waited. The prophet waited. Seven older brothers stood there and waited, while somebody ran out to the pasture for the one they had left with the animals. </p><p><span class="scrip">“So Jesse sent for him. He was dark and handsome, with beautiful eyes. And the L<small>ORD</small> said, ‘This is the one; anoint him’”</span> <span class="ref">1 Samuel 16:12 (NLT)</span>. And then the key verse: <span class="scrip">“So as David stood there among his brothers, Samuel took the flask of olive oil he had brought and anointed David with the oil. And the Spirit of the L<small>ORD</small> came powerfully upon David from that day on”</span> <span class="ref">1 Samuel 16:13 (NLT)</span>. Oil on a shepherd’s head. The Spirit of God on a shepherd’s life. </p><p>Two things happened that afternoon that could never be undone, and both of them were real. But now read the last five words of the verse, because they are where this devotion lives: <span class="scrip">“Then Samuel returned to Ramah”</span> <span class="ref">1 Samuel 16:13 (NLT)</span>. That is all. No crown. No throne. No royal escort, no proclamation in the street, not even an explanation to the family. Ellen White notes exactly this about the scene: <span class="egw">“Samuel had not made known his errand, even to the family of Jesse, and the ceremony of anointing David had been performed in secret.”</span> The prophet packed his flask and went home. </p><p>And the boy with the oil still in his hair went back out to the sheep. That gap — between the oil in 1 Samuel 16 and the crown in 2 Samuel 5 — is what these two words are describing: <strong>anointed, but not yet appointed.</strong> Scripture does not use those two words as technical terms, and we should not pretend it does; both simply mean what they mean. But the gap itself is not invented. It is in the text, it is measured in years, and everyone who has ever been sure God was calling them to something they cannot yet see has stood inside it.</p></section>
 
-    <p>What David did next is the most ordinary and most instructive thing in the story: he went back to work. Ellen White describes it with a restraint the moment deserves: <span class="egw">“The great honor conferred upon David did not serve to elate him. Notwithstanding the high position which he was to occupy, he quietly continued his employment, content to await the development of the Lord’s plans in His own time and way. As humble and modest as before his anointing, the shepherd boy returned to the hills and watched and guarded his flocks as tenderly as ever.”</span> He did not resign from the flock because he had a future. He did not tell his brothers what had happened to make them regret the line-up. He went back to a job that had not changed, in a place that had not changed, wearing an anointing that changed everything &mdash; and he kept the sheep. And here is the thing we most need to see: <strong>the field was not the delay before his calling; the field was where his calling was being built.</strong> Later, standing in front of a king who thought he was too young to fight, David explained where his courage had come from: <span class="scrip">“I have been taking care of my father’s sheep and goats &hellip; When a lion or a bear comes to steal a lamb from the flock, I go after it with a club and rescue the lamb from its mouth”</span> <span class="ref">1 Samuel 17:34-35 (NLT)</span>, and then, <span class="scrip">“The L<small>ORD</small> who rescued me from the claws of the lion and the bear will rescue me from this Philistine!”</span> <span class="ref">1 Samuel 17:37 (NLT)</span>. Nobody watched him fight the lion. There was no crowd, no song, no record but his own memory and God’s. Yet that unwitnessed afternoon is what he was standing on when the whole nation was watching. The private victories came first, and they came first on purpose. The same was already true of his music. The skill he taught himself alone on the hills is the reason the palace door opened at all: <span class="scrip">“So Saul sent messengers to Jesse to say, ‘Send me your son David, the shepherd’”</span> <span class="ref">1 Samuel 16:19 (NLT)</span>, and <span class="scrip">“whenever the tormenting spirit from God troubled Saul, David would play the harp”</span> <span class="ref">1 Samuel 16:23 (NLT)</span>. He was invited into the king’s presence not as a king but as a musician &mdash; because of something he had practised when nobody needed it yet. Ellen White reads the shepherd years the same way: <span class="egw">“The Lord had chosen David, and was preparing him, in his solitary life with his flocks, for the work He designed to commit to his trust in after years,”</span> and she asks the question the rest of us should sit with: <span class="egw">“Who can measure the results of those years of toil and wandering among the lonely hills?”</span> Her verdict on the whole apprenticeship is one sentence: <span class="egw">“David had proved himself brave and faithful in the humble office of a shepherd, and now God had chosen him to be captain of His people.”</span> Israel’s own hymn book tells it in the same order: <span class="scrip">“He chose his servant David, calling him from the sheep pens. He took David from tending the ewes and lambs and made him the shepherd of Jacob’s descendants”</span> <span class="ref">Psalm 78:70-71 (NLT)</span>. God did not find a king and give him some sheep to pass the time. He took a faithful shepherd and gave him a nation.</p>
+    <section class="mv"><p>What David did next is the most ordinary and most instructive thing in the story: he went back to work. Ellen White describes it with a restraint the moment deserves: </p><blockquote class="egw-block"><span class="egw">“The great honor conferred upon David did not serve to elate him. Notwithstanding the high position which he was to occupy, he quietly continued his employment, content to await the development of the Lord’s plans in His own time and way. As humble and modest as before his anointing, the shepherd boy returned to the hills and watched and guarded his flocks as tenderly as ever.”</span></blockquote><p> He did not resign from the flock because he had a future. He did not tell his brothers what had happened to make them regret the line-up. He went back to a job that had not changed, in a place that had not changed, wearing an anointing that changed everything — and he kept the sheep. And here is the thing we most need to see: <strong>the field was not the delay before his calling; the field was where his calling was being built.</strong> Later, standing in front of a king who thought he was too young to fight, David explained where his courage had come from: <span class="scrip">“I have been taking care of my father’s sheep and goats … When a lion or a bear comes to steal a lamb from the flock, I go after it with a club and rescue the lamb from its mouth”</span> <span class="ref">1 Samuel 17:34-35 (NLT)</span>, and then, <span class="scrip">“The L<small>ORD</small> who rescued me from the claws of the lion and the bear will rescue me from this Philistine!”</span> <span class="ref">1 Samuel 17:37 (NLT)</span>. </p><p>Nobody watched him fight the lion. There was no crowd, no song, no record but his own memory and God’s. Yet that unwitnessed afternoon is what he was standing on when the whole nation was watching. The private victories came first, and they came first on purpose. The same was already true of his music. The skill he taught himself alone on the hills is the reason the palace door opened at all: <span class="scrip">“So Saul sent messengers to Jesse to say, ‘Send me your son David, the shepherd’”</span> <span class="ref">1 Samuel 16:19 (NLT)</span>, and <span class="scrip">“whenever the tormenting spirit from God troubled Saul, David would play the harp”</span> <span class="ref">1 Samuel 16:23 (NLT)</span>. </p><p>He was invited into the king’s presence not as a king but as a musician — because of something he had practised when nobody needed it yet. Ellen White reads the shepherd years the same way: <span class="egw">“The Lord had chosen David, and was preparing him, in his solitary life with his flocks, for the work He designed to commit to his trust in after years,”</span> and she asks the question the rest of us should sit with: <span class="egw">“Who can measure the results of those years of toil and wandering among the lonely hills?”</span> Her verdict on the whole apprenticeship is one sentence: <span class="egw">“David had proved himself brave and faithful in the humble office of a shepherd, and now God had chosen him to be captain of His people.”</span> Israel’s own hymn book tells it in the same order: <span class="scrip">“He chose his servant David, calling him from the sheep pens. He took David from tending the ewes and lambs and made him the shepherd of Jacob’s descendants”</span> <span class="ref">Psalm 78:70-71 (NLT)</span>. </p><p>God did not find a king and give him some sheep to pass the time. He took a faithful shepherd and gave him a nation.</p></section>
 
-    <p>If the story ran from the oil to the crown in a straight line, it would be a nice story and it would help nobody. It does not. After the anointing, David’s life got harder, and for a long time it looked like the opposite of a promise. There were good gifts in it: a friendship most people never get, <span class="scrip">“There was an immediate bond between them, for Jonathan loved David”</span> <span class="ref">1 Samuel 18:1 (NLT)</span>, and a covenant sealed by a prince handing a shepherd his own robe and sword <span class="ref">1 Samuel 18:3-4</span>. There was competence and its rewards: <span class="scrip">“Whatever Saul asked David to do, David did it successfully. So Saul made him a commander over the men of war”</span> <span class="ref">1 Samuel 18:5 (NLT)</span>. And then success turned into a song, and the song turned into a problem: <span class="scrip">“Saul has killed his thousands, and David his ten thousands!”</span> <span class="ref">1 Samuel 18:7 (NLT)</span>, after which <span class="scrip">“from that time on Saul kept a jealous eye on David”</span> <span class="ref">1 Samuel 18:9 (NLT)</span>. Be careful with Saul here. It is easy, and lazy, to make him a cardboard villain so that David can be a hero; the text is more troubling than that. Saul was a man who had already been told by a prophet that his kingdom would not last <span class="ref">1 Samuel 13:14</span>, and who spent the rest of his life trying to hold on to something God had already said was leaving his hands. Fear of losing what he could not keep is what curdled into suspicion, and suspicion into hunting a young man across a wilderness. That is a warning worth taking personally, but it is not the point of this devotion. The point is what David did while it was happening to him. He lost the court, he lost the marriage, he lost his safety, and he ended up in a cave: <span class="scrip">“So David left Gath and escaped to the cave of Adullam &hellip; Then others began coming &mdash; men who were in trouble or in debt or who were just discontented &mdash; until David was the captain of about 400 men”</span> <span class="ref">1 Samuel 22:1-2 (NLT)</span>. The man God had anointed to be king of Israel was captain of four hundred men in trouble, in debt and discontented, in a hole in the ground. <span class="scrip">“David now stayed in the strongholds of the wilderness and in the hill country of Ziph. Saul hunted him day after day, but God didn’t let Saul find him”</span> <span class="ref">1 Samuel 23:14 (NLT)</span>. Day after day. Years of it. And yet Ellen White’s reading of those fugitive years refuses to call them wasted: <span class="egw">“The experience through which David was passing was not unnecessary or fruitless,”</span> she writes, and again, <span class="egw">“This experience was serving to teach David wisdom; for it led him to realize his weakness and the necessity of constant dependence upon God,”</span> and once more, <span class="egw">“God was giving him a course of discipline to fit him to become a wise general as well as a just and merciful king.”</span> Notice what that last sentence means. The four hundred desperate men in the cave were the first command that was his own rather than Saul’s; the wilderness was the terrain he later defended; the injustice he suffered from a king is exactly what taught him what a king should never do. Nothing was thrown away. And notice too that David’s waiting was not idleness. He worked, he led, he fought, he wrote, he worshipped, he grieved, he asked God questions. On one of the worst days of his life, when his own men talked of stoning him, the record says simply, <span class="scrip">“But David found strength in the L<small>ORD</small> his God”</span> <span class="ref">1 Samuel 30:6 (NLT)</span>. Waiting on God is not sitting still until something happens. It is being faithful in the place you are while the something is being prepared.</p>
+    <section class="mv"><p>If the story ran from the oil to the crown in a straight line, it would be a nice story and it would help nobody. It does not. After the anointing, David’s life got harder, and for a long time it looked like the opposite of a promise. There were good gifts in it: a friendship most people never get, <span class="scrip">“There was an immediate bond between them, for Jonathan loved David”</span> <span class="ref">1 Samuel 18:1 (NLT)</span>, and a covenant sealed by a prince handing a shepherd his own robe and sword <span class="ref">1 Samuel 18:3-4</span>. </p><p>There was competence and its rewards: <span class="scrip">“Whatever Saul asked David to do, David did it successfully. So Saul made him a commander over the men of war”</span> <span class="ref">1 Samuel 18:5 (NLT)</span>. And then success turned into a song, and the song turned into a problem: <span class="scrip">“Saul has killed his thousands, and David his ten thousands!”</span> <span class="ref">1 Samuel 18:7 (NLT)</span>, after which <span class="scrip">“from that time on Saul kept a jealous eye on David”</span> <span class="ref">1 Samuel 18:9 (NLT)</span>. Be careful with Saul here. It is easy, and lazy, to make him a cardboard villain so that David can be a hero; the text is more troubling than that. </p><p>Saul was a man who had already been told by a prophet that his kingdom would not last <span class="ref">1 Samuel 13:14</span>, and who spent the rest of his life trying to hold on to something God had already said was leaving his hands. Fear of losing what he could not keep is what curdled into suspicion, and suspicion into hunting a young man across a wilderness. That is a warning worth taking personally, but it is not the point of this devotion. The point is what David did while it was happening to him. </p><p>He lost the court, he lost the marriage, he lost his safety, and he ended up in a cave: <span class="scrip">“So David left Gath and escaped to the cave of Adullam … Then others began coming — men who were in trouble or in debt or who were just discontented — until David was the captain of about 400 men”</span> <span class="ref">1 Samuel 22:1-2 (NLT)</span>. The man God had anointed to be king of Israel was captain of four hundred men in trouble, in debt and discontented, in a hole in the ground. </p><p><span class="scrip">“David now stayed in the strongholds of the wilderness and in the hill country of Ziph. Saul hunted him day after day, but God didn’t let Saul find him”</span> <span class="ref">1 Samuel 23:14 (NLT)</span>. Day after day. Years of it. And yet Ellen White’s reading of those fugitive years refuses to call them wasted: <span class="egw">“The experience through which David was passing was not unnecessary or fruitless,”</span> she writes, and again, <span class="egw">“This experience was serving to teach David wisdom; for it led him to realize his weakness and the necessity of constant dependence upon God,”</span> and once more, <span class="egw">“God was giving him a course of discipline to fit him to become a wise general as well as a just and merciful king.”</span> Notice what that last sentence means. </p><p>The four hundred desperate men in the cave were the first command that was his own rather than Saul’s; the wilderness was the terrain he later defended; the injustice he suffered from a king is exactly what taught him what a king should never do. Nothing was thrown away. And notice too that David’s waiting was not idleness. He worked, he led, he fought, he wrote, he worshipped, he grieved, he asked God questions. On one of the worst days of his life, when his own men talked of stoning him, the record says simply, <span class="scrip">“But David found strength in the L<small>ORD</small> his God”</span> <span class="ref">1 Samuel 30:6 (NLT)</span>. </p><p>Waiting on God is not sitting still until something happens. It is being faithful in the place you are while the something is being prepared.</p></section>
 
-    <p>Twice in those years, the whole promise was within reach of David’s hand, and twice he refused to take it. In a cave at En-gedi, Saul walked in alone and unaware. <span class="scrip">“‘Now’s your opportunity!’ David’s men whispered to him. ‘Today the L<small>ORD</small> is telling you, “I will certainly put your enemy into your power, to do with as you wish”’”</span> <span class="ref">1 Samuel 24:4 (NLT)</span>. Look closely at that sentence, because it is the most dangerous sentence in the chapter. His men did not tempt him with sin; they tempted him with <em>providence</em>. They read the circumstances, found God’s promise inside them, and handed him his chance. And David, who cut nothing but a corner of cloth, could not live with even that: <span class="scrip">“But then David’s conscience began bothering him because he had cut Saul’s robe”</span> <span class="ref">1 Samuel 24:5 (NLT)</span>. Then he said the sentence that explains his whole life in the wilderness: <span class="scrip">“The L<small>ORD</small> forbid that I should do this to my lord the king. I shouldn’t attack the L<small>ORD</small>’s anointed one, for the L<small>ORD</small> himself has chosen him”</span> <span class="ref">1 Samuel 24:6 (NLT)</span>. It happened again in a sleeping camp at Hachilah, and this time the offer was blunter. <span class="scrip">“God has surely handed your enemy over to you this time!” Abishai whispered to David. “Let me pin him to the ground with one thrust of the spear; I won’t need to strike twice!”</span> <span class="ref">1 Samuel 26:8 (NLT)</span>. One thrust, one night, and the years of running would have been over. David answered, <span class="scrip">“No! &hellip; Don’t kill him. For who can remain innocent after attacking the L<small>ORD</small>’s anointed one? &hellip; The L<small>ORD</small> forbid that I should kill the one he has anointed!”</span> <span class="ref">1 Samuel 26:9-11 (NLT)</span>, and afterwards, shouting across the valley, he named the principle for everyone to hear: <span class="scrip">“The L<small>ORD</small> gives his own reward for doing good and for being loyal, and I refused to kill you even when the L<small>ORD</small> placed you in my power”</span> <span class="ref">1 Samuel 26:23 (NLT)</span>. Here is what David understood that his advisers did not. He was already anointed. God had already chosen him. And a man who is certain that God has promised him something does not need to sin to get it. If the throne was God’s to give, it was God’s to time; and if it had to be seized by blood to be obtained, then whatever he obtained would not have been the thing God promised. Ellen White says the same of him at the other end of the story, when other men murdered on his behalf and expected thanks: <span class="egw">“But David, whose throne God Himself had established, and whom God had delivered from his adversaries, did not desire the aid of treachery to establish his power.”</span> This is the hardest and most practical lesson in the whole account, and it is worth stating without decoration: <strong>what God has promised does not need to be obtained by methods that dishonour God.</strong> You do not have to lie to get the position. You do not have to damage a reputation to clear your path. You do not have to manipulate the meeting, flatter the wrong person, cut the corner, or take a knife to somebody’s life to make room for your own. The moment a promise requires sin to arrive, it has stopped being God’s promise and become our project.</p>
+    <section class="mv"><p>Twice in those years, the whole promise was within reach of David’s hand, and twice he refused to take it. In a cave at En-gedi, Saul walked in alone and unaware. <span class="scrip">“‘Now’s your opportunity!’ David’s men whispered to him. ‘Today the L<small>ORD</small> is telling you, “I will certainly put your enemy into your power, to do with as you wish”’”</span> <span class="ref">1 Samuel 24:4 (NLT)</span>. Look closely at that sentence, because it is the most dangerous sentence in the chapter. His men did not tempt him with sin; they tempted him with <em>providence</em>. </p><p>They read the circumstances, found God’s promise inside them, and handed him his chance. And David, who cut nothing but a corner of cloth, could not live with even that: <span class="scrip">“But then David’s conscience began bothering him because he had cut Saul’s robe”</span> <span class="ref">1 Samuel 24:5 (NLT)</span>. Then he said the sentence that explains his whole life in the wilderness: <span class="scrip">“The L<small>ORD</small> forbid that I should do this to my lord the king. I shouldn’t attack the L<small>ORD</small>’s anointed one, for the L<small>ORD</small> himself has chosen him”</span> <span class="ref">1 Samuel 24:6 (NLT)</span>. </p><p>It happened again in a sleeping camp at Hachilah, and this time the offer was blunter. <span class="scrip">“God has surely handed your enemy over to you this time!” Abishai whispered to David. “Let me pin him to the ground with one thrust of the spear; I won’t need to strike twice!”</span> <span class="ref">1 Samuel 26:8 (NLT)</span>. One thrust, one night, and the years of running would have been over. David answered, <span class="scrip">“No! … Don’t kill him. For who can remain innocent after attacking the L<small>ORD</small>’s anointed one? … The L<small>ORD</small> forbid that I should kill the one he has anointed!”</span> <span class="ref">1 Samuel 26:9-11 (NLT)</span>, and afterwards, shouting across the valley, he named the principle for everyone to hear: <span class="scrip">“The L<small>ORD</small> gives his own reward for doing good and for being loyal, and I refused to kill you even when the L<small>ORD</small> placed you in my power”</span> <span class="ref">1 Samuel 26:23 (NLT)</span>. </p><p>Here is what David understood that his advisers did not. He was already anointed. God had already chosen him. And a man who is certain that God has promised him something does not need to sin to get it. If the throne was God’s to give, it was God’s to time; and if it had to be seized by blood to be obtained, then whatever he obtained would not have been the thing God promised. Ellen White says the same of him at the other end of the story, when other men murdered on his behalf and expected thanks: <span class="egw">“But David, whose throne God Himself had established, and whom God had delivered from his adversaries, did not desire the aid of treachery to establish his power.”</span> This is the hardest and most practical lesson in the whole account, and it is worth stating without decoration: <strong>what God has promised does not need to be obtained by methods that dishonour God.</strong> You do not have to lie to get the position. </p><p>You do not have to damage a reputation to clear your path. You do not have to manipulate the meeting, flatter the wrong person, cut the corner, or take a knife to somebody’s life to make room for your own. The moment a promise requires sin to arrive, it has stopped being God’s promise and become our project.</p></section>
 
-    <p>And then, in God’s time, the crown came &mdash; and even then it came in stages, which is worth noticing. Scripture records three separate anointings in David’s life, and they should not be blurred together. The first, in Bethlehem, was private and prophetic: Samuel, the flask of oil, the seven brothers, the Spirit of God <span class="ref">1 Samuel 16:1-13</span>. The second came only after Saul’s death, and David did not presume even then; he asked. <span class="scrip">“After this, David asked the L<small>ORD</small>, ‘Should I move back to one of the towns of Judah?’ ‘Yes,’ the L<small>ORD</small> replied. Then David asked, ‘Which town should I go to?’ ‘To Hebron,’ the L<small>ORD</small> answered”</span> <span class="ref">2 Samuel 2:1 (NLT)</span>. A man who has carried a prophet’s promise of a kingdom for years still stops to ask which road to take. <span class="scrip">“Then the men of Judah came to David and anointed him king over the people of Judah”</span> <span class="ref">2 Samuel 2:4 (NLT)</span> &mdash; one tribe, not twelve. The third came years later. <span class="scrip">“Then all the tribes of Israel went to David at Hebron and told him, ‘We are your own flesh and blood’”</span> <span class="ref">2 Samuel 5:1 (NLT)</span>, and they reminded him of the word that had been spoken over him long before: <span class="scrip">“And the L<small>ORD</small> told you, ‘You will be the shepherd of my people Israel. You will be Israel’s leader’”</span> <span class="ref">2 Samuel 5:2 (NLT)</span>. <span class="scrip">“So there at Hebron, King David made a covenant before the L<small>ORD</small> with all the elders of Israel. And they anointed him king of Israel”</span> <span class="ref">2 Samuel 5:3 (NLT)</span>. The chronicler tells the same scene and adds the clause that ties the last day to the first: <span class="scrip">“And they anointed him king of Israel, just as the L<small>ORD</small> had promised through Samuel”</span> <span class="ref">1 Chronicles 11:3 (NLT)</span>. Just as the L<small>ORD</small> had promised. The oil poured in a Bethlehem courtyard on a boy who had been left with the sheep was not a mood, a hope or a misreading; it was a promise, and God kept it &mdash; on His calendar. And what a calendar it was: <span class="scrip">“David was thirty years old when he began to reign, and he reigned forty years in all. He had reigned over Judah from Hebron for seven years and six months”</span> <span class="ref">2 Samuel 5:4-5 (NLT)</span>. Ellen White’s summary of that coronation is worth reading twice: <span class="egw">“Thus through the providence of God the way had been opened for him to come to the throne. He had no personal ambition to gratify, for he had not sought the honor to which he had been brought.”</span> And of the day itself she writes, <span class="egw">“Israel had a king by divine appointment,”</span> and then, in one of the loveliest sentences in the book, <span class="egw">“He who had waited patiently for the Lord, beheld the promise of God fulfilled.”</span> Now say the honest thing, because this story is not a formula. Scripture is not promising that every believer who waits will end up with a throne, a platform, a title or a public role; David’s crown was tied to a specific promise God had actually made to him through a prophet, and most of our expectations are not that. There is a real difference between a promise God has made and an assumption we have formed about what God will do, and confusing the two is how good people end up bitter. What God does promise every one of His children is His presence, His providence, His character, and a place in His kingdom; and He promises that nothing offered to Him is wasted, whatever it leads to on earth. <span class="scrip">“It is God alone who judges; he decides who will rise and who will fall”</span> <span class="ref">Psalm 75:7 (NLT)</span>. Our part is not the rising. Our part is the faithfulness.</p>
+    <section class="mv"><p>And then, in God’s time, the crown came — and even then it came in stages, which is worth noticing. Scripture records three separate anointings in David’s life, and they should not be blurred together. The first, in Bethlehem, was private and prophetic: Samuel, the flask of oil, the seven brothers, the Spirit of God <span class="ref">1 Samuel 16:1-13</span>. The second came only after Saul’s death, and David did not presume even then; he asked. <span class="scrip">“After this, David asked the L<small>ORD</small>, ‘Should I move back to one of the towns of Judah?’ ‘Yes,’ the L<small>ORD</small> replied. Then David asked, ‘Which town should I go to?’ ‘To Hebron,’ the L<small>ORD</small> answered”</span> <span class="ref">2 Samuel 2:1 (NLT)</span>. </p><p>A man who has carried a prophet’s promise of a kingdom for years still stops to ask which road to take. <span class="scrip">“Then the men of Judah came to David and anointed him king over the people of Judah”</span> <span class="ref">2 Samuel 2:4 (NLT)</span> — one tribe, not twelve. The third came years later. <span class="scrip">“Then all the tribes of Israel went to David at Hebron and told him, ‘We are your own flesh and blood’”</span> <span class="ref">2 Samuel 5:1 (NLT)</span>, and they reminded him of the word that had been spoken over him long before: <span class="scrip">“And the L<small>ORD</small> told you, ‘You will be the shepherd of my people Israel. You will be Israel’s leader’”</span> <span class="ref">2 Samuel 5:2 (NLT)</span>. </p><p><span class="scrip">“So there at Hebron, King David made a covenant before the L<small>ORD</small> with all the elders of Israel. And they anointed him king of Israel”</span> <span class="ref">2 Samuel 5:3 (NLT)</span>. The chronicler tells the same scene and adds the clause that ties the last day to the first: <span class="scrip">“And they anointed him king of Israel, just as the L<small>ORD</small> had promised through Samuel”</span> <span class="ref">1 Chronicles 11:3 (NLT)</span>. Just as the L<small>ORD</small> had promised. The oil poured in a Bethlehem courtyard on a boy who had been left with the sheep was not a mood, a hope or a misreading; it was a promise, and God kept it — on His calendar. </p><p>And what a calendar it was: <span class="scrip">“David was thirty years old when he began to reign, and he reigned forty years in all. He had reigned over Judah from Hebron for seven years and six months”</span> <span class="ref">2 Samuel 5:4-5 (NLT)</span>. Ellen White’s summary of that coronation is worth reading twice: </p><blockquote class="egw-block"><span class="egw">“Thus through the providence of God the way had been opened for him to come to the throne. He had no personal ambition to gratify, for he had not sought the honor to which he had been brought.”</span></blockquote><p> And of the day itself she writes, <span class="egw">“Israel had a king by divine appointment,”</span> and then, in one of the loveliest sentences in the book, <span class="egw">“He who had waited patiently for the Lord, beheld the promise of God fulfilled.”</span> Now say the honest thing, because this story is not a formula. Scripture is not promising that every believer who waits will end up with a throne, a platform, a title or a public role; David’s crown was tied to a specific promise God had actually made to him through a prophet, and most of our expectations are not that. </p><p>There is a real difference between a promise God has made and an assumption we have formed about what God will do, and confusing the two is how good people end up bitter. What God does promise every one of His children is His presence, His providence, His character, and a place in His kingdom; and He promises that nothing offered to Him is wasted, whatever it leads to on earth. <span class="scrip">“It is God alone who judges; he decides who will rise and who will fall”</span> <span class="ref">Psalm 75:7 (NLT)</span>. Our part is not the rising. Our part is the faithfulness.</p></section>
 
-    <p>And there is a deeper reason a Christian can wait without grasping, which is that our King has already walked this road, and walked it further than David ever did. Jesus was born in David’s Bethlehem, of David’s line, and He too was anointed long before He was enthroned <span class="ref">Luke 4:18; Acts 10:38</span>, and He too was overlooked by the people who thought they knew Him <span class="ref">Mark 6:3; John 1:11</span>. And He too was offered a shortcut. <span class="scrip">“Next the devil took him to the peak of a very high mountain and showed him all the kingdoms of the world and their glory. ‘I will give it all to you,’ he said, ‘if you will kneel down and worship me’”</span> <span class="ref">Matthew 4:8-9 (NLT)</span>. Every kingdom, immediately, with no cross in the middle &mdash; the crown without the waiting and without the wounds. And He refused: <span class="scrip">“Get out of here, Satan &hellip; For the Scriptures say, ‘You must worship the L<small>ORD</small> your God and serve only him’”</span> <span class="ref">Matthew 4:10 (NLT)</span>. In a garden years later, with the cost fully in view, He said the sentence that every waiting believer eventually has to say: <span class="scrip">“Father, if you are willing, please take this cup of suffering away from me. Yet I want your will to be done, not mine”</span> <span class="ref">Luke 22:42 (NLT)</span>. And the order of what followed is the pattern of the whole Christian life: <span class="scrip">“he humbled himself in obedience to God and died a criminal’s death on a cross. Therefore, God elevated him to the place of highest honor and gave him the name above all other names”</span> <span class="ref">Philippians 2:8-9 (NLT)</span>. Humbled, then elevated; obedient, then exalted; and one day, visibly, <span class="scrip">“King of all kings and Lord of all lords”</span> <span class="ref">Revelation 19:16 (NLT)</span>. So if you are living in the gap tonight &mdash; if you know God has put something on your heart and your circumstances look nothing like it; if you are overlooked in a family, a workplace or a church where other people keep getting called forward; if you are tired of watching everyone else arrive; if you have been in the same ordinary job, the same small town, the same quiet season for years and you have begun to wonder whether God forgot &mdash; here is what David’s life says to you. First, be faithful in the field. Not because the field is a waiting room, but because it is the classroom; the lion nobody saw is the reason he could face the giant everybody saw. Second, refuse the shortcut. If it needs a lie, a betrayal, a cruelty or a compromise, it is not the door God is opening, however much it looks like an opportunity. Third, keep asking God rather than assuming; David inquired of the L<small>ORD</small> even after years of certainty. Fourth, hold your expectations open-handed. Ask Him for the grace to be faithful whether the crown ever comes or not, because faithfulness, not promotion, is what He actually asked of you. <span class="scrip">“So humble yourselves under the mighty power of God, and at the right time he will lift you up in honor”</span> <span class="ref">1 Peter 5:6 (NLT)</span>. <span class="scrip">“Wait patiently for the L<small>ORD</small>. Be brave and courageous. Yes, wait patiently for the L<small>ORD</small>”</span> <span class="ref">Psalm 27:14 (NLT)</span>. <span class="scrip">“So let’s not get tired of doing what is good. At just the right time we will reap a harvest of blessing if we don’t give up”</span> <span class="ref">Galatians 6:9 (NLT)</span>. <strong>If God has called you, you do not have to force what God has promised. Be faithful in the field, faithful in the wilderness, faithful when you are overlooked, and faithful while you wait. God knows when the oil was poured, and He knows when the crown should come. Your work is not to manufacture the throne; your work is to stay faithful to Him while He prepares you for whatever He has entrusted to you &mdash; and to give the whole of it, the waiting included, to the King who refused the shortcut and went to a cross for you.</strong></p>
+    <section class="mv"><p>And there is a deeper reason a Christian can wait without grasping, which is that our King has already walked this road, and walked it further than David ever did. Jesus was born in David’s Bethlehem, of David’s line, and He too was anointed long before He was enthroned <span class="ref">Luke 4:18; Acts 10:38</span>, and He too was overlooked by the people who thought they knew Him <span class="ref">Mark 6:3; John 1:11</span>. And He too was offered a shortcut. <span class="scrip">“Next the devil took him to the peak of a very high mountain and showed him all the kingdoms of the world and their glory. ‘I will give it all to you,’ he said, ‘if you will kneel down and worship me’”</span> <span class="ref">Matthew 4:8-9 (NLT)</span>. </p><p>Every kingdom, immediately, with no cross in the middle — the crown without the waiting and without the wounds. And He refused: <span class="scrip">“Get out of here, Satan … For the Scriptures say, ‘You must worship the L<small>ORD</small> your God and serve only him’”</span> <span class="ref">Matthew 4:10 (NLT)</span>. In a garden years later, with the cost fully in view, He said the sentence that every waiting believer eventually has to say: <span class="scrip">“Father, if you are willing, please take this cup of suffering away from me. Yet I want your will to be done, not mine”</span> <span class="ref">Luke 22:42 (NLT)</span>. </p><p>And the order of what followed is the pattern of the whole Christian life: <span class="scrip">“he humbled himself in obedience to God and died a criminal’s death on a cross. Therefore, God elevated him to the place of highest honor and gave him the name above all other names”</span> <span class="ref">Philippians 2:8-9 (NLT)</span>. Humbled, then elevated; obedient, then exalted; and one day, visibly, <span class="scrip">“King of all kings and Lord of all lords”</span> <span class="ref">Revelation 19:16 (NLT)</span>. So if you are living in the gap tonight — if you know God has put something on your heart and your circumstances look nothing like it; if you are overlooked in a family, a workplace or a church where other people keep getting called forward; if you are tired of watching everyone else arrive; if you have been in the same ordinary job, the same small town, the same quiet season for years and you have begun to wonder whether God forgot — here is what David’s life says to you. </p><p>First, be faithful in the field. Not because the field is a waiting room, but because it is the classroom; the lion nobody saw is the reason he could face the giant everybody saw. Second, refuse the shortcut. If it needs a lie, a betrayal, a cruelty or a compromise, it is not the door God is opening, however much it looks like an opportunity. Third, keep asking God rather than assuming; David inquired of the L<small>ORD</small> even after years of certainty. Fourth, hold your expectations open-handed. </p><p>Ask Him for the grace to be faithful whether the crown ever comes or not, because faithfulness, not promotion, is what He actually asked of you. <span class="scrip">“So humble yourselves under the mighty power of God, and at the right time he will lift you up in honor”</span> <span class="ref">1 Peter 5:6 (NLT)</span>. <span class="scrip">“Wait patiently for the L<small>ORD</small>. Be brave and courageous. Yes, wait patiently for the L<small>ORD</small>”</span> <span class="ref">Psalm 27:14 (NLT)</span>. <span class="scrip">“So let’s not get tired of doing what is good. At just the right time we will reap a harvest of blessing if we don’t give up”</span> <span class="ref">Galatians 6:9 (NLT)</span>. </p><p class="thesis"><strong>If God has called you, you do not have to force what God has promised. Be faithful in the field, faithful in the wilderness, faithful when you are overlooked, and faithful while you wait. God knows when the oil was poured, and He knows when the crown should come. Your work is not to manufacture the throne; your work is to stay faithful to Him while He prepares you for whatever He has entrusted to you — and to give the whole of it, the waiting included, to the King who refused the shortcut and went to a cross for you.</strong></p></section>
   </div>
 
   <div class="divider" aria-hidden="true">
     <span class="line"></span>
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <svg width="26" height="26" viewbox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"></path></svg>
     <span class="line right"></span>
   </div>
 
   <h2 class="takeaways">Key Takeaways</h2>
   <ol class="takeaway-list">
-    <li><strong>God sees what people cannot see</strong> &mdash; even Samuel got it wrong at first glance: <em>Surely this is the L<small>ORD</small>’s anointed!</em> (1 Samuel 16:6). God’s correction is both a warning and a comfort: <em>People judge by outward appearance, but the L<small>ORD</small> looks at the heart</em> (1 Samuel 16:7). Ellen White: <span class="egw">“No outward beauty can recommend the soul to God.”</span></li>
-    <li><strong>The one they didn’t call was the one God had chosen</strong> &mdash; seven sons were dressed and presented; David was left with the sheep and goats (1 Samuel 16:11). He was not rejected, he was simply not considered &mdash; and heaven already knew his name. The meal waited until he arrived.</li>
-    <li><strong>The oil came long before the crown</strong> &mdash; the Spirit came powerfully upon him <em>from that day on</em>, and then <em>Samuel returned to Ramah</em> (1 Samuel 16:13). Ellen White notes the anointing <span class="egw">“had been performed in secret.”</span> “Anointed, but not yet appointed” is not a category Scripture names; it is a plain description of the years between 1 Samuel 16 and 2 Samuel 5.</li>
-    <li><strong>He went back to the sheep, and the sheep were the training</strong> &mdash; <span class="egw">“he quietly continued his employment, content to await the development of the Lord’s plans in His own time and way”</span> (Ellen White). The lion and the bear nobody watched (1 Samuel 17:34-37) and the harp he practised alone (1 Samuel 16:23) are what he stood on later. The private victories came first, and they came first on purpose.</li>
-    <li><strong>The waiting years were hard, and they were not wasted</strong> &mdash; a jealous king, a cave, four hundred desperate men, a wilderness, <em>day after day</em> (1 Samuel 22:1-2; 23:14). Ellen White: <span class="egw">“The experience through which David was passing was not unnecessary or fruitless”</span>; it taught him <span class="egw">“the necessity of constant dependence upon God.”</span> And waiting was never idleness &mdash; he led, fought, wrote, worshipped, and <em>found strength in the L<small>ORD</small> his God</em> (1 Samuel 30:6).</li>
-    <li><strong>He would not seize what God had promised to give</strong> &mdash; twice the throne was within reach, and twice he refused: <em>The L<small>ORD</small> forbid that I should do this to my lord the king</em> (1 Samuel 24:6; see 26:9-11). His men even framed it as providence. Ellen White: he <span class="egw">“did not desire the aid of treachery to establish his power.”</span> What God has promised does not need to be obtained by methods that dishonour God.</li>
-    <li><strong>The promise was kept &mdash; in God’s time, and it points to Christ</strong> &mdash; anointed by Samuel (1 Samuel 16:13), then king over Judah at Hebron (2 Samuel 2:4), then king over all Israel <em>just as the L<small>ORD</small> had promised through Samuel</em> (2 Samuel 5:3; 1 Chronicles 11:3). Ellen White: <span class="egw">“He who had waited patiently for the Lord, beheld the promise of God fulfilled.”</span> This is not a guarantee of earthly position; it is a portrait of a faithful God &mdash; and of great David’s greater Son, who was offered every kingdom without a cross and refused (Matthew 4:8-10), was humbled and then exalted (Philippians 2:8-9), and is King of all kings (Revelation 19:16).</li>
+    <li><strong>God sees what people cannot see</strong> — even Samuel got it wrong at first glance: <em>Surely this is the L<small>ORD</small>’s anointed!</em> (1 Samuel 16:6). God’s correction is both a warning and a comfort: <em>People judge by outward appearance, but the L<small>ORD</small> looks at the heart</em> (1 Samuel 16:7). Ellen White: <span class="egw">“No outward beauty can recommend the soul to God.”</span></li>
+    <li><strong>The one they didn’t call was the one God had chosen</strong> — seven sons were dressed and presented; David was left with the sheep and goats (1 Samuel 16:11). He was not rejected, he was simply not considered — and heaven already knew his name. The meal waited until he arrived.</li>
+    <li><strong>The oil came long before the crown</strong> — the Spirit came powerfully upon him <em>from that day on</em>, and then <em>Samuel returned to Ramah</em> (1 Samuel 16:13). Ellen White notes the anointing <span class="egw">“had been performed in secret.”</span> “Anointed, but not yet appointed” is not a category Scripture names; it is a plain description of the years between 1 Samuel 16 and 2 Samuel 5.</li>
+    <li><strong>He went back to the sheep, and the sheep were the training</strong> — <span class="egw">“he quietly continued his employment, content to await the development of the Lord’s plans in His own time and way”</span> (Ellen White). The lion and the bear nobody watched (1 Samuel 17:34-37) and the harp he practised alone (1 Samuel 16:23) are what he stood on later. The private victories came first, and they came first on purpose.</li>
+    <li><strong>The waiting years were hard, and they were not wasted</strong> — a jealous king, a cave, four hundred desperate men, a wilderness, <em>day after day</em> (1 Samuel 22:1-2; 23:14). Ellen White: <span class="egw">“The experience through which David was passing was not unnecessary or fruitless”</span>; it taught him <span class="egw">“the necessity of constant dependence upon God.”</span> And waiting was never idleness — he led, fought, wrote, worshipped, and <em>found strength in the L<small>ORD</small> his God</em> (1 Samuel 30:6).</li>
+    <li><strong>He would not seize what God had promised to give</strong> — twice the throne was within reach, and twice he refused: <em>The L<small>ORD</small> forbid that I should do this to my lord the king</em> (1 Samuel 24:6; see 26:9-11). His men even framed it as providence. Ellen White: he <span class="egw">“did not desire the aid of treachery to establish his power.”</span> What God has promised does not need to be obtained by methods that dishonour God.</li>
+    <li><strong>The promise was kept — in God’s time, and it points to Christ</strong> — anointed by Samuel (1 Samuel 16:13), then king over Judah at Hebron (2 Samuel 2:4), then king over all Israel <em>just as the L<small>ORD</small> had promised through Samuel</em> (2 Samuel 5:3; 1 Chronicles 11:3). Ellen White: <span class="egw">“He who had waited patiently for the Lord, beheld the promise of God fulfilled.”</span> This is not a guarantee of earthly position; it is a portrait of a faithful God — and of great David’s greater Son, who was offered every kingdom without a cross and refused (Matthew 4:8-10), was humbled and then exalted (Philippians 2:8-9), and is King of all kings (Revelation 19:16).</li>
   </ol>
 
   
-  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/Qqguyxa49VA" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">&#9654;</span>Watch the Short</a><p class="note">On YouTube as &ldquo;Are You Allowing God To Fulfill It?&rdquo; &mdash; from the channel <em>I Can Still Believe</em>.</p></div>
+  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/Qqguyxa49VA" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">▶</span>Watch the Short</a><p class="note">On YouTube as “Are You Allowing God To Fulfill It?” — from the channel <em>I Can Still Believe</em>.</p></div>
 
   <div class="sdg">Soli Deo Gloria</div>
 </article>
+<nav class="footnav"><a href="./">&#8592;&nbsp;All devotions</a><a href="#top">Back to top&nbsp;&#8593;</a></nav>
+<button class="lamp" id="lamp" type="button" aria-label="Night reading">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path class="moon" d="M20 13.4A8.2 8.2 0 1 1 10.6 4a6.4 6.4 0 0 0 9.4 9.4Z"/>
+  </svg>
+</button>
+<script>
+(function(){
+  var root=document.documentElement, lamp=document.getElementById('lamp');
+  try{ if(localStorage.getItem('devo-theme')==='night') root.setAttribute('data-theme','night'); }catch(e){}
+  if(lamp){ lamp.addEventListener('click',function(){
+    var on = root.getAttribute('data-theme')==='night';
+    if(on){ root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme','night'); }
+    try{ localStorage.setItem('devo-theme', on?'day':'night'); }catch(e){}
+  }); }
+  var bar=document.getElementById('prog');
+  function tick(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.width=(h>0?Math.min(100,(window.scrollY/h)*100):0)+'%';
+  }
+  if(bar){ window.addEventListener('scroll',tick,{passive:true});
+           window.addEventListener('resize',tick); tick(); }
+})();
+</script>
 </body>
 </html>

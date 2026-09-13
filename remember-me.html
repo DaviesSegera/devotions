@@ -3,143 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Remember Me &mdash; Today's Devotion</title>
+<title>Remember Me — Today's Devotion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
 <style>
   :root{
-    --parchment:#f3ead4;
-    --parchment-deep:#eadfc2;
-    --ink:#3b2d18;
-    --ink-soft:#5a4629;
-    --gold:#a67c1e;
-    --gold-bright:#c9a227;
-    --gold-pale:#e3cf95;
-    --wine:#7a3b2e;
+    --bg1:#f8f2e1; --bg2:#f3ead4; --bg3:#e8dcbd;
+    --page-bg:rgba(255,252,241,.62);
+    --page-border:#a67c1e; --page-outline:#e3cf95;
+    --ink:#33281a; --ink-soft:#5a4629;
+    --gold:#a67c1e; --gold-bright:#c9a227; --gold-pale:#e3cf95;
+    --wine:#7a3b2e; --wine-solid:#7a3b2e; --wine-edge:#5d2b20;
+    --card1:rgba(255,250,232,.92); --card2:rgba(247,238,213,.92);
+    --emph:#7c5a12;
+    --num1:#f5e7bd; --num2:#e3cf95; --numfg:#7c5a12;
+    --shadow:rgba(90,70,30,.16);
+    --grain:.30;
+    --rule:rgba(166,124,30,.28);
+  }
+  :root[data-theme="night"]{
+    --bg1:#1a160f; --bg2:#15120c; --bg3:#100e09;
+    --page-bg:rgba(44,37,26,.42);
+    --page-border:#7d6524; --page-outline:#463a19;
+    --ink:#e9dfc8; --ink-soft:#c4b491;
+    --gold:#c2a03a; --gold-bright:#e0bf58; --gold-pale:#6a5828;
+    --wine:#e2a891; --wine-solid:#8a4537; --wine-edge:#6b3428;
+    --card1:rgba(56,47,32,.6); --card2:rgba(46,39,27,.6);
+    --emph:#e2c775;
+    --num1:#4c4024; --num2:#3a311b; --numfg:#e8ce7f;
+    --shadow:rgba(0,0,0,.55);
+    --grain:.16;
+    --rule:rgba(194,160,58,.26);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{
-    background:radial-gradient(ellipse at 50% 0%, #f7f0dd 0%, var(--parchment) 45%, var(--parchment-deep) 100%);
+    background:radial-gradient(ellipse at 50% 0%, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%);
+    background-attachment:fixed;
     color:var(--ink);
     font-family:'Lora',serif;
-    line-height:1.85;
-    padding:34px 14px 60px;
+    line-height:1.78;
+    padding:30px 14px 28px;
     position:relative;
+    -webkit-font-smoothing:antialiased;
+    transition:background-color .25s ease, color .25s ease;
   }
-  /* aged-paper grain */
+  /* aged-paper grain, lighter than before */
   body::before{
     content:"";
     position:fixed;inset:0;
     pointer-events:none;
-    opacity:.5;
+    opacity:var(--grain);
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
     z-index:2;
   }
-  .page{
-    max-width:760px;
-    margin:0 auto;
-    background:rgba(255,252,240,.55);
-    border:1.5px solid var(--gold);
-    outline:1px solid var(--gold-pale);
-    outline-offset:6px;
-    padding:64px 52px 56px;
-    position:relative;
-    box-shadow:0 18px 50px rgba(90,70,30,.18);
+
+  /* reading progress */
+  .progress{
+    position:fixed;top:0;left:0;height:3px;width:0;
+    background:linear-gradient(90deg,var(--gold-pale),var(--gold-bright));
+    z-index:12;transition:width .08s linear;
   }
-  @media(max-width:620px){.page{padding:52px 24px 44px;}}
-  .corner{position:absolute;width:64px;height:64px;color:var(--gold);}
-  .corner.tl{top:10px;left:10px;}
-  .corner.tr{top:10px;right:10px;transform:scaleX(-1);}
-  .corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
-  .corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+
+  .page{
+    max-width:720px;
+    margin:0 auto;
+    background:var(--page-bg);
+    border:1.5px solid var(--page-border);
+    outline:1px solid var(--page-outline);
+    outline-offset:6px;
+    padding:62px 56px 54px;
+    position:relative;
+    box-shadow:0 18px 50px var(--shadow);
+  }
+  @media(max-width:620px){.page{padding:48px 22px 40px;} body{padding:22px 11px 24px;}}
+
+  /* corners, quieter: smaller and lighter than before */
+  .corner{position:absolute;width:44px;height:44px;color:var(--gold);opacity:.55;}
+  .corner.tl{top:9px;left:9px;}
+  .corner.tr{top:9px;right:9px;transform:scaleX(-1);}
+  .corner.bl{bottom:9px;left:9px;transform:scaleY(-1);}
+  .corner.br{bottom:9px;right:9px;transform:scale(-1,-1);}
+
   .eyebrow{
     font-family:'Cinzel',serif;
-    font-size:.82rem;
-    letter-spacing:.42em;
+    font-size:.74rem;
+    letter-spacing:.34em;
     text-transform:uppercase;
     color:var(--gold);
     text-align:center;
-    margin-bottom:18px;
+    margin-bottom:16px;
   }
   h1{
     font-family:'Playfair Display',serif;
     font-weight:700;
-    font-size:clamp(2.1rem,5.4vw,3rem);
+    font-size:clamp(2rem,5vw,2.8rem);
+    line-height:1.18;
     text-align:center;
     color:var(--ink);
-    letter-spacing:.01em;
-    margin-bottom:26px;
+    letter-spacing:.005em;
+    margin-bottom:14px;
   }
+  .meta{
+    font-family:'Cinzel',serif;
+    font-variant:small-caps;
+    letter-spacing:.16em;
+    font-size:.78rem;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:28px;
+  }
+  .meta span{opacity:.55;margin:0 7px;}
+
   /* Ellen G. White — companion ink */
   .egw{color:var(--wine);}
   .egw-ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.08em;
-    font-size:.88em;
+    letter-spacing:.07em;
+    font-size:.85em;
     color:var(--wine);
   }
-  .egw-ref::before{content:"\2712\00a0";font-size:.9em;}
+  .egw-ref::before{content:"\2712";margin-right:.3em;font-size:.9em;}
+  /* long quotations stand as blocks */
+  blockquote.egw-block{
+    margin:26px 0 28px;
+    padding:2px 0 2px 22px;
+    border-left:2px solid var(--wine);
+    color:var(--wine);
+    font-size:1.01rem;
+    line-height:1.72;
+  }
+  blockquote.egw-block .egw-ref{
+    display:block;margin-top:9px;font-size:.78rem;
+    letter-spacing:.04em;line-height:1.55;opacity:.92;
+    text-wrap:pretty;          /* keeps a lone word off the last line */
+  }
+  @media(max-width:620px){blockquote.egw-block{padding-left:16px;}}
+
   .divider{
     display:flex;align-items:center;justify-content:center;
-    gap:14px;margin:30px 0;color:var(--gold);
+    gap:14px;margin:28px 0;color:var(--gold);
   }
   .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
   .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
   .divider svg{flex-shrink:0;}
+
   .verse-card{
     border:1px solid var(--gold-pale);
-    background:linear-gradient(180deg,rgba(255,250,232,.9),rgba(247,238,213,.9));
-    padding:30px 34px 26px;
+    background:linear-gradient(180deg,var(--card1),var(--card2));
+    padding:28px 32px 24px;
     text-align:center;
     margin:0 auto 8px;
     position:relative;
   }
   .verse-card .label{
     font-family:'Cinzel',serif;
-    font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;
-    color:var(--gold);margin-bottom:14px;
+    font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:13px;
   }
   .verse-card .scripture{
     font-family:'Cormorant Garamond',serif;
     font-style:italic;
-    font-size:1.42rem;
-    line-height:1.65;
+    font-size:1.38rem;
+    line-height:1.62;
     color:var(--ink-soft);
   }
   .verse-card .ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.14em;
-    font-size:.95rem;
+    letter-spacing:.13em;
+    font-size:.92rem;
     color:var(--gold);
-    margin-top:14px;
+    margin-top:13px;
   }
-  .body-text p{margin-bottom:1.35em;font-size:1.06rem;text-align:justify;}
-  .body-text p:first-of-type::first-letter{
+
+  /* body — ragged right, book measure */
+  .body-text{margin-top:4px;}
+  .body-text p{
+    margin-bottom:1.15em;
+    font-size:1.075rem;
+    text-align:left;
+    hyphens:none;
+  }
+  .body-text .mv{margin-bottom:6px;}
+  .body-text > .mv:first-child > p:first-child::first-letter{
     font-family:'Playfair Display',serif;
-    font-size:3.9em;
+    font-size:3.7em;
     float:left;
     line-height:.82;
-    padding:6px 12px 0 0;
+    padding:5px 11px 0 0;
     color:var(--gold);
   }
-  .body-text strong{color:#7c5a12;font-weight:600;}
+  .body-text strong{color:var(--emph);font-weight:600;}
   .scrip{font-style:italic;color:var(--ink-soft);}
   .ref{
     font-family:'Cinzel',serif;
     font-variant:small-caps;
-    letter-spacing:.1em;
-    font-size:.92em;
+    letter-spacing:.09em;
+    font-size:.9em;
     color:var(--gold);
     white-space:nowrap;
   }
+
+  /* the closing sentence of each movement, promoted */
+  .body-text p.thesis{
+    text-align:center;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.32rem;
+    line-height:1.55;
+    color:var(--ink);
+    margin:26px auto 34px;
+    max-width:34em;
+    padding-top:22px;
+    position:relative;
+  }
+  .body-text p.thesis::before{
+    content:"";
+    position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:58px;height:1px;background:var(--gold);opacity:.8;
+  }
+  .body-text p.thesis strong{font-weight:inherit;color:inherit;}
+  @media(max-width:620px){.body-text p.thesis{font-size:1.2rem;}}
+
   h2.takeaways{
     font-family:'Cinzel',serif;
     font-weight:600;
-    font-size:1.35rem;
-    letter-spacing:.18em;
+    font-size:1.22rem;
+    letter-spacing:.16em;
     text-transform:uppercase;
     text-align:center;
     color:var(--ink);
@@ -149,30 +242,45 @@
   ol.takeaway-list li{
     counter-increment:tk;
     position:relative;
-    padding-left:62px;
+    padding-left:54px;
     margin-bottom:20px;
-    font-size:1.03rem;
+    font-size:1.02rem;
   }
   ol.takeaway-list li::before{
     content:counter(tk);
-    position:absolute;left:0;top:2px;
-    width:42px;height:42px;
+    position:absolute;left:0;top:3px;
+    width:36px;height:36px;
     border-radius:50%;
     border:1.5px solid var(--gold);
-    background:radial-gradient(circle at 35% 30%,#f5e7bd,var(--gold-pale));
-    color:#7c5a12;
+    background:radial-gradient(circle at 35% 30%,var(--num1),var(--num2));
+    color:var(--numfg);
     font-family:'Cinzel',serif;
     font-weight:600;
-    font-size:1.05rem;
+    font-size:.98rem;
     display:flex;align-items:center;justify-content:center;
-    box-shadow:0 2px 6px rgba(120,90,30,.25), inset 0 1px 2px rgba(255,255,255,.6);
+    box-shadow:0 2px 6px var(--shadow), inset 0 1px 2px rgba(255,255,255,.35);
   }
-  ol.takeaway-list li strong{color:#7c5a12;font-weight:600;}
+  ol.takeaway-list li strong{color:var(--emph);font-weight:600;}
+
+  .sources{
+    margin-top:34px;
+    font-size:.88rem;
+    line-height:1.7;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+  .sources .label{
+    font-family:'Cinzel',serif;
+    font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);display:block;margin-bottom:4px;
+  }
+
+  /* Watch It — unchanged treatment, tokenised for night reading */
   .watch{
     margin-top:38px;
     text-align:center;
     border:1px solid var(--gold);
-    background:linear-gradient(180deg,rgba(255,250,232,.75),rgba(247,238,213,.75));
+    background:linear-gradient(180deg,var(--card1),var(--card2));
     padding:26px 22px 22px;
   }
   .watch .label{
@@ -187,8 +295,8 @@
     letter-spacing:.08em;
     font-size:1.02rem;
     color:#fdf6e6;
-    background:var(--wine);
-    border:1px solid #5d2b20;
+    background:var(--wine-solid);
+    border:1px solid var(--wine-edge);
     text-decoration:none;
     padding:14px 26px;
     margin:6px 7px;
@@ -210,55 +318,78 @@
     .watch a{display:block;margin:9px 0;padding:15px 18px;}
     .watch{padding:22px 16px 18px;}
   }
+
   .sdg{
     font-family:'Pinyon Script',cursive;
-    font-size:2.5rem;
+    font-size:2.4rem;
     color:var(--gold);
     text-align:center;
     margin-top:40px;
   }
+
+  /* navigation */
+  .allnav,.footnav{max-width:720px;margin:0 auto 16px;text-align:center;}
+  .footnav{margin:26px auto 8px;display:flex;justify-content:center;gap:26px;}
+  .allnav a,.footnav a{
+    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.16em;
+    font-size:.8rem;color:var(--gold);text-decoration:none;
+    border-bottom:1px solid var(--rule);padding-bottom:2px;
+  }
+  .allnav a:hover,.footnav a:hover{border-bottom-color:var(--gold);}
+
+  /* night-reading toggle */
+  .lamp{
+    position:fixed;right:16px;bottom:16px;z-index:11;
+    width:44px;height:44px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--card1);
+    border:1px solid var(--gold);
+    color:var(--gold);
+    cursor:pointer;
+    box-shadow:0 4px 14px var(--shadow);
+    opacity:.72;
+    transition:opacity .18s ease, transform .18s ease;
+  }
+  .lamp:hover,.lamp:focus-visible{opacity:1;transform:translateY(-2px);outline:none;}
+  .lamp svg{width:20px;height:20px;}
+  @media print{.lamp,.progress,.allnav,.footnav{display:none;}}
 </style>
 </head>
 <body>
-<style>
-  .allnav{max-width:760px;margin:0 auto 16px;text-align:center;}
-  .allnav a{
-    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.18em;
-    font-size:.82rem;color:#a67c1e;text-decoration:none;border-bottom:1px solid rgba(166,124,30,.4);
-    padding-bottom:2px;
-  }
-  .allnav a:hover{border-bottom-color:#a67c1e;}
-</style>
-<nav class="allnav"><a href="./">&#8592;&nbsp;All devotions</a></nav>
+<div class="progress" id="prog"></div>
+<a id="top"></a>
+<nav class="allnav"><a href="./">← All devotions</a></nav>
 
 <article class="page">
-  <svg class="corner tl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner tl" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner tr" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner tr" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner bl" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner bl" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
-  <svg class="corner br" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"/>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"/>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"/>
+  <svg class="corner br" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
+    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
+    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
+    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
   </svg>
 
     <div class="eyebrow">Today's Devotion</div>
   <h1>Remember Me</h1>
+
+  <div class="meta">Luke 23 <span>·</span> 22 min read</div>
 
   <section class="verse-card">
     <div class="label">Key Verse</div>
@@ -268,34 +399,34 @@
 
   <div class="divider" aria-hidden="true">
     <span class="line"></span>
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <svg width="26" height="26" viewbox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"></path></svg>
     <span class="line right"></span>
   </div>
 
   <div class="body-text">
-    <p>Luke does not begin the story of the repentant thief with the thief. He begins with Jesus being led out to die, and with two other men walking the same road. <span class="scrip">“Two others, both criminals, were led out to be executed with him.”</span> <span class="ref">Luke 23:32 (NLT)</span> <span class="scrip">“When they came to a place called The Skull, they nailed him to the cross. And the criminals were also crucified—one on his right and one on his left.”</span> <span class="ref">Luke 23:33 (NLT)</span> John records the arrangement from his own vantage point: <span class="scrip">“Two others were crucified with him, one on either side, with Jesus between them.”</span> <span class="ref">John 19:18 (NLT)</span> Matthew and Mark call the two men revolutionaries, with a translators’ note that the word can also mean criminals; Luke simply calls them criminals. None of the four Gospels gives their names, and this devotion uses none. Whatever they had done, the men who arranged the crosses put the innocent One in the middle. Centuries earlier Isaiah had written of the Lord’s Servant, <span class="scrip">“He was counted among the rebels. He bore the sins of many and interceded for rebels.”</span> <span class="ref">Isaiah 53:12 (NLT)</span> On the night before He died, Jesus applied that prophecy to Himself: <span class="scrip">“For the time has come for this prophecy about me to be fulfilled: ‘He was counted among the rebels.’”</span> <span class="ref">Luke 22:37 (NLT)</span> Ellen White tells us that this arrangement was made at the direction of the priests and rulers, and that Christ’s position between the thieves “was to indicate that He was the greatest criminal of the three.” Then she draws out its deeper meaning: <span class="egw">“As Jesus, crucified with the thieves, was placed ‘in the midst,’ so His cross was placed in the midst of a world lying in sin. And the words of pardon spoken to the penitent thief kindled a light that will shine to the earth’s remotest bounds”</span> <span class="egw-ref">The Desire of Ages, chapter 78, “Calvary,” p. 751 · DA 751.4</span>. The Son of God was counted among rebels so that rebels could one day be counted with Him. <strong>The innocent One was numbered with the guilty so that the guilty could be numbered with Him.</strong></p>
+    <section class="mv"><p>Luke does not begin the story of the repentant thief with the thief. He begins with Jesus being led out to die, and with two other men walking the same road. <span class="scrip">“Two others, both criminals, were led out to be executed with him.”</span> <span class="ref">Luke 23:32 (NLT)</span> <span class="scrip">“When they came to a place called The Skull, they nailed him to the cross. And the criminals were also crucified—one on his right and one on his left.”</span> <span class="ref">Luke 23:33 (NLT)</span> John records the arrangement from his own vantage point: <span class="scrip">“Two others were crucified with him, one on either side, with Jesus between them.”</span> <span class="ref">John 19:18 (NLT)</span></p><p> Matthew and Mark call the two men revolutionaries, with a translators’ note that the word can also mean criminals; Luke simply calls them criminals. None of the four Gospels gives their names, and this devotion uses none. Whatever they had done, the men who arranged the crosses put the innocent One in the middle. Centuries earlier Isaiah had written of the Lord’s Servant, <span class="scrip">“He was counted among the rebels. He bore the sins of many and interceded for rebels.”</span> <span class="ref">Isaiah 53:12 (NLT)</span> On the night before He died, Jesus applied that prophecy to Himself: <span class="scrip">“For the time has come for this prophecy about me to be fulfilled: ‘He was counted among the rebels.’”</span> <span class="ref">Luke 22:37 (NLT)</span></p><p> Ellen White tells us that this arrangement was made at the direction of the priests and rulers, and that Christ’s position between the thieves “was to indicate that He was the greatest criminal of the three.” Then she draws out its deeper meaning: </p><blockquote class="egw-block"><span class="egw">“As Jesus, crucified with the thieves, was placed ‘in the midst,’ so His cross was placed in the midst of a world lying in sin. And the words of pardon spoken to the penitent thief kindled a light that will shine to the earth’s remotest bounds”</span>.  <span class="egw-ref">The Desire of Ages, chapter 78, “Calvary,” p. 751 · DA 751.4</span></blockquote><p>The Son of God was counted among rebels so that rebels could one day be counted with Him. </p><p class="thesis"><strong>The innocent One was numbered with the guilty so that the guilty could be numbered with Him.</strong></p></section>
 
-    <p>The first words Luke records from the cross set the tone for everything that follows. <span class="scrip">“Jesus said, ‘Father, forgive them, for they don’t know what they are doing.’ And the soldiers gambled for his clothes by throwing dice.”</span> <span class="ref">Luke 23:34 (NLT)</span> The prayer went up while the soldiers were still at work. (The NLT notes that this sentence is not included in many ancient manuscripts; it is quoted here exactly as the NLT prints it.) Then the mockery came in waves. <span class="scrip">“The crowd watched and the leaders scoffed. ‘He saved others,’ they said, ‘let him save himself if he is really God’s Messiah, the Chosen One.’”</span> <span class="ref">Luke 23:35 (NLT)</span> <span class="scrip">“The soldiers mocked him, too, by offering him a drink of sour wine. They called out to him, ‘If you are the King of the Jews, save yourself!’”</span> <span class="ref">Luke 23:36–37 (NLT)</span> Above His head hung the charge: <span class="scrip">“A sign was fastened above him with these words: ‘This is the King of the Jews.’”</span> <span class="ref">Luke 23:38 (NLT)</span> Matthew preserves the religious leaders’ sharpest line: <span class="scrip">“‘He saved others,’ they scoffed, ‘but he can’t save himself! So he is the King of Israel, is he? Let him come down from the cross right now, and we will believe in him!’”</span> <span class="ref">Matthew 27:42 (NLT)</span> Notice the shape of every taunt. Leaders, soldiers and passers-by all demanded the same proof: come down. Save yourself. Show us power, and then we will consider believing. Ellen White writes that Jesus “heard every word” of it, and then states the truth the mockers never grasped: <span class="egw">“Christ could have come down from the cross. But it is because He would not save Himself that the sinner has hope of pardon and favor with God”</span> <span class="egw-ref">The Desire of Ages, chapter 78, p. 749 · DA 749.1</span>. Of the prayer for His enemies she writes, <span class="egw">“That prayer of Christ for His enemies embraced the world. It took in every sinner that had lived or should live, from the beginning of the world to the end of time”</span> <span class="egw-ref">The Desire of Ages, chapter 78, p. 745 · DA 745.1</span>. Keep those two things together as the story unfolds: a King who would not come down, and a prayer wide enough to hold every sinner on earth. One of the two men beside Him was about to discover what both of them meant. <strong>The mockers demanded that He save Himself; He stayed on the cross so that He could save them.</strong></p>
+    <section class="mv"><p>The first words Luke records from the cross set the tone for everything that follows. <span class="scrip">“Jesus said, ‘Father, forgive them, for they don’t know what they are doing.’ And the soldiers gambled for his clothes by throwing dice.”</span> <span class="ref">Luke 23:34 (NLT)</span> The prayer went up while the soldiers were still at work. (The NLT notes that this sentence is not included in many ancient manuscripts; it is quoted here exactly as the NLT prints it.) Then the mockery came in waves. <span class="scrip">“The crowd watched and the leaders scoffed. ‘He saved others,’ they said, ‘let him save himself if he is really God’s Messiah, the Chosen One.’”</span> <span class="ref">Luke 23:35 (NLT)</span> <span class="scrip">“The soldiers mocked him, too, by offering him a drink of sour wine. They called out to him, ‘If you are the King of the Jews, save yourself!’”</span> <span class="ref">Luke 23:36–37 (NLT)</span></p><p> Above His head hung the charge: <span class="scrip">“A sign was fastened above him with these words: ‘This is the King of the Jews.’”</span> <span class="ref">Luke 23:38 (NLT)</span> Matthew preserves the religious leaders’ sharpest line: <span class="scrip">“‘He saved others,’ they scoffed, ‘but he can’t save himself! So he is the King of Israel, is he? Let him come down from the cross right now, and we will believe in him!’”</span> <span class="ref">Matthew 27:42 (NLT)</span> Notice the shape of every taunt. Leaders, soldiers and passers-by all demanded the same proof: come down. </p><p>Save yourself. Show us power, and then we will consider believing. Ellen White writes that Jesus “heard every word” of it, and then states the truth the mockers never grasped: <span class="egw">“Christ could have come down from the cross. But it is because He would not save Himself that the sinner has hope of pardon and favor with God”</span> <span class="egw-ref">The Desire of Ages, chapter 78, p. 749 · DA 749.1</span>. Of the prayer for His enemies she writes, <span class="egw">“That prayer of Christ for His enemies embraced the world. It took in every sinner that had lived or should live, from the beginning of the world to the end of time”</span> <span class="egw-ref">The Desire of Ages, chapter 78, p. 745 · DA 745.1</span>. </p><p>Keep those two things together as the story unfolds: a King who would not come down, and a prayer wide enough to hold every sinner on earth. One of the two men beside Him was about to discover what both of them meant. </p><p class="thesis"><strong>The mockers demanded that He save Himself; He stayed on the cross so that He could save them.</strong></p></section>
 
-    <p>Now Luke turns to the two men. <span class="scrip">“One of the criminals hanging beside him scoffed, ‘So you’re the Messiah, are you? Prove it by saving yourself—and us, too, while you’re at it!’”</span> <span class="ref">Luke 23:39 (NLT)</span> His words were the crowd’s words with one addition: and us. He wanted what the leaders wanted, a display of power, and he wanted it to include a rescue from his own cross. Matthew and Mark record that at first both criminals joined the abuse: <span class="scrip">“Even the revolutionaries who were crucified with him ridiculed him in the same way.”</span> <span class="ref">Matthew 27:44 (NLT)</span> <span class="scrip">“Even the men who were crucified with Jesus ridiculed him.”</span> <span class="ref">Mark 15:32 (NLT)</span> Luke records the second man’s rebuke and faith. Taken together, the Gospels show that both men began where the crowd was, and that one of them changed as the hours passed. Ellen White fills in the picture: <span class="egw">“Both the men who were crucified with Jesus had at first railed upon Him; and one under his suffering only became more desperate and defiant. But not so with his companion”</span> <span class="egw-ref">The Desire of Ages, chapter 78, p. 749 · DA 749.3</span>. She tells us that this man “had seen and heard Jesus, and had been convicted by His teaching, but he had been turned away from Him by the priests and rulers,” that in the judgment hall and on the way to Calvary he had been in company with Jesus, and that he <span class="egw">“had heard Pilate declare, ‘I find no fault in Him’”</span> <span class="egw-ref">The Desire of Ages, chapter 78, p. 749 · DA 749.3</span>, the verdict Luke also records: <span class="scrip">“I find nothing wrong with this man!”</span> <span class="ref">Luke 23:4 (NLT)</span> So this was not a stranger to the truth. He had heard it before and turned from it; now, on a cross, conviction was about to return. Hold that alongside what both men shared. Two men hung the same distance from Jesus. Both were in agony. Both heard the same prayer, the same taunts, the same silence from heaven. Both could read the same sign. And they went in opposite directions. Proximity to Christ decided nothing. A religious upbringing, a Christian home, years in church, a Bible on the shelf, even witnessing something extraordinary: none of these produces faith on its own. Ellen White writes that <span class="egw">“the two thieves upon the cross represent the two great classes of mankind”</span> <span class="egw-ref">The Spirit of Prophecy, volume 3, chapter 10, “Calvary,” p. 159 · 3SP 159.3</span>: those who look to the crucified Christ and live, and those who refuse to look, just as Jesus told Nicodemus that the Son of Man must be lifted up like the bronze snake in the wilderness. The cross leaves no one neutral. <strong>Two men were equally close to the cross physically, yet they responded to Jesus very differently spiritually; closeness was never the thing that saved.</strong></p>
+    <section class="mv"><p>Now Luke turns to the two men. <span class="scrip">“One of the criminals hanging beside him scoffed, ‘So you’re the Messiah, are you? Prove it by saving yourself—and us, too, while you’re at it!’”</span> <span class="ref">Luke 23:39 (NLT)</span> His words were the crowd’s words with one addition: and us. He wanted what the leaders wanted, a display of power, and he wanted it to include a rescue from his own cross. Matthew and Mark record that at first both criminals joined the abuse: <span class="scrip">“Even the revolutionaries who were crucified with him ridiculed him in the same way.”</span> <span class="ref">Matthew 27:44 (NLT)</span> <span class="scrip">“Even the men who were crucified with Jesus ridiculed him.”</span> <span class="ref">Mark 15:32 (NLT)</span></p><p> Luke records the second man’s rebuke and faith. Taken together, the Gospels show that both men began where the crowd was, and that one of them changed as the hours passed. Ellen White fills in the picture: <span class="egw">“Both the men who were crucified with Jesus had at first railed upon Him; and one under his suffering only became more desperate and defiant. But not so with his companion”</span> <span class="egw-ref">The Desire of Ages, chapter 78, p. 749 · DA 749.3</span>. She tells us that this man “had seen and heard Jesus, and had been convicted by His teaching, but he had been turned away from Him by the priests and rulers,” that in the judgment hall and on the way to Calvary he had been in company with Jesus, and that he <span class="egw">“had heard Pilate declare, ‘I find no fault in Him’”</span> <span class="egw-ref">The Desire of Ages, chapter 78, p. 749 · DA 749.3</span>, the verdict Luke also records: <span class="scrip">“I find nothing wrong with this man!”</span> <span class="ref">Luke 23:4 (NLT)</span></p><p> So this was not a stranger to the truth. He had heard it before and turned from it; now, on a cross, conviction was about to return. Hold that alongside what both men shared. Two men hung the same distance from Jesus. Both were in agony. Both heard the same prayer, the same taunts, the same silence from heaven. Both could read the same sign. And they went in opposite directions. Proximity to Christ decided nothing. A religious upbringing, a Christian home, years in church, a Bible on the shelf, even witnessing something extraordinary: none of these produces faith on its own. </p><p>Ellen White writes that <span class="egw">“the two thieves upon the cross represent the two great classes of mankind”</span> <span class="egw-ref">The Spirit of Prophecy, volume 3, chapter 10, “Calvary,” p. 159 · 3SP 159.3</span>: those who look to the crucified Christ and live, and those who refuse to look, just as Jesus told Nicodemus that the Son of Man must be lifted up like the bronze snake in the wilderness. The cross leaves no one neutral. </p><p class="thesis"><strong>Two men were equally close to the cross physically, yet they responded to Jesus very differently spiritually; closeness was never the thing that saved.</strong></p></section>
 
-    <p>Listen to the second man. <span class="scrip">“But the other criminal protested, ‘Don’t you fear God even when you have been sentenced to die? We deserve to die for our crimes, but this man hasn’t done anything wrong.’”</span> <span class="ref">Luke 23:40–41 (NLT)</span> Three things happen in that short speech. First, he fears God. A man with hours to live had nothing left to fear from Rome, from the priests or from the crowd; Ellen White observes that <span class="egw">“the dying thieves have no longer anything to fear from man. But upon one of them presses the conviction that there is a God to fear, a future to cause him to tremble”</span> <span class="egw-ref">The Desire of Ages, chapter 78, p. 749 · DA 749.3</span>. Second, he tells the truth about himself: “We deserve to die for our crimes.” No excuse, no account of his background, no comparison with worse men, no complaint about the court. Third, he tells the truth about Jesus: “this man hasn’t done anything wrong.” This is what repentance looks like when it is real. It does not begin by explaining why everyone else is worse. It stops defending sin and turns towards the Saviour. Jesus had already described this kind of prayer: <span class="scrip">“But the tax collector stood at a distance and dared not even lift his eyes to heaven as he prayed. Instead, he beat his chest in sorrow, saying, ‘O God, be merciful to me, for I am a sinner.’”</span> <span class="ref">Luke 18:13 (NLT)</span> And He gave the verdict: <span class="scrip">“I tell you, this sinner, not the Pharisee, returned home justified before God.”</span> <span class="ref">Luke 18:14 (NLT)</span> John later put the same principle in two sentences: <span class="scrip">“If we claim we have no sin, we are only fooling ourselves and not living in the truth. But if we confess our sins to him, he is faithful and just to forgive us our sins and to cleanse us from all wickedness.”</span> <span class="ref">1 John 1:8–9 (NLT)</span> Two cautions belong here. The thief’s honesty about his sentence does not mean that suffering pays for sin, or that a person must be punished before grace can reach him; his cross paid for nothing, and Christ’s cross paid for everything. And his words do not teach that every hardship a person endures is God’s punishment; Jesus, hanging beside him, was suffering without any guilt at all. What the thief models is not suffering but honesty. <strong>Repentance began the moment he stopped defending himself and told the truth about himself and about Jesus.</strong></p>
+    <section class="mv"><p>Listen to the second man. <span class="scrip">“But the other criminal protested, ‘Don’t you fear God even when you have been sentenced to die? We deserve to die for our crimes, but this man hasn’t done anything wrong.’”</span> <span class="ref">Luke 23:40–41 (NLT)</span> Three things happen in that short speech. First, he fears God. A man with hours to live had nothing left to fear from Rome, from the priests or from the crowd; Ellen White observes that <span class="egw">“the dying thieves have no longer anything to fear from man. But upon one of them presses the conviction that there is a God to fear, a future to cause him to tremble”</span> <span class="egw-ref">The Desire of Ages, chapter 78, p. 749 · DA 749.3</span>. </p><p>Second, he tells the truth about himself: “We deserve to die for our crimes.” No excuse, no account of his background, no comparison with worse men, no complaint about the court. Third, he tells the truth about Jesus: “this man hasn’t done anything wrong.” This is what repentance looks like when it is real. It does not begin by explaining why everyone else is worse. It stops defending sin and turns towards the Saviour. Jesus had already described this kind of prayer: <span class="scrip">“But the tax collector stood at a distance and dared not even lift his eyes to heaven as he prayed. Instead, he beat his chest in sorrow, saying, ‘O God, be merciful to me, for I am a sinner.’”</span> <span class="ref">Luke 18:13 (NLT)</span></p><p> And He gave the verdict: <span class="scrip">“I tell you, this sinner, not the Pharisee, returned home justified before God.”</span> <span class="ref">Luke 18:14 (NLT)</span> John later put the same principle in two sentences: <span class="scrip">“If we claim we have no sin, we are only fooling ourselves and not living in the truth. But if we confess our sins to him, he is faithful and just to forgive us our sins and to cleanse us from all wickedness.”</span> <span class="ref">1 John 1:8–9 (NLT)</span> Two cautions belong here. The thief’s honesty about his sentence does not mean that suffering pays for sin, or that a person must be punished before grace can reach him; his cross paid for nothing, and Christ’s cross paid for everything. </p><p>And his words do not teach that every hardship a person endures is God’s punishment; Jesus, hanging beside him, was suffering without any guilt at all. What the thief models is not suffering but honesty. </p><p class="thesis"><strong>Repentance began the moment he stopped defending himself and told the truth about himself and about Jesus.</strong></p></section>
 
-    <p>“This man hasn’t done anything wrong.” The thief was not the only one to say it that day; he was simply the only one who said it with faith. Pilate had said it three times in Luke’s account alone: <span class="scrip">“I find nothing wrong with this man!”</span> <span class="ref">Luke 23:4 (NLT)</span> <span class="scrip">“I have examined him thoroughly on this point in your presence and find him innocent.”</span> <span class="ref">Luke 23:14 (NLT)</span> <span class="scrip">“Why? What crime has he committed? I have found no reason to sentence him to death.”</span> <span class="ref">Luke 23:22 (NLT)</span> And after Jesus died, the officer in charge of the execution added his own verdict: <span class="scrip">“Surely this man was innocent.”</span> <span class="ref">Luke 23:47 (NLT)</span> So the record is unanimous. A Roman governor, a Roman officer and a condemned criminal all declared that the Man on the middle cross did not belong there because of anything He had done. That raises the question the whole New Testament answers. If He was innocent, why was He there? Isaiah had said it: <span class="scrip">“He bore the sins of many and interceded for rebels.”</span> <span class="ref">Isaiah 53:12 (NLT)</span> Paul says it with breathtaking directness: <span class="scrip">“For God made Christ, who never sinned, to be the offering for our sin, so that we could be made right with God through Christ.”</span> <span class="ref">2 Corinthians 5:21 (NLT)</span> Peter writes: <span class="scrip">“He personally carried our sins in his body on the cross so that we can be dead to sin and live for what is right.”</span> <span class="ref">1 Peter 2:24 (NLT)</span> The picture at Calvary is therefore exact. Guilty humanity hangs on either side. The innocent Christ hangs in the middle, in the place where criminals die, carrying what they carried and infinitely more. Ellen White writes that as Jesus spoke His promise to the thief, <span class="egw">“He who in all other eyes appeared to be conquered was a Conqueror. He was acknowledged as the Sin Bearer”</span> <span class="egw-ref">The Desire of Ages, chapter 78, p. 751 · DA 751.2</span>. Do not read the thief’s confession as a compliment paid to a good man. It was the recognition, however partial, that the innocent One was dying in the place of the guilty. That recognition is the beginning of the gospel for every person who has ever lived. <strong>The innocent Man was dying where the guilty die, and one guilty man beside Him understood enough to trust Him.</strong></p>
+    <section class="mv"><p>“This man hasn’t done anything wrong.” The thief was not the only one to say it that day; he was simply the only one who said it with faith. Pilate had said it three times in Luke’s account alone: <span class="scrip">“I find nothing wrong with this man!”</span> <span class="ref">Luke 23:4 (NLT)</span> <span class="scrip">“I have examined him thoroughly on this point in your presence and find him innocent.”</span> <span class="ref">Luke 23:14 (NLT)</span> <span class="scrip">“Why? What crime has he committed? I have found no reason to sentence him to death.”</span> <span class="ref">Luke 23:22 (NLT)</span></p><p> And after Jesus died, the officer in charge of the execution added his own verdict: <span class="scrip">“Surely this man was innocent.”</span> <span class="ref">Luke 23:47 (NLT)</span> So the record is unanimous. A Roman governor, a Roman officer and a condemned criminal all declared that the Man on the middle cross did not belong there because of anything He had done. That raises the question the whole New Testament answers. If He was innocent, why was He there? Isaiah had said it: <span class="scrip">“He bore the sins of many and interceded for rebels.”</span> <span class="ref">Isaiah 53:12 (NLT)</span></p><p> Paul says it with breathtaking directness: <span class="scrip">“For God made Christ, who never sinned, to be the offering for our sin, so that we could be made right with God through Christ.”</span> <span class="ref">2 Corinthians 5:21 (NLT)</span> Peter writes: <span class="scrip">“He personally carried our sins in his body on the cross so that we can be dead to sin and live for what is right.”</span> <span class="ref">1 Peter 2:24 (NLT)</span> The picture at Calvary is therefore exact. Guilty humanity hangs on either side. The innocent Christ hangs in the middle, in the place where criminals die, carrying what they carried and infinitely more. </p><p>Ellen White writes that as Jesus spoke His promise to the thief, <span class="egw">“He who in all other eyes appeared to be conquered was a Conqueror. He was acknowledged as the Sin Bearer”</span> <span class="egw-ref">The Desire of Ages, chapter 78, p. 751 · DA 751.2</span>. Do not read the thief’s confession as a compliment paid to a good man. It was the recognition, however partial, that the innocent One was dying in the place of the guilty. That recognition is the beginning of the gospel for every person who has ever lived. </p><p class="thesis"><strong>The innocent Man was dying where the guilty die, and one guilty man beside Him understood enough to trust Him.</strong></p></section>
 
-    <p>Then comes the request that names this devotion. <span class="scrip">“Then he said, ‘Jesus, remember me when you come into your Kingdom.’”</span> <span class="ref">Luke 23:42 (NLT)</span> Weigh what he was looking at when he said it. Jesus was nailed, bleeding, mocked by the religious establishment, deserted by most of His disciples, labelled by a sign that everyone around Him treated as a joke. The leaders had just sneered, <span class="scrip">“So he is the King of Israel, is he? Let him come down from the cross right now, and we will believe in him!”</span> <span class="ref">Matthew 27:42 (NLT)</span> They would believe in a king who came down. The thief believed in a King who stayed up. He did not ask for the nails to be removed. He did not ask Jesus to prove anything. He looked at a dying man and spoke of a coming Kingdom, as if the cross were not the end of the story but the road into it. That is the extraordinary thing. Many people believed in Jesus when they saw miracles. This man believed while looking at a crucified Messiah. Ellen White puts it memorably: <span class="egw">“Many were ready to call Him Lord when He wrought miracles, and after He had risen from the grave; but none acknowledged Him as He hung dying upon the cross save the penitent thief who was saved at the eleventh hour”</span> <span class="egw-ref">The Desire of Ages, chapter 78, p. 750 · DA 750.3</span>. (In the King James Version, which Ellen White quotes, the thief says “Lord, remember me”; the NLT renders his address as “Jesus.”) How did he come to see it? Ellen White explains what was happening in that heart: “He calls to mind all he has heard of Jesus, how He has healed the sick and pardoned sin.” Then: <span class="egw">“The Holy Spirit illuminates his mind, and little by little the chain of evidence is joined together. In Jesus, bruised, mocked, and hanging upon the cross, he sees the Lamb of God, that taketh away the sin of the world”</span> <span class="egw-ref">The Desire of Ages, chapter 78, p. 750 · DA 750.1</span>. He may not have understood every doctrine, but he grasped the two things that matter most: that he was a sinner who needed mercy, and that the Man beside him was a King who could give it. Everyone around the cross could see a dying man. Faith enabled the repentant thief to recognise a King. <strong>Faith recognised a crown when almost everyone else could see only a cross.</strong></p>
+    <section class="mv"><p>Then comes the request that names this devotion. <span class="scrip">“Then he said, ‘Jesus, remember me when you come into your Kingdom.’”</span> <span class="ref">Luke 23:42 (NLT)</span> Weigh what he was looking at when he said it. Jesus was nailed, bleeding, mocked by the religious establishment, deserted by most of His disciples, labelled by a sign that everyone around Him treated as a joke. The leaders had just sneered, <span class="scrip">“So he is the King of Israel, is he? Let him come down from the cross right now, and we will believe in him!”</span> <span class="ref">Matthew 27:42 (NLT)</span></p><p> They would believe in a king who came down. The thief believed in a King who stayed up. He did not ask for the nails to be removed. He did not ask Jesus to prove anything. He looked at a dying man and spoke of a coming Kingdom, as if the cross were not the end of the story but the road into it. That is the extraordinary thing. Many people believed in Jesus when they saw miracles. This man believed while looking at a crucified Messiah. </p><p>Ellen White puts it memorably: </p><blockquote class="egw-block"><span class="egw">“Many were ready to call Him Lord when He wrought miracles, and after He had risen from the grave; but none acknowledged Him as He hung dying upon the cross save the penitent thief who was saved at the eleventh hour”</span>.  <span class="egw-ref">The Desire of Ages, chapter 78, p. 750 · DA 750.3</span></blockquote><p>(In the King James Version, which Ellen White quotes, the thief says “Lord, remember me”; the NLT renders his address as “Jesus.”) How did he come to see it? Ellen White explains what was happening in that heart: “He calls to mind all he has heard of Jesus, how He has healed the sick and pardoned sin.” Then: </p><blockquote class="egw-block"><span class="egw">“The Holy Spirit illuminates his mind, and little by little the chain of evidence is joined together. In Jesus, bruised, mocked, and hanging upon the cross, he sees the Lamb of God, that taketh away the sin of the world”</span>.  <span class="egw-ref">The Desire of Ages, chapter 78, p. 750 · DA 750.1</span></blockquote><p>He may not have understood every doctrine, but he grasped the two things that matter most: that he was a sinner who needed mercy, and that the Man beside him was a King who could give it. Everyone around the cross could see a dying man. Faith enabled the repentant thief to recognise a King. </p><p class="thesis"><strong>Faith recognised a crown when almost everyone else could see only a cross.</strong></p></section>
 
-    <p>Look at how little the thief brought and how much he asked. He brought no righteous record; he had just confessed the opposite. He brought no promise of future service; there would be no future. He could not be baptised, could not make restitution to the people he had wronged, could not join a community of believers, could not spend years growing in holiness. He could not even fold his hands. All he could do was speak, and what he spoke was not a bargain but a plea: remember me. Compare it with the first criminal’s demand: <span class="scrip">“Prove it by saving yourself—and us, too, while you’re at it!”</span> <span class="ref">Luke 23:39 (NLT)</span> One man wanted Jesus to change his circumstances; the other entrusted Jesus with his eternity. Do not push that contrast further than the text allows. There is nothing wrong with asking God for rescue, and Scripture is full of such prayers. But there is a difference between demanding that Christ prove Himself by fixing our situation and trusting Christ with our destiny whether or not the situation changes. The thief’s prayer belongs in the second category, and Scripture explains why prayers like it are heard: <span class="scrip">“They have the same Lord, who gives generously to all who call on him. For ‘Everyone who calls on the name of the Lord will be saved.’”</span> <span class="ref">Romans 10:12–13 (NLT)</span> <span class="scrip">“God saved you by his grace when you believed. And you can’t take credit for this; it is a gift from God. Salvation is not a reward for the good things we have done, so none of us can boast about it.”</span> <span class="ref">Ephesians 2:8–9 (NLT)</span> The thief had no good things to point to and nothing to boast about, which is exactly why his story shows the gospel so clearly. He was not saved because he defended Jesus, because he confessed well, because he suffered enough or because he used the right words; “remember me” is not a formula. He was saved because the One he asked was able and willing to save him. Ellen White describes the moment as <span class="egw">“the helpless, dying soul casts himself upon a dying Saviour”</span> <span class="egw-ref">The Desire of Ages, chapter 78, p. 750 · DA 750.1</span>. He did not ask Jesus to explain away his past, and he did not pretend it was not there. He owned it, and then he entrusted himself to Christ’s coming Kingdom. <strong>The thief could not change his past, but he could still place his future in the hands of Christ.</strong></p>
+    <section class="mv"><p>Look at how little the thief brought and how much he asked. He brought no righteous record; he had just confessed the opposite. He brought no promise of future service; there would be no future. He could not be baptised, could not make restitution to the people he had wronged, could not join a community of believers, could not spend years growing in holiness. He could not even fold his hands. All he could do was speak, and what he spoke was not a bargain but a plea: remember me. </p><p>Compare it with the first criminal’s demand: <span class="scrip">“Prove it by saving yourself—and us, too, while you’re at it!”</span> <span class="ref">Luke 23:39 (NLT)</span> One man wanted Jesus to change his circumstances; the other entrusted Jesus with his eternity. Do not push that contrast further than the text allows. There is nothing wrong with asking God for rescue, and Scripture is full of such prayers. But there is a difference between demanding that Christ prove Himself by fixing our situation and trusting Christ with our destiny whether or not the situation changes. </p><p>The thief’s prayer belongs in the second category, and Scripture explains why prayers like it are heard: <span class="scrip">“They have the same Lord, who gives generously to all who call on him. For ‘Everyone who calls on the name of the Lord will be saved.’”</span> <span class="ref">Romans 10:12–13 (NLT)</span> <span class="scrip">“God saved you by his grace when you believed. And you can’t take credit for this; it is a gift from God. Salvation is not a reward for the good things we have done, so none of us can boast about it.”</span> <span class="ref">Ephesians 2:8–9 (NLT)</span></p><p> The thief had no good things to point to and nothing to boast about, which is exactly why his story shows the gospel so clearly. He was not saved because he defended Jesus, because he confessed well, because he suffered enough or because he used the right words; “remember me” is not a formula. He was saved because the One he asked was able and willing to save him. Ellen White describes the moment as <span class="egw">“the helpless, dying soul casts himself upon a dying Saviour”</span> <span class="egw-ref">The Desire of Ages, chapter 78, p. 750 · DA 750.1</span>. </p><p>He did not ask Jesus to explain away his past, and he did not pretend it was not there. He owned it, and then he entrusted himself to Christ’s coming Kingdom. </p><p class="thesis"><strong>The thief could not change his past, but he could still place his future in the hands of Christ.</strong></p></section>
 
-    <p><span class="scrip">“And Jesus replied, ‘I assure you, today you will be with me in paradise.’”</span> <span class="ref">Luke 23:43 (NLT)</span> The answer came at once. No test, no waiting period, no demand for proof of sincerity. Ellen White writes, <span class="egw">“Quickly the answer came. Soft and melodious the tone, full of love, compassion, and power the words”</span> <span class="egw-ref">The Desire of Ages, chapter 78, p. 750 · DA 750.2</span>, and she describes the thief’s prayer as “one gleam of comfort” that came to Jesus in His agony: <span class="egw">“How grateful then to the Saviour was the utterance of faith and love from the dying thief!”</span> <span class="egw-ref">The Desire of Ages, chapter 78, pp. 749–750 · DA 749.3; DA 750.3</span>. Consider what was happening to Jesus while He spoke. He was bearing the sin of the world, mocked from below, with most of His followers scattered, within hours of death. And He turned His attention to one sinner at His side. The cross did not interrupt His saving work; it was His saving work, and even in the middle of it He had time for one man. Ellen White captures it: <span class="egw">“Men may exercise power over His human body. … But they cannot rob Him of His power to forgive sins. … It is His royal right to save unto the uttermost all who come unto God by Him”</span> <span class="egw-ref">The Desire of Ages, chapter 78, p. 751 · DA 751.2</span>. That last line echoes Hebrews: <span class="scrip">“Therefore he is able, once and forever, to save those who come to God through him. He lives forever to intercede with God on their behalf.”</span> <span class="ref">Hebrews 7:25 (NLT)</span> A word about the promise itself. The NLT reads, “I assure you, today you will be with me in paradise.” The earliest Greek manuscripts were written without the punctuation marks modern readers rely on, so the comma is supplied by translators, and the meaning of the promise does not hang on it. Ellen White explains what Jesus was promising: <span class="egw">“Christ did not promise that the thief should be with Him in Paradise that day. He Himself did not go that day to Paradise. He slept in the tomb, and on the morning of the resurrection He said, ‘I am not yet ascended to My Father.’ John 20:17. But on the day of the crucifixion, the day of apparent defeat and darkness, the promise was given. ‘Today’ while dying upon the cross as a malefactor, Christ assures the poor sinner, Thou shalt be with Me in Paradise”</span> <span class="egw-ref">The Desire of Ages, chapter 78, p. 751 · DA 751.3</span>. <em>The Story of Redemption</em> prints the verse with the comma after “today,” noting that this placing makes “the true meaning of the text” more apparent (<em>The Story of Redemption</em>, chapter 29, “The Crucifixion of Christ,” p. 222, SR 222.3). That is the force of the promise, and it is glorious: on the darkest day in history, from the cross itself, Jesus gave a dying sinner a certain place in His Kingdom. The certainty rests on His authority, not on the thief’s feelings. Jesus had promised, <span class="scrip">“However, those the Father has given me will come to me, and I will never reject them.”</span> <span class="ref">John 6:37 (NLT)</span> At Calvary He kept that promise to the least likely man in sight. <strong>Jesus was still saving while He was suffering; the cross did not interrupt His mission, because the cross was His mission.</strong></p>
+    <section class="mv"><p><span class="scrip">“And Jesus replied, ‘I assure you, today you will be with me in paradise.’”</span> <span class="ref">Luke 23:43 (NLT)</span> The answer came at once. No test, no waiting period, no demand for proof of sincerity. Ellen White writes, <span class="egw">“Quickly the answer came. Soft and melodious the tone, full of love, compassion, and power the words”</span> <span class="egw-ref">The Desire of Ages, chapter 78, p. 750 · DA 750.2</span>, and she describes the thief’s prayer as “one gleam of comfort” that came to Jesus in His agony: <span class="egw">“How grateful then to the Saviour was the utterance of faith and love from the dying thief!”</span> <span class="egw-ref">The Desire of Ages, chapter 78, pp. 749–750 · DA 749.3; DA 750.3</span>. </p><p>Consider what was happening to Jesus while He spoke. He was bearing the sin of the world, mocked from below, with most of His followers scattered, within hours of death. And He turned His attention to one sinner at His side. The cross did not interrupt His saving work; it was His saving work, and even in the middle of it He had time for one man. Ellen White captures it: </p><blockquote class="egw-block"><span class="egw">“Men may exercise power over His human body. … But they cannot rob Him of His power to forgive sins. … It is His royal right to save unto the uttermost all who come unto God by Him”</span>.  <span class="egw-ref">The Desire of Ages, chapter 78, p. 751 · DA 751.2</span></blockquote><p>That last line echoes Hebrews: <span class="scrip">“Therefore he is able, once and forever, to save those who come to God through him. He lives forever to intercede with God on their behalf.”</span> <span class="ref">Hebrews 7:25 (NLT)</span> A word about the promise itself. The NLT reads, “I assure you, today you will be with me in paradise.” The earliest Greek manuscripts were written without the punctuation marks modern readers rely on, so the comma is supplied by translators, and the meaning of the promise does not hang on it. </p><p>Ellen White explains what Jesus was promising: </p><blockquote class="egw-block"><span class="egw">“Christ did not promise that the thief should be with Him in Paradise that day. He Himself did not go that day to Paradise. He slept in the tomb, and on the morning of the resurrection He said, ‘I am not yet ascended to My Father.’ John 20:17. But on the day of the crucifixion, the day of apparent defeat and darkness, the promise was given. ‘Today’ while dying upon the cross as a malefactor, Christ assures the poor sinner, Thou shalt be with Me in Paradise”</span>.  <span class="egw-ref">The Desire of Ages, chapter 78, p. 751 · DA 751.3</span></blockquote><p><em>The Story of Redemption</em> prints the verse with the comma after “today,” noting that this placing makes “the true meaning of the text” more apparent (<em>The Story of Redemption</em>, chapter 29, “The Crucifixion of Christ,” p. 222, SR 222.3). That is the force of the promise, and it is glorious: on the darkest day in history, from the cross itself, Jesus gave a dying sinner a certain place in His Kingdom. The certainty rests on His authority, not on the thief’s feelings. Jesus had promised, <span class="scrip">“However, those the Father has given me will come to me, and I will never reject them.”</span> <span class="ref">John 6:37 (NLT)</span> At Calvary He kept that promise to the least likely man in sight. </p><p class="thesis"><strong>Jesus was still saving while He was suffering; the cross did not interrupt His mission, because the cross was His mission.</strong></p></section>
 
-    <p>So what does this mean for you? Start with the hope, because it is enormous. If Jesus received a condemned criminal with hours to live, there is no past that puts a person beyond His reach. Paul writes, <span class="scrip">“For everyone has sinned; we all fall short of God’s glorious standard. Yet God, in his grace, freely makes us right in his sight. He did this through Christ Jesus when he freed us from the penalty for our sins.”</span> <span class="ref">Romans 3:23–24 (NLT)</span> And again: <span class="scrip">“When we were utterly helpless, Christ came at just the right time and died for us sinners.”</span> <span class="ref">Romans 5:6 (NLT)</span> <span class="scrip">“But God showed his great love for us by sending Christ to die for us while we were still sinners.”</span> <span class="ref">Romans 5:8 (NLT)</span> If you carry a destructive past, shame, years of wrong decisions, broken relationships, addiction, a criminal record or long seasons far from God, hear this clearly: none of it is a reason to conclude that Christ is unwilling to receive you. Ellen White writes that at the cross Christ <span class="egw">“teaches that the vilest sinner may find pardon and salvation through the merits of the blood of Christ”</span> <span class="egw-ref">The Spirit of Prophecy, volume 3, chapter 10, p. 158 · 3SP 158.1</span>. Grace does not, however, erase every earthly consequence. The thief was forgiven and still died on his cross. Forgiveness does not automatically repair a relationship, cancel a court date, undo harm done to others or remove the duty to make things right where that is still possible, and it never means that crimes or abuse should go unreported. What it settles is the question that matters most: where you stand with God. Now hear the warning, because the same story that gives hope has been misused to excuse delay. The thief’s conversion is not a strategy. He responded the moment light reached him; he did not sit on a known truth for years and plan to deal with it at the end. Ellen White is direct: <span class="egw">“But let no one neglect present opportunities and delay repentance, presuming on the eleventh-hour conversion of the thief, and trusting to a death-bed repentance. Every ray of light neglected leaves the sinner in greater darkness than before”</span> <span class="egw-ref">The Spirit of Prophecy, volume 3, chapter 10, p. 159 · 3SP 159.1</span>. Scripture says the same: <span class="scrip">“Today when you hear his voice, don’t harden your hearts.”</span> <span class="ref">Hebrews 3:15 (NLT)</span> <span class="scrip">“Indeed, the ‘right time’ is now. Today is the day of salvation.”</span> <span class="ref">2 Corinthians 6:2 (NLT)</span> Nor does the thief’s story make obedience optional for those who still have life ahead of them. He could not be baptised or follow Christ for years; you can. Scripture never sets grace against the transformed life that follows it: <span class="scrip">“For we are God’s masterpiece. He has created us anew in Christ Jesus, so we can do the good things he planned for us long ago.”</span> <span class="ref">Ephesians 2:10 (NLT)</span> Baptism, discipleship, obedience and restitution do not purchase salvation, and the thief’s exceptional circumstances do not make them irrelevant; they are what grace produces in a life that has time to grow. His situation was extraordinary, and he responded to the light and the opportunity he had. The question is what you will do with yours. Two men hung beside Jesus. One demanded that He prove Himself. One asked to be remembered. The same Saviour who heard “Remember me” at Calvary still receives sinners who genuinely come to Him, and He is not waiting for you to become worthy first. <strong>The same Saviour who heard “Remember me” at Calvary still receives every sinner who genuinely comes to Him; if He is calling you today, respond today.</strong></p>
+    <section class="mv"><p>So what does this mean for you? Start with the hope, because it is enormous. If Jesus received a condemned criminal with hours to live, there is no past that puts a person beyond His reach. Paul writes, <span class="scrip">“For everyone has sinned; we all fall short of God’s glorious standard. Yet God, in his grace, freely makes us right in his sight. He did this through Christ Jesus when he freed us from the penalty for our sins.”</span> <span class="ref">Romans 3:23–24 (NLT)</span> And again: <span class="scrip">“When we were utterly helpless, Christ came at just the right time and died for us sinners.”</span> <span class="ref">Romans 5:6 (NLT)</span> <span class="scrip">“But God showed his great love for us by sending Christ to die for us while we were still sinners.”</span> <span class="ref">Romans 5:8 (NLT)</span></p><p> If you carry a destructive past, shame, years of wrong decisions, broken relationships, addiction, a criminal record or long seasons far from God, hear this clearly: none of it is a reason to conclude that Christ is unwilling to receive you. Ellen White writes that at the cross Christ <span class="egw">“teaches that the vilest sinner may find pardon and salvation through the merits of the blood of Christ”</span> <span class="egw-ref">The Spirit of Prophecy, volume 3, chapter 10, p. 158 · 3SP 158.1</span>. Grace does not, however, erase every earthly consequence. </p><p>The thief was forgiven and still died on his cross. Forgiveness does not automatically repair a relationship, cancel a court date, undo harm done to others or remove the duty to make things right where that is still possible, and it never means that crimes or abuse should go unreported. What it settles is the question that matters most: where you stand with God. Now hear the warning, because the same story that gives hope has been misused to excuse delay. The thief’s conversion is not a strategy. </p><p>He responded the moment light reached him; he did not sit on a known truth for years and plan to deal with it at the end. Ellen White is direct: </p><blockquote class="egw-block"><span class="egw">“But let no one neglect present opportunities and delay repentance, presuming on the eleventh-hour conversion of the thief, and trusting to a death-bed repentance. Every ray of light neglected leaves the sinner in greater darkness than before”</span>.  <span class="egw-ref">The Spirit of Prophecy, volume 3, chapter 10, p. 159 · 3SP 159.1</span></blockquote><p>Scripture says the same: <span class="scrip">“Today when you hear his voice, don’t harden your hearts.”</span> <span class="ref">Hebrews 3:15 (NLT)</span> <span class="scrip">“Indeed, the ‘right time’ is now. Today is the day of salvation.”</span> <span class="ref">2 Corinthians 6:2 (NLT)</span> Nor does the thief’s story make obedience optional for those who still have life ahead of them. He could not be baptised or follow Christ for years; you can. Scripture never sets grace against the transformed life that follows it: <span class="scrip">“For we are God’s masterpiece. He has created us anew in Christ Jesus, so we can do the good things he planned for us long ago.”</span> <span class="ref">Ephesians 2:10 (NLT)</span></p><p> Baptism, discipleship, obedience and restitution do not purchase salvation, and the thief’s exceptional circumstances do not make them irrelevant; they are what grace produces in a life that has time to grow. His situation was extraordinary, and he responded to the light and the opportunity he had. The question is what you will do with yours. Two men hung beside Jesus. One demanded that He prove Himself. One asked to be remembered. The same Saviour who heard “Remember me” at Calvary still receives sinners who genuinely come to Him, and He is not waiting for you to become worthy first. </p><p class="thesis"><strong>The same Saviour who heard “Remember me” at Calvary still receives every sinner who genuinely comes to Him; if He is calling you today, respond today.</strong></p></section>
 
   </div>
 
   <div class="divider" aria-hidden="true">
     <span class="line"></span>
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"/></svg>
+    <svg width="26" height="26" viewbox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"></path></svg>
     <span class="line right"></span>
   </div>
 
@@ -311,9 +442,34 @@
   </ol>
 
   
-  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/hhBEy2FN0hg" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">&#9654;</span>Watch the Short</a><p class="note">On YouTube as &ldquo;They Saw a Criminal—He Saw a King&rdquo; &mdash; from the channel <em>I Can Still Believe</em>.</p></div>
+  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/hhBEy2FN0hg" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">▶</span>Watch the Short</a><p class="note">On YouTube as “They Saw a Criminal—He Saw a King” — from the channel <em>I Can Still Believe</em>.</p></div>
 
   <div class="sdg">Soli Deo Gloria</div>
 </article>
+<nav class="footnav"><a href="./">&#8592;&nbsp;All devotions</a><a href="#top">Back to top&nbsp;&#8593;</a></nav>
+<button class="lamp" id="lamp" type="button" aria-label="Night reading">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path class="moon" d="M20 13.4A8.2 8.2 0 1 1 10.6 4a6.4 6.4 0 0 0 9.4 9.4Z"/>
+  </svg>
+</button>
+<script>
+(function(){
+  var root=document.documentElement, lamp=document.getElementById('lamp');
+  try{ if(localStorage.getItem('devo-theme')==='night') root.setAttribute('data-theme','night'); }catch(e){}
+  if(lamp){ lamp.addEventListener('click',function(){
+    var on = root.getAttribute('data-theme')==='night';
+    if(on){ root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme','night'); }
+    try{ localStorage.setItem('devo-theme', on?'day':'night'); }catch(e){}
+  }); }
+  var bar=document.getElementById('prog');
+  function tick(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.width=(h>0?Math.min(100,(window.scrollY/h)*100):0)+'%';
+  }
+  if(bar){ window.addEventListener('scroll',tick,{passive:true});
+           window.addEventListener('resize',tick); tick(); }
+})();
+</script>
 </body>
 </html>
