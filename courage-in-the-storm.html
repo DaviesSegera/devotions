@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Courage in the Storm — a daily devotion on Acts 27 from A New Beginning, read alongside Ellen G. White, with the Short from the channel I Can Still Believe.">
+<meta name="theme-color" content="#1e2340">
+<title>Courage in the Storm — Today's Devotion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Manrope:wght@600;700;800&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
+<style>
+  /* ── A New Beginning · Daily Devotions — modern devotional system (Sep 2026) ──
+     Deep indigo structure · warm gold · wine for Ellen G. White · cream reading surface.
+     Day and night are full token sets; the reading-page content classes are unchanged. */
+  :root{
+    --bg:#f3efe6;
+    --surface:#fffdf8;
+    --surface-2:#f8f3e8;
+    --ink:#24211a;
+    --ink-soft:#544e3f;
+    --muted:#736d5e;
+    --indigo:#1e2340;
+    --indigo-2:#2a3159;
+    --indigo-3:#3b4780;
+    --on-indigo:#f4efe2;
+    --gold:#b08a2a;
+    --gold-bright:#d6ab3c;
+    --gold-pale:#eadfbd;
+    --gold-soft:#fbf4df;
+    --wine:#7a3b2e;
+    --wine-solid:#7a3b2e;
+    --wine-edge:#5d2b20;
+    --wine-soft:#f7ece8;
+    --emph:#7c5a12;
+    --num1:#f5e7bd; --num2:#e3cf95; --numfg:#7c5a12;
+    --rule:#e3dccb;
+    --shadow:0 2px 14px rgba(30,35,64,.08);
+    --shadow-lg:0 14px 44px rgba(30,35,64,.14);
+    --radius:14px;
+    --f-title:'Playfair Display',Georgia,serif;
+    --f-body:'Lora',Georgia,serif;
+    --f-verse:'Cormorant Garamond',Georgia,serif;
+    --f-ui:'Manrope','Segoe UI',system-ui,sans-serif;
+  }
+  :root[data-theme="night"]{
+    --bg:#121420;
+    --surface:#1b1e2d;
+    --surface-2:#22263a;
+    --ink:#e9e3d4;
+    --ink-soft:#c6bfa9;
+    --muted:#9d97a8;
+    --indigo:#0d0f1c;
+    --indigo-2:#161a30;
+    --indigo-3:#2a3159;
+    --on-indigo:#f0ead9;
+    --gold:#d3ad48;
+    --gold-bright:#e6c15a;
+    --gold-pale:#4b3e1a;
+    --gold-soft:#2a2519;
+    --wine:#e2a891;
+    --wine-solid:#8a4537;
+    --wine-edge:#6b3428;
+    --wine-soft:#2e2220;
+    --emph:#e2c775;
+    --num1:#4c4024; --num2:#3a311b; --numfg:#e8ce7f;
+    --rule:#30344a;
+    --shadow:0 2px 14px rgba(0,0,0,.35);
+    --shadow-lg:0 14px 44px rgba(0,0,0,.5);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--f-body);
+    line-height:1.78;
+    -webkit-font-smoothing:antialiased;
+    transition:background-color .25s ease,color .25s ease;
+  }
+  img{max-width:100%;}
+
+  /* reading progress */
+  .progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-bright));z-index:30;transition:width .08s linear;}
+
+  /* ── top bar ── */
+  .topbar{
+    background:var(--indigo);color:var(--on-indigo);
+    position:sticky;top:0;z-index:20;
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .topbar .in{max-width:1040px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:inherit;min-width:0;}
+  .brand .mark{width:34px;height:34px;border-radius:9px;flex-shrink:0;background:linear-gradient(135deg,var(--gold-bright),var(--gold));display:flex;align-items:center;justify-content:center;color:var(--indigo);font-family:var(--f-title);font-weight:700;font-size:18px;}
+  .brand .t{font-family:var(--f-ui);font-weight:800;font-size:15px;letter-spacing:-.2px;line-height:1.15;white-space:nowrap;}
+  .brand .t small{display:block;font-weight:600;font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-bright);}
+  .topbar nav{display:flex;gap:6px;align-items:center;}
+  .topbar nav a{font-family:var(--f-ui);font-weight:600;font-size:13px;color:var(--on-indigo);text-decoration:none;padding:7px 12px;border-radius:999px;border:1px solid transparent;white-space:nowrap;transition:background .15s;}
+  .topbar nav a:hover{background:rgba(255,255,255,.1);}
+  .topbar nav a.yt{border-color:rgba(214,171,60,.5);color:var(--gold-bright);}
+  .topbar nav a.yt:hover{background:rgba(214,171,60,.14);}
+  .topbar nav a .short{display:none;}
+  @media(max-width:620px){
+    .topbar .in{padding:9px 12px;gap:8px;}
+    .brand .t{font-size:14px;} .brand .t small{font-size:9.5px;letter-spacing:1.5px;}
+    .topbar nav{gap:4px;} .topbar nav a{padding:6px 9px;font-size:12px;}
+    .topbar nav a .long{display:none;} .topbar nav a .short{display:inline;}
+    .topbar nav a.all{display:none;}
+  }
+  .topbar .lamp{position:static;width:36px;height:36px;opacity:1;box-shadow:none;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.18);color:var(--gold-bright);}
+
+  /* ── hero band ── */
+  .hero{
+    background:linear-gradient(135deg,var(--indigo) 0%,var(--indigo-2) 55%,var(--indigo-3) 100%);
+    color:var(--on-indigo);text-align:center;
+    padding:58px 22px 120px;position:relative;overflow:hidden;
+  }
+  .hero::before{content:'';position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(circle at 12% 18%,rgba(214,171,60,.18),transparent 40%),radial-gradient(circle at 88% 85%,rgba(122,59,46,.35),transparent 45%);}
+  .hero>*{position:relative;}
+  .eyebrow{font-family:var(--f-ui);font-weight:700;font-size:11.5px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-bright);margin-bottom:16px;}
+  .hero h1{font-family:var(--f-title);font-weight:700;font-size:clamp(2rem,5vw,3.1rem);line-height:1.15;color:#fff;letter-spacing:-.01em;max-width:820px;margin:0 auto 16px;}
+  .meta{font-family:var(--f-ui);font-weight:600;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.72);}
+  .meta span{opacity:.5;margin:0 8px;}
+
+  /* ── the reading sheet ── */
+  .page{
+    max-width:760px;margin:-72px auto 0;
+    background:var(--surface);
+    border:1px solid var(--rule);
+    border-radius:18px;
+    padding:46px 58px 50px;
+    position:relative;
+    box-shadow:var(--shadow-lg);
+  }
+  @media(max-width:620px){.page{padding:34px 22px 40px;margin:-64px 12px 0;border-radius:14px;} .hero{padding:44px 18px 108px;}}
+  .corner{display:none;}
+
+  /* Ellen G. White — companion ink (unchanged) */
+  .egw{color:var(--wine);}
+  .egw-ref{font-family:var(--f-ui);font-weight:600;font-size:.78em;letter-spacing:.02em;color:var(--wine);}
+  .egw-ref::before{content:"\2712";margin-right:.3em;font-size:.95em;}
+  blockquote.egw-block{margin:26px 0 28px;padding:4px 0 4px 22px;border-left:3px solid var(--wine);color:var(--wine);font-size:1.01rem;line-height:1.72;background:linear-gradient(90deg,var(--wine-soft),transparent 70%);border-radius:0 10px 10px 0;padding-right:12px;padding-top:12px;padding-bottom:12px;}
+  blockquote.egw-block .egw-ref{display:block;margin-top:9px;font-size:.76rem;line-height:1.55;opacity:.92;text-wrap:pretty;}
+  @media(max-width:620px){blockquote.egw-block{padding-left:16px;}}
+
+  .divider{display:flex;align-items:center;justify-content:center;gap:14px;margin:30px 0;color:var(--gold);}
+  .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+  .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
+  .divider svg{flex-shrink:0;}
+
+  .verse-card{
+    border:1px solid var(--gold-pale);
+    border-top:4px solid var(--gold-bright);
+    background:var(--gold-soft);
+    border-radius:12px;
+    padding:26px 30px 22px;text-align:center;margin:0 auto 8px;position:relative;
+  }
+  .verse-card .label{font-family:var(--f-ui);font-weight:700;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+  .verse-card .scripture{font-family:var(--f-verse);font-style:italic;font-size:1.42rem;line-height:1.6;color:var(--ink);}
+  .verse-card .ref{font-family:var(--f-ui);font-weight:700;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-top:12px;}
+
+  /* body — ragged right, book measure */
+  .body-text{margin-top:4px;}
+  .body-text p{margin-bottom:1.15em;font-size:1.075rem;text-align:left;hyphens:none;}
+  .body-text .mv{margin-bottom:6px;}
+  .body-text > .mv:first-child > p:first-child::first-letter{font-family:var(--f-title);font-size:3.7em;float:left;line-height:.82;padding:5px 11px 0 0;color:var(--gold);}
+  .body-text strong{color:var(--emph);font-weight:600;}
+  .scrip{font-style:italic;color:var(--ink-soft);}
+  .ref{font-family:var(--f-ui);font-weight:700;font-size:.74em;letter-spacing:1px;text-transform:uppercase;color:var(--gold);white-space:nowrap;}
+  .body-text p.thesis{text-align:center;font-family:var(--f-verse);font-style:italic;font-size:1.34rem;line-height:1.55;color:var(--ink);margin:26px auto 34px;max-width:34em;padding-top:22px;position:relative;}
+  .body-text p.thesis::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:58px;height:2px;background:var(--gold-bright);border-radius:2px;}
+  .body-text p.thesis strong{font-weight:inherit;color:inherit;}
+  @media(max-width:620px){.body-text p.thesis{font-size:1.2rem;}}
+
+  h2.takeaways{font-family:var(--f-ui);font-weight:800;font-size:1.05rem;letter-spacing:3px;text-transform:uppercase;text-align:center;color:var(--indigo-3);margin-bottom:26px;}
+  :root[data-theme="night"] h2.takeaways{color:var(--gold-bright);}
+  ol.takeaway-list{list-style:none;counter-reset:tk;}
+  ol.takeaway-list li{counter-increment:tk;position:relative;padding-left:54px;margin-bottom:20px;font-size:1.02rem;}
+  ol.takeaway-list li::before{content:counter(tk);position:absolute;left:0;top:3px;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--gold);background:radial-gradient(circle at 35% 30%,var(--num1),var(--num2));color:var(--numfg);font-family:var(--f-ui);font-weight:800;font-size:.95rem;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);}
+  ol.takeaway-list li strong{color:var(--emph);font-weight:600;}
+
+  .sources{margin-top:34px;font-size:.88rem;line-height:1.7;color:var(--muted);text-align:center;}
+  .sources .label{font-family:var(--f-ui);font-weight:700;font-size:10.5px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px;}
+
+  /* ── Watch it — inline vertical player + buttons ── */
+  .watch{
+    margin-top:40px;
+    border:1px solid var(--rule);
+    border-radius:16px;
+    background:var(--surface-2);
+    overflow:hidden;
+    display:grid;grid-template-columns:230px minmax(0,1fr);
+    box-shadow:var(--shadow);
+  }
+  .watch .media{background:var(--indigo);display:flex;align-items:center;justify-content:center;padding:18px;}
+  .yt-short{
+    position:relative;width:100%;max-width:194px;aspect-ratio:9/16;
+    border:0;padding:0;cursor:pointer;border-radius:12px;overflow:hidden;
+    background:var(--indigo-2) center/cover no-repeat;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+    display:block;
+  }
+  .yt-short::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.45));transition:background .2s;}
+  .yt-short:hover::after{background:linear-gradient(180deg,rgba(0,0,0,0) 65%,rgba(0,0,0,.3));}
+  .yt-short .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:60px;height:42px;border-radius:11px;background:#e11d2f;z-index:2;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.4);transition:transform .15s,background .15s;}
+  .yt-short:hover .play{transform:translate(-50%,-50%) scale(1.08);background:#ff0000;}
+  .yt-short .play::before{content:'';border-style:solid;border-width:10px 0 10px 18px;border-color:transparent transparent transparent #fff;margin-left:4px;}
+  .yt-short .tag{position:absolute;left:10px;top:10px;z-index:2;font-family:var(--f-ui);font-weight:800;font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.55);padding:3px 8px;border-radius:5px;}
+  .yt-short iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3;}
+  .watch .body{padding:24px 26px 22px;display:flex;flex-direction:column;justify-content:center;}
+  .watch .label{font-family:var(--f-ui);font-weight:700;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px;}
+  .watch h3{font-family:var(--f-title);font-weight:700;font-size:1.32rem;line-height:1.3;color:var(--ink);margin-bottom:10px;}
+  .watch .note{font-family:var(--f-verse);font-style:italic;font-size:1.05rem;color:var(--ink-soft);line-height:1.5;margin-bottom:16px;}
+  .watch .btns{display:flex;flex-wrap:wrap;gap:9px;}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-ui);font-weight:700;font-size:13.5px;padding:11px 16px;border-radius:9px;text-decoration:none;border:1px solid transparent;transition:transform .12s,box-shadow .12s,background .12s;white-space:nowrap;}
+  .btn:hover{transform:translateY(-1px);box-shadow:var(--shadow);}
+  .btn.wine{background:var(--wine-solid);color:#fdf6e6;border-color:var(--wine-edge);}
+  .btn.wine:hover{background:#8f4837;}
+  .btn.wine .yt{color:var(--gold-bright);}
+  .btn.ghost{background:var(--surface);color:var(--ink);border-color:var(--rule);}
+  .btn.ghost .yt{color:var(--wine);}
+  .btn.gold{background:var(--gold-bright);color:var(--indigo);}
+  .watch-film{border-top:1px solid var(--rule);grid-column:1/-1;padding:18px 26px 22px;display:grid;grid-template-columns:200px minmax(0,1fr);gap:18px;align-items:center;}
+  .yt-wide{position:relative;width:100%;aspect-ratio:16/9;border:0;padding:0;cursor:pointer;border-radius:10px;overflow:hidden;background:var(--indigo-2) center/cover no-repeat;box-shadow:var(--shadow);display:block;}
+  .yt-wide::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.4));}
+  .yt-wide .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:50px;height:36px;border-radius:9px;background:#e11d2f;z-index:2;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.4);}
+  .yt-wide .play::before{content:'';border-style:solid;border-width:8px 0 8px 15px;border-color:transparent transparent transparent #fff;margin-left:3px;}
+  .yt-wide .dur{position:absolute;right:8px;bottom:8px;z-index:2;font-family:var(--f-ui);font-weight:700;font-size:11px;color:#fff;background:rgba(0,0,0,.7);padding:2px 7px;border-radius:4px;}
+  .yt-wide iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3;}
+  .watch-film .fb .label{margin-bottom:4px;}
+  .watch-film .fb h3{font-size:1.12rem;margin-bottom:6px;}
+  .watch-film .fb .note{margin-bottom:10px;font-size:1rem;}
+  @media(max-width:620px){
+    .watch{grid-template-columns:1fr;}
+    .watch .media{padding:20px 20px 6px;background:transparent;}
+    .yt-short{max-width:220px;}
+    .watch .body{padding:16px 20px 22px;text-align:center;align-items:center;}
+    .watch .btns{justify-content:center;width:100%;}
+    .watch .btns .btn{flex:1 1 100%;justify-content:center;}
+    .watch-film{grid-template-columns:1fr;padding:18px 20px 22px;text-align:center;}
+  }
+
+  .sdg{font-family:'Pinyon Script',cursive;font-size:2.4rem;color:var(--gold);text-align:center;margin-top:40px;}
+
+  /* navigation + footer */
+  .allnav{display:none;}
+  .footnav{max-width:760px;margin:26px auto 8px;display:flex;justify-content:center;gap:26px;padding:0 16px;}
+  .footnav a{font-family:var(--f-ui);font-weight:700;font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid var(--rule);padding-bottom:2px;}
+  .footnav a:hover{border-bottom-color:var(--gold);}
+  .site-foot{background:var(--indigo);color:rgba(255,255,255,.72);text-align:center;padding:30px 22px;margin-top:30px;font-family:var(--f-ui);font-size:13.5px;line-height:1.8;}
+  .site-foot a{color:var(--gold-bright);text-decoration:none;font-weight:700;}
+  .site-foot a:hover{text-decoration:underline;}
+  .site-foot .l{display:block;}
+  .site-foot .l.small{font-size:12.5px;color:rgba(255,255,255,.5);}
+
+  /* night-reading toggle */
+  .lamp{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--gold);color:var(--gold);cursor:pointer;transition:opacity .18s ease,transform .18s ease;}
+  .lamp:hover,.lamp:focus-visible{transform:translateY(-1px);outline:none;}
+  .lamp svg{width:18px;height:18px;}
+  @media print{.lamp,.progress,.topbar,.footnav,.site-foot,.watch{display:none;}.hero{background:none;color:#000;padding:0;}.page{margin:0;box-shadow:none;border:0;}}
+</style>
+</head>
+<body>
+<div class="progress" id="prog"></div>
+<a id="top"></a>
+<header class="topbar">
+  <div class="in">
+    <a class="brand" href="./"><span class="mark">✦</span><span class="t"><small>A New Beginning</small>Daily Devotions</span></a>
+    <nav>
+      <a class="all" href="./">All devotions</a>
+      <a class="yt" href="https://www.youtube.com/@icanstillbelieve" target="_blank" rel="noopener">▶ <span class="long">I Can Still Believe</span><span class="short">YouTube</span></a>
+      <button class="lamp" id="lamp" type="button" aria-label="Night reading" title="Night reading">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13.4A8.2 8.2 0 1 1 10.6 4a6.4 6.4 0 0 0 9.4 9.4Z"/></svg>
+    </button>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="eyebrow">Today's Devotion</div>
+  <h1>Courage in the Storm</h1>
+  <div class="meta">Acts 27 · 6 min read</div>
+</div>
+
+<article class="page">
+  <section class="verse-card">
+    <div class="label">Key Verse</div>
+    <div class="scripture">“So take courage! For I believe God. It will be just as he said.”</div>
+    <div class="ref">Acts 27:25 (NLT)</div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewbox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"></path></svg>
+    <span class="line right"></span>
+  </div>
+
+  <div class="body-text">
+    <section class="mv"><p>What can hold us steady when we cannot see how the journey will end? Paul was travelling to Rome as a prisoner, in the custody of a Roman officer, Julius. The sailing season was closing when the ship reached Fair Havens on Crete, and he warned the officers: <span class="scrip">“Men,” he said, “I believe there is trouble ahead if we go on—shipwreck, loss of cargo, and danger to our lives as well.”</span> <span class="ref">Acts 27:10 (NLT)</span> The officer listened to the captain and the owner instead (Acts 27:11–12). A gentle south wind made that decision look right—until <span class="scrip">“a wind of typhoon strength ... burst across the island and blew us out to sea.”</span> <span class="ref">Acts 27:14 (NLT, excerpt)</span></p><p>The crew did what experienced sailors do—braced the hull with ropes, threw the cargo and then the ship’s gear overboard (Acts 27:16–19). Effort and skill were not the problem; the sky was. <span class="scrip">“The terrible storm raged for many days, blotting out the sun and the stars, until at last all hope was gone.”</span> <span class="ref">Acts 27:20 (NLT)</span> Ellen G. White writes, <span class="egw" data-wa="block">“For fourteen days they drifted under a sunless and starless heaven.”</span> <span class="egw-ref">The Acts of the Apostles, p. 442 · AA 442.2</span> That is not a failure of faith; it is what happens when people have worked to exhaustion and still cannot see.</p><p class="thesis"><strong>Hope can fail in us; the God we belong to does not fail.</strong></p></section>
+
+    <section class="mv"><p>Then a prisoner stood up on the deck. No one had eaten for a long time (Acts 27:21). Paul began where honesty required—they should have listened at Crete—and then gave them what he had been given: <span class="scrip">“But take courage! None of you will lose your lives, even though the ship will go down. For last night an angel of the God to whom I belong and whom I serve stood beside me, and he said, ‘Don’t be afraid, Paul, for you will surely stand trial before Caesar! What’s more, God in his goodness has granted safety to everyone sailing with you.’”</span> <span class="ref">Acts 27:22–24 (NLT)</span></p><p>Notice what that promise did and did not say. Not that the storm would stop, or the ship be saved: the people would live, and Paul would stand before Caesar (Acts 23:11). On that word Paul staked everything: <span class="scrip">“So take courage! For I believe God. It will be just as he said.”</span> <span class="ref">Acts 27:25 (NLT)</span> He added that they would be shipwrecked on an island (Acts 27:26). Ellen G. White fills in those hours for him: </p><blockquote class="egw-block"><span class="egw" data-wa="block">“He grasped by faith the arm of Infinite Power, and his heart was stayed upon God.... As he earnestly pleaded with God to spare their lives, it was revealed to him that his prayer was granted.”</span> <span class="egw-ref">The Acts of the Apostles, p. 442 · AA 442.2</span></blockquote><p class="thesis"><strong>Faith can hold to God’s word while the way ahead remains unclear.</strong></p></section>
+
+    <section class="mv"><p>Ellen G. White writes, <span class="egw" data-wa="block">“At these words, hope revived. Passengers and crew roused from their apathy.”</span> <span class="egw-ref">The Acts of the Apostles, p. 443 · AA 443.2</span> Trust did not end the work; it started it again. Nearing land the crew threw out four anchors and <span class="scrip">“prayed for daylight”</span> <span class="ref">Acts 27:29 (NLT, excerpt)</span>. When some sailors tried to slip away in the lifeboat, Paul told the officer and the soldiers, <span class="scrip">“You will all die unless the sailors stay aboard.”</span> <span class="ref">Acts 27:31 (NLT)</span> The soldiers cut the ropes and let the boat go. The promise had not made seamanship unnecessary: the people who knew the ship were needed at their posts.</p><p>Then comes the chapter’s most ordinary instruction: as day dawned, Paul urged them all to eat, promising that not one of them would be harmed (Acts 27:33–34). <span class="scrip">“Then he took some bread, gave thanks to God before them all, and broke off a piece and ate it. Then everyone was encouraged and began to eat—all 276 of us who were on board.”</span> <span class="ref">Acts 27:35–37 (NLT)</span> He gave thanks before the shore was in sight. Ellen G. White describes a worn and discouraged company <span class="egw" data-wa="block">“who but for Paul would have become desperate, joined with the apostle in partaking of food.”</span> <span class="egw-ref">The Acts of the Apostles, p. 444 · AA 444.2</span></p><p>Paul was in the same danger as everyone else, and not the only one who acted: the sailors’ skill, the soldiers’ obedience and Julius’s authority all belong to this rescue. His encouragement was not advice from safety; it was truth, bread and a steady presence from someone frightened too.</p><p class="thesis"><strong>Hope can be heard in our words and felt in our care.</strong></p></section>
+
+    <section class="mv"><p>Morning showed a bay with a beach; they ran for it, struck a shoal, and the ship began to break apart (Acts 27:39–41). The soldiers wanted to kill the prisoners so that none could escape, but Julius stopped them to spare Paul; some swam, the rest came in on planks and broken pieces of the ship, and <span class="scrip">“everyone escaped safely to shore.”</span> <span class="ref">Acts 27:42–44 (NLT, excerpt)</span> Ellen G. White adds, <span class="egw" data-wa="block">“When the roll was called, not one was missing.”</span> <span class="egw-ref">The Acts of the Apostles, p. 445 · AA 445.1</span> The ship was lost, the cargo was lost, and everyone was alive, exactly as God had said.</p><p>On Malta the islanders lit a fire in the cold rain and welcomed them. Paul, gathering sticks for it, was bitten by a snake driven out by the heat and was unharmed; he prayed for the sick father of Publius, who was healed, and others were healed too (Acts 28:1–10). Paul received help and gave it.</p><p>That promise was made to that ship’s company on that voyage; it is not a guarantee that every believer will survive every danger or recover every loss. What God has promised us is larger and surer: Christ Jesus <span class="scrip">“died for us and was raised to life for us, and he is sitting in the place of honor at God’s right hand, pleading for us.”</span> <span class="ref">Romans 8:34 (NLT, excerpt)</span> Nothing in all creation can separate us from that love—not trouble, not danger, not death itself (Romans 8:35–39). So we may come to Him now: <span class="scrip">“There we will receive his mercy, and we will find grace to help us when we need it most.”</span> <span class="ref">Hebrews 4:16 (NLT, excerpt)</span></p><p>Bring Him the fear you actually have. Ask for the help you need, and let someone give it. Then look around the boat: someone near you has not eaten. How can I trust God’s word and share His care in the storm I face today?</p><p class="thesis"><strong>Bring Christ your fear, trust what He has promised, and carry hope to the person beside you.</strong></p></section>
+  </div>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <svg width="26" height="26" viewbox="0 0 26 26" fill="currentColor"><path d="M13 2 L15.5 10.5 L24 13 L15.5 15.5 L13 24 L10.5 15.5 L2 13 L10.5 10.5 Z"></path></svg>
+    <span class="line right"></span>
+  </div>
+
+  <h2 class="takeaways">Key Takeaways</h2>
+  <ol class="takeaway-list">
+    <li><strong>Hope can fail in us; the God we belong to does not fail.</strong> <span class="scrip">“The terrible storm raged for many days, blotting out the sun and the stars, until at last all hope was gone.”</span> <span class="ref">Acts 27:20 (NLT)</span> Ellen White tells us they drifted <span class="egw">“under a sunless and starless heaven”</span> <span class="egw-ref">The Acts of the Apostles, p. 442 · AA 442.2</span>—exhaustion and lost hope are in this account, and they are not treated as unbelief.</li>
+    <li><strong>Faith can hold to God’s word while the way ahead remains unclear.</strong> <span class="scrip">“So take courage! For I believe God. It will be just as he said.”</span> <span class="ref">Acts 27:25 (NLT)</span> Ellen White writes that Paul <span class="egw">“grasped by faith the arm of Infinite Power, and his heart was stayed upon God”</span> <span class="egw-ref">The Acts of the Apostles, p. 442 · AA 442.2</span>—and the promise he trusted included the loss of the ship.</li>
+    <li><strong>Hope can be heard in our words and felt in our care.</strong> <span class="scrip">“Then he took some bread, gave thanks to God before them all, and broke off a piece and ate it.”</span> <span class="ref">Acts 27:35 (NLT)</span> Ellen White says that at his words <span class="egw">“hope revived. Passengers and crew roused from their apathy”</span> <span class="egw-ref">The Acts of the Apostles, p. 443 · AA 443.2</span>—trust put them back to work and back to the table.</li>
+    <li><strong>Bring Christ your fear, trust what He has promised, and carry hope to the person beside you.</strong> <span class="scrip">“There we will receive his mercy, and we will find grace to help us when we need it most.”</span> <span class="ref">Hebrews 4:16 (NLT, excerpt)</span> The rescue of 276 people was God keeping a particular promise; our lasting assurance is Christ, who <span class="scrip">“died for us and was raised to life for us ... pleading for us.”</span> <span class="ref">Romans 8:34 (NLT, excerpt)</span></li>
+  </ol>
+
+  <p class="sources"><span class="label">Sources and Further Reading</span>Scripture: Acts 27:1–44, with the central scene in 27:20–38 and the key text in 27:25; Acts 28:1–10 as the brief aftermath; Acts 23:11 and 25:10–12 as background; Romans 8:31–39 and Hebrews 4:14–16 (NLT). Ellen G. White: <em>The Acts of the Apostles</em>, chapter 42, “The Voyage and Shipwreck,” pp. 439–446 (AA 442.2, 443.2, 444.2, 445.1) — her account of the voyage, of Paul’s faith and his prayer for the ship’s company, of the encouragement to eat, and of the rescue and the stay on Malta. Her earlier account of the same voyage, <em>Sketches from the Life of Paul</em>, chapter 24, “The Voyage and Shipwreck,” pp. 261–271, was read alongside it.</p>
+
+  <div class="watch" id="watch">
+    <div class="media">
+      <button class="yt-short" type="button" data-id="uTmbPjT8mn4" aria-label="Play the Short: All Hope Was Gone - Then He Stood Up" style="background-image:url('https://i.ytimg.com/vi/uTmbPjT8mn4/maxresdefault.jpg')"><span class="tag">Short</span><span class="play"></span></button>
+    </div>
+    <div class="body">
+      <span class="label">Watch it</span>
+      <h3>All Hope Was Gone - Then He Stood Up</h3>
+      <p class="note">The Short for this devotion, from the channel <em>I Can Still Believe</em>. Tap the artwork to play it here, or open it in the YouTube app.</p>
+      <div class="btns"><a class="btn wine" href="https://www.youtube.com/shorts/uTmbPjT8mn4" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">▶</span>Watch the Short</a></div>
+    </div>
+  </div>
+
+  <div class="sdg">Soli Deo Gloria</div>
+</article>
+<nav class="footnav"><a href="./">&#8592;&nbsp;All devotions</a><a href="#top">Back to top&nbsp;&#8593;</a></nav>
+<footer class="site-foot">
+  <span class="l">Scripture quotations are from the <em>Holy Bible, New Living Translation</em>. Ellen G. White quotations are cited to book, page and paragraph.</span>
+  <span class="l">Videos: <a href="https://www.youtube.com/@icanstillbelieve" target="_blank" rel="noopener">I Can Still Believe on YouTube</a> · <a href="./">All devotions</a></span>
+  <span class="l small">Prepared by Dr. Davies Rene Segera · Free to read, and free to share with anyone.</span>
+</footer>
+<script>
+(function(){
+  var root=document.documentElement, lamp=document.getElementById('lamp');
+  try{ if(localStorage.getItem('devo-theme')==='night') root.setAttribute('data-theme','night'); }catch(e){}
+  if(lamp){ lamp.addEventListener('click',function(){
+    var on = root.getAttribute('data-theme')==='night';
+    if(on){ root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme','night'); }
+    try{ localStorage.setItem('devo-theme', on?'day':'night'); }catch(e){}
+  }); }
+  var bar=document.getElementById('prog');
+  function tick(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.width=(h>0?Math.min(100,(window.scrollY/h)*100):0)+'%';
+  }
+  if(bar){ window.addEventListener('scroll',tick,{passive:true}); window.addEventListener('resize',tick); tick(); }
+  /* click-to-play YouTube: nothing from YouTube loads until the artwork is tapped */
+  document.querySelectorAll('.yt-short,.yt-wide').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var f=document.createElement('iframe');
+      f.src='https://www.youtube-nocookie.com/embed/'+btn.getAttribute('data-id')+'?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+      f.title=btn.getAttribute('aria-label');
+      f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      f.setAttribute('allowfullscreen','');
+      btn.appendChild(f); btn.style.cursor='default';
+    },{once:true});
+  });
+})();
+</script>
+</body>
+</html>

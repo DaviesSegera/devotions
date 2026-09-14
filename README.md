@@ -9,7 +9,7 @@ Scripture is quoted from the New Living Translation.
 
 ## What is in this repository
 
-Thirty-one devotions, each a single self-contained page, plus the index that lists them.
+Thirty-two devotions, each a single self-contained page, plus the index that lists them.
 
 Every devotion page ends with a **Watch it** panel: the Short's own artwork as a
 click-to-play player (nothing from YouTube loads until it is tapped), the video's
@@ -40,7 +40,8 @@ with a search box for finding one by title, person or passage.
    artwork URL, the passage, the title, the subject line, the key verse and its
    reference. Update the `data-find` attribute too, since that is what the search
    box reads. Move the "Latest devotion" block to the new devotion.
-5. Change the count in the standfirst if the total is no longer thirty-one.
+5. Change the count in the standfirst and in the search box's caption if the
+   total is no longer thirty-two.
 
 GitHub Pages rebuilds the site automatically, usually within a minute. The address
 never changes, so links already shared with the church keep working.
