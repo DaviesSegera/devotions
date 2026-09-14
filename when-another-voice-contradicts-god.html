@@ -3,394 +3,289 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="When Another Voice Contradicts God — a daily devotion on 1 Kings 13 from A New Beginning, read alongside Ellen G. White, with the Short from the channel I Can Still Believe.">
+<meta name="theme-color" content="#1e2340">
 <title>When Another Voice Contradicts God — Today's Devotion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cinzel:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Manrope:wght@600;700;800&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
 <style>
+  /* ── A New Beginning · Daily Devotions — modern devotional system (Sep 2026) ──
+     Deep indigo structure · warm gold · wine for Ellen G. White · cream reading surface.
+     Day and night are full token sets; the reading-page content classes are unchanged. */
   :root{
-    --bg1:#f8f2e1; --bg2:#f3ead4; --bg3:#e8dcbd;
-    --page-bg:rgba(255,252,241,.62);
-    --page-border:#a67c1e; --page-outline:#e3cf95;
-    --ink:#33281a; --ink-soft:#5a4629;
-    --gold:#a67c1e; --gold-bright:#c9a227; --gold-pale:#e3cf95;
-    --wine:#7a3b2e; --wine-solid:#7a3b2e; --wine-edge:#5d2b20;
-    --card1:rgba(255,250,232,.92); --card2:rgba(247,238,213,.92);
+    --bg:#f3efe6;
+    --surface:#fffdf8;
+    --surface-2:#f8f3e8;
+    --ink:#24211a;
+    --ink-soft:#544e3f;
+    --muted:#736d5e;
+    --indigo:#1e2340;
+    --indigo-2:#2a3159;
+    --indigo-3:#3b4780;
+    --on-indigo:#f4efe2;
+    --gold:#b08a2a;
+    --gold-bright:#d6ab3c;
+    --gold-pale:#eadfbd;
+    --gold-soft:#fbf4df;
+    --wine:#7a3b2e;
+    --wine-solid:#7a3b2e;
+    --wine-edge:#5d2b20;
+    --wine-soft:#f7ece8;
     --emph:#7c5a12;
     --num1:#f5e7bd; --num2:#e3cf95; --numfg:#7c5a12;
-    --shadow:rgba(90,70,30,.16);
-    --grain:.30;
-    --rule:rgba(166,124,30,.28);
+    --rule:#e3dccb;
+    --shadow:0 2px 14px rgba(30,35,64,.08);
+    --shadow-lg:0 14px 44px rgba(30,35,64,.14);
+    --radius:14px;
+    --f-title:'Playfair Display',Georgia,serif;
+    --f-body:'Lora',Georgia,serif;
+    --f-verse:'Cormorant Garamond',Georgia,serif;
+    --f-ui:'Manrope','Segoe UI',system-ui,sans-serif;
   }
   :root[data-theme="night"]{
-    --bg1:#1a160f; --bg2:#15120c; --bg3:#100e09;
-    --page-bg:rgba(44,37,26,.42);
-    --page-border:#7d6524; --page-outline:#463a19;
-    --ink:#e9dfc8; --ink-soft:#c4b491;
-    --gold:#c2a03a; --gold-bright:#e0bf58; --gold-pale:#6a5828;
-    --wine:#e2a891; --wine-solid:#8a4537; --wine-edge:#6b3428;
-    --card1:rgba(56,47,32,.6); --card2:rgba(46,39,27,.6);
+    --bg:#121420;
+    --surface:#1b1e2d;
+    --surface-2:#22263a;
+    --ink:#e9e3d4;
+    --ink-soft:#c6bfa9;
+    --muted:#9d97a8;
+    --indigo:#0d0f1c;
+    --indigo-2:#161a30;
+    --indigo-3:#2a3159;
+    --on-indigo:#f0ead9;
+    --gold:#d3ad48;
+    --gold-bright:#e6c15a;
+    --gold-pale:#4b3e1a;
+    --gold-soft:#2a2519;
+    --wine:#e2a891;
+    --wine-solid:#8a4537;
+    --wine-edge:#6b3428;
+    --wine-soft:#2e2220;
     --emph:#e2c775;
     --num1:#4c4024; --num2:#3a311b; --numfg:#e8ce7f;
-    --shadow:rgba(0,0,0,.55);
-    --grain:.16;
-    --rule:rgba(194,160,58,.26);
+    --rule:#30344a;
+    --shadow:0 2px 14px rgba(0,0,0,.35);
+    --shadow-lg:0 14px 44px rgba(0,0,0,.5);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
   body{
-    background:radial-gradient(ellipse at 50% 0%, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%);
-    background-attachment:fixed;
+    background:var(--bg);
     color:var(--ink);
-    font-family:'Lora',serif;
+    font-family:var(--f-body);
     line-height:1.78;
-    padding:30px 14px 28px;
-    position:relative;
     -webkit-font-smoothing:antialiased;
-    transition:background-color .25s ease, color .25s ease;
+    transition:background-color .25s ease,color .25s ease;
   }
-  /* aged-paper grain, lighter than before */
-  body::before{
-    content:"";
-    position:fixed;inset:0;
-    pointer-events:none;
-    opacity:var(--grain);
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
-    z-index:2;
-  }
+  img{max-width:100%;}
 
   /* reading progress */
-  .progress{
-    position:fixed;top:0;left:0;height:3px;width:0;
-    background:linear-gradient(90deg,var(--gold-pale),var(--gold-bright));
-    z-index:12;transition:width .08s linear;
-  }
+  .progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-bright));z-index:30;transition:width .08s linear;}
 
+  /* ── top bar ── */
+  .topbar{
+    background:var(--indigo);color:var(--on-indigo);
+    position:sticky;top:0;z-index:20;
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .topbar .in{max-width:1040px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:inherit;min-width:0;}
+  .brand .mark{width:34px;height:34px;border-radius:9px;flex-shrink:0;background:linear-gradient(135deg,var(--gold-bright),var(--gold));display:flex;align-items:center;justify-content:center;color:var(--indigo);font-family:var(--f-title);font-weight:700;font-size:18px;}
+  .brand .t{font-family:var(--f-ui);font-weight:800;font-size:15px;letter-spacing:-.2px;line-height:1.15;white-space:nowrap;}
+  .brand .t small{display:block;font-weight:600;font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-bright);}
+  .topbar nav{display:flex;gap:6px;align-items:center;}
+  .topbar nav a{font-family:var(--f-ui);font-weight:600;font-size:13px;color:var(--on-indigo);text-decoration:none;padding:7px 12px;border-radius:999px;border:1px solid transparent;white-space:nowrap;transition:background .15s;}
+  .topbar nav a:hover{background:rgba(255,255,255,.1);}
+  .topbar nav a.yt{border-color:rgba(214,171,60,.5);color:var(--gold-bright);}
+  .topbar nav a.yt:hover{background:rgba(214,171,60,.14);}
+  .topbar nav a .short{display:none;}
+  @media(max-width:620px){
+    .topbar .in{padding:9px 12px;gap:8px;}
+    .brand .t{font-size:14px;} .brand .t small{font-size:9.5px;letter-spacing:1.5px;}
+    .topbar nav{gap:4px;} .topbar nav a{padding:6px 9px;font-size:12px;}
+    .topbar nav a .long{display:none;} .topbar nav a .short{display:inline;}
+    .topbar nav a.all{display:none;}
+  }
+  .topbar .lamp{position:static;width:36px;height:36px;opacity:1;box-shadow:none;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.18);color:var(--gold-bright);}
+
+  /* ── hero band ── */
+  .hero{
+    background:linear-gradient(135deg,var(--indigo) 0%,var(--indigo-2) 55%,var(--indigo-3) 100%);
+    color:var(--on-indigo);text-align:center;
+    padding:58px 22px 120px;position:relative;overflow:hidden;
+  }
+  .hero::before{content:'';position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(circle at 12% 18%,rgba(214,171,60,.18),transparent 40%),radial-gradient(circle at 88% 85%,rgba(122,59,46,.35),transparent 45%);}
+  .hero>*{position:relative;}
+  .eyebrow{font-family:var(--f-ui);font-weight:700;font-size:11.5px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-bright);margin-bottom:16px;}
+  .hero h1{font-family:var(--f-title);font-weight:700;font-size:clamp(2rem,5vw,3.1rem);line-height:1.15;color:#fff;letter-spacing:-.01em;max-width:820px;margin:0 auto 16px;}
+  .meta{font-family:var(--f-ui);font-weight:600;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.72);}
+  .meta span{opacity:.5;margin:0 8px;}
+
+  /* ── the reading sheet ── */
   .page{
-    max-width:720px;
-    margin:0 auto;
-    background:var(--page-bg);
-    border:1.5px solid var(--page-border);
-    outline:1px solid var(--page-outline);
-    outline-offset:6px;
-    padding:62px 56px 54px;
+    max-width:760px;margin:-72px auto 0;
+    background:var(--surface);
+    border:1px solid var(--rule);
+    border-radius:18px;
+    padding:46px 58px 50px;
     position:relative;
-    box-shadow:0 18px 50px var(--shadow);
+    box-shadow:var(--shadow-lg);
   }
-  @media(max-width:620px){.page{padding:48px 22px 40px;} body{padding:22px 11px 24px;}}
+  @media(max-width:620px){.page{padding:34px 22px 40px;margin:-64px 12px 0;border-radius:14px;} .hero{padding:44px 18px 108px;}}
+  .corner{display:none;}
 
-  /* corners, quieter: smaller and lighter than before */
-  .corner{position:absolute;width:44px;height:44px;color:var(--gold);opacity:.55;}
-  .corner.tl{top:9px;left:9px;}
-  .corner.tr{top:9px;right:9px;transform:scaleX(-1);}
-  .corner.bl{bottom:9px;left:9px;transform:scaleY(-1);}
-  .corner.br{bottom:9px;right:9px;transform:scale(-1,-1);}
-
-  .eyebrow{
-    font-family:'Cinzel',serif;
-    font-size:.74rem;
-    letter-spacing:.34em;
-    text-transform:uppercase;
-    color:var(--gold);
-    text-align:center;
-    margin-bottom:16px;
-  }
-  h1{
-    font-family:'Playfair Display',serif;
-    font-weight:700;
-    font-size:clamp(2rem,5vw,2.8rem);
-    line-height:1.18;
-    text-align:center;
-    color:var(--ink);
-    letter-spacing:.005em;
-    margin-bottom:14px;
-  }
-  .meta{
-    font-family:'Cinzel',serif;
-    font-variant:small-caps;
-    letter-spacing:.16em;
-    font-size:.78rem;
-    color:var(--gold);
-    text-align:center;
-    margin-bottom:28px;
-  }
-  .meta span{opacity:.55;margin:0 7px;}
-
-  /* Ellen G. White — companion ink */
+  /* Ellen G. White — companion ink (unchanged) */
   .egw{color:var(--wine);}
-  .egw-ref{
-    font-family:'Cinzel',serif;
-    font-variant:small-caps;
-    letter-spacing:.07em;
-    font-size:.85em;
-    color:var(--wine);
-  }
-  .egw-ref::before{content:"\2712";margin-right:.3em;font-size:.9em;}
-  /* long quotations stand as blocks */
-  blockquote.egw-block{
-    margin:26px 0 28px;
-    padding:2px 0 2px 22px;
-    border-left:2px solid var(--wine);
-    color:var(--wine);
-    font-size:1.01rem;
-    line-height:1.72;
-  }
-  blockquote.egw-block .egw-ref{
-    display:block;margin-top:9px;font-size:.78rem;
-    letter-spacing:.04em;line-height:1.55;opacity:.92;
-    text-wrap:pretty;          /* keeps a lone word off the last line */
-  }
+  .egw-ref{font-family:var(--f-ui);font-weight:600;font-size:.78em;letter-spacing:.02em;color:var(--wine);}
+  .egw-ref::before{content:"\2712";margin-right:.3em;font-size:.95em;}
+  blockquote.egw-block{margin:26px 0 28px;padding:4px 0 4px 22px;border-left:3px solid var(--wine);color:var(--wine);font-size:1.01rem;line-height:1.72;background:linear-gradient(90deg,var(--wine-soft),transparent 70%);border-radius:0 10px 10px 0;padding-right:12px;padding-top:12px;padding-bottom:12px;}
+  blockquote.egw-block .egw-ref{display:block;margin-top:9px;font-size:.76rem;line-height:1.55;opacity:.92;text-wrap:pretty;}
   @media(max-width:620px){blockquote.egw-block{padding-left:16px;}}
 
-  .divider{
-    display:flex;align-items:center;justify-content:center;
-    gap:14px;margin:28px 0;color:var(--gold);
-  }
+  .divider{display:flex;align-items:center;justify-content:center;gap:14px;margin:30px 0;color:var(--gold);}
   .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
   .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
   .divider svg{flex-shrink:0;}
 
   .verse-card{
     border:1px solid var(--gold-pale);
-    background:linear-gradient(180deg,var(--card1),var(--card2));
-    padding:28px 32px 24px;
-    text-align:center;
-    margin:0 auto 8px;
-    position:relative;
+    border-top:4px solid var(--gold-bright);
+    background:var(--gold-soft);
+    border-radius:12px;
+    padding:26px 30px 22px;text-align:center;margin:0 auto 8px;position:relative;
   }
-  .verse-card .label{
-    font-family:'Cinzel',serif;
-    font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;
-    color:var(--gold);margin-bottom:13px;
-  }
-  .verse-card .scripture{
-    font-family:'Cormorant Garamond',serif;
-    font-style:italic;
-    font-size:1.38rem;
-    line-height:1.62;
-    color:var(--ink-soft);
-  }
-  .verse-card .ref{
-    font-family:'Cinzel',serif;
-    font-variant:small-caps;
-    letter-spacing:.13em;
-    font-size:.92rem;
-    color:var(--gold);
-    margin-top:13px;
-  }
+  .verse-card .label{font-family:var(--f-ui);font-weight:700;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+  .verse-card .scripture{font-family:var(--f-verse);font-style:italic;font-size:1.42rem;line-height:1.6;color:var(--ink);}
+  .verse-card .ref{font-family:var(--f-ui);font-weight:700;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-top:12px;}
 
   /* body — ragged right, book measure */
   .body-text{margin-top:4px;}
-  .body-text p{
-    margin-bottom:1.15em;
-    font-size:1.075rem;
-    text-align:left;
-    hyphens:none;
-  }
+  .body-text p{margin-bottom:1.15em;font-size:1.075rem;text-align:left;hyphens:none;}
   .body-text .mv{margin-bottom:6px;}
-  .body-text > .mv:first-child > p:first-child::first-letter{
-    font-family:'Playfair Display',serif;
-    font-size:3.7em;
-    float:left;
-    line-height:.82;
-    padding:5px 11px 0 0;
-    color:var(--gold);
-  }
+  .body-text > .mv:first-child > p:first-child::first-letter{font-family:var(--f-title);font-size:3.7em;float:left;line-height:.82;padding:5px 11px 0 0;color:var(--gold);}
   .body-text strong{color:var(--emph);font-weight:600;}
   .scrip{font-style:italic;color:var(--ink-soft);}
-  .ref{
-    font-family:'Cinzel',serif;
-    font-variant:small-caps;
-    letter-spacing:.09em;
-    font-size:.9em;
-    color:var(--gold);
-    white-space:nowrap;
-  }
-
-  /* the closing sentence of each movement, promoted */
-  .body-text p.thesis{
-    text-align:center;
-    font-family:'Cormorant Garamond',serif;
-    font-style:italic;
-    font-size:1.32rem;
-    line-height:1.55;
-    color:var(--ink);
-    margin:26px auto 34px;
-    max-width:34em;
-    padding-top:22px;
-    position:relative;
-  }
-  .body-text p.thesis::before{
-    content:"";
-    position:absolute;top:0;left:50%;transform:translateX(-50%);
-    width:58px;height:1px;background:var(--gold);opacity:.8;
-  }
+  .ref{font-family:var(--f-ui);font-weight:700;font-size:.74em;letter-spacing:1px;text-transform:uppercase;color:var(--gold);white-space:nowrap;}
+  .body-text p.thesis{text-align:center;font-family:var(--f-verse);font-style:italic;font-size:1.34rem;line-height:1.55;color:var(--ink);margin:26px auto 34px;max-width:34em;padding-top:22px;position:relative;}
+  .body-text p.thesis::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:58px;height:2px;background:var(--gold-bright);border-radius:2px;}
   .body-text p.thesis strong{font-weight:inherit;color:inherit;}
   @media(max-width:620px){.body-text p.thesis{font-size:1.2rem;}}
 
-  h2.takeaways{
-    font-family:'Cinzel',serif;
-    font-weight:600;
-    font-size:1.22rem;
-    letter-spacing:.16em;
-    text-transform:uppercase;
-    text-align:center;
-    color:var(--ink);
-    margin-bottom:26px;
-  }
+  h2.takeaways{font-family:var(--f-ui);font-weight:800;font-size:1.05rem;letter-spacing:3px;text-transform:uppercase;text-align:center;color:var(--indigo-3);margin-bottom:26px;}
+  :root[data-theme="night"] h2.takeaways{color:var(--gold-bright);}
   ol.takeaway-list{list-style:none;counter-reset:tk;}
-  ol.takeaway-list li{
-    counter-increment:tk;
-    position:relative;
-    padding-left:54px;
-    margin-bottom:20px;
-    font-size:1.02rem;
-  }
-  ol.takeaway-list li::before{
-    content:counter(tk);
-    position:absolute;left:0;top:3px;
-    width:36px;height:36px;
-    border-radius:50%;
-    border:1.5px solid var(--gold);
-    background:radial-gradient(circle at 35% 30%,var(--num1),var(--num2));
-    color:var(--numfg);
-    font-family:'Cinzel',serif;
-    font-weight:600;
-    font-size:.98rem;
-    display:flex;align-items:center;justify-content:center;
-    box-shadow:0 2px 6px var(--shadow), inset 0 1px 2px rgba(255,255,255,.35);
-  }
+  ol.takeaway-list li{counter-increment:tk;position:relative;padding-left:54px;margin-bottom:20px;font-size:1.02rem;}
+  ol.takeaway-list li::before{content:counter(tk);position:absolute;left:0;top:3px;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--gold);background:radial-gradient(circle at 35% 30%,var(--num1),var(--num2));color:var(--numfg);font-family:var(--f-ui);font-weight:800;font-size:.95rem;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);}
   ol.takeaway-list li strong{color:var(--emph);font-weight:600;}
 
-  .sources{
-    margin-top:34px;
-    font-size:.88rem;
-    line-height:1.7;
-    color:var(--ink-soft);
-    text-align:center;
-  }
-  .sources .label{
-    font-family:'Cinzel',serif;
-    font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;
-    color:var(--gold);display:block;margin-bottom:4px;
-  }
+  .sources{margin-top:34px;font-size:.88rem;line-height:1.7;color:var(--muted);text-align:center;}
+  .sources .label{font-family:var(--f-ui);font-weight:700;font-size:10.5px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px;}
 
-  /* Watch It — unchanged treatment, tokenised for night reading */
+  /* ── Watch it — inline vertical player + buttons ── */
   .watch{
-    margin-top:38px;
-    text-align:center;
-    border:1px solid var(--gold);
-    background:linear-gradient(180deg,var(--card1),var(--card2));
-    padding:26px 22px 22px;
-  }
-  .watch .label{
-    font-family:'Cinzel',serif;
-    font-size:.72rem;letter-spacing:.36em;text-transform:uppercase;
-    color:var(--gold);display:block;margin-bottom:16px;
-  }
-  .watch a{
-    display:inline-block;
-    font-family:'Cinzel',serif;
-    font-weight:600;
-    letter-spacing:.08em;
-    font-size:1.02rem;
-    color:#fdf6e6;
-    background:var(--wine-solid);
-    border:1px solid var(--wine-edge);
-    text-decoration:none;
-    padding:14px 26px;
-    margin:6px 7px;
-    box-shadow:0 4px 14px rgba(90,45,30,.28);
-    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
-  }
-  .watch a:hover,.watch a:focus-visible{
-    background:#8f4837;
-    transform:translateY(-2px);
-    box-shadow:0 8px 22px rgba(90,45,30,.36);
-    outline:none;
-  }
-  .watch a .yt{color:var(--gold-bright);margin-right:10px;font-variant:normal;}
-  .watch .note{
-    font-family:'Cormorant Garamond',serif;font-style:italic;
-    font-size:1.02rem;color:var(--ink-soft);margin-top:14px;
-  }
-  @media(max-width:620px){
-    .watch a{display:block;margin:9px 0;padding:15px 18px;}
-    .watch{padding:22px 16px 18px;}
-  }
-
-  .sdg{
-    font-family:'Pinyon Script',cursive;
-    font-size:2.4rem;
-    color:var(--gold);
-    text-align:center;
     margin-top:40px;
+    border:1px solid var(--rule);
+    border-radius:16px;
+    background:var(--surface-2);
+    overflow:hidden;
+    display:grid;grid-template-columns:230px minmax(0,1fr);
+    box-shadow:var(--shadow);
+  }
+  .watch .media{background:var(--indigo);display:flex;align-items:center;justify-content:center;padding:18px;}
+  .yt-short{
+    position:relative;width:100%;max-width:194px;aspect-ratio:9/16;
+    border:0;padding:0;cursor:pointer;border-radius:12px;overflow:hidden;
+    background:var(--indigo-2) center/cover no-repeat;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+    display:block;
+  }
+  .yt-short::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.45));transition:background .2s;}
+  .yt-short:hover::after{background:linear-gradient(180deg,rgba(0,0,0,0) 65%,rgba(0,0,0,.3));}
+  .yt-short .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:60px;height:42px;border-radius:11px;background:#e11d2f;z-index:2;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.4);transition:transform .15s,background .15s;}
+  .yt-short:hover .play{transform:translate(-50%,-50%) scale(1.08);background:#ff0000;}
+  .yt-short .play::before{content:'';border-style:solid;border-width:10px 0 10px 18px;border-color:transparent transparent transparent #fff;margin-left:4px;}
+  .yt-short .tag{position:absolute;left:10px;top:10px;z-index:2;font-family:var(--f-ui);font-weight:800;font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.55);padding:3px 8px;border-radius:5px;}
+  .yt-short iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3;}
+  .watch .body{padding:24px 26px 22px;display:flex;flex-direction:column;justify-content:center;}
+  .watch .label{font-family:var(--f-ui);font-weight:700;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px;}
+  .watch h3{font-family:var(--f-title);font-weight:700;font-size:1.32rem;line-height:1.3;color:var(--ink);margin-bottom:10px;}
+  .watch .note{font-family:var(--f-verse);font-style:italic;font-size:1.05rem;color:var(--ink-soft);line-height:1.5;margin-bottom:16px;}
+  .watch .btns{display:flex;flex-wrap:wrap;gap:9px;}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-ui);font-weight:700;font-size:13.5px;padding:11px 16px;border-radius:9px;text-decoration:none;border:1px solid transparent;transition:transform .12s,box-shadow .12s,background .12s;white-space:nowrap;}
+  .btn:hover{transform:translateY(-1px);box-shadow:var(--shadow);}
+  .btn.wine{background:var(--wine-solid);color:#fdf6e6;border-color:var(--wine-edge);}
+  .btn.wine:hover{background:#8f4837;}
+  .btn.wine .yt{color:var(--gold-bright);}
+  .btn.ghost{background:var(--surface);color:var(--ink);border-color:var(--rule);}
+  .btn.ghost .yt{color:var(--wine);}
+  .btn.gold{background:var(--gold-bright);color:var(--indigo);}
+  .watch-film{border-top:1px solid var(--rule);grid-column:1/-1;padding:18px 26px 22px;display:grid;grid-template-columns:200px minmax(0,1fr);gap:18px;align-items:center;}
+  .yt-wide{position:relative;width:100%;aspect-ratio:16/9;border:0;padding:0;cursor:pointer;border-radius:10px;overflow:hidden;background:var(--indigo-2) center/cover no-repeat;box-shadow:var(--shadow);display:block;}
+  .yt-wide::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.4));}
+  .yt-wide .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:50px;height:36px;border-radius:9px;background:#e11d2f;z-index:2;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.4);}
+  .yt-wide .play::before{content:'';border-style:solid;border-width:8px 0 8px 15px;border-color:transparent transparent transparent #fff;margin-left:3px;}
+  .yt-wide .dur{position:absolute;right:8px;bottom:8px;z-index:2;font-family:var(--f-ui);font-weight:700;font-size:11px;color:#fff;background:rgba(0,0,0,.7);padding:2px 7px;border-radius:4px;}
+  .yt-wide iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3;}
+  .watch-film .fb .label{margin-bottom:4px;}
+  .watch-film .fb h3{font-size:1.12rem;margin-bottom:6px;}
+  .watch-film .fb .note{margin-bottom:10px;font-size:1rem;}
+  @media(max-width:620px){
+    .watch{grid-template-columns:1fr;}
+    .watch .media{padding:20px 20px 6px;background:transparent;}
+    .yt-short{max-width:220px;}
+    .watch .body{padding:16px 20px 22px;text-align:center;align-items:center;}
+    .watch .btns{justify-content:center;width:100%;}
+    .watch .btns .btn{flex:1 1 100%;justify-content:center;}
+    .watch-film{grid-template-columns:1fr;padding:18px 20px 22px;text-align:center;}
   }
 
-  /* navigation */
-  .allnav,.footnav{max-width:720px;margin:0 auto 16px;text-align:center;}
-  .footnav{margin:26px auto 8px;display:flex;justify-content:center;gap:26px;}
-  .allnav a,.footnav a{
-    font-family:'Cinzel',serif;font-variant:small-caps;letter-spacing:.16em;
-    font-size:.8rem;color:var(--gold);text-decoration:none;
-    border-bottom:1px solid var(--rule);padding-bottom:2px;
-  }
-  .allnav a:hover,.footnav a:hover{border-bottom-color:var(--gold);}
+  .sdg{font-family:'Pinyon Script',cursive;font-size:2.4rem;color:var(--gold);text-align:center;margin-top:40px;}
+
+  /* navigation + footer */
+  .allnav{display:none;}
+  .footnav{max-width:760px;margin:26px auto 8px;display:flex;justify-content:center;gap:26px;padding:0 16px;}
+  .footnav a{font-family:var(--f-ui);font-weight:700;font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid var(--rule);padding-bottom:2px;}
+  .footnav a:hover{border-bottom-color:var(--gold);}
+  .site-foot{background:var(--indigo);color:rgba(255,255,255,.72);text-align:center;padding:30px 22px;margin-top:30px;font-family:var(--f-ui);font-size:13.5px;line-height:1.8;}
+  .site-foot a{color:var(--gold-bright);text-decoration:none;font-weight:700;}
+  .site-foot a:hover{text-decoration:underline;}
+  .site-foot .l{display:block;}
+  .site-foot .l.small{font-size:12.5px;color:rgba(255,255,255,.5);}
 
   /* night-reading toggle */
-  .lamp{
-    position:fixed;right:16px;bottom:16px;z-index:11;
-    width:44px;height:44px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    background:var(--card1);
-    border:1px solid var(--gold);
-    color:var(--gold);
-    cursor:pointer;
-    box-shadow:0 4px 14px var(--shadow);
-    opacity:.72;
-    transition:opacity .18s ease, transform .18s ease;
-  }
-  .lamp:hover,.lamp:focus-visible{opacity:1;transform:translateY(-2px);outline:none;}
-  .lamp svg{width:20px;height:20px;}
-  @media print{.lamp,.progress,.allnav,.footnav{display:none;}}
+  .lamp{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--gold);color:var(--gold);cursor:pointer;transition:opacity .18s ease,transform .18s ease;}
+  .lamp:hover,.lamp:focus-visible{transform:translateY(-1px);outline:none;}
+  .lamp svg{width:18px;height:18px;}
+  @media print{.lamp,.progress,.topbar,.footnav,.site-foot,.watch{display:none;}.hero{background:none;color:#000;padding:0;}.page{margin:0;box-shadow:none;border:0;}}
 </style>
 </head>
 <body>
 <div class="progress" id="prog"></div>
 <a id="top"></a>
-<nav class="allnav"><a href="./">← All devotions</a></nav>
+<header class="topbar">
+  <div class="in">
+    <a class="brand" href="./"><span class="mark">✦</span><span class="t"><small>A New Beginning</small>Daily Devotions</span></a>
+    <nav>
+      <a class="all" href="./">All devotions</a>
+      <a class="yt" href="https://www.youtube.com/@icanstillbelieve" target="_blank" rel="noopener">▶ <span class="long">I Can Still Believe</span><span class="short">YouTube</span></a>
+      <button class="lamp" id="lamp" type="button" aria-label="Night reading" title="Night reading">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13.4A8.2 8.2 0 1 1 10.6 4a6.4 6.4 0 0 0 9.4 9.4Z"/></svg>
+    </button>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="eyebrow">Today's Devotion</div>
+  <h1>When Another Voice Contradicts God</h1>
+  <div class="meta">1 Kings 13 <span>·</span> 7 min read</div>
+</div>
 
 <article class="page">
-  <svg class="corner tl" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
-  </svg>
-  <svg class="corner tr" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
-  </svg>
-  <svg class="corner bl" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
-  </svg>
-  <svg class="corner br" viewbox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-    <path d="M4 60 V14 Q4 4 14 4 H60"></path>
-    <path d="M12 60 V22 Q12 12 22 12 H60" opacity=".55"></path>
-    <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none"></circle>
-    <path d="M4 34 q8 -3 8 -12 M34 4 q-3 8 -12 8" opacity=".7"></path>
-  </svg>
-
-    <div class="eyebrow">Today's Devotion</div>
-  <h1>When Another Voice Contradicts God</h1>
-
-  <div class="meta">1 Kings 13 <span>·</span> 7 min read</div>
-
   <section class="verse-card">
     <div class="label">Key Verse</div>
     <div class="scripture">“But the man of God said to the king, ‘Even if you gave me half of everything you own, I would not go with you. I would not eat or drink anything in this place. For the Lord gave me this command: You must not eat or drink anything while you are there, and do not return to Judah by the same way you came.’”</div>
@@ -430,18 +325,26 @@
 
   <p class="sources"><span class="label">Sources and Further Reading</span>Scripture: 1 Kings 13:1–34 (context 1 Kings 12:25–33; fulfilment 2 Kings 23:15–18); 1 Thessalonians 5:20–21; 1 Corinthians 10:12; Hebrews 12:1–2 (NLT). Ellen G. White: <em>Prophets and Kings</em>, chapter 7, “Jeroboam,” pp. 99–108 (PK 105.1, 106.1, 106.2, 107.1); the fulfilment under Josiah in chapter 33, “The Book of the Law,” pp. 401–402 (PK 402.2); the same account appears in condensed form in <em>Royalty and Ruin</em>, “How a Prophet Was Tricked Into Disobeying,” pp. 37–38, and <em>From Splendor to Shadow</em>, pp. 54–55.</p>
 
-  
-  <div class="watch"><span class="label">Watch It</span><a href="https://www.youtube.com/shorts/M-MUDQxc0_4" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">▶</span>Watch the Short</a><p class="note">On YouTube as “He Stood Up to a King—Then Believed a Lie” — from the channel <em>I Can Still Believe</em>.</p></div>
+  <div class="watch" id="watch">
+    <div class="media">
+      <button class="yt-short" type="button" data-id="M-MUDQxc0_4" aria-label="Play the Short: He Stood Up to a King—Then Believed a Lie" style="background-image:url('https://i.ytimg.com/vi/M-MUDQxc0_4/maxresdefault.jpg')"><span class="tag">Short</span><span class="play"></span></button>
+    </div>
+    <div class="body">
+      <span class="label">Watch it</span>
+      <h3>He Stood Up to a King—Then Believed a Lie</h3>
+      <p class="note">The Short for this devotion, from the channel <em>I Can Still Believe</em>. Tap the artwork to play it here, or open it in the YouTube app.</p>
+      <div class="btns"><a class="btn wine" href="https://www.youtube.com/shorts/M-MUDQxc0_4" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">▶</span>Watch the Short</a></div>
+    </div>
+  </div>
 
   <div class="sdg">Soli Deo Gloria</div>
 </article>
 <nav class="footnav"><a href="./">&#8592;&nbsp;All devotions</a><a href="#top">Back to top&nbsp;&#8593;</a></nav>
-<button class="lamp" id="lamp" type="button" aria-label="Night reading">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
-       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <path class="moon" d="M20 13.4A8.2 8.2 0 1 1 10.6 4a6.4 6.4 0 0 0 9.4 9.4Z"/>
-  </svg>
-</button>
+<footer class="site-foot">
+  <span class="l">Scripture quotations are from the <em>Holy Bible, New Living Translation</em>. Ellen G. White quotations are cited to book, page and paragraph.</span>
+  <span class="l">Videos: <a href="https://www.youtube.com/@icanstillbelieve" target="_blank" rel="noopener">I Can Still Believe on YouTube</a> · <a href="./">All devotions</a></span>
+  <span class="l small">Prepared by Dr. Davies Rene Segera · Free to read, and free to share with anyone.</span>
+</footer>
 <script>
 (function(){
   var root=document.documentElement, lamp=document.getElementById('lamp');
@@ -456,8 +359,18 @@
     var h=document.documentElement.scrollHeight-window.innerHeight;
     bar.style.width=(h>0?Math.min(100,(window.scrollY/h)*100):0)+'%';
   }
-  if(bar){ window.addEventListener('scroll',tick,{passive:true});
-           window.addEventListener('resize',tick); tick(); }
+  if(bar){ window.addEventListener('scroll',tick,{passive:true}); window.addEventListener('resize',tick); tick(); }
+  /* click-to-play YouTube: nothing from YouTube loads until the artwork is tapped */
+  document.querySelectorAll('.yt-short,.yt-wide').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var f=document.createElement('iframe');
+      f.src='https://www.youtube-nocookie.com/embed/'+btn.getAttribute('data-id')+'?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+      f.title=btn.getAttribute('aria-label');
+      f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      f.setAttribute('allowfullscreen','');
+      btn.appendChild(f); btn.style.cursor='default';
+    },{once:true});
+  });
 })();
 </script>
 </body>
