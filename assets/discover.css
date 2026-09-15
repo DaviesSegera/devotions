@@ -86,3 +86,5 @@ button.btn{font-family:var(--f-ui)}
 @media(max-width:820px){.featured{margin-top:0}.featured .fm{order:0}.featured .fm a{max-width:130px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
 @media print{.topbar,.site-foot,.reading-intro .btns,.watch-section,.related,.topic-chips,.progress,.skip-link{display:none!important}.hero{background:white!important;color:black!important;padding:20px}.hero h1,.hero .meta,.hero .eyebrow{color:black!important}.page{box-shadow:none;margin:0;max-width:none;padding:0;border:0}.body-text p{font-size:12pt}}
+
+.featured.reading-only,.card.reading-only{grid-template-columns:1fr}

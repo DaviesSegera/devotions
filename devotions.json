@@ -3,7 +3,7 @@
   "siteName": "A New Beginning",
   "author": "Dr. Davies Rene Segera",
   "youtubeChannel": "https://www.youtube.com/@icanstillbelieve",
-  "latest": "courage-in-the-storm",
+  "latest": "holding-on-to-god-at-peniel",
   "topics": [
     {
       "slug": "faith-and-trust",
@@ -115,6 +115,25 @@
           "title": "He Used God's Name to Cover a Lie"
         }
       ]
+    },
+    {
+      "slug": "holding-on-to-god-at-peniel",
+      "title": "Holding On to God at Peniel",
+      "passage": "Genesis 32:22–32",
+      "testament": "old",
+      "subject": "Jacob wrestles at Peniel",
+      "readingMinutes": 6,
+      "keyVerse": "“I will not let you go unless you bless me.”",
+      "keyVerseReference": "Genesis 32:26 (NLT, excerpt)",
+      "summary": "Jacob’s night at Peniel invites us to bring our fears to God, persist in prayer, and receive the grace that changes how we live.",
+      "topics": [
+        "prayer",
+        "faith-and-trust",
+        "forgiveness-and-grace",
+        "humility-and-obedience"
+      ],
+      "videos": [],
+      "publishedDate": "2026-09-15"
     },
     {
       "slug": "when-envy-takes-root",
