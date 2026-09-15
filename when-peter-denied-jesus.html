@@ -2,291 +2,44 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="When Peter Denied Jesus — a daily devotion on Luke 22 from A New Beginning, read alongside Ellen G. White, with the Short from the channel I Can Still Believe.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>When Peter Denied Jesus | Luke 22 Devotion</title>
+<meta name="description" content="Peter’s denial in Luke 22 invites honest reflection on failure, repentance, and the grace of Jesus that calls us back.">
+<meta name="author" content="Dr. Davies Rene Segera">
+<meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="theme-color" content="#1e2340">
-<title>When Peter Denied Jesus — Today's Devotion</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link rel="canonical" href="https://daviessegera.github.io/devotions/when-peter-denied-jesus.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="A New Beginning">
+<meta property="og:title" content="When Peter Denied Jesus | Luke 22 Devotion">
+<meta property="og:description" content="Peter’s denial in Luke 22 invites honest reflection on failure, repentance, and the grace of Jesus that calls us back.">
+<meta property="og:url" content="https://daviessegera.github.io/devotions/when-peter-denied-jesus.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="When Peter Denied Jesus | Luke 22 Devotion">
+<meta name="twitter:description" content="Peter’s denial in Luke 22 invites honest reflection on failure, repentance, and the grace of Jesus that calls us back.">
+<link rel="alternate" type="application/rss+xml" title="A New Beginning — Daily Devotions" href="feed.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Manrope:wght@600;700;800&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
-<style>
-  /* ── A New Beginning · Daily Devotions — modern devotional system (Sep 2026) ──
-     Deep indigo structure · warm gold · wine for Ellen G. White · cream reading surface.
-     Day and night are full token sets; the reading-page content classes are unchanged. */
-  :root{
-    --bg:#f3efe6;
-    --surface:#fffdf8;
-    --surface-2:#f8f3e8;
-    --ink:#24211a;
-    --ink-soft:#544e3f;
-    --muted:#736d5e;
-    --indigo:#1e2340;
-    --indigo-2:#2a3159;
-    --indigo-3:#3b4780;
-    --on-indigo:#f4efe2;
-    --gold:#b08a2a;
-    --gold-bright:#d6ab3c;
-    --gold-pale:#eadfbd;
-    --gold-soft:#fbf4df;
-    --wine:#7a3b2e;
-    --wine-solid:#7a3b2e;
-    --wine-edge:#5d2b20;
-    --wine-soft:#f7ece8;
-    --emph:#7c5a12;
-    --num1:#f5e7bd; --num2:#e3cf95; --numfg:#7c5a12;
-    --rule:#e3dccb;
-    --shadow:0 2px 14px rgba(30,35,64,.08);
-    --shadow-lg:0 14px 44px rgba(30,35,64,.14);
-    --radius:14px;
-    --f-title:'Playfair Display',Georgia,serif;
-    --f-body:'Lora',Georgia,serif;
-    --f-verse:'Cormorant Garamond',Georgia,serif;
-    --f-ui:'Manrope','Segoe UI',system-ui,sans-serif;
-  }
-  :root[data-theme="night"]{
-    --bg:#121420;
-    --surface:#1b1e2d;
-    --surface-2:#22263a;
-    --ink:#e9e3d4;
-    --ink-soft:#c6bfa9;
-    --muted:#9d97a8;
-    --indigo:#0d0f1c;
-    --indigo-2:#161a30;
-    --indigo-3:#2a3159;
-    --on-indigo:#f0ead9;
-    --gold:#d3ad48;
-    --gold-bright:#e6c15a;
-    --gold-pale:#4b3e1a;
-    --gold-soft:#2a2519;
-    --wine:#e2a891;
-    --wine-solid:#8a4537;
-    --wine-edge:#6b3428;
-    --wine-soft:#2e2220;
-    --emph:#e2c775;
-    --num1:#4c4024; --num2:#3a311b; --numfg:#e8ce7f;
-    --rule:#30344a;
-    --shadow:0 2px 14px rgba(0,0,0,.35);
-    --shadow-lg:0 14px 44px rgba(0,0,0,.5);
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
-  body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:var(--f-body);
-    line-height:1.78;
-    -webkit-font-smoothing:antialiased;
-    transition:background-color .25s ease,color .25s ease;
-  }
-  img{max-width:100%;}
-
-  /* reading progress */
-  .progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-bright));z-index:30;transition:width .08s linear;}
-
-  /* ── top bar ── */
-  .topbar{
-    background:var(--indigo);color:var(--on-indigo);
-    position:sticky;top:0;z-index:20;
-    border-bottom:1px solid rgba(255,255,255,.08);
-  }
-  .topbar .in{max-width:1040px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;}
-  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:inherit;min-width:0;}
-  .brand .mark{width:34px;height:34px;border-radius:9px;flex-shrink:0;background:linear-gradient(135deg,var(--gold-bright),var(--gold));display:flex;align-items:center;justify-content:center;color:var(--indigo);font-family:var(--f-title);font-weight:700;font-size:18px;}
-  .brand .t{font-family:var(--f-ui);font-weight:800;font-size:15px;letter-spacing:-.2px;line-height:1.15;white-space:nowrap;}
-  .brand .t small{display:block;font-weight:600;font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-bright);}
-  .topbar nav{display:flex;gap:6px;align-items:center;}
-  .topbar nav a{font-family:var(--f-ui);font-weight:600;font-size:13px;color:var(--on-indigo);text-decoration:none;padding:7px 12px;border-radius:999px;border:1px solid transparent;white-space:nowrap;transition:background .15s;}
-  .topbar nav a:hover{background:rgba(255,255,255,.1);}
-  .topbar nav a.yt{border-color:rgba(214,171,60,.5);color:var(--gold-bright);}
-  .topbar nav a.yt:hover{background:rgba(214,171,60,.14);}
-  .topbar nav a .short{display:none;}
-  @media(max-width:620px){
-    .topbar .in{padding:9px 12px;gap:8px;}
-    .brand .t{font-size:14px;} .brand .t small{font-size:9.5px;letter-spacing:1.5px;}
-    .topbar nav{gap:4px;} .topbar nav a{padding:6px 9px;font-size:12px;}
-    .topbar nav a .long{display:none;} .topbar nav a .short{display:inline;}
-    .topbar nav a.all{display:none;}
-  }
-  .topbar .lamp{position:static;width:36px;height:36px;opacity:1;box-shadow:none;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.18);color:var(--gold-bright);}
-
-  /* ── hero band ── */
-  .hero{
-    background:linear-gradient(135deg,var(--indigo) 0%,var(--indigo-2) 55%,var(--indigo-3) 100%);
-    color:var(--on-indigo);text-align:center;
-    padding:58px 22px 120px;position:relative;overflow:hidden;
-  }
-  .hero::before{content:'';position:absolute;inset:0;pointer-events:none;
-    background:radial-gradient(circle at 12% 18%,rgba(214,171,60,.18),transparent 40%),radial-gradient(circle at 88% 85%,rgba(122,59,46,.35),transparent 45%);}
-  .hero>*{position:relative;}
-  .eyebrow{font-family:var(--f-ui);font-weight:700;font-size:11.5px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-bright);margin-bottom:16px;}
-  .hero h1{font-family:var(--f-title);font-weight:700;font-size:clamp(2rem,5vw,3.1rem);line-height:1.15;color:#fff;letter-spacing:-.01em;max-width:820px;margin:0 auto 16px;}
-  .meta{font-family:var(--f-ui);font-weight:600;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.72);}
-  .meta span{opacity:.5;margin:0 8px;}
-
-  /* ── the reading sheet ── */
-  .page{
-    max-width:760px;margin:-72px auto 0;
-    background:var(--surface);
-    border:1px solid var(--rule);
-    border-radius:18px;
-    padding:46px 58px 50px;
-    position:relative;
-    box-shadow:var(--shadow-lg);
-  }
-  @media(max-width:620px){.page{padding:34px 22px 40px;margin:-64px 12px 0;border-radius:14px;} .hero{padding:44px 18px 108px;}}
-  .corner{display:none;}
-
-  /* Ellen G. White — companion ink (unchanged) */
-  .egw{color:var(--wine);}
-  .egw-ref{font-family:var(--f-ui);font-weight:600;font-size:.78em;letter-spacing:.02em;color:var(--wine);}
-  .egw-ref::before{content:"\2712";margin-right:.3em;font-size:.95em;}
-  blockquote.egw-block{margin:26px 0 28px;padding:4px 0 4px 22px;border-left:3px solid var(--wine);color:var(--wine);font-size:1.01rem;line-height:1.72;background:linear-gradient(90deg,var(--wine-soft),transparent 70%);border-radius:0 10px 10px 0;padding-right:12px;padding-top:12px;padding-bottom:12px;}
-  blockquote.egw-block .egw-ref{display:block;margin-top:9px;font-size:.76rem;line-height:1.55;opacity:.92;text-wrap:pretty;}
-  @media(max-width:620px){blockquote.egw-block{padding-left:16px;}}
-
-  .divider{display:flex;align-items:center;justify-content:center;gap:14px;margin:30px 0;color:var(--gold);}
-  .divider .line{flex:1;max-width:190px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
-  .divider .line.right{background:linear-gradient(90deg,var(--gold),transparent);}
-  .divider svg{flex-shrink:0;}
-
-  .verse-card{
-    border:1px solid var(--gold-pale);
-    border-top:4px solid var(--gold-bright);
-    background:var(--gold-soft);
-    border-radius:12px;
-    padding:26px 30px 22px;text-align:center;margin:0 auto 8px;position:relative;
-  }
-  .verse-card .label{font-family:var(--f-ui);font-weight:700;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
-  .verse-card .scripture{font-family:var(--f-verse);font-style:italic;font-size:1.42rem;line-height:1.6;color:var(--ink);}
-  .verse-card .ref{font-family:var(--f-ui);font-weight:700;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-top:12px;}
-
-  /* body — ragged right, book measure */
-  .body-text{margin-top:4px;}
-  .body-text p{margin-bottom:1.15em;font-size:1.075rem;text-align:left;hyphens:none;}
-  .body-text .mv{margin-bottom:6px;}
-  .body-text > .mv:first-child > p:first-child::first-letter{font-family:var(--f-title);font-size:3.7em;float:left;line-height:.82;padding:5px 11px 0 0;color:var(--gold);}
-  .body-text strong{color:var(--emph);font-weight:600;}
-  .scrip{font-style:italic;color:var(--ink-soft);}
-  .ref{font-family:var(--f-ui);font-weight:700;font-size:.74em;letter-spacing:1px;text-transform:uppercase;color:var(--gold);white-space:nowrap;}
-  .body-text p.thesis{text-align:center;font-family:var(--f-verse);font-style:italic;font-size:1.34rem;line-height:1.55;color:var(--ink);margin:26px auto 34px;max-width:34em;padding-top:22px;position:relative;}
-  .body-text p.thesis::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:58px;height:2px;background:var(--gold-bright);border-radius:2px;}
-  .body-text p.thesis strong{font-weight:inherit;color:inherit;}
-  @media(max-width:620px){.body-text p.thesis{font-size:1.2rem;}}
-
-  h2.takeaways{font-family:var(--f-ui);font-weight:800;font-size:1.05rem;letter-spacing:3px;text-transform:uppercase;text-align:center;color:var(--indigo-3);margin-bottom:26px;}
-  :root[data-theme="night"] h2.takeaways{color:var(--gold-bright);}
-  ol.takeaway-list{list-style:none;counter-reset:tk;}
-  ol.takeaway-list li{counter-increment:tk;position:relative;padding-left:54px;margin-bottom:20px;font-size:1.02rem;}
-  ol.takeaway-list li::before{content:counter(tk);position:absolute;left:0;top:3px;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--gold);background:radial-gradient(circle at 35% 30%,var(--num1),var(--num2));color:var(--numfg);font-family:var(--f-ui);font-weight:800;font-size:.95rem;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);}
-  ol.takeaway-list li strong{color:var(--emph);font-weight:600;}
-
-  .sources{margin-top:34px;font-size:.88rem;line-height:1.7;color:var(--muted);text-align:center;}
-  .sources .label{font-family:var(--f-ui);font-weight:700;font-size:10.5px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px;}
-
-  /* ── Watch it — inline vertical player + buttons ── */
-  .watch{
-    margin-top:40px;
-    border:1px solid var(--rule);
-    border-radius:16px;
-    background:var(--surface-2);
-    overflow:hidden;
-    display:grid;grid-template-columns:230px minmax(0,1fr);
-    box-shadow:var(--shadow);
-  }
-  .watch .media{background:var(--indigo);display:flex;align-items:center;justify-content:center;padding:18px;}
-  .yt-short{
-    position:relative;width:100%;max-width:194px;aspect-ratio:9/16;
-    border:0;padding:0;cursor:pointer;border-radius:12px;overflow:hidden;
-    background:var(--indigo-2) center/cover no-repeat;
-    box-shadow:0 10px 30px rgba(0,0,0,.35);
-    display:block;
-  }
-  .yt-short::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.45));transition:background .2s;}
-  .yt-short:hover::after{background:linear-gradient(180deg,rgba(0,0,0,0) 65%,rgba(0,0,0,.3));}
-  .yt-short .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:60px;height:42px;border-radius:11px;background:#e11d2f;z-index:2;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.4);transition:transform .15s,background .15s;}
-  .yt-short:hover .play{transform:translate(-50%,-50%) scale(1.08);background:#ff0000;}
-  .yt-short .play::before{content:'';border-style:solid;border-width:10px 0 10px 18px;border-color:transparent transparent transparent #fff;margin-left:4px;}
-  .yt-short .tag{position:absolute;left:10px;top:10px;z-index:2;font-family:var(--f-ui);font-weight:800;font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.55);padding:3px 8px;border-radius:5px;}
-  .yt-short iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3;}
-  .watch .body{padding:24px 26px 22px;display:flex;flex-direction:column;justify-content:center;}
-  .watch .label{font-family:var(--f-ui);font-weight:700;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px;}
-  .watch h3{font-family:var(--f-title);font-weight:700;font-size:1.32rem;line-height:1.3;color:var(--ink);margin-bottom:10px;}
-  .watch .note{font-family:var(--f-verse);font-style:italic;font-size:1.05rem;color:var(--ink-soft);line-height:1.5;margin-bottom:16px;}
-  .watch .btns{display:flex;flex-wrap:wrap;gap:9px;}
-  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-ui);font-weight:700;font-size:13.5px;padding:11px 16px;border-radius:9px;text-decoration:none;border:1px solid transparent;transition:transform .12s,box-shadow .12s,background .12s;white-space:nowrap;}
-  .btn:hover{transform:translateY(-1px);box-shadow:var(--shadow);}
-  .btn.wine{background:var(--wine-solid);color:#fdf6e6;border-color:var(--wine-edge);}
-  .btn.wine:hover{background:#8f4837;}
-  .btn.wine .yt{color:var(--gold-bright);}
-  .btn.ghost{background:var(--surface);color:var(--ink);border-color:var(--rule);}
-  .btn.ghost .yt{color:var(--wine);}
-  .btn.gold{background:var(--gold-bright);color:var(--indigo);}
-  .watch-film{border-top:1px solid var(--rule);grid-column:1/-1;padding:18px 26px 22px;display:grid;grid-template-columns:200px minmax(0,1fr);gap:18px;align-items:center;}
-  .yt-wide{position:relative;width:100%;aspect-ratio:16/9;border:0;padding:0;cursor:pointer;border-radius:10px;overflow:hidden;background:var(--indigo-2) center/cover no-repeat;box-shadow:var(--shadow);display:block;}
-  .yt-wide::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.4));}
-  .yt-wide .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:50px;height:36px;border-radius:9px;background:#e11d2f;z-index:2;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.4);}
-  .yt-wide .play::before{content:'';border-style:solid;border-width:8px 0 8px 15px;border-color:transparent transparent transparent #fff;margin-left:3px;}
-  .yt-wide .dur{position:absolute;right:8px;bottom:8px;z-index:2;font-family:var(--f-ui);font-weight:700;font-size:11px;color:#fff;background:rgba(0,0,0,.7);padding:2px 7px;border-radius:4px;}
-  .yt-wide iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3;}
-  .watch-film .fb .label{margin-bottom:4px;}
-  .watch-film .fb h3{font-size:1.12rem;margin-bottom:6px;}
-  .watch-film .fb .note{margin-bottom:10px;font-size:1rem;}
-  @media(max-width:620px){
-    .watch{grid-template-columns:1fr;}
-    .watch .media{padding:20px 20px 6px;background:transparent;}
-    .yt-short{max-width:220px;}
-    .watch .body{padding:16px 20px 22px;text-align:center;align-items:center;}
-    .watch .btns{justify-content:center;width:100%;}
-    .watch .btns .btn{flex:1 1 100%;justify-content:center;}
-    .watch-film{grid-template-columns:1fr;padding:18px 20px 22px;text-align:center;}
-  }
-
-  .sdg{font-family:'Pinyon Script',cursive;font-size:2.4rem;color:var(--gold);text-align:center;margin-top:40px;}
-
-  /* navigation + footer */
-  .allnav{display:none;}
-  .footnav{max-width:760px;margin:26px auto 8px;display:flex;justify-content:center;gap:26px;padding:0 16px;}
-  .footnav a{font-family:var(--f-ui);font-weight:700;font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid var(--rule);padding-bottom:2px;}
-  .footnav a:hover{border-bottom-color:var(--gold);}
-  .site-foot{background:var(--indigo);color:rgba(255,255,255,.72);text-align:center;padding:30px 22px;margin-top:30px;font-family:var(--f-ui);font-size:13.5px;line-height:1.8;}
-  .site-foot a{color:var(--gold-bright);text-decoration:none;font-weight:700;}
-  .site-foot a:hover{text-decoration:underline;}
-  .site-foot .l{display:block;}
-  .site-foot .l.small{font-size:12.5px;color:rgba(255,255,255,.5);}
-
-  /* night-reading toggle */
-  .lamp{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--gold);color:var(--gold);cursor:pointer;transition:opacity .18s ease,transform .18s ease;}
-  .lamp:hover,.lamp:focus-visible{transform:translateY(-1px);outline:none;}
-  .lamp svg{width:18px;height:18px;}
-  @media print{.lamp,.progress,.topbar,.footnav,.site-foot,.watch{display:none;}.hero{background:none;color:#000;padding:0;}.page{margin:0;box-shadow:none;border:0;}}
-</style>
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/discover.css">
+<script src="assets/theme.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://daviessegera.github.io/devotions/when-peter-denied-jesus.html#article","headline":"When Peter Denied Jesus","description":"Peter’s denial in Luke 22 invites honest reflection on failure, repentance, and the grace of Jesus that calls us back.","url":"https://daviessegera.github.io/devotions/when-peter-denied-jesus.html","mainEntityOfPage":"https://daviessegera.github.io/devotions/when-peter-denied-jesus.html","inLanguage":"en","author":{"@type":"Person","@id":"https://daviessegera.github.io/devotions/about.html#author","name":"Dr. Davies Rene Segera","url":"https://daviessegera.github.io/devotions/about.html"},"isAccessibleForFree":true,"articleSection":["Forgiveness & grace","Hope & encouragement"],"about":{"@type":"Thing","name":"Luke 22"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Daily devotions","item":"https://daviessegera.github.io/devotions/"},{"@type":"ListItem","position":2,"name":"When Peter Denied Jesus","item":"https://daviessegera.github.io/devotions/when-peter-denied-jesus.html"}]}]}</script>
+<script src="assets/site.js" defer></script>
 </head>
-<body>
-<div class="progress" id="prog"></div>
-<a id="top"></a>
-<header class="topbar">
-  <div class="in">
-    <a class="brand" href="./"><span class="mark">✦</span><span class="t"><small>A New Beginning</small>Daily Devotions</span></a>
-    <nav>
-      <a class="all" href="./">All devotions</a>
-      <a class="yt" href="https://www.youtube.com/@icanstillbelieve" target="_blank" rel="noopener">▶ <span class="long">I Can Still Believe</span><span class="short">YouTube</span></a>
-      <button class="lamp" id="lamp" type="button" aria-label="Night reading" title="Night reading">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13.4A8.2 8.2 0 1 1 10.6 4a6.4 6.4 0 0 0 9.4 9.4Z"/></svg>
-    </button>
-    </nav>
-  </div>
-</header>
-
-<div class="hero">
-  <div class="eyebrow">Today's Devotion</div>
-  <h1>When Peter Denied Jesus</h1>
-  <div class="meta">Luke 22 <span>·</span> 7 min read</div>
-</div>
-
-<article class="page">
-  <section class="verse-card">
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="progress" id="prog" aria-hidden="true"></div>
+<header class="topbar"><div class="in">
+ <a class="brand" href="index.html"><span class="mark" aria-hidden="true">✦</span><span class="t"><small>A New Beginning</small>Daily Devotions</span></a>
+ <nav aria-label="Main navigation"><a class="nav-topic" href="topics.html">Topics</a><a href="videos.html">Videos</a><a href="follow.html">Follow</a><button class="lamp" id="lamp" type="button" aria-label="Night reading" aria-pressed="false" title="Night reading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M21 13A9 9 0 0 1 11 3a9 9 0 1 0 10 10Z"/></svg></button></nav>
+</div></header>
+<div class="hero"><div class="eyebrow">A New Beginning · Bible devotion</div><h1>When Peter Denied Jesus</h1><div class="meta">Luke 22 <span>·</span> 7 min read</div></div>
+<main id="main"><article class="page">
+<div class="reading-intro"><p class="byline">By <a href="about.html">Dr. Davies Rene Segera</a></p><p>Peter’s denial in Luke 22 invites honest reflection on failure, repentance, and the grace of Jesus that calls us back.</p><nav class="topic-chips" aria-label="Devotion topics"><a href="topics/forgiveness-and-grace.html">Forgiveness &amp; grace</a><a href="topics/hope-and-encouragement.html">Hope &amp; encouragement</a></nav><div class="btns"><a class="btn wine" href="watch/when-peter-denied-jesus-short.html">Watch the Short</a><button class="btn ghost" type="button" data-share>Share devotion</button></div><p class="share-status" role="status"></p></div>
+<!-- DEVOTION CONTENT START -->
+<section class="verse-card">
     <div class="label">Key Verse</div>
     <div class="scripture">“But I have pleaded in prayer for you, Simon, that your faith should not fail.”</div>
     <div class="ref">Luke 22:32 (NLT, excerpt)</div>
@@ -326,54 +79,12 @@
   </ol>
 
   <p class="sources"><span class="label">Sources and Further Reading</span>Scripture: Luke 22:31–34, 54–62 (parallels Matthew 26:31–35, 69–75; Mark 14:27–31, 66–72; John 13:36–38; 18:15–18, 25–27); Matthew 26:40–41; Mark 16:6–7; 1 Corinthians 15:3–5; John 21:15–19; 1 John 1:9 (NLT). Ellen G. White: <em>The Desire of Ages</em>, chapter 75, “Before Annas and the Court of Caiaphas,” pp. 698–715 (DA 712.1, 712.4, 713.4) and chapter 85, “By the Sea Once More,” pp. 809–817 (DA 815.1); <em>Christ’s Object Lessons</em>, chapter 13, “Two Worshipers,” pp. 150–163 (COL 152.2, 152.3, 155.4). Related readings appear in <em>Conflict and Courage</em>, “On Enemy Ground” (November 11, p. 321, gathering COL 152–155 and DA 712) and “Converted at Last” (November 12, p. 322, drawn from <em>The SDA Bible Commentary</em>, vol. 5, p. 1152).</p>
-
-  <div class="watch" id="watch">
-    <div class="media">
-      <button class="yt-short" type="button" data-id="tCOAy3fnhjU" aria-label="Play the Short: Has the Rooster Crowed in Your Life?" style="background-image:url('https://i.ytimg.com/vi/tCOAy3fnhjU/maxresdefault.jpg')"><span class="tag">Short</span><span class="play"></span></button>
-    </div>
-    <div class="body">
-      <span class="label">Watch it</span>
-      <h3>Has the Rooster Crowed in Your Life?</h3>
-      <p class="note">The Short for this devotion, from the channel <em>I Can Still Believe</em>. Tap the artwork to play it here, or open it in the YouTube app.</p>
-      <div class="btns"><a class="btn wine" href="https://www.youtube.com/shorts/tCOAy3fnhjU" target="_blank" rel="noopener"><span class="yt" aria-hidden="true">▶</span>Watch the Short</a></div>
-    </div>
-  </div>
-
-  <div class="sdg">Soli Deo Gloria</div>
-</article>
-<nav class="footnav"><a href="./">&#8592;&nbsp;All devotions</a><a href="#top">Back to top&nbsp;&#8593;</a></nav>
-<footer class="site-foot">
-  <span class="l">Scripture quotations are from the <em>Holy Bible, New Living Translation</em>. Ellen G. White quotations are cited to book, page and paragraph.</span>
-  <span class="l">Videos: <a href="https://www.youtube.com/@icanstillbelieve" target="_blank" rel="noopener">I Can Still Believe on YouTube</a> · <a href="./">All devotions</a></span>
-  <span class="l small">Prepared by Dr. Davies Rene Segera · Free to read, and free to share with anyone.</span>
-</footer>
-<script>
-(function(){
-  var root=document.documentElement, lamp=document.getElementById('lamp');
-  try{ if(localStorage.getItem('devo-theme')==='night') root.setAttribute('data-theme','night'); }catch(e){}
-  if(lamp){ lamp.addEventListener('click',function(){
-    var on = root.getAttribute('data-theme')==='night';
-    if(on){ root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme','night'); }
-    try{ localStorage.setItem('devo-theme', on?'day':'night'); }catch(e){}
-  }); }
-  var bar=document.getElementById('prog');
-  function tick(){
-    var h=document.documentElement.scrollHeight-window.innerHeight;
-    bar.style.width=(h>0?Math.min(100,(window.scrollY/h)*100):0)+'%';
-  }
-  if(bar){ window.addEventListener('scroll',tick,{passive:true}); window.addEventListener('resize',tick); tick(); }
-  /* click-to-play YouTube: nothing from YouTube loads until the artwork is tapped */
-  document.querySelectorAll('.yt-short,.yt-wide').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      var f=document.createElement('iframe');
-      f.src='https://www.youtube-nocookie.com/embed/'+btn.getAttribute('data-id')+'?autoplay=1&rel=0&modestbranding=1&playsinline=1';
-      f.title=btn.getAttribute('aria-label');
-      f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-      f.setAttribute('allowfullscreen','');
-      btn.appendChild(f); btn.style.cursor='default';
-    },{once:true});
-  });
-})();
-</script>
-</body>
-</html>
+<!-- DEVOTION CONTENT END -->
+<section class="watch-section" id="watch"><h2>Watch this Bible story</h2><p>Reflect on the story in the accompanying Short from I Can Still Believe.</p><section class="reading-video"><h3>Has the Rooster Crowed in Your Life?</h3><div class="embed short"><iframe src="https://www.youtube-nocookie.com/embed/tCOAy3fnhjU?rel=0&amp;playsinline=1" title="Has the Rooster Crowed in Your Life?" width="315" height="560" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><p><a href="watch/when-peter-denied-jesus-short.html">Open the Short watch page</a> · <a href="https://www.youtube.com/watch?v=tCOAy3fnhjU" target="_blank" rel="noopener">Watch on YouTube</a></p></section></section>
+<div class="sdg">Soli Deo Gloria</div></article>
+<section class="wrap related"><h2>Continue your reflection</h2><div class="grid"><a class="card" href="when-god-raises-a-deliverer.html" data-find="When God Raises a Deliverer Judges 3 Ehud, and a people who cried out Read Judges 3 and reflect on Israel’s cry for help, God’s mercy, and the deliverance that calls His people back to Him. Hope &amp; encouragement Prayer Forgiveness &amp; grace"><span class="th"><img src="https://i.ytimg.com/vi/FjLT3w0dCxY/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="pl" aria-hidden="true"></span></span><span class="tx"><span class="passage">Judges 3<span class="mins"> · 7 min read</span></span><h3>When God Raises a Deliverer</h3><span class="card-summary">Read Judges 3 and reflect on Israel’s cry for help, God’s mercy, and the deliverance that calls His people back to Him.</span><span class="card-action">Read devotion · Short video</span></span></a><a class="card" href="remember-me.html" data-find="Remember Me Luke 23 The dying man who saw a King The dying man beside Jesus in Luke 23 turns to Him in faith. Reflect on mercy, salvation, and hope found in Christ. Forgiveness &amp; grace Hope &amp; encouragement Faith &amp; trust"><span class="th"><img src="https://i.ytimg.com/vi/hhBEy2FN0hg/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="pl" aria-hidden="true"></span></span><span class="tx"><span class="passage">Luke 23<span class="mins"> · 22 min read</span></span><h3>Remember Me</h3><span class="card-summary">The dying man beside Jesus in Luke 23 turns to Him in faith. Reflect on mercy, salvation, and hope found in Christ.</span><span class="card-action">Read devotion · Short video</span></span></a><a class="card" href="i-have-no-one.html" data-find="I Have No One John 5 Thirty-eight years at Bethesda Jesus meets a lonely man at Bethesda in John 5. Reflect on His compassion and the invitation to respond when hope feels distant. Hope &amp; encouragement Waiting on God Forgiveness &amp; grace"><span class="th"><img src="https://i.ytimg.com/vi/BVbA0D9fgco/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="pl" aria-hidden="true"></span></span><span class="tx"><span class="passage">John 5<span class="mins"> · 12 min read</span></span><h3>I Have No One</h3><span class="card-summary">Jesus meets a lonely man at Bethesda in John 5. Reflect on His compassion and the invitation to respond when hope feels distant.</span><span class="card-action">Read devotion · Short video</span></span></a></div><aside class="follow-panel"><h2>Make room for a daily devotion</h2><p>Return for new Bible reflections, or follow the devotions in your favourite feed reader. Watch the stories on I Can Still Believe.</p><div class="btns"><a class="btn indigo" href="follow.html">Follow new devotions</a><a class="btn ghost" href="https://www.youtube.com/@icanstillbelieve" target="_blank" rel="noopener">Visit the YouTube channel</a></div></aside></section></main>
+<footer class="site-foot"><nav aria-label="Footer navigation"><a href="index.html">All devotions</a><a href="topics.html">Browse topics</a><a href="videos.html">Watch videos</a><a href="follow.html">Follow new devotions</a><a href="about.html">About</a></nav>
+<span class="l">Scripture quotations are from the <em>Holy Bible, New Living Translation</em>. Ellen G. White quotations are cited to book, page and paragraph.</span>
+<span class="l">Videos: <a href="https://www.youtube.com/@icanstillbelieve" target="_blank" rel="noopener">I Can Still Believe on YouTube</a></span>
+<span class="l small">Prepared by Dr. Davies Rene Segera · Free to read, and free to share with anyone.</span></footer>
+</body></html>

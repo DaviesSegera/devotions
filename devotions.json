@@ -1,0 +1,808 @@
+{
+  "siteUrl": "https://daviessegera.github.io/devotions/",
+  "siteName": "A New Beginning",
+  "author": "Dr. Davies Rene Segera",
+  "youtubeChannel": "https://www.youtube.com/@icanstillbelieve",
+  "latest": "courage-in-the-storm",
+  "topics": [
+    {
+      "slug": "faith-and-trust",
+      "title": "Faith & trust",
+      "description": "Trust God when the way ahead is uncertain. Read Bible devotions about courage, doubt, and holding to His promises."
+    },
+    {
+      "slug": "prayer",
+      "title": "Prayer",
+      "description": "Bring your fears, questions, and gratitude to God. These devotions explore honest prayer and dependence on Him."
+    },
+    {
+      "slug": "hope-and-encouragement",
+      "title": "Hope & encouragement",
+      "description": "Find encouragement in accounts of people who met God in loss, loneliness, danger, and discouragement."
+    },
+    {
+      "slug": "forgiveness-and-grace",
+      "title": "Forgiveness & grace",
+      "description": "Reflect on the mercy of Jesus, the invitation to repent, and the grace that welcomes us back to God."
+    },
+    {
+      "slug": "wisdom-and-discernment",
+      "title": "Wisdom & discernment",
+      "description": "Learn from Scripture about listening well, testing what we hear, and making choices with humility."
+    },
+    {
+      "slug": "humility-and-obedience",
+      "title": "Humility & obedience",
+      "description": "Consider what it means to receive God’s Word, surrender pride, and follow Him in everyday decisions."
+    },
+    {
+      "slug": "love-and-service",
+      "title": "Love & service",
+      "description": "Explore practical compassion, generosity, peacemaking, and faith expressed through care for other people."
+    },
+    {
+      "slug": "waiting-on-god",
+      "title": "Waiting on God",
+      "description": "Read about patient faith when answers take time, circumstances remain difficult, or the next step is unclear."
+    }
+  ],
+  "devotions": [
+    {
+      "slug": "building-without-god",
+      "title": "Building Without God",
+      "passage": "Genesis 11",
+      "testament": "old",
+      "subject": "The tower on the plain of Shinar",
+      "readingMinutes": 6,
+      "keyVerse": "“Come, let’s build a great city for ourselves with a tower that reaches into the sky.”",
+      "keyVerseReference": "Genesis 11:4 (NLT)",
+      "summary": "Reflect on the tower of Babel in Genesis 11 and the difference between building a name for ourselves and trusting God.",
+      "topics": [
+        "humility-and-obedience",
+        "wisdom-and-discernment"
+      ],
+      "videos": [
+        {
+          "id": "nNTkAFPtTcQ",
+          "kind": "short",
+          "title": "When The Lord Came Down",
+          "uploadDate": "2026-08-25",
+          "uploadDateSource": "Channel Performance Index.md; YouTube Studio export recorded 2 September 2026"
+        }
+      ]
+    },
+    {
+      "slug": "do-not-trade-the-eternal-for-the-temporary",
+      "title": "Do Not Trade the Eternal for the Temporary",
+      "passage": "Genesis 25",
+      "testament": "old",
+      "subject": "Esau sells his birthright",
+      "readingMinutes": 7,
+      "keyVerse": "“Then Jacob gave Esau some bread and lentil stew. Esau ate the meal, then got up and left. He showed contempt for his rights as the firstborn.”",
+      "keyVerseReference": "Genesis 25:34 (NLT)",
+      "summary": "Esau’s birthright in Genesis 25 invites us to consider how today’s desires shape our choices and what we value most.",
+      "topics": [
+        "wisdom-and-discernment",
+        "humility-and-obedience"
+      ],
+      "videos": [
+        {
+          "id": "2Mrt02bogi4",
+          "kind": "short",
+          "title": "One Meal Cost Him Everything"
+        }
+      ]
+    },
+    {
+      "slug": "gods-promise-does-not-need-our-deception",
+      "title": "God’s Promise Does Not Need Our Deception",
+      "passage": "Genesis 27",
+      "testament": "old",
+      "subject": "Jacob and Rebekah deceive Isaac",
+      "readingMinutes": 7,
+      "keyVerse": "“But Isaac said, ‘Your brother was here, and he tricked me. He has taken away your blessing.’”",
+      "keyVerseReference": "Genesis 27:35 (NLT)",
+      "summary": "Jacob and Rebekah’s deception in Genesis 27 challenges us to trust God’s promises without trying to secure them through dishonesty.",
+      "topics": [
+        "faith-and-trust",
+        "humility-and-obedience",
+        "waiting-on-god"
+      ],
+      "videos": [
+        {
+          "id": "3GpzwT5GH4o",
+          "kind": "short",
+          "title": "He Used God's Name to Cover a Lie"
+        }
+      ]
+    },
+    {
+      "slug": "when-envy-takes-root",
+      "title": "When Envy Takes Root",
+      "passage": "Genesis 37",
+      "testament": "old",
+      "subject": "Joseph's brothers and the robe",
+      "readingMinutes": 10,
+      "keyVerse": "“But his brothers hated Joseph because their father loved him more than the rest of them. They couldn’t say a kind word to him.”",
+      "keyVerseReference": "Genesis 37:4 (NLT)",
+      "summary": "Joseph’s brothers in Genesis 37 reveal how envy harms relationships. Reflect on gratitude, honesty, and love within the family.",
+      "topics": [
+        "love-and-service",
+        "humility-and-obedience"
+      ],
+      "videos": [
+        {
+          "id": "QATFwlOuY2s",
+          "kind": "short",
+          "title": "Check Your Soil Today",
+          "uploadDate": "2026-08-27",
+          "uploadDateSource": "Channel Performance Index.md; YouTube Studio export recorded 2 September 2026"
+        }
+      ]
+    },
+    {
+      "slug": "whose-report-will-you-believe",
+      "title": "Whose Report Will You Believe?",
+      "passage": "Numbers 14",
+      "testament": "old",
+      "subject": "The twelve spies and the same land",
+      "readingMinutes": 20,
+      "keyVerse": "“And if the Lord is pleased with us, he will bring us safely into that land and give it to us. It is a rich land flowing with milk and honey. Do not rebel against the Lord, and don’t be afraid of the people of the land. They are only helpless prey to us! They have no protection, but the Lord is with us! Don’t be afraid of them!”",
+      "keyVerseReference": "Numbers 14:8–9 (NLT)",
+      "summary": "The twelve spies saw the same land. Reflect on Numbers 13–14 and the courage to trust God when fear shapes the story.",
+      "topics": [
+        "faith-and-trust",
+        "hope-and-encouragement"
+      ],
+      "videos": [
+        {
+          "id": "6YYVS-59_Ac",
+          "kind": "short",
+          "title": "Faith Sees God, Not Giants",
+          "uploadDate": "2026-09-01",
+          "uploadDateSource": "Channel Performance Index.md; YouTube Studio export recorded 2 September 2026"
+        }
+      ]
+    },
+    {
+      "slug": "when-discontent-becomes-rebellion",
+      "title": "When Discontent Becomes Rebellion",
+      "passage": "Numbers 16",
+      "testament": "old",
+      "subject": "Korah, Dathan and Abiram",
+      "readingMinutes": 6,
+      "keyVerse": "“Does it seem insignificant to you that the God of Israel has chosen you from among all the community of Israel to be near him so you can serve in the Lord’s Tabernacle and stand before the people to minister to them? Korah, he has already given this special ministry to you and your fellow Levites. Are you now demanding the priesthood as well?”",
+      "keyVerseReference": "Numbers 16:9–10 (NLT)",
+      "summary": "Korah’s rebellion in Numbers 16 invites reflection on pride, gratitude, and serving faithfully in the place God has given us.",
+      "topics": [
+        "humility-and-obedience",
+        "love-and-service"
+      ],
+      "videos": [
+        {
+          "id": "33R2In5LgbM",
+          "kind": "short",
+          "title": "Chosen, Yet Yearning for More"
+        }
+      ]
+    },
+    {
+      "slug": "faith-that-keeps-marching",
+      "title": "Faith That Keeps Marching",
+      "passage": "Hebrews 11",
+      "testament": "old",
+      "subject": "Six silent days around Jericho",
+      "readingMinutes": 16,
+      "keyVerse": "“It was by faith that the people of Israel marched around Jericho for seven days, and the walls came crashing down.”",
+      "keyVerseReference": "Hebrews 11:30 (NLT)",
+      "summary": "The fall of Jericho in Joshua 6 encourages patient obedience and trust in God before we can see the outcome.",
+      "topics": [
+        "faith-and-trust",
+        "waiting-on-god",
+        "humility-and-obedience"
+      ],
+      "videos": [
+        {
+          "id": "lRXe0YyXgI0",
+          "kind": "short",
+          "title": "Six Days And The Wall Still Stood",
+          "uploadDate": "2026-09-02",
+          "uploadDateSource": "Channel Performance Index.md; YouTube Studio export recorded 2 September 2026"
+        }
+      ]
+    },
+    {
+      "slug": "when-god-raises-a-deliverer",
+      "title": "When God Raises a Deliverer",
+      "passage": "Judges 3",
+      "testament": "old",
+      "subject": "Ehud, and a people who cried out",
+      "readingMinutes": 7,
+      "keyVerse": "“The Lord again raised up a rescuer to save them.”",
+      "keyVerseReference": "Judges 3:15 (NLT, excerpt)",
+      "summary": "Read Judges 3 and reflect on Israel’s cry for help, God’s mercy, and the deliverance that calls His people back to Him.",
+      "topics": [
+        "hope-and-encouragement",
+        "prayer",
+        "forgiveness-and-grace"
+      ],
+      "videos": [
+        {
+          "id": "FjLT3w0dCxY",
+          "kind": "short",
+          "title": "They Turned From God Many Times—Yet He Still Sent a Rescuer"
+        }
+      ]
+    },
+    {
+      "slug": "when-empty-becomes-full",
+      "title": "When Empty Becomes Full",
+      "passage": "Ruth 1",
+      "testament": "old",
+      "subject": "Naomi returns, and Ruth goes with her",
+      "readingMinutes": 21,
+      "keyVerse": "“I went away full, but the LORD has brought me home empty. Why call me Naomi when the LORD has caused me to suffer and the Almighty has sent such tragedy upon me?”",
+      "keyVerseReference": "Ruth 1:21 (NLT)",
+      "summary": "Walk with Naomi and Ruth through grief, loyal love, and unexpected provision. A devotion on finding hope when life feels empty.",
+      "topics": [
+        "hope-and-encouragement",
+        "waiting-on-god",
+        "love-and-service"
+      ],
+      "videos": [
+        {
+          "id": "7uTN0Gd58aY",
+          "kind": "short",
+          "title": "The Answer Was Standing Beside Her",
+          "uploadDate": "2026-08-28",
+          "uploadDateSource": "Channel Performance Index.md; YouTube Studio export recorded 2 September 2026"
+        },
+        {
+          "id": "B73HyukztqI",
+          "kind": "film",
+          "title": "Naomi Thought Her Story Was Over",
+          "uploadDate": "2026-08-29",
+          "uploadDateSource": "Channel Performance Index.md; YouTube Studio export recorded 2 September 2026"
+        }
+      ]
+    },
+    {
+      "slug": "fight-on-your-knees",
+      "title": "Fight on Your Knees",
+      "passage": "1 Samuel 1",
+      "testament": "old",
+      "subject": "Hannah, taunted year after year",
+      "readingMinutes": 14,
+      "keyVerse": "“Hannah was in deep anguish, crying bitterly as she prayed to the LORD.”",
+      "keyVerseReference": "1 Samuel 1:10 (NLT)",
+      "summary": "Hannah’s prayer in 1 Samuel 1 shows us how to bring deep anguish honestly to God and entrust our burdens to Him.",
+      "topics": [
+        "prayer",
+        "waiting-on-god",
+        "hope-and-encouragement"
+      ],
+      "videos": [
+        {
+          "id": "HX6aDgACqlo",
+          "kind": "short",
+          "title": "A Battle Fought Without Fighting Back",
+          "uploadDate": "2026-08-27",
+          "uploadDateSource": "Channel Performance Index.md; YouTube Studio export recorded 2 September 2026"
+        }
+      ]
+    },
+    {
+      "slug": "anointed-but-not-yet-appointed",
+      "title": "Anointed, But Not Yet Appointed",
+      "passage": "1 Samuel 16",
+      "testament": "old",
+      "subject": "David, the oil and the long wait",
+      "readingMinutes": 23,
+      "keyVerse": "“So as David stood there among his brothers, Samuel took the flask of olive oil he had brought and anointed David with the oil. And the Spirit of the LORD came powerfully upon David from that day on.”",
+      "keyVerseReference": "1 Samuel 16:13 (NLT)",
+      "summary": "David’s anointing in 1 Samuel 16 begins a long wait. Reflect on God’s timing, faithful service, and trust in unfinished seasons.",
+      "topics": [
+        "waiting-on-god",
+        "faith-and-trust",
+        "humility-and-obedience"
+      ],
+      "videos": [
+        {
+          "id": "Qqguyxa49VA",
+          "kind": "short",
+          "title": "Are You Allowing God To Fulfill It?",
+          "uploadDate": "2026-08-29",
+          "uploadDateSource": "Channel Performance Index.md; YouTube Studio export recorded 2 September 2026"
+        }
+      ]
+    },
+    {
+      "slug": "when-god-sends-a-peacemaker",
+      "title": "When God Sends a Peacemaker",
+      "passage": "1 Samuel 25",
+      "testament": "old",
+      "subject": "Abigail rides out to meet David",
+      "readingMinutes": 7,
+      "keyVerse": "“Praise the Lord, the God of Israel, who has sent you to meet me today!”",
+      "keyVerseReference": "1 Samuel 25:32 (NLT, excerpt)",
+      "summary": "Abigail’s courage in 1 Samuel 25 shows how wise words and humble action can interrupt anger and make room for peace.",
+      "topics": [
+        "love-and-service",
+        "wisdom-and-discernment",
+        "humility-and-obedience"
+      ],
+      "videos": [
+        {
+          "id": "D8oFvwGntVU",
+          "kind": "short",
+          "title": "400 Swords Came for Revenge - One Woman Stopped Them"
+        }
+      ]
+    },
+    {
+      "slug": "an-understanding-heart",
+      "title": "An Understanding Heart",
+      "passage": "1 Kings 3",
+      "testament": "old",
+      "subject": "Solomon asks, and two mothers come",
+      "readingMinutes": 8,
+      "keyVerse": "“Give me an understanding heart so that I can govern your people well and know the difference between right and wrong.”",
+      "keyVerseReference": "1 Kings 3:9 (NLT, excerpt)",
+      "summary": "Solomon asks for wisdom in 1 Kings 3. Reflect on listening to God, discerning what is right, and caring for the people entrusted to us.",
+      "topics": [
+        "wisdom-and-discernment",
+        "prayer",
+        "love-and-service"
+      ],
+      "videos": [
+        {
+          "id": "t_LnKXsP8Jc",
+          "kind": "short",
+          "title": "Both Claimed the Child—One Wanted Him Alive"
+        }
+      ]
+    },
+    {
+      "slug": "when-another-voice-contradicts-god",
+      "title": "When Another Voice Contradicts God",
+      "passage": "1 Kings 13",
+      "testament": "old",
+      "subject": "The man of God from Judah",
+      "readingMinutes": 7,
+      "keyVerse": "“But the man of God said to the king, ‘Even if you gave me half of everything you own, I would not go with you. I would not eat or drink anything in this place. For the Lord gave me this command: You must not eat or drink anything while you are there, and do not return to Judah by the same way you came.’”",
+      "keyVerseReference": "1 Kings 13:8–9 (NLT)",
+      "summary": "The man of God in 1 Kings 13 reminds us to test persuasive voices against what God has said and remain faithful to His Word.",
+      "topics": [
+        "wisdom-and-discernment",
+        "humility-and-obedience"
+      ],
+      "videos": [
+        {
+          "id": "M-MUDQxc0_4",
+          "kind": "short",
+          "title": "He Stood Up to a King—Then Believed a Lie"
+        }
+      ]
+    },
+    {
+      "slug": "when-enough-is-not-enough",
+      "title": "When Enough Is Not Enough",
+      "passage": "1 Kings 21",
+      "testament": "old",
+      "subject": "Ahab, Naboth and one vineyard",
+      "readingMinutes": 6,
+      "keyVerse": "“So Ahab went home angry and sullen because of Naboth’s answer. The king went to bed with his face to the wall and refused to eat!”",
+      "keyVerseReference": "1 Kings 21:4 (NLT)",
+      "summary": "Ahab and Naboth’s vineyard in 1 Kings 21 expose the danger of coveting. Reflect on contentment, justice, and the desires we nurture.",
+      "topics": [
+        "humility-and-obedience",
+        "wisdom-and-discernment"
+      ],
+      "videos": [
+        {
+          "id": "yu7But8bBEU",
+          "kind": "short",
+          "title": "Ahab Had a Kingdom - Yet He Was Miserable"
+        }
+      ]
+    },
+    {
+      "slug": "god-sees-your-generosity",
+      "title": "God Sees Your Generosity",
+      "passage": "2 Kings 4",
+      "testament": "old",
+      "subject": "The Shunammite builds a room",
+      "readingMinutes": 6,
+      "keyVerse": "“We appreciate the kind concern you have shown us. What can we do for you?”",
+      "keyVerseReference": "2 Kings 4:13 (NLT)",
+      "summary": "The Shunammite woman’s hospitality in 2 Kings 4 invites us to practise thoughtful generosity and care without seeking recognition.",
+      "topics": [
+        "love-and-service",
+        "faith-and-trust"
+      ],
+      "videos": [
+        {
+          "id": "kpa50j8iM4g",
+          "kind": "short",
+          "title": "Blessed Is The Hand That Gives",
+          "uploadDate": "2026-08-26",
+          "uploadDateSource": "Channel Performance Index.md; YouTube Studio export recorded 2 September 2026"
+        }
+      ]
+    },
+    {
+      "slug": "when-pride-bows-to-the-word-of-god",
+      "title": "When Pride Bows to the Word of God",
+      "passage": "2 Kings 5",
+      "testament": "old",
+      "subject": "Naaman at the Jordan",
+      "readingMinutes": 20,
+      "keyVerse": "“Sir, if the prophet had told you to do something very difficult … So Naaman went down … and dipped himself seven times …”",
+      "keyVerseReference": "2 Kings 5:13–14 (NLT)",
+      "summary": "Naaman’s encounter with God’s word in 2 Kings 5 invites us to lay down pride and receive grace with humble faith.",
+      "topics": [
+        "humility-and-obedience",
+        "forgiveness-and-grace",
+        "faith-and-trust"
+      ],
+      "videos": [
+        {
+          "id": "McNEce0QrLA",
+          "kind": "short",
+          "title": "When Help Comes From the Unexpected",
+          "uploadDate": "2026-08-31",
+          "uploadDateSource": "Channel Performance Index.md; YouTube Studio export recorded 2 September 2026"
+        }
+      ]
+    },
+    {
+      "slug": "theres-more-with-you-than-against-you",
+      "title": "There’s More With You Than Against You",
+      "passage": "2 Kings 6",
+      "testament": "old",
+      "subject": "Elisha's servant at Dothan",
+      "readingMinutes": 8,
+      "keyVerse": "“Don’t be afraid!” Elisha told him. “For there are more on our side than on theirs!”",
+      "keyVerseReference": "2 Kings 6:16 (NLT)",
+      "summary": "Elisha’s servant in 2 Kings 6 learns to see beyond fear. Reflect on prayer, God’s presence, and courage when you feel outnumbered.",
+      "topics": [
+        "faith-and-trust",
+        "hope-and-encouragement",
+        "prayer"
+      ],
+      "videos": [
+        {
+          "id": "Od3Yp4tcK34",
+          "kind": "short",
+          "title": "When The Count Is Against Us",
+          "uploadDate": "2026-08-26",
+          "uploadDateSource": "Channel Performance Index.md; YouTube Studio export recorded 2 September 2026"
+        }
+      ]
+    },
+    {
+      "slug": "when-hezekiah-turned-his-face-to-the-wall",
+      "title": "When Hezekiah Turned His Face to the Wall",
+      "passage": "2 Kings 20",
+      "testament": "old",
+      "subject": "A king told he would die",
+      "readingMinutes": 7,
+      "keyVerse": "“When Hezekiah heard this, he turned his face to the wall and prayed to the Lord.”",
+      "keyVerseReference": "2 Kings 20:2 (NLT)",
+      "summary": "Hezekiah turns to God in 2 Kings 20. Reflect on honest prayer, dependence, and bringing frightening news into God’s presence.",
+      "topics": [
+        "prayer",
+        "hope-and-encouragement"
+      ],
+      "videos": [
+        {
+          "id": "nWv57ALjJNQ",
+          "kind": "short",
+          "title": "A Death Sentence Reversed in the Courtyard"
+        }
+      ]
+    },
+    {
+      "slug": "can-these-bones-live",
+      "title": "Can These Bones Live?",
+      "passage": "Ezekiel 37",
+      "testament": "old",
+      "subject": "The valley of dry bones",
+      "readingMinutes": 24,
+      "keyVerse": "“Son of man, can these bones become living people again?” “O Sovereign Lord,” I replied, “you alone know the answer to that.”",
+      "keyVerseReference": "Ezekiel 37:3 (NLT)",
+      "summary": "Ezekiel 37 speaks hope into despair. Reflect on God’s Word, the life His Spirit gives, and renewal that we cannot create ourselves.",
+      "topics": [
+        "hope-and-encouragement",
+        "faith-and-trust"
+      ],
+      "videos": [
+        {
+          "id": "Ab9kTRTNW9E",
+          "kind": "short",
+          "title": "They Looked Alive… But Weren’t"
+        },
+        {
+          "id": "A3yoxnVobxs",
+          "kind": "film",
+          "title": "The Bones Came Together. Still No Breath. | Ezekiel 37"
+        }
+      ]
+    },
+    {
+      "slug": "faith-that-will-not-bow",
+      "title": "Faith That Will Not Bow",
+      "passage": "Daniel 3",
+      "testament": "old",
+      "subject": "Three men and the blazing furnace",
+      "readingMinutes": 19,
+      "keyVerse": "“If we are thrown into the blazing furnace, the God whom we serve is able to save us. He will rescue us from your power, Your Majesty. But even if he doesn’t, we want to make it clear to you, Your Majesty, that we will never serve your gods or worship the gold statue you have set up.”",
+      "keyVerseReference": "Daniel 3:17–18 (NLT)",
+      "summary": "The three men in Daniel 3 choose faithfulness in the furnace. Reflect on trusting God even when the outcome is uncertain.",
+      "topics": [
+        "faith-and-trust",
+        "humility-and-obedience"
+      ],
+      "videos": [
+        {
+          "id": "q-1jYubYUVU",
+          "kind": "short",
+          "title": "They Chose The Furnace"
+        }
+      ]
+    },
+    {
+      "slug": "daniel-prayed-anyway",
+      "title": "Daniel Prayed Anyway",
+      "passage": "Daniel 6",
+      "testament": "old",
+      "subject": "A decree against prayer",
+      "readingMinutes": 24,
+      "keyVerse": "“But when Daniel learned that the law had been signed, he went home and knelt down as usual in his upstairs room, with its windows open toward Jerusalem. He prayed three times a day, just as he had always done, giving thanks to his God.”",
+      "keyVerseReference": "Daniel 6:10 (NLT)",
+      "summary": "Daniel 6 reveals a life rooted in daily prayer. Reflect on faithful habits, courage, and trusting God under pressure.",
+      "topics": [
+        "prayer",
+        "faith-and-trust",
+        "humility-and-obedience"
+      ],
+      "videos": [
+        {
+          "id": "VIzl1sZ_ic0",
+          "kind": "short",
+          "title": "His Only “Crime” Was Prayer"
+        }
+      ]
+    },
+    {
+      "slug": "when-jesus-saw-their-faith",
+      "title": "When Jesus Saw Their Faith",
+      "passage": "Mark 2",
+      "testament": "new",
+      "subject": "Four friends open a roof",
+      "readingMinutes": 17,
+      "keyVerse": "“Seeing their faith, Jesus said to the paralyzed man, ‘My child, your sins are forgiven.’”",
+      "keyVerseReference": "Mark 2:5 (NLT)",
+      "summary": "Four friends bring a paralysed man to Jesus in Mark 2. Reflect on persistent faith, forgiveness, and carrying one another’s burdens.",
+      "topics": [
+        "faith-and-trust",
+        "love-and-service",
+        "forgiveness-and-grace"
+      ],
+      "videos": [
+        {
+          "id": "U6SclWGHOlw",
+          "kind": "short",
+          "title": "Faith That Opened a Roof",
+          "uploadDate": "2026-08-28",
+          "uploadDateSource": "Channel Performance Index.md; YouTube Studio export recorded 2 September 2026"
+        }
+      ]
+    },
+    {
+      "slug": "when-peter-denied-jesus",
+      "title": "When Peter Denied Jesus",
+      "passage": "Luke 22",
+      "testament": "new",
+      "subject": "The promise, the fire and the look",
+      "readingMinutes": 7,
+      "keyVerse": "“But I have pleaded in prayer for you, Simon, that your faith should not fail.”",
+      "keyVerseReference": "Luke 22:32 (NLT, excerpt)",
+      "summary": "Peter’s denial in Luke 22 invites honest reflection on failure, repentance, and the grace of Jesus that calls us back.",
+      "topics": [
+        "forgiveness-and-grace",
+        "hope-and-encouragement"
+      ],
+      "videos": [
+        {
+          "id": "tCOAy3fnhjU",
+          "kind": "short",
+          "title": "Has the Rooster Crowed in Your Life?"
+        }
+      ]
+    },
+    {
+      "slug": "remember-me",
+      "title": "Remember Me",
+      "passage": "Luke 23",
+      "testament": "new",
+      "subject": "The dying man who saw a King",
+      "readingMinutes": 22,
+      "keyVerse": "“Jesus, remember me when you come into your Kingdom.”",
+      "keyVerseReference": "Luke 23:42 (NLT)",
+      "summary": "The dying man beside Jesus in Luke 23 turns to Him in faith. Reflect on mercy, salvation, and hope found in Christ.",
+      "topics": [
+        "forgiveness-and-grace",
+        "hope-and-encouragement",
+        "faith-and-trust"
+      ],
+      "videos": [
+        {
+          "id": "hhBEy2FN0hg",
+          "kind": "short",
+          "title": "They Saw a Criminal—He Saw a King"
+        }
+      ]
+    },
+    {
+      "slug": "when-jesus-walks-with-us-unrecognized",
+      "title": "When Jesus Walks With Us Unrecognized",
+      "passage": "Luke 24",
+      "testament": "new",
+      "subject": "The road to Emmaus",
+      "readingMinutes": 8,
+      "keyVerse": "“As they talked and discussed these things, Jesus himself suddenly came and began walking with them. But God kept them from recognizing him.”",
+      "keyVerseReference": "Luke 24:15–16 (NLT)",
+      "summary": "On the road to Emmaus in Luke 24, Jesus meets discouraged disciples. Reflect on Scripture, hope, and His presence in our confusion.",
+      "topics": [
+        "hope-and-encouragement",
+        "faith-and-trust",
+        "wisdom-and-discernment"
+      ],
+      "videos": [
+        {
+          "id": "QtNHg97gtjA",
+          "kind": "short",
+          "title": "When You Can’t See Jesus—But He’s Still There"
+        }
+      ]
+    },
+    {
+      "slug": "i-have-no-one",
+      "title": "I Have No One",
+      "passage": "John 5",
+      "testament": "new",
+      "subject": "Thirty-eight years at Bethesda",
+      "readingMinutes": 12,
+      "keyVerse": "“When Jesus saw him and knew he had been ill for a long time, he asked him, ‘Would you like to get well?’”",
+      "keyVerseReference": "John 5:6 (NLT)",
+      "summary": "Jesus meets a lonely man at Bethesda in John 5. Reflect on His compassion and the invitation to respond when hope feels distant.",
+      "topics": [
+        "hope-and-encouragement",
+        "waiting-on-god",
+        "forgiveness-and-grace"
+      ],
+      "videos": [
+        {
+          "id": "BVbA0D9fgco",
+          "kind": "short",
+          "title": "A Waiting Room Without A Doctor",
+          "uploadDate": "2026-08-27",
+          "uploadDateSource": "Channel Performance Index.md; YouTube Studio export recorded 2 September 2026"
+        }
+      ]
+    },
+    {
+      "slug": "when-thomas-doubted",
+      "title": "When Thomas Doubted",
+      "passage": "John 20",
+      "testament": "new",
+      "subject": "Proof on his own terms",
+      "readingMinutes": 7,
+      "keyVerse": "“Blessed are those who believe without seeing me.”",
+      "keyVerseReference": "John 20:29 (NLT, excerpt)",
+      "summary": "Jesus meets Thomas in John 20. Reflect on honest questions, the testimony of Scripture, and learning to trust the risen Christ.",
+      "topics": [
+        "faith-and-trust",
+        "forgiveness-and-grace"
+      ],
+      "videos": [
+        {
+          "id": "YPvEcqw3PT0",
+          "kind": "short",
+          "title": "He Demanded Proof. The Answer Had Wounds."
+        }
+      ]
+    },
+    {
+      "slug": "a-life-that-left-evidence",
+      "title": "A Life That Left Evidence",
+      "passage": "Acts 9",
+      "testament": "new",
+      "subject": "Dorcas, and the coats she had made",
+      "readingMinutes": 6,
+      "keyVerse": "“There was a believer in Joppa named Tabitha (which in Greek is Dorcas). She was always doing kind things for others and helping the poor.”",
+      "keyVerseReference": "Acts 9:36 (NLT)",
+      "summary": "Tabitha’s life in Acts 9 shows faith through practical kindness. Reflect on generosity, service, and the people our love reaches.",
+      "topics": [
+        "love-and-service",
+        "hope-and-encouragement"
+      ],
+      "videos": [
+        {
+          "id": "w7vQt4uaTEc",
+          "kind": "short",
+          "title": "A Life That Left Evidence"
+        }
+      ]
+    },
+    {
+      "slug": "praise-in-the-midnight",
+      "title": "Praise in the Midnight",
+      "passage": "Acts 16",
+      "testament": "new",
+      "subject": "Paul and Silas sing in the stocks",
+      "readingMinutes": 20,
+      "keyVerse": "“Around midnight Paul and Silas were praying and singing hymns to God, and the other prisoners were listening.”",
+      "keyVerseReference": "Acts 16:25 (NLT)",
+      "summary": "Paul and Silas pray and sing in Acts 16. Reflect on worship in suffering, faithful witness, and care for others in the dark.",
+      "topics": [
+        "prayer",
+        "hope-and-encouragement",
+        "faith-and-trust"
+      ],
+      "videos": [
+        {
+          "id": "eEwJBA16fac",
+          "kind": "short",
+          "title": "A Prison Break Nobody Took"
+        }
+      ]
+    },
+    {
+      "slug": "search-the-scriptures",
+      "title": "Search the Scriptures",
+      "passage": "Acts 17",
+      "testament": "new",
+      "subject": "The Bereans search day after day",
+      "readingMinutes": 20,
+      "keyVerse": "“And the people of Berea were more open-minded than those in Thessalonica, and they listened eagerly to Paul’s message. They searched the Scriptures day after day to see if Paul and Silas were teaching the truth.”",
+      "keyVerseReference": "Acts 17:11 (NLT)",
+      "summary": "The Bereans in Acts 17 welcome the message and examine Scripture. Reflect on a faith that listens carefully and tests what it hears.",
+      "topics": [
+        "wisdom-and-discernment",
+        "faith-and-trust"
+      ],
+      "videos": [
+        {
+          "id": "g8N8Hm30qrI",
+          "kind": "short",
+          "title": "Eager Hearts Search Scripture"
+        }
+      ]
+    },
+    {
+      "slug": "courage-in-the-storm",
+      "title": "Courage in the Storm",
+      "passage": "Acts 27",
+      "testament": "new",
+      "subject": "Fourteen nights without sun or stars",
+      "readingMinutes": 6,
+      "keyVerse": "“So take courage! For I believe God. It will be just as he said.”",
+      "keyVerseReference": "Acts 27:25 (NLT)",
+      "summary": "Paul’s voyage in Acts 27 offers encouragement for uncertain times: trust God’s promises and bring practical hope to the people beside you.",
+      "topics": [
+        "hope-and-encouragement",
+        "faith-and-trust",
+        "love-and-service"
+      ],
+      "videos": [
+        {
+          "id": "uTmbPjT8mn4",
+          "kind": "short",
+          "title": "All Hope Was Gone - Then He Stood Up"
+        }
+      ]
+    }
+  ]
+}

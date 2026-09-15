@@ -1,56 +1,104 @@
-# A New Beginning — Daily Devotions
+# A New Beginning — Daily Christian Devotions
 
-Devotions from the Word of God, read alongside the writings of Ellen G. White.
-Scripture is quoted from the New Living Translation.
+[Read the devotions](https://daviessegera.github.io/devotions/)
 
-### 📖 Read them here → **https://daviessegera.github.io/devotions/**
+Bible devotions prepared by Dr. Davies Rene Segera, with reflections alongside
+Ellen G. White’s writings and videos from **I Can Still Believe**.
+Scripture quotations are from the New Living Translation.
 
----
+## What readers can do
 
-## What is in this repository
+- Read each complete devotion, its key takeaways, and sources.
+- Browse by Bible passage or eight spiritual topics; search by topic, title, or person.
+- Continue with related readings.
+- Watch each Short or full film on its own page, or beneath the devotion.
+- Share a devotion, bookmark the homepage, or follow new posts using its RSS feed.
 
-Thirty-two devotions, each a single self-contained page, plus the index that lists them.
+## Daily publishing: desktop, then commit
 
-Every devotion page ends with a **Watch it** panel: the Short's own artwork as a
-click-to-play player (nothing from YouTube loads until it is tapped), the video's
-title as it appears on the channel, and buttons that open it in the YouTube app.
-The two devotions that also have a long film show the film beneath the Short.
-The index leads with the latest devotion and lists every devotion with its
-artwork. A night-reading mode (the moon button in the top bar) is remembered
-across the whole site.
+The website remains plain HTML on GitHub Pages. There is no package installation,
+paid service, database, or new hosting account. Node.js 18 or newer is only needed
+on the desktop to run the update helper; visitors do not need it.
 
-Pages are named after the devotion, in lower case with hyphens — for example
-`remember-me.html`, `when-thomas-doubted.html`. The index at `index.html` groups
-them by testament and orders them by the book of the Bible the account comes from,
-with a search box for finding one by title, person or passage.
+### Editing an existing devotion
 
-## Adding a new devotion
+1. Edit its `.html` page **between** `DEVOTION CONTENT START` and
+   `DEVOTION CONTENT END`. These markers surround the Scripture, original
+   reflection, takeaways, and sources. Leave the markers in place.
+2. If the title, summary, topics, passage, reading time, or video changed, update
+   that devotion’s entry in `devotions.json` as well.
+3. Double-click **Update website.cmd**. It updates the website and checks it.
+4. Commit **all** changes in this folder, including `assets`, `topics`, `watch`,
+   the XML files, and `devotions.json`, using your normal GitHub workflow.
 
-1. Copy the new reading page into this repository, renamed to lower case with
-   hyphens and no apostrophes — `when-god-sends-a-peacemaker.html`, not
-   `when-god-sends-a-peacemaker-reading.html`.
-2. Give it the site's frame: copy the `<head>` styles, the top bar, the hero band
-   and the footer from any existing page, keeping the new devotion's own content
-   between `<section class="verse-card">` and the Sources paragraph.
-3. Build its Watch it panel by copying an existing `<div class="watch">` block and
-   changing the YouTube video ID (it appears three times: `data-id`, the artwork
-   URL and the button link) and the video's title.
-4. Add a card for it in `index.html`, in the right testament section and in
-   biblical order. Copy an existing card and change the link, the video ID in the
-   artwork URL, the passage, the title, the subject line, the key verse and its
-   reference. Update the `data-find` attribute too, since that is what the search
-   box reads. Move the "Latest devotion" block to the new devotion.
-5. Change the count in the standfirst and in the search box's caption if the
-   total is no longer thirty-two.
+When publishing this folder as the repository root, its `index.html` must be at
+the root of the repository, as before. Do not add an extra `github-site` level
+inside the repository.
 
-GitHub Pages rebuilds the site automatically, usually within a minute. The address
-never changes, so links already shared with the church keep working.
+### Adding a new devotion
 
-## Sharing
+1. Copy an existing devotion page to a new stable filename such as
+   `trusting-god-in-the-wait.html`.
+2. Replace the authored content between the two markers with the new devotion,
+   keeping the existing content classes for styling.
+3. Add an entry in `devotions.json`, using a current entry as the example.
+   Supply its unique slug (filename without `.html`), title, Bible passage,
+   subject, testament (`old` or `new`), reading time, key verse/reference,
+   a short original summary, topic slugs, and verified YouTube IDs/titles.
+   Put the entry in biblical order among the existing entries.
+4. Set the top-level `latest` value to the new slug. If you know the actual
+   website publication date, add `publishedDate` as `YYYY-MM-DD` to the entry.
+5. For each video, set `kind` to `short` or `film`. Add `uploadDate` and
+   `uploadDateSource` only when the actual public YouTube date is verified.
+   Omit these fields if unknown. File creation and editing dates are not
+   publication dates. A YouTube page URL is not an MP4 content URL.
+6. Double-click **Update website.cmd**, review the result, and commit all changes.
 
-The address can be sent to the church WhatsApp group as it is. A single devotion
-can be shared on its own — every page stands alone and needs nothing else to
-display correctly.
+The helper automatically updates the homepage, topic collections, related
+readings, watch pages, search information, sitemap, video sitemap, and feed.
+Do not edit those generated pages by hand; the next update rebuilds them.
+Your devotion content inside the markers is preserved exactly.
+
+If working with an assistant, this request is sufficient:
+
+> Add my new devotion and its verified YouTube video to github-site. Keep its
+> Scripture, reflection, takeaways, and sources intact. Update devotions.json,
+> select relevant existing topics, set the latest devotion, then run the update
+> helper and validation before I commit. Do not invent publication dates.
+
+### Commands, if preferred
+
+```text
+node tools/update-site.cjs
+node tools/validate-site.cjs
+```
+
+`node tools/update-site.cjs --check` checks generated pages without writing files.
+New unregistered `.html` files are reported so they cannot silently be omitted
+from the sitemap.
+
+### Design and functionality
+
+- `assets/base.css`: original shared visual design.
+- `assets/discover.css`: topic browsing, watch pages, and reading additions.
+- `assets/theme.js`: restores night reading before the page renders.
+- `assets/site.js`: night mode, reading progress, search, and sharing.
+- `tools/update-site.cjs`: generates the website from the catalog and authored pages.
+- `tools/validate-site.cjs`: checks routes, metadata, video information, and generation.
+
+Existing devotion URLs are unchanged. Links already shared continue to work.
+Historical dates that were not known were left unspecified. Video structured
+data is emitted only when its required upload date has a documented source;
+the video sitemap includes all watch pages regardless.
+
+The RSS feed contains stable entry links and summaries, with the latest devotion
+first. It does not invent a chronological order for undated historical readings.
+
+## Search visibility and measurement
+
+Follow [SEARCH-CONSOLE.md](SEARCH-CONSOLE.md) once the changes are live. Search
+Console checks which pages Google has indexed and which searches bring readers.
+No analytics account or tracking ID has been configured.
 
 ## Licence and use
 
