@@ -77,7 +77,7 @@ ${config.googleSiteVerification?`<meta name="google-site-verification" content="
 <script src="${prefix}assets/theme.js"></script>
 <script type="application/ld+json">${json({'@context':'https://schema.org','@graph':schemas})}</script>
 <script src="${prefix}assets/site.js" defer></script>${options.community?`
-<script src="${prefix}assets/firebase-config.js" defer></script>
+<script src="${prefix}assets/firebase-config.js?v=a-new-beginning-devotions" defer></script>
 <script src="${prefix}assets/community.js" defer></script>`:''}
 </head>
 <body id="top">
