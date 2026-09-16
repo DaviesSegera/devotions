@@ -1,5 +1,5 @@
 /* Firebase settings for the Amen button and reader messages.
-   Replace the five PASTE-… values below with the ones from your own Firebase
+   Replace the six PASTE-… values below with the ones from your own Firebase
    project. Step-by-step instructions are in SETUP-COMMENTS.md.
 
    Until they are replaced, the Amen button and the message form stay hidden and

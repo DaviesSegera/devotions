@@ -62,8 +62,8 @@ On the **Sign-in method** tab, enable two providers:
 
 - **Anonymous.** This is how a reader gets an identity without making an
   account. They type a name and a message, nothing more. Firebase quietly gives
-  their browser a private identifier so the rules can say "one Amen each" and so
-  you can block a nuisance later.
+  their browser a private identifier so the rules can say "one Amen each" and
+  "one waiting message per devotion".
 - **Google.** This is for you alone, to open the moderation page.
 
 Then go to the **Settings** tab, find **Authorised domains**, and add:

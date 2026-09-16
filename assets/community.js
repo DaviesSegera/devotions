@@ -84,7 +84,11 @@
 
     var user = null;
     try {
-      user = (await authMod.signInAnonymously(auth)).user;
+      // Keep an existing Google sign-in intact (the site owner may have signed
+      // in on the moderation page). Only create an anonymous visitor when this
+      // browser has no Firebase identity yet.
+      await auth.authStateReady();
+      user = auth.currentUser || (await authMod.signInAnonymously(auth)).user;
     } catch (error) {
       console.warn('Anonymous sign-in unavailable:', error && error.message);
     }
@@ -121,7 +125,10 @@
       say('');
 
       try {
-        await fs.addDoc(fs.collection(db, 'pending'), {
+        // A stable document ID lets the security rules enforce one waiting
+        // message per reader on this devotion. After it is moderated, the
+        // reader may send another.
+        await fs.setDoc(fs.doc(db, 'pending', slug + '_' + user.uid), {
           slug: slug,
           name: name,
           body: body,
@@ -134,7 +141,7 @@
         say('Thank you. Your message has been sent, and will appear here once it has been read.', 'good');
       } catch (error) {
         console.warn('Message not sent:', error && error.message);
-        say('Your message could not be sent just now. Please try again in a moment.', 'bad');
+        say('Your message could not be sent. If you already have one waiting for this devotion, please wait until it has been read.', 'bad');
       } finally {
         sending = false;
         if (submit) { submit.disabled = false; submit.textContent = 'Send your message'; }

@@ -3,7 +3,7 @@ rules_version = '2';
 /*  Security rules for A New Beginning — Daily Devotions.
 
     In short:
-      · A visitor may leave one message at a time and nothing else. They cannot
+      · A visitor may leave one waiting message per devotion and nothing else. They cannot
         read, list, change or delete anything in the waiting area — not even
         their own message. Unapproved words are invisible to everyone but you.
       · Approved messages are public to read and only you can write them.
@@ -31,6 +31,7 @@ service cloud.firestore {
     match /pending/{message} {
       allow read, update, delete: if isOwner();
       allow create: if isVisitor()
+        && message == request.resource.data.slug + '_' + request.auth.uid
         && request.resource.data.keys().hasOnly(['slug', 'name', 'body', 'uid', 'status', 'createdAt'])
         && request.resource.data.uid == request.auth.uid
         && request.resource.data.status == 'pending'
