@@ -10,10 +10,10 @@
    read and written is decided by the security rules in firestore.rules. */
 
 window.DEVOTIONS_FIREBASE = {
-  apiKey: 'PASTE-YOUR-API-KEY',
-  authDomain: 'PASTE-YOUR-PROJECT.firebaseapp.com',
-  projectId: 'PASTE-YOUR-PROJECT-ID',
-  storageBucket: 'PASTE-YOUR-PROJECT.firebasestorage.app',
-  messagingSenderId: 'PASTE-YOUR-SENDER-ID',
-  appId: 'PASTE-YOUR-APP-ID'
+  apiKey: 'AIzaSyCdbr5ES6QorZwwbKj5phvlFtTwmkfBvBw',
+  authDomain: 'a-new-beginning-devotions.firebaseapp.com',
+  projectId: 'a-new-beginning-devotions',
+  storageBucket: 'a-new-beginning-devotions.firebasestorage.app',
+  messagingSenderId: '938213900217',
+  appId: '1:938213900217:web:be26b0a5a78c8134e90068'
 };
