@@ -1,5 +1,10 @@
 # Amen and reader messages — setting it up once
 
+> **Setup completed 16 September 2026.** The project, web app, Authentication,
+> authorised GitHub Pages domain, Firestore database, and owner ID are all
+> configured. Do not repeat these steps unless the site moves to a new Firebase
+> project or a different Google account becomes the moderator.
+
 The prayers work already. Nothing in this file is needed to write them: open
 **Write prayers.cmd**, type, save, and run **Update website.cmd**.
 

@@ -140,15 +140,11 @@ cannot be read by anyone but you, not even by whoever wrote them. You approve
 them at `admin/moderate.html`, which is kept out of the sitemap and out of
 search results.
 
-This part needs a free Firebase project, because GitHub Pages can serve files
-but cannot receive anything a visitor types. **SETUP-COMMENTS.md** walks through
-it once, in about twenty minutes. `firestore.rules` holds the rules to paste
-into the Firebase console.
-
-Until that is done, `assets/firebase-config.js` still holds its `PASTE-…`
-placeholders, the Amen button and the message box stay hidden, and the website
-behaves exactly as it did before. The prayers do not depend on any of this and
-work on their own.
+This part uses the free Firebase project **A New Beginning Devotions**, because
+GitHub Pages can serve files but cannot receive anything a visitor types. Its
+web app, sign-in methods, authorised domain, database, and owner account are
+configured. `firestore.rules` is the source copy of the published security
+rules. **SETUP-COMMENTS.md** records the setup for future maintenance.
 
 ## Licence and use
 

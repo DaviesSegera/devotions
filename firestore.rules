@@ -11,16 +11,15 @@ rules_version = '2';
         the record is keyed by who they are, nobody can vote twice.
       · Everything not named below is refused.
 
-    Before pasting this into the Firebase console, replace
-    PASTE-YOUR-FIREBASE-USER-ID with your own user ID. The moderation page
-    shows it to you the first time you sign in.                              */
+    The owner UID below was collected from the private moderation sign-in.
+    Change it only if ownership moves to a different Google account.         */
 
 service cloud.firestore {
   match /databases/{database}/documents {
 
     function isOwner() {
       return request.auth != null
-        && request.auth.uid == 'PASTE-YOUR-FIREBASE-USER-ID';
+        && request.auth.uid == 'AlDLgVcWnGcnhvOeVrUY0DWAR0j1';
     }
 
     function isVisitor() {
