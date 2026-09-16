@@ -131,6 +131,13 @@ async function start() {
   const auth = auth_.getAuth(app);
   const db = fs.getFirestore(app);
 
+  // Complete a Google redirect, if this load is returning from sign-in.
+  try {
+    await auth_.getRedirectResult(auth);
+  } catch (error) {
+    say(gateStatus, 'Sign-in did not complete: ' + (error.code || error.message), 'bad');
+  }
+
   const fmt = value => {
     const when = value && typeof value.toDate === 'function' ? value.toDate() : null;
     if (!when) return '';
@@ -140,7 +147,7 @@ async function start() {
 
   $('in').addEventListener('click', async () => {
     try {
-      await auth_.signInWithPopup(auth, new auth_.GoogleAuthProvider());
+      await auth_.signInWithRedirect(auth, new auth_.GoogleAuthProvider());
     } catch (error) {
       say(gateStatus, 'Sign-in did not complete: ' + (error.code || error.message), 'bad');
     }
