@@ -7,6 +7,8 @@ const checkOnly = process.argv.includes('--check');
 const config = JSON.parse(fs.readFileSync(path.join(root, 'devotions.json'), 'utf8'));
 const {siteUrl, siteName, author, youtubeChannel, topics, devotions} = config;
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+// A prayer is typed as plain text. Blank lines separate its paragraphs.
+const paragraphs = text => String(text).replace(/\r\n/g,'\n').trim().split(/\n\s*\n/).map(p=>p.trim()).filter(Boolean).map(p=>`<p>${esc(p).replace(/\n/g,'<br>')}</p>`).join('');
 const json = o => JSON.stringify(o).replace(/</g, '\\u003c');
 const absolute = route => siteUrl + (route === 'index.html' ? '' : route);
 const route = d => d.slug + '.html';
@@ -30,6 +32,10 @@ for(const d of devotions) {
   if(v.uploadDate && (!/^\d{4}-\d{2}-\d{2}$/.test(v.uploadDate)||!v.uploadDateSource||new Date(v.uploadDate).toISOString().slice(0,10)!==v.uploadDate))throw Error('Use a verified ISO upload date and source: '+v.id);
  }
  if(d.publishedDate && (!/^\d{4}-\d{2}-\d{2}$/.test(d.publishedDate)||new Date(d.publishedDate).toISOString().slice(0,10)!==d.publishedDate))throw Error('Invalid devotion publication date: '+d.slug);
+ if(d.prayer!==undefined){
+  if(typeof d.prayer!=='string'||!d.prayer.trim())throw Error('Remove the prayer field rather than leaving it empty: '+d.slug);
+  if(d.prayer.length>4000)throw Error('Prayer is longer than 4000 characters: '+d.slug);
+ }
 }
 const outputs = new Map();
 const set = (file, content) => outputs.set(file, content.trim()+'\n');
@@ -66,10 +72,13 @@ ${config.googleSiteVerification?`<meta name="google-site-verification" content="
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Manrope:wght@600;700;800&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${prefix}assets/base.css">
-<link rel="stylesheet" href="${prefix}assets/discover.css">
+<link rel="stylesheet" href="${prefix}assets/discover.css">${options.community?`
+<link rel="stylesheet" href="${prefix}assets/community.css">`:''}
 <script src="${prefix}assets/theme.js"></script>
 <script type="application/ld+json">${json({'@context':'https://schema.org','@graph':schemas})}</script>
-<script src="${prefix}assets/site.js" defer></script>
+<script src="${prefix}assets/site.js" defer></script>${options.community?`
+<script src="${prefix}assets/firebase-config.js" defer></script>
+<script src="${prefix}assets/community.js" defer></script>`:''}
 </head>
 <body id="top">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -115,17 +124,40 @@ for(const d of devotions) {
  }
  const videoButtons=d.videos.map(v=>`<a class="btn ${v.kind==='short'?'wine':'ghost'}" href="${videoRoute(d,v)}">Watch the ${v.kind==='short'?'Short':'full film'}</a>`).join('');
  const videos=d.videos.map(v=>`<section class="reading-video"><h3>${esc(v.title)}</h3><div class="embed ${v.kind}"><iframe src="https://www.youtube-nocookie.com/embed/${v.id}?rel=0&amp;playsinline=1" title="${esc(v.title)}" width="${v.kind==='short'?315:560}" height="${v.kind==='short'?560:315}" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><p><a href="${videoRoute(d,v)}">Open the ${v.kind==='short'?'Short':'full film'} watch page</a> · <a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener">Watch on YouTube</a></p></section>`).join('');
+ // The prayer is authored in devotions.json. Use "Write prayers.cmd" to add one.
+ const prayerBlock=d.prayer?`
+<section class="prayer-card" id="prayer" aria-labelledby="prayer-heading">
+<h2 id="prayer-heading">A prayer for today</h2>
+<div class="prayer-text">${paragraphs(d.prayer)}</div>
+<p class="prayer-sign">— ${esc(author)}</p>
+<div class="amen" data-amen="${esc(d.slug)}" hidden><button class="btn gold amen-btn" type="button" aria-pressed="false"><span class="amen-label">Amen — I prayed this</span></button><p class="amen-count" role="status"></p></div>
+</section>`:'';
+ // Readers' messages. Hidden until assets/firebase-config.js holds real settings,
+ // and each message is shown only after it has been approved.
+ const communityBlock=`
+<section class="community" id="community" data-devotion="${esc(d.slug)}" hidden>
+<h2>Share a word</h2>
+<p class="community-intro">Add a reflection of your own, or a prayer for someone who needs one. Give a name you are happy for other readers to see. Every message is read by ${esc(author)} before it appears here.</p>
+<ol class="comment-list" id="comment-list"></ol>
+<p class="comment-empty" id="comment-empty" hidden>No words have been shared yet. Yours can be the first.</p>
+<form class="comment-form" id="comment-form" novalidate>
+<div class="field"><label for="comment-name">Your name</label><input id="comment-name" name="name" type="text" maxlength="60" autocomplete="name" required></div>
+<div class="field"><label for="comment-body">Your message</label><textarea id="comment-body" name="body" rows="5" maxlength="1500" required></textarea></div>
+<div class="comment-actions"><button class="btn indigo" type="submit">Send your message</button><span class="comment-hint">It appears once it has been read.</span></div>
+</form>
+<p class="community-status" id="community-status" role="status"></p>
+</section>`;
  const body=`<div class="hero"><div class="eyebrow">A New Beginning · Bible devotion</div><h1>${esc(d.title)}</h1><div class="meta">${esc(d.passage)} <span>·</span> ${d.readingMinutes} min read</div></div>
 <main id="main"><article class="page">
 <div class="reading-intro"><p class="byline">By <a href="about.html">${esc(author)}</a>${d.publishedDate?` · <time datetime="${d.publishedDate}">${d.publishedDate}</time>`:''}</p><p>${esc(d.summary)}</p><nav class="topic-chips" aria-label="Devotion topics">${chips(d)}</nav><div class="btns">${videoButtons}<button class="btn ghost" type="button" data-share>Share devotion</button></div><p class="share-status" role="status"></p></div>
 <!-- DEVOTION CONTENT START -->
 ${content}
-<!-- DEVOTION CONTENT END -->
-${d.videos.length?`<section class="watch-section" id="watch"><h2>Watch this Bible story</h2><p>Reflect on the story in the accompanying ${d.videos.length>1?'Short and full film':'Short'} from I Can Still Believe.</p>${videos}</section>`:''}
+<!-- DEVOTION CONTENT END -->${prayerBlock}
+${d.videos.length?`<section class="watch-section" id="watch"><h2>Watch this Bible story</h2><p>Reflect on the story in the accompanying ${d.videos.length>1?'Short and full film':'Short'} from I Can Still Believe.</p>${videos}</section>`:''}${communityBlock}
 <div class="sdg">Soli Deo Gloria</div></article>
 <section class="wrap related"><h2>Continue your reflection</h2><div class="grid">${related(d)}</div>${followPanel()}</section></main>`;
  const article={'@type':'Article','@id':absolute(file)+'#article',headline:d.title,description:d.summary,url:absolute(file),mainEntityOfPage:absolute(file),inLanguage:'en',author:authorSchema,isAccessibleForFree:true,articleSection:d.topics.map(t=>topicById.get(t).title),about:{'@type':'Thing',name:d.passage},...(d.publishedDate?{datePublished:d.publishedDate}:{})};
- set(file,shell(file,`${d.title} | ${d.passage} Devotion`,d.summary,body,[article,breadcrumbs([['Daily devotions','index.html'],[d.title,file]])],{article:true}));
+ set(file,shell(file,`${d.title} | ${d.passage} Devotion`,d.summary,body,[article,breadcrumbs([['Daily devotions','index.html'],[d.title,file]])],{article:true,community:true}));
 }
 const search=`<div class="search"><label class="sr-only" for="q">Search by topic, title, person or Bible passage</label><input id="q" type="search" autocomplete="off" placeholder="Search prayer, hope, a name or a Bible passage…"><p class="count" id="count" role="status" aria-live="polite">${devotions.length} devotions</p></div>`;
 const groups=['old','new'].map(testament=>`<section class="group"><div class="sec-head"><h2>${testament==='old'?'Old':'New'} Testament</h2></div><div class="grid">${devotions.filter(d=>d.testament===testament).map(d=>card(d)).join('')}</div></section>`).join('');

@@ -9,7 +9,7 @@ const config=JSON.parse(fs.readFileSync(path.join(root,'devotions.json'),'utf8')
 const read=f=>fs.readFileSync(path.join(root,f),'utf8');
 const decode=s=>s.replace(/&#(\d+);/g,(_,n)=>String.fromCodePoint(Number(n))).replace(/&quot;/g,'"').replace(/&apos;/g,"'").replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
 const files=[];
-function walk(dir){for(const entry of fs.readdirSync(path.join(root,dir),{withFileTypes:true})){const name=path.posix.join(dir,entry.name);if(entry.isDirectory()){if(!['node_modules','.git'].includes(entry.name))walk(name);}else if(name.endsWith('.html'))files.push(name);}}
+function walk(dir){for(const entry of fs.readdirSync(path.join(root,dir),{withFileTypes:true})){const name=path.posix.join(dir,entry.name);if(entry.isDirectory()){if(!['node_modules','.git','admin'].includes(entry.name))walk(name);}else if(name.endsWith('.html'))files.push(name);}}
 walk('');
 const titles=new Set(), descriptions=new Set();
 let links=0, videos=0;
@@ -62,6 +62,14 @@ for(const f of files)assert(urls.includes(config.siteUrl+(f==='index.html'?'':f)
 const vs=read('video-sitemap.xml');
 assert.equal((vs.match(/<video:video>/g)||[]).length,config.devotions.reduce((n,d)=>n+d.videos.length,0));
 assert.equal((read('feed.xml').match(/<item>/g)||[]).length,config.devotions.length);
-for(const asset of ['assets/site.js','assets/theme.js'])new vm.Script(read(asset),{filename:asset});
+for(const asset of ['assets/site.js','assets/theme.js','assets/community.js','assets/firebase-config.js'])new vm.Script(read(asset),{filename:asset});
+// admin/ is your private moderation page: deliberately not generated, not listed
+// in the sitemap, and marked so search engines leave it alone.
+const moderation=path.join(root,'admin','moderate.html');
+if(fs.existsSync(moderation)){
+ const html=fs.readFileSync(moderation,'utf8');
+ assert.match(html,/<meta name="robots" content="noindex/,'admin/moderate.html: must stay out of search results');
+ assert(!sitemap.includes('admin/moderate.html'),'admin/moderate.html must not be in the sitemap');
+}
 execFileSync(process.execPath,[path.join(__dirname,'update-site.cjs'),'--check'],{stdio:'inherit'});
 console.log(`Passed: ${files.length} pages, ${links} local links/assets, ${videos} complete video schemas, all sitemap/feed entries, JavaScript syntax, and repeatable generation.`);

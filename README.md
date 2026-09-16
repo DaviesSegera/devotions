@@ -83,8 +83,13 @@ from the sitemap.
 - `assets/discover.css`: topic browsing, watch pages, and reading additions.
 - `assets/theme.js`: restores night reading before the page renders.
 - `assets/site.js`: night mode, reading progress, search, and sharing.
+- `assets/community.css`: the prayer, the Amen button, and readers' messages.
+- `assets/community.js`: shows the Amen count and approved messages, and sends new ones for approval.
+- `assets/firebase-config.js`: where the Firebase settings go. See SETUP-COMMENTS.md.
 - `tools/update-site.cjs`: generates the website from the catalog and authored pages.
 - `tools/validate-site.cjs`: checks routes, metadata, video information, and generation.
+- `tools/prayer-editor.cjs`: the editor behind **Write prayers.cmd**.
+- `admin/moderate.html`: your private page for approving readers' messages.
 
 Existing devotion URLs are unchanged. Links already shared continue to work.
 Historical dates that were not known were left unspecified. Video structured
@@ -99,6 +104,51 @@ first. It does not invent a chronological order for undated historical readings.
 Follow [SEARCH-CONSOLE.md](SEARCH-CONSOLE.md) once the changes are live. Search
 Console checks which pages Google has indexed and which searches bring readers.
 No analytics account or tracking ID has been configured.
+
+## Writing the prayer on a devotion
+
+Double-click **Write prayers.cmd**. A page opens in your browser listing every
+devotion, with a gold mark beside those that already have a prayer.
+
+Choose one, type the prayer, and leave a blank line between paragraphs. What you
+type is shown beneath the box exactly as readers will see it. Then either:
+
+- **Save prayer**, and run **Update website.cmd** yourself afterwards; or
+- **Save, then update the website**, which does both in one step.
+
+Either way, commit the folder as usual to publish. Ctrl+S saves without reaching
+for the mouse. To take a prayer down, clear the box and save.
+
+The prayer is kept in `devotions.json` as a `prayer` value beside that
+devotion's summary, and appears at the close of the reading, before the video.
+It is ordinary page text, so it is read by search engines and carried in the
+feed like the rest of the devotion. A devotion without a prayer simply does not
+show that section.
+
+The editor is served by your own computer to your own computer, behind a key
+that changes each time it starts. Nothing leaves the machine. Close the window
+and press Ctrl+C in the black window when you have finished.
+
+## Amen, and messages from readers
+
+Beneath each prayer is an **Amen** button that counts how many people have
+prayed it, and below that a box where a reader can leave a message using only a
+name — no account, no sign-in.
+
+**Nothing a reader writes appears until you approve it.** Unapproved messages
+cannot be read by anyone but you, not even by whoever wrote them. You approve
+them at `admin/moderate.html`, which is kept out of the sitemap and out of
+search results.
+
+This part needs a free Firebase project, because GitHub Pages can serve files
+but cannot receive anything a visitor types. **SETUP-COMMENTS.md** walks through
+it once, in about twenty minutes. `firestore.rules` holds the rules to paste
+into the Firebase console.
+
+Until that is done, `assets/firebase-config.js` still holds its `PASTE-…`
+placeholders, the Amen button and the message box stay hidden, and the website
+behaves exactly as it did before. The prayers do not depend on any of this and
+work on their own.
 
 ## Licence and use
 

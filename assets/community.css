@@ -1,0 +1,107 @@
+/* Prayer, Amen, and reader messages.
+   Loaded only on devotion pages. Uses the existing design tokens in base.css,
+   so it follows day and night reading without any further setting. */
+
+/* ── The prayer ───────────────────────────────────────────────── */
+.prayer-card{
+  margin-top:38px;
+  padding:30px 34px 26px;
+  border:1px solid var(--gold-pale);
+  border-left:4px solid var(--gold-bright);
+  border-radius:14px;
+  background:var(--gold-soft);
+  box-shadow:var(--shadow);
+}
+.prayer-card h2{
+  font-family:var(--f-ui);font-weight:800;font-size:.95rem;letter-spacing:3px;
+  text-transform:uppercase;color:var(--gold);margin:0 0 18px;text-align:center;
+}
+.prayer-text p{
+  font-family:var(--f-verse);font-style:italic;font-size:1.28rem;line-height:1.72;
+  color:var(--ink);margin-bottom:.9em;
+}
+.prayer-text p:last-child{margin-bottom:0;}
+.prayer-sign{
+  font-family:var(--f-ui);font-weight:700;font-size:.74rem;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--gold);margin-top:18px;text-align:right;
+}
+
+/* ── Amen ─────────────────────────────────────────────────────── */
+.amen{
+  margin-top:22px;padding-top:20px;border-top:1px solid var(--gold-pale);
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;
+}
+.amen-btn{cursor:pointer;font-family:var(--f-ui);}
+.amen-btn[aria-pressed="true"]{
+  background:var(--surface);color:var(--emph);border-color:var(--gold);
+}
+.amen-btn[aria-pressed="true"]::before{content:"✓";font-weight:800;}
+.amen-btn[disabled]{opacity:.55;cursor:default;transform:none;box-shadow:none;}
+.amen-count{
+  font-family:var(--f-ui);font-size:.85rem;color:var(--muted);margin:0;
+}
+
+/* ── Reader messages ──────────────────────────────────────────── */
+.community{
+  margin-top:40px;padding-top:28px;border-top:1px solid var(--rule);
+}
+.community h2{font-family:var(--f-title);font-size:1.6rem;margin-bottom:10px;}
+.community-intro{font-size:1rem;line-height:1.75;color:var(--ink-soft);margin-bottom:26px;}
+
+.comment-list{list-style:none;margin:0 0 26px;padding:0;}
+.comment-list li{
+  padding:18px 22px;margin-bottom:14px;
+  background:var(--surface-2);border:1px solid var(--rule);border-radius:12px;
+}
+.comment-head{
+  display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px;
+}
+.comment-name{font-family:var(--f-ui);font-weight:700;font-size:.95rem;color:var(--indigo-3);}
+:root[data-theme="night"] .comment-name{color:var(--gold-bright);}
+.comment-date{font-family:var(--f-ui);font-size:.75rem;letter-spacing:.5px;color:var(--muted);}
+.comment-body{font-size:1rem;line-height:1.75;white-space:pre-wrap;margin:0;}
+.comment-empty{font-size:.95rem;color:var(--muted);font-style:italic;margin-bottom:26px;}
+
+/* ── The form ─────────────────────────────────────────────────── */
+.comment-form{
+  padding:24px 26px;background:var(--surface-2);
+  border:1px solid var(--rule);border-radius:14px;
+}
+.comment-form .field{margin-bottom:16px;}
+.comment-form label{
+  display:block;font-family:var(--f-ui);font-weight:700;font-size:.78rem;
+  letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:7px;
+}
+.comment-form input,
+.comment-form textarea{
+  width:100%;font-family:var(--f-body);font-size:1rem;line-height:1.65;color:var(--ink);
+  background:var(--surface);border:1px solid var(--rule);border-radius:9px;padding:11px 13px;
+}
+.comment-form textarea{resize:vertical;min-height:120px;}
+.comment-form input:focus,
+.comment-form textarea:focus{
+  outline:2px solid var(--gold-bright);outline-offset:1px;border-color:var(--gold);
+}
+.comment-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.comment-actions .btn{cursor:pointer;}
+.comment-actions .btn[disabled]{opacity:.55;cursor:default;transform:none;box-shadow:none;}
+.comment-hint{font-family:var(--f-ui);font-size:.8rem;color:var(--muted);}
+.community-status{
+  font-family:var(--f-ui);font-size:.9rem;line-height:1.6;margin-top:16px;min-height:1.2em;
+}
+.community-status.good{color:var(--emph);font-weight:700;}
+.community-status.bad{color:var(--wine);font-weight:700;}
+
+@media(max-width:620px){
+  .prayer-card{padding:24px 20px 20px;}
+  .prayer-text p{font-size:1.14rem;}
+  .prayer-sign{text-align:center;}
+  .comment-form{padding:20px 18px;}
+  .comment-actions{justify-content:center;}
+  .comment-actions .btn{flex:1 1 100%;justify-content:center;}
+}
+
+@media print{
+  .amen,.community{display:none!important;}
+  .prayer-card{box-shadow:none;background:white!important;}
+}

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Moderation — A New Beginning</title>
+<style>
+  :root{
+    --bg:#f3efe6;--surface:#fffdf8;--surface-2:#f8f3e8;--ink:#24211a;--ink-soft:#544e3f;
+    --muted:#736d5e;--indigo:#1e2340;--indigo-3:#3b4780;--gold:#b08a2a;--gold-bright:#d6ab3c;
+    --gold-pale:#eadfbd;--gold-soft:#fbf4df;--wine:#7a3b2e;--rule:#e3dccb;
+    --shadow:0 2px 14px rgba(30,35,64,.08);
+    --f-ui:'Manrope','Segoe UI',system-ui,sans-serif;
+    --f-body:Georgia,'Times New Roman',serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--f-body);line-height:1.65;padding:0 0 60px}
+  header{background:var(--indigo);color:#f4efe2;padding:22px 24px}
+  header .in{max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  header h1{font-size:1.25rem;font-family:var(--f-ui);font-weight:800;letter-spacing:.5px}
+  header a{color:var(--gold-bright)}
+  main{max-width:860px;margin:0 auto;padding:28px 24px 0}
+  h2{font-family:var(--f-ui);font-weight:800;font-size:.95rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin:34px 0 16px}
+  h2:first-of-type{margin-top:0}
+  .btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--f-ui);font-weight:700;font-size:13.5px;
+       padding:10px 16px;border-radius:9px;border:1px solid transparent;cursor:pointer;text-decoration:none}
+  .btn.indigo{background:var(--indigo);color:#f4efe2}
+  .btn.gold{background:var(--gold-bright);color:var(--indigo)}
+  .btn.ghost{background:var(--surface);color:var(--ink);border-color:var(--rule)}
+  .btn.danger{background:var(--wine);color:#fdf6e6}
+  .btn[disabled]{opacity:.5;cursor:default}
+  .panel{background:var(--surface);border:1px solid var(--rule);border-radius:14px;padding:22px 26px;box-shadow:var(--shadow);margin-bottom:18px}
+  .note{background:var(--gold-soft);border:1px solid var(--gold-pale);border-left:4px solid var(--gold-bright);
+        border-radius:12px;padding:18px 22px;margin-bottom:22px;font-size:.95rem}
+  .note code{background:var(--surface);border:1px solid var(--rule);border-radius:5px;padding:2px 7px;
+             font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92em;user-select:all;word-break:break-all}
+  .msg{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:18px 22px;margin-bottom:14px}
+  .msg .top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+  .msg .who{font-family:var(--f-ui);font-weight:700;color:var(--indigo-3)}
+  .msg .meta{font-family:var(--f-ui);font-size:.75rem;letter-spacing:.4px;color:var(--muted)}
+  .msg .text{white-space:pre-wrap;margin:10px 0 16px}
+  .msg .acts{display:flex;gap:10px;flex-wrap:wrap}
+  .empty{color:var(--muted);font-style:italic}
+  .status{font-family:var(--f-ui);font-size:.9rem;margin:14px 0;min-height:1.2em}
+  .status.good{color:var(--gold);font-weight:700}
+  .status.bad{color:var(--wine);font-weight:700}
+  select{font-family:var(--f-ui);font-size:.95rem;padding:9px 11px;border-radius:9px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);max-width:100%}
+  .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+
+<header><div class="in">
+  <h1>Moderation — A New Beginning</h1>
+  <div class="row">
+    <span id="who" class="meta"></span>
+    <button class="btn ghost" type="button" id="out" hidden>Sign out</button>
+  </div>
+</div></header>
+
+<main>
+
+  <section id="gate">
+    <div class="panel">
+      <h2>Sign in</h2>
+      <p style="margin-bottom:18px">This page is for you alone. Sign in with the Google account you used to create the Firebase project.</p>
+      <button class="btn indigo" type="button" id="in">Sign in with Google</button>
+      <p class="status" id="gate-status" role="status"></p>
+    </div>
+  </section>
+
+  <section id="setup" hidden>
+    <div class="note">
+      <p><strong>One step remains.</strong> Your Firebase user ID is:</p>
+      <p style="margin:12px 0"><code id="uid"></code></p>
+      <p>Open the Firebase console, go to <strong>Firestore Database → Rules</strong>, replace
+         <code>PASTE-YOUR-FIREBASE-USER-ID</code> with the value above, and publish. Then reload this page.</p>
+    </div>
+  </section>
+
+  <section id="work" hidden>
+
+    <h2>Waiting to be read</h2>
+    <p class="status" id="status" role="status"></p>
+    <div id="pending"></div>
+
+    <h2>Already published</h2>
+    <div class="panel">
+      <div class="row">
+        <select id="pick"><option value="">Choose a devotion…</option></select>
+        <button class="btn ghost" type="button" id="load">Show its messages</button>
+      </div>
+      <p class="status" id="pub-status" role="status"></p>
+    </div>
+    <div id="published"></div>
+
+  </section>
+
+</main>
+
+<script src="../assets/firebase-config.js"></script>
+<script type="module">
+const SDK = 'https://www.gstatic.com/firebasejs/12.19.0/';
+const cfg = window.DEVOTIONS_FIREBASE;
+
+const $ = id => document.getElementById(id);
+const gateStatus = $('gate-status');
+
+function say(node, text, kind) {
+  node.textContent = text || '';
+  node.className = 'status' + (kind ? ' ' + kind : '');
+}
+
+if (!cfg || !cfg.projectId || /^PASTE/.test(cfg.projectId)) {
+  say(gateStatus, 'Fill in assets/firebase-config.js first. SETUP-COMMENTS.md explains where those values come from.', 'bad');
+  $('in').disabled = true;
+} else {
+  start();
+}
+
+async function start() {
+  const [{ initializeApp }, auth_, fs] = await Promise.all([
+    import(SDK + 'firebase-app.js'),
+    import(SDK + 'firebase-auth.js'),
+    import(SDK + 'firebase-firestore.js')
+  ]);
+
+  const app = initializeApp(cfg);
+  const auth = auth_.getAuth(app);
+  const db = fs.getFirestore(app);
+
+  const fmt = value => {
+    const when = value && typeof value.toDate === 'function' ? value.toDate() : null;
+    if (!when) return '';
+    try { return when.toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' }); }
+    catch (_) { return when.toISOString().slice(0, 16).replace('T', ' '); }
+  };
+
+  $('in').addEventListener('click', async () => {
+    try {
+      await auth_.signInWithPopup(auth, new auth_.GoogleAuthProvider());
+    } catch (error) {
+      say(gateStatus, 'Sign-in did not complete: ' + (error.code || error.message), 'bad');
+    }
+  });
+
+  $('out').addEventListener('click', () => auth_.signOut(auth));
+
+  auth_.onAuthStateChanged(auth, async user => {
+    $('gate').hidden = !!user;
+    $('out').hidden = !user;
+    $('who').textContent = user ? (user.email || '') : '';
+    $('setup').hidden = true;
+    $('work').hidden = true;
+    if (!user) return;
+
+    // A signed-in account that the rules do not recognise cannot list anything.
+    try {
+      await fs.getDocs(fs.query(fs.collection(db, 'pending'), fs.limit(1)));
+    } catch (error) {
+      $('uid').textContent = user.uid;
+      $('setup').hidden = false;
+      return;
+    }
+
+    $('work').hidden = false;
+    await fillDevotionList();
+    await showPending();
+  });
+
+  async function fillDevotionList() {
+    const pick = $('pick');
+    if (pick.options.length > 1) return;
+    try {
+      const catalogue = await (await fetch('../devotions.json')).json();
+      for (const d of catalogue.devotions) {
+        const option = document.createElement('option');
+        option.value = d.slug;
+        option.textContent = d.title;
+        pick.appendChild(option);
+      }
+    } catch (_) {
+      say($('pub-status'), 'The devotion list could not be read from devotions.json.', 'bad');
+    }
+  }
+
+  function messageCard(data, extra) {
+    const card = document.createElement('div');
+    card.className = 'msg';
+
+    const top = document.createElement('div');
+    top.className = 'top';
+    const who = document.createElement('span');
+    who.className = 'who';
+    who.textContent = data.name || 'A reader';
+    const meta = document.createElement('span');
+    meta.className = 'meta';
+    meta.textContent = [extra, fmt(data.createdAt)].filter(Boolean).join(' · ');
+    top.append(who, meta);
+
+    const text = document.createElement('p');
+    text.className = 'text';
+    text.textContent = data.body || '';
+
+    const acts = document.createElement('div');
+    acts.className = 'acts';
+
+    card.append(top, text, acts);
+    return { card, acts };
+  }
+
+  async function showPending() {
+    const box = $('pending');
+    box.textContent = '';
+    say($('status'), 'Loading…');
+
+    let found;
+    try {
+      found = await fs.getDocs(fs.query(
+        fs.collection(db, 'pending'), fs.orderBy('createdAt', 'asc'), fs.limit(200)
+      ));
+    } catch (error) {
+      say($('status'), 'Could not read the waiting messages: ' + (error.code || error.message), 'bad');
+      return;
+    }
+
+    if (found.empty) {
+      say($('status'), '');
+      const none = document.createElement('p');
+      none.className = 'empty';
+      none.textContent = 'Nothing is waiting. Every message has been dealt with.';
+      box.appendChild(none);
+      return;
+    }
+
+    say($('status'), found.size === 1 ? '1 message waiting.' : found.size + ' messages waiting.');
+
+    found.forEach(entry => {
+      const data = entry.data();
+      const { card, acts } = messageCard(data, data.slug);
+
+      const approve = document.createElement('button');
+      approve.className = 'btn gold';
+      approve.type = 'button';
+      approve.textContent = 'Publish';
+
+      const reject = document.createElement('button');
+      reject.className = 'btn danger';
+      reject.type = 'button';
+      reject.textContent = 'Discard';
+
+      approve.addEventListener('click', async () => {
+        approve.disabled = reject.disabled = true;
+        try {
+          await fs.setDoc(fs.doc(db, 'devotions', data.slug, 'comments', entry.id), {
+            name: data.name,
+            body: data.body,
+            createdAt: data.createdAt || fs.serverTimestamp(),
+            publishedAt: fs.serverTimestamp()
+          });
+          await fs.deleteDoc(fs.doc(db, 'pending', entry.id));
+          card.remove();
+          say($('status'), 'Published. It is now on the devotion page.', 'good');
+        } catch (error) {
+          approve.disabled = reject.disabled = false;
+          say($('status'), 'Could not publish: ' + (error.code || error.message), 'bad');
+        }
+      });
+
+      reject.addEventListener('click', async () => {
+        approve.disabled = reject.disabled = true;
+        try {
+          await fs.deleteDoc(fs.doc(db, 'pending', entry.id));
+          card.remove();
+          say($('status'), 'Discarded.', 'good');
+        } catch (error) {
+          approve.disabled = reject.disabled = false;
+          say($('status'), 'Could not discard: ' + (error.code || error.message), 'bad');
+        }
+      });
+
+      acts.append(approve, reject);
+      box.appendChild(card);
+    });
+  }
+
+  $('load').addEventListener('click', async () => {
+    const slug = $('pick').value;
+    const box = $('published');
+    box.textContent = '';
+    if (!slug) { say($('pub-status'), 'Choose a devotion first.', 'bad'); return; }
+    say($('pub-status'), 'Loading…');
+
+    let found;
+    try {
+      found = await fs.getDocs(fs.query(
+        fs.collection(db, 'devotions', slug, 'comments'), fs.orderBy('createdAt', 'asc'), fs.limit(200)
+      ));
+    } catch (error) {
+      say($('pub-status'), 'Could not read them: ' + (error.code || error.message), 'bad');
+      return;
+    }
+
+    if (found.empty) { say($('pub-status'), 'No published messages on this devotion yet.'); return; }
+    say($('pub-status'), found.size === 1 ? '1 published message.' : found.size + ' published messages.');
+
+    found.forEach(entry => {
+      const { card, acts } = messageCard(entry.data(), 'published');
+      const remove = document.createElement('button');
+      remove.className = 'btn danger';
+      remove.type = 'button';
+      remove.textContent = 'Take down';
+      remove.addEventListener('click', async () => {
+        remove.disabled = true;
+        try {
+          await fs.deleteDoc(fs.doc(db, 'devotions', slug, 'comments', entry.id));
+          card.remove();
+          say($('pub-status'), 'Taken down.', 'good');
+        } catch (error) {
+          remove.disabled = false;
+          say($('pub-status'), 'Could not take it down: ' + (error.code || error.message), 'bad');
+        }
+      });
+      acts.appendChild(remove);
+      box.appendChild(card);
+    });
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+rules_version = '2';
+
+/*  Security rules for A New Beginning — Daily Devotions.
+
+    In short:
+      · A visitor may leave one message at a time and nothing else. They cannot
+        read, list, change or delete anything in the waiting area — not even
+        their own message. Unapproved words are invisible to everyone but you.
+      · Approved messages are public to read and only you can write them.
+      · A visitor may add or remove their own Amen, and nothing else. Because
+        the record is keyed by who they are, nobody can vote twice.
+      · Everything not named below is refused.
+
+    Before pasting this into the Firebase console, replace
+    PASTE-YOUR-FIREBASE-USER-ID with your own user ID. The moderation page
+    shows it to you the first time you sign in.                              */
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isOwner() {
+      return request.auth != null
+        && request.auth.uid == 'PASTE-YOUR-FIREBASE-USER-ID';
+    }
+
+    function isVisitor() {
+      return request.auth != null;
+    }
+
+    // ── Messages waiting to be read ──────────────────────────────────────
+    match /pending/{message} {
+      allow read, update, delete: if isOwner();
+      allow create: if isVisitor()
+        && request.resource.data.keys().hasOnly(['slug', 'name', 'body', 'uid', 'status', 'createdAt'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.status == 'pending'
+        && request.resource.data.slug is string
+        && request.resource.data.slug.size() <= 80
+        && request.resource.data.slug.matches('^[a-z0-9]+(-[a-z0-9]+)*$')
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 2
+        && request.resource.data.name.size() <= 60
+        && request.resource.data.body is string
+        && request.resource.data.body.size() >= 2
+        && request.resource.data.body.size() <= 1500
+        && request.resource.data.createdAt == request.time;
+    }
+
+    // ── Approved messages, shown beneath the devotion ────────────────────
+    match /devotions/{slug}/comments/{message} {
+      allow read: if true;
+      allow write: if isOwner();
+    }
+
+    // ── One Amen per visitor per devotion ────────────────────────────────
+    match /amens/{slug}/voters/{visitor} {
+      allow read: if true;
+      allow create: if isVisitor()
+        && request.auth.uid == visitor
+        && request.resource.data.keys().hasOnly(['createdAt'])
+        && request.resource.data.createdAt == request.time;
+      allow delete: if isOwner() || (isVisitor() && request.auth.uid == visitor);
+      allow update: if false;
+    }
+
+    // ── Everything else ──────────────────────────────────────────────────
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
