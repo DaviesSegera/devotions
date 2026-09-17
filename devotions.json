@@ -3,7 +3,7 @@
   "siteName": "A New Beginning",
   "author": "Dr. Davies Rene Segera",
   "youtubeChannel": "https://www.youtube.com/@icanstillbelieve",
-  "latest": "when-the-donkey-saw-what-the-prophet-could-not",
+  "latest": "when-gods-word-was-found-again",
   "topics": [
     {
       "slug": "faith-and-trust",
@@ -554,6 +554,30 @@
           "title": "A Death Sentence Reversed in the Courtyard"
         }
       ]
+    },
+    {
+      "slug": "when-gods-word-was-found-again",
+      "title": "When God’s Word Was Found Again",
+      "passage": "2 Kings 22–23",
+      "testament": "old",
+      "subject": "Josiah and the rediscovery of the Book of the Law",
+      "readingMinutes": 6,
+      "keyVerse": "“The king took his place of authority beside the pillar and renewed the covenant in the LORD’s presence… and all the people pledged themselves to the covenant.”",
+      "keyVerseReference": "2 Kings 23:3 (NLT, excerpt)",
+      "summary": "When the Book of the Law was found, Josiah listened with humility and acted. Reflect on receiving God’s Word and letting Christ reshape our choices.",
+      "topics": [
+        "humility-and-obedience",
+        "wisdom-and-discernment",
+        "forgiveness-and-grace"
+      ],
+      "videos": [
+        {
+          "id": "hRqdEnn6gO0",
+          "kind": "short",
+          "title": "They Repaired the Temple. They Found a Book."
+        }
+      ],
+      "publishedDate": "2026-09-17"
     },
     {
       "slug": "can-these-bones-live",
