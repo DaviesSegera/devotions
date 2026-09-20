@@ -3,7 +3,7 @@
   "siteName": "A New Beginning",
   "author": "Dr. Davies Rene Segera",
   "youtubeChannel": "https://www.youtube.com/@icanstillbelieve",
-  "latest": "when-gods-word-was-found-again",
+  "latest": "the-man-jesus-set-free",
   "topics": [
     {
       "slug": "faith-and-trust",
@@ -578,6 +578,24 @@
         }
       ],
       "publishedDate": "2026-09-17"
+    },
+    {
+      "slug": "the-man-jesus-set-free",
+      "title": "The Man Jesus Set Free",
+      "passage": "Mark 5:1–20",
+      "testament": "new",
+      "subject": "Jesus restores and sends the man from the Gerasenes",
+      "readingMinutes": 6,
+      "keyVerse": "“Go home to your family, and tell them everything the Lord has done for you and how merciful he has been.”",
+      "keyVerseReference": "Mark 5:19 (NLT, excerpt)",
+      "summary": "Jesus meets a man no one else could restrain, restores him, and sends him home to tell what the Lord has done. Reflect on Christ’s mercy and the testimony it gives us.",
+      "topics": [
+        "forgiveness-and-grace",
+        "hope-and-encouragement",
+        "love-and-service"
+      ],
+      "videos": [],
+      "publishedDate": "2026-09-20"
     },
     {
       "slug": "can-these-bones-live",
