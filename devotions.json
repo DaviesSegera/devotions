@@ -594,7 +594,13 @@
         "hope-and-encouragement",
         "love-and-service"
       ],
-      "videos": [],
+      "videos": [
+        {
+          "id": "s0sikC5o7Cs",
+          "kind": "short",
+          "title": "He Broke Every Chain. He Was Still Not Free."
+        }
+      ],
       "publishedDate": "2026-09-20"
     },
     {
