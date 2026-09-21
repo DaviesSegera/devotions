@@ -3,7 +3,7 @@
   "siteName": "A New Beginning",
   "author": "Dr. Davies Rene Segera",
   "youtubeChannel": "https://www.youtube.com/@icanstillbelieve",
-  "latest": "the-man-jesus-set-free",
+  "latest": "remember-the-creator",
   "topics": [
     {
       "slug": "faith-and-trust",
@@ -47,6 +47,24 @@
     }
   ],
   "devotions": [
+    {
+      "slug": "remember-the-creator",
+      "title": "Remember the Creator",
+      "passage": "Genesis 1:1–2:3",
+      "testament": "old",
+      "subject": "Creation and the first Sabbath",
+      "readingMinutes": 6,
+      "keyVerse": "“And God blessed the seventh day and declared it holy, because it was the day when he rested from all his work of creation.”",
+      "keyVerseReference": "Genesis 2:3 (NLT)",
+      "summary": "Creation reveals whose world this is and whose we are. Reflect on human dignity, stewardship, and the seventh-day Sabbath as God’s gift.",
+      "topics": [
+        "faith-and-trust",
+        "humility-and-obedience",
+        "love-and-service"
+      ],
+      "videos": [],
+      "publishedDate": "2026-09-21"
+    },
     {
       "slug": "building-without-god",
       "title": "Building Without God",
