@@ -3,7 +3,7 @@
   "siteName": "A New Beginning",
   "author": "Dr. Davies Rene Segera",
   "youtubeChannel": "https://www.youtube.com/@icanstillbelieve",
-  "latest": "remember-the-creator",
+  "latest": "the-serpent-the-fruit-and-the-first-hiding",
   "topics": [
     {
       "slug": "faith-and-trust",
@@ -70,6 +70,30 @@
         }
       ],
       "publishedDate": "2026-09-21"
+    },
+    {
+      "slug": "the-serpent-the-fruit-and-the-first-hiding",
+      "title": "The Serpent, the Fruit and the First Hiding",
+      "passage": "Genesis 3:1–24",
+      "testament": "old",
+      "subject": "Temptation, shame, and the God who comes looking for us",
+      "readingMinutes": 6,
+      "keyVerse": "“Then the LORD God called to the man, ‘Where are you?’”",
+      "keyVerseReference": "Genesis 3:9 (NLT)",
+      "summary": "Genesis 3 traces temptation, shame, hiding, and blame—then reveals the God who comes looking for us and speaks hope before the sentence is finished.",
+      "topics": [
+        "wisdom-and-discernment",
+        "forgiveness-and-grace",
+        "humility-and-obedience"
+      ],
+      "videos": [
+        {
+          "id": "kIFOpNcpLTk",
+          "kind": "short",
+          "title": "A Question Came Before the Fruit."
+        }
+      ],
+      "publishedDate": "2026-09-22"
     },
     {
       "slug": "building-without-god",
