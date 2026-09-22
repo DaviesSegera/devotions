@@ -47,6 +47,8 @@ function shell(file,title,description,body,schemas=[],options={}) {
  const prefix = '../'.repeat(file.split('/').length-1);
  const current=absolute(file);
  const kind=options.article?'article':'website';
+ const sharingVideo=options.video;
+ const sharingImage=sharingVideo?`https://i.ytimg.com/vi/${sharingVideo.id}/hqdefault.jpg`:null;
  return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,12 +60,19 @@ function shell(file,title,description,body,schemas=[],options={}) {
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="theme-color" content="#1e2340">
 ${config.googleSiteVerification?`<meta name="google-site-verification" content="${esc(config.googleSiteVerification)}">`:''}
+${config.bingSiteVerification?`<meta name="msvalidate.01" content="${esc(config.bingSiteVerification)}">`:''}
 <link rel="canonical" href="${current}">
 <meta property="og:type" content="${kind}">
 <meta property="og:site_name" content="${esc(siteName)}">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${current}">
+${sharingImage?`<meta property="og:image" content="${sharingImage}">
+<meta property="og:image:width" content="480">
+<meta property="og:image:height" content="360">
+<meta property="og:image:alt" content="${esc(sharingVideo.title)}">
+<meta name="twitter:image" content="${sharingImage}">
+<meta name="twitter:image:alt" content="${esc(sharingVideo.title)}">`:''}
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(description)}">
@@ -103,7 +112,7 @@ function card(d,prefix='',heading='h3') {
 function related(d,prefix='') {
  return devotions.filter(x=>x.slug!==d.slug).map((x,i)=>({d:x,score:x.topics.filter(t=>d.topics.includes(t)).length,i})).sort((a,b)=>b.score-a.score||a.i-b.i).slice(0,3).map(x=>card(x.d,prefix)).join('');
 }
-function followPanel(prefix='') {return `<aside class="follow-panel"><h2>Make room for a daily devotion</h2><p>Return for new Bible reflections, or follow the devotions in your favourite feed reader. Watch the stories on I Can Still Believe.</p><div class="btns"><a class="btn indigo" href="${prefix}follow.html">Follow new devotions</a><a class="btn ghost" href="${youtubeChannel}" target="_blank" rel="noopener">Visit the YouTube channel</a></div></aside>`;}
+function followPanel(prefix='') {return `<aside class="follow-panel"><h2>Make room for a daily devotion</h2><p>Return for new Bible reflections, or follow the devotions in your favourite feed reader. Watch the stories on I Can Still Believe.</p><div class="btns"><a class="btn indigo" href="${prefix}follow.html">Follow new devotions</a><a class="btn ghost" href="${youtubeChannel}" target="_blank" rel="noopener">Subscribe on YouTube</a></div></aside>`;}
 function hero(title,subtitle,eyebrow='A New Beginning',extra='') {return `<div class="hero home"><div class="eyebrow">${esc(eyebrow)}</div><h1>${esc(title)}</h1>${subtitle?`<p class="standfirst">${esc(subtitle)}</p>`:''}${extra}</div>`;}
 function collection(file,title,description,content,items) {
  const schema={'@type':'CollectionPage','@id':absolute(file),name:title,description,url:absolute(file),inLanguage:'en',mainEntity:{'@type':'ItemList',itemListElement:items.map(([name,url],i)=>({'@type':'ListItem',position:i+1,name,url:absolute(url)}))}};
@@ -157,7 +166,7 @@ ${d.videos.length?`<section class="watch-section" id="watch"><h2>Watch this Bibl
 <div class="sdg">Soli Deo Gloria</div></article>
 <section class="wrap related"><h2>Continue your reflection</h2><div class="grid">${related(d)}</div>${followPanel()}</section></main>`;
  const article={'@type':'Article','@id':absolute(file)+'#article',headline:d.title,description:d.summary,url:absolute(file),mainEntityOfPage:absolute(file),inLanguage:'en',author:authorSchema,isAccessibleForFree:true,articleSection:d.topics.map(t=>topicById.get(t).title),about:{'@type':'Thing',name:d.passage},...(d.publishedDate?{datePublished:d.publishedDate}:{})};
- set(file,shell(file,`${d.title} | ${d.passage} Devotion`,d.summary,body,[article,breadcrumbs([['Daily devotions','index.html'],[d.title,file]])],{article:true,community:true}));
+ set(file,shell(file,`${d.title} | ${d.passage} Devotion`,d.summary,body,[article,breadcrumbs([['Daily devotions','index.html'],[d.title,file]])],{article:true,community:true,video:d.videos[0]}));
 }
 const search=`<div class="search"><label class="sr-only" for="q">Search by topic, title, person or Bible passage</label><input id="q" type="search" autocomplete="off" placeholder="Search prayer, hope, a name or a Bible passage…"><p class="count" id="count" role="status" aria-live="polite">${devotions.length} devotions</p></div>`;
 const groups=['old','new'].map(testament=>`<section class="group"><div class="sec-head"><h2>${testament==='old'?'Old':'New'} Testament</h2></div><div class="grid">${devotions.filter(d=>d.testament===testament).map(d=>card(d)).join('')}</div></section>`).join('');
@@ -181,7 +190,7 @@ for(const {d,v} of allVideos) {
  const schemas=[{'@type':'WebPage',url:absolute(file),name:v.title,description:desc,inLanguage:'en',...(v.uploadDate?{mainEntity:{'@id':absolute(file)+'#video'}}:{})},breadcrumbs([['Daily devotions','index.html'],['Bible story videos','videos.html'],[v.title,file]])];
  if(v.uploadDate)schemas.push(video);
  const body=`<main class="watch-page" id="main"><p class="backlink"><a href="../videos.html">All videos</a> · ${esc(d.passage)} · ${v.kind==='short'?'Short':'Full film'}</p><h1>${esc(v.title)}</h1><div class="embed ${v.kind}"><iframe src="https://www.youtube-nocookie.com/embed/${v.id}?rel=0&amp;playsinline=1" title="${esc(v.title)}" width="${v.kind==='short'?315:960}" height="${v.kind==='short'?560:540}" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><p class="video-description">${esc(desc)}</p>${v.uploadDate?`<p class="byline">Published on YouTube <time datetime="${v.uploadDate}">${v.uploadDate}</time></p>`:''}<p class="video-source">From <a href="${youtubeChannel}" target="_blank" rel="noopener">I Can Still Believe</a> · <a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener">Open on YouTube</a></p><section class="watch-reading"><h2>Read and reflect</h2><h3><a href="../${route(d)}">${esc(d.title)}</a></h3><blockquote>${esc(d.keyVerse)}<cite>${esc(d.keyVerseReference)}</cite></blockquote><p>Read the Scripture, full reflection, key takeaways, and sources in the accompanying devotion.</p><div class="btns"><a class="btn indigo" href="../${route(d)}">Read the devotion</a>${d.videos.filter(x=>x.id!==v.id).map(x=>`<a class="btn wine" href="${path.basename(videoRoute(d,x))}">Watch the ${x.kind==='short'?'Short':'full film'}</a>`).join('')}</div></section><nav class="topic-chips" aria-label="Related topics">${chips(d,'../')}</nav>${followPanel('../')}</main>`;
- set(file,shell(file,`${v.title} | ${v.kind==='short'?'Bible Short':'Bible Film'}`,desc,body,schemas));
+ set(file,shell(file,`${v.title} | ${v.kind==='short'?'Bible Short':'Bible Film'}`,desc,body,schemas,{video:v}));
 }
 set('follow.html',shell('follow.html','Follow Daily Devotions | A New Beginning','Make time for daily Bible reflection. Bookmark A New Beginning, follow new devotions in a feed reader, and visit I Can Still Believe on YouTube.',hero('Keep a little space for Scripture','Choose a simple way to return for new devotions and Bible story videos.')+`<main class="wrap narrow" id="main"><section class="info-section"><h2>Bookmark the daily devotions</h2><p>Save the <a href="index.html">devotions homepage</a> in your browser’s bookmarks. The latest devotion appears at the top, with a link to its video.</p><p>On a computer, use Ctrl+D (Windows) or Command+D (Mac). On a phone, open your browser’s menu and choose its bookmark option.</p></section><section class="info-section"><h2>Follow new readings</h2><p>A feed reader brings new posts from websites you follow into one place. Add this feed address to your reader to receive new devotion entries:</p><p><a class="feed-url" href="feed.xml">${siteUrl}feed.xml</a></p><p>Each entry links to the devotion and its accompanying video.</p></section><section class="info-section"><h2>Follow the Bible stories on YouTube</h2><p>Visit I Can Still Believe to watch the Shorts and full films. You can subscribe and choose notifications on YouTube.</p><a class="btn wine" href="${youtubeChannel}" target="_blank" rel="noopener">Visit I Can Still Believe</a></section><section class="info-section"><h2>Share encouragement</h2><p>Each devotion has a share button. Send a reading to someone it may encourage, and include a personal word about why it made you think of them.</p><a href="${route(latest)}">Read the latest devotion</a></section></main>`,[{'@type':'WebPage',name:'Follow Daily Devotions',url:absolute('follow.html')}]));
 set('about.html',shell('about.html','About A New Beginning | Daily Christian Devotions','Bible devotions prepared by Dr. Davies Rene Segera, with Scripture, reflections alongside Ellen G. White’s writings, and I Can Still Believe videos.',hero('About A New Beginning','Daily devotions for thoughtful reading, practical faith, and encouragement in Christ.')+`<main class="wrap narrow" id="main"><section class="info-section"><h2>Scripture and everyday faith</h2><p>A New Beginning brings together Bible accounts, reflections on their meaning, and practical takeaways. These devotions are prepared by ${esc(author)} for a broad Christian audience worldwide.</p><p>Each reading invites you to consider the biblical account in its context and reflect on how it speaks to your life. The accompanying videos are published on <a href="${youtubeChannel}" target="_blank" rel="noopener">I Can Still Believe</a>.</p></section><section class="info-section"><h2>Sources you can follow</h2><p>Scripture quotations are from the <em>Holy Bible, New Living Translation</em>. The reflections also draw on the writings of Ellen G. White, a Christian author associated with the Seventh-day Adventist tradition. Her quotations are identified separately and cited to book, page, and paragraph.</p><p>Each devotion includes sources and further reading so you can explore the passages and quotations for yourself.</p></section><section class="info-section" id="author"><h2>Prepared by ${esc(author)}</h2><p>Free to read, and free to share with anyone.</p><div class="btns"><a class="btn indigo" href="index.html">Read the devotions</a><a class="btn ghost" href="topics.html">Explore a topic</a></div></section><div class="sdg">Soli Deo Gloria</div></main>`,[authorSchema,{'@type':'AboutPage',name:'About A New Beginning',url:absolute('about.html'),mainEntity:authorSchema}]));

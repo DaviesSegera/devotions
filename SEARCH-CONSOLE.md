@@ -30,7 +30,16 @@ indexing. Submit the sitemaps directly rather than adding a misleading project
 robots file. If you later manage the hostname-root site, its robots file can
 advertise these two sitemap URLs.
 
-## Review once a week
+## Bing setup
+
+Open [Bing Webmaster Tools](https://www.bing.com/webmasters/) and add this same
+website. If offered, import the verified Google Search Console property.
+For HTML-meta verification, copy only the content value of the `msvalidate.01`
+tag into a top-level `bingSiteVerification` string in `devotions.json`.
+Run **Update website.cmd**, publish, then verify in Bing. Keep the token in the
+catalog. Submit the same two sitemap URLs there.
+
+## Weekly measurement
 
 - **Page indexing:** check that new devotion and topic pages are being indexed.
 - **Search performance:** compare clicks, impressions, search terms, and countries
