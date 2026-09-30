@@ -1050,7 +1050,13 @@
         "love-and-service",
         "hope-and-encouragement"
       ],
-      "videos": [],
+      "videos": [
+        {
+          "id": "RWYBaqQLANo",
+          "kind": "short",
+          "title": "He Came to Arrest Believers. Jesus Stopped Him."
+        }
+      ],
       "prayer": "Lord Jesus, stop me when I am sure of myself but wrong. Open my eyes to who You are. Thank You for mercy that reaches even the worst sinner. Give me courage like Ananias, humility like Saul, and the faith to take the next step You give me. Amen.",
       "publishedDate": "2026-09-30"
     },
