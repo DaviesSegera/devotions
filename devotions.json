@@ -4,7 +4,7 @@
   "googleSiteVerification": "l6vbWTvce9WJmMDtK9vFmY74kSCxlbxehx03D9hQqAE",
   "author": "Dr. Davies Rene Segera",
   "youtubeChannel": "https://www.youtube.com/@icanstillbelieve",
-  "latest": "jacobs-ladder-at-bethel",
+  "latest": "the-transfiguration-of-jesus",
   "topics": [
     {
       "slug": "faith-and-trust",
@@ -981,6 +981,32 @@
           "uploadDateSource": "Channel Performance Index.md; YouTube Studio export recorded 2 September 2026"
         }
       ]
+    },
+    {
+      "slug": "the-transfiguration-of-jesus",
+      "title": "The Transfiguration of Jesus",
+      "passage": "Luke 9:28–43",
+      "testament": "new",
+      "subject": "Glory on the mountain, strength for the valley",
+      "readingMinutes": 6,
+      "keyVerse": "“This is my Son, my Chosen One. Listen to him.”",
+      "keyVerseReference": "Luke 9:35 (NLT, excerpt)",
+      "summary": "The disciples see Jesus’ glory and hear the Father’s call to listen to Him. Reflect on the cross, trusting His saving grace, and following Him in compassion for others.",
+      "topics": [
+        "faith-and-trust",
+        "hope-and-encouragement",
+        "humility-and-obedience",
+        "love-and-service"
+      ],
+      "prayer": "Father, thank You for Your Son, Your Chosen One, who went to the cross for me and rose again. Help me listen to Him in Your Word. When the bright moments pass, keep me close to Jesus, and help me serve others in His love. Amen.",
+      "videos": [
+        {
+          "id": "pdc8L3sprps",
+          "kind": "short",
+          "title": "God Spoke From the Cloud. Are You Listening?"
+        }
+      ],
+      "publishedDate": "2026-10-03"
     },
     {
       "slug": "when-peter-denied-jesus",
