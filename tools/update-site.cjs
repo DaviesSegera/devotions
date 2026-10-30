@@ -121,7 +121,7 @@ function collection(file,title,description,content,items) {
 // Preserve the exact authored devotion body. All generated additions stay outside these markers.
 for(const d of devotions) {
  const file=route(d), original=fs.readFileSync(path.join(root,file),'utf8');
- let content=original.match(/<!-- DEVOTION CONTENT START -->\n([\s\S]*?)\n<!-- DEVOTION CONTENT END -->/);
+ let content=original.match(/<!-- DEVOTION CONTENT START -->\r?\n([\s\S]*?)\r?\n<!-- DEVOTION CONTENT END -->/);
  if(content) content=content[1];
  else {
   const article=original.match(/<article class="page">([\s\S]*?)<\/article>/);
