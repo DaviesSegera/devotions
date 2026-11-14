@@ -4,7 +4,7 @@
   "googleSiteVerification": "l6vbWTvce9WJmMDtK9vFmY74kSCxlbxehx03D9hQqAE",
   "author": "Dr. Davies Rene Segera",
   "youtubeChannel": "https://www.youtube.com/@icanstillbelieve",
-  "latest": "the-son-who-changed-his-mind",
+  "latest": "the-stranger-who-stopped",
   "topics": [
     {
       "slug": "faith-and-trust",
@@ -1687,6 +1687,33 @@
         }
       ],
       "publishedDate": "2026-10-03"
+    },
+    {
+      "slug": "the-stranger-who-stopped",
+      "title": "The Stranger Who Stopped",
+      "passage": "Luke 10:25–37",
+      "testament": "new",
+      "subject": "The Good Samaritan, showing mercy to our neighbors, and the compassion of Jesus",
+      "readingMinutes": 10,
+      "keyVerse": "“Then a despised Samaritan came along, and when he saw the man, he felt compassion for him.”",
+      "keyVerseReference": "Luke 10:33 (NLT)",
+      "summary": "Two men pass by a wounded traveler, but a Samaritan stops to care for him. Reflect on what it means to be a neighbor and how the mercy Jesus shows us moves us to help others.",
+      "topics": [
+        "love-and-service",
+        "forgiveness-and-grace",
+        "humility-and-obedience"
+      ],
+      "videos": [
+        {
+          "id": "WXSB5SwoIgI",
+          "kind": "short",
+          "title": "Two Holy Men Walked Past. A Despised Man Stopped. | Good Samaritan",
+          "uploadDate": "2026-11-11",
+          "uploadDateSource": "Public YouTube watch page uploadDate metadata, verified November 14, 2026"
+        }
+      ],
+      "prayer": "Heavenly Father, thank You for sending Jesus to us when we were wounded and helpless. He came near, healed us and paid the cost Himself. Forgive us for the times we’ve seen someone in need and kept walking. Forgive us for keeping our distance from people who are different from us. Fill our hearts with Christ’s love so we can stop for those who are hurting. Give us the wisdom to know how to help, the courage to draw near and the kindness to speak gently. Show each of us one person we can care for this week. In Jesus’ name, Amen.",
+      "publishedDate": "2026-11-14"
     },
     {
       "slug": "one-more-year",
